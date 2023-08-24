@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{c970392d-39bb-466f-902d-7130982b2325}</ProjectGuid>
+    <RootNamespace>OglRender</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLM_ENABLE_EXPERIMENTAL;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./../../../includes;./../../../src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>./../../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;assimp.lib;STB_IMAGE.lib;GLAD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\base\OGL_Base.h" />
+    <ClInclude Include="..\..\..\src\base\OGL_RefCounts.h" />
+    <ClInclude Include="..\..\..\src\base\OGL_TreeNode.h" />
+    <ClInclude Include="..\..\..\src\common\OGL_Define.h" />
+    <ClInclude Include="..\..\..\src\common\OGL_FrameStructure.h" />
+    <ClInclude Include="..\..\..\src\common\OGL_GfxConfiguration.h" />
+    <ClInclude Include="..\..\..\src\common\OGL_Image.h" />
+    <ClInclude Include="..\..\..\src\common\OGL_Buffer.h" />
+    <ClInclude Include="..\..\..\src\common\OGL_ParameterValueMap.h" />
+    <ClInclude Include="..\..\..\src\dispatchPass\OGL_BaseDispatchPass.h" />
+    <ClInclude Include="..\..\..\src\dispatchPass\OGL_BRDFIntegrator.h" />
+    <ClInclude Include="..\..\..\src\drawPass\OGL_BaseDrawPass.h" />
+    <ClInclude Include="..\..\..\src\drawPass\OGL_ForwardGeometryPass.h" />
+    <ClInclude Include="..\..\..\src\drawPass\OGL_OverlayPass.h" />
+    <ClInclude Include="..\..\..\src\drawPass\OGL_ShadowMapPass.h" />
+    <ClInclude Include="..\..\..\src\drawSubPass\OGL_BaseSubPass.h" />
+    <ClInclude Include="..\..\..\src\drawSubPass\OGL_GeometrySubPass.h" />
+    <ClInclude Include="..\..\..\src\drawSubPass\OGL_SkyBoxSubPass.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IApplication.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IAssetLoader.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IDispatchPass.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IDrawPass.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IDrawSubPass.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IGameLogic.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IGraphicsManager.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IPass.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IPipelineStateManager.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_IRuntimeModule.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_ISceneManager.h" />
+    <ClInclude Include="..\..\..\src\interface\OGL_ISubPass.h" />
+    <ClInclude Include="..\..\..\src\manager\OGL_AssetLoader.h" />
+    <ClInclude Include="..\..\..\src\manager\OGL_BaseApplication.h" />
+    <ClInclude Include="..\..\..\src\manager\OGL_GraphicsManager.h" />
+    <ClInclude Include="..\..\..\src\manager\OGL_PipelineStateManager.h" />
+    <ClInclude Include="..\..\..\src\manager\OGL_SceneManager.h" />
+    <ClInclude Include="..\..\..\src\platform\windows\OGL_Application.h" />
+    <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsCommonBaseManager.h" />
+    <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsManager.h" />
+    <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateCommonBaseManager.h" />
+    <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateManager.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Asset.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Camera.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Component.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_EditorCamera.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Entity.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Light.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Material.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Mesh.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_MeshRenderer.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Scene.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_SkyBox.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Texture.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Transform.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_UUID.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\dispatchPass\OGL_BaseDispatchPass.cpp" />
+    <ClCompile Include="..\..\..\src\dispatchPass\OGL_BRDFIntegrator.cpp" />
+    <ClCompile Include="..\..\..\src\drawPass\OGL_BaseDrawPass.cpp" />
+    <ClCompile Include="..\..\..\src\drawPass\OGL_ForwardGeometryPass.cpp" />
+    <ClCompile Include="..\..\..\src\drawPass\OGL_OverlayPass.cpp" />
+    <ClCompile Include="..\..\..\src\drawPass\OGL_ShadowMapPass.cpp" />
+    <ClCompile Include="..\..\..\src\drawSubPass\OGL_BaseSubPass.cpp" />
+    <ClCompile Include="..\..\..\src\drawSubPass\OGL_GeometrySubPass.cpp" />
+    <ClCompile Include="..\..\..\src\drawSubPass\OGL_SkyBoxSubPass.cpp" />
+    <ClCompile Include="..\..\..\src\manager\OGL_AssetLoader.cpp" />
+    <ClCompile Include="..\..\..\src\manager\OGL_BaseApplication.cpp" />
+    <ClCompile Include="..\..\..\src\manager\OGL_GraphicsManager.cpp" />
+    <ClCompile Include="..\..\..\src\manager\OGL_PipelineStateManager.cpp" />
+    <ClCompile Include="..\..\..\src\manager\OGL_SceneManager.cpp" />
+    <ClCompile Include="..\..\..\src\platform\windows\OGL_Application.cpp" />
+    <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsCommonBaseManager.cpp" />
+    <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsManager.cpp" />
+    <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateCommonBaseManager.cpp" />
+    <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateManager.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Asset.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Camera.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Component.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_EditorCamera.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Entity.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Light.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Material.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Mesh.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_MeshRenderer.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Scene.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_SkyBox.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Texture.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Transform.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_UUID.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\shaders\basic.frag" />
+    <None Include="..\..\..\shaders\basic.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,7 @@
+# ignores following folders
+
+.vs/
+.vscode/
+Debug/
+resources/
+blender/
