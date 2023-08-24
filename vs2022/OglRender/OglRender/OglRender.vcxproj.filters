@@ -96,95 +96,8 @@
     <ClInclude Include="..\..\..\src\common\OGL_Define.h">
       <Filter>头文件\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\common\FrameStructure.h">
-      <Filter>头文件\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\common\GfxConfiguration.h">
-      <Filter>头文件\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\common\Image.h">
-      <Filter>头文件\Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\common\OGL_Buffer.h">
       <Filter>头文件\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\common\ParameterValueMap.h">
-      <Filter>头文件\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\dispatchPass\BaseDispatchPass.h">
-      <Filter>头文件\DispatchPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\dispatchPass\BRDFIntegrator.h">
-      <Filter>头文件\DispatchPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\drawPass\BaseDrawPass.h">
-      <Filter>头文件\DrawPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\drawPass\ForwardGeometryPass.h">
-      <Filter>头文件\DrawPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\drawPass\OverlayPass.h">
-      <Filter>头文件\DrawPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\drawPass\ShadowMapPass.h">
-      <Filter>头文件\DrawPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\drawSubPass\BaseSubPass.h">
-      <Filter>头文件\DrawSubPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\drawSubPass\GeometrySubPass.h">
-      <Filter>头文件\DrawSubPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\drawSubPass\SkyBoxSubPass.h">
-      <Filter>头文件\DrawSubPass</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IApplication.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IAssetLoader.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IDispatchPass.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IDrawPass.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IDrawSubPass.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IGameLogic.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IGraphicsManager.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IPipelineStateManager.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IRuntimeModule.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\ISceneManager.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\ISubPass.h">
-      <Filter>头文件\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\manager\AssetLoader.h">
-      <Filter>头文件\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\manager\BaseApplication.h">
-      <Filter>头文件\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\manager\GraphicsManager.h">
-      <Filter>头文件\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\manager\PipelineStateManager.h">
-      <Filter>头文件\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\manager\SceneManager.h">
-      <Filter>头文件\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sceneGraph\OGL_Asset.h">
       <Filter>头文件\SceneGraph</Filter>
@@ -228,82 +141,106 @@
     <ClInclude Include="..\..\..\src\sceneGraph\OGL_UUID.h">
       <Filter>头文件\SceneGraph</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\rhi\opengl\OpenGLGraphicsCommonBaseManager.h">
-      <Filter>头文件\RHI\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\rhi\opengl\OpenGLGraphicsManager.h">
-      <Filter>头文件\RHI\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\rhi\opengl\OpenGLPipelineStateCommonBaseManager.h">
-      <Filter>头文件\RHI\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\rhi\opengl\OpenGLPipelineStateManager.h">
-      <Filter>头文件\RHI\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\platform\windows\OGL_Application.h">
       <Filter>头文件\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\interface\IPass.h">
+    <ClInclude Include="..\..\..\src\interface\OGL_IApplication.h">
       <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IAssetLoader.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IDispatchPass.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IDrawPass.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IDrawSubPass.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IGameLogic.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IGraphicsManager.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IPass.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IPipelineStateManager.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_IRuntimeModule.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_ISceneManager.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\interface\OGL_ISubPass.h">
+      <Filter>头文件\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\common\OGL_Image.h">
+      <Filter>头文件\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dispatchPass\OGL_BaseDispatchPass.h">
+      <Filter>头文件\DispatchPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dispatchPass\OGL_BRDFIntegrator.h">
+      <Filter>头文件\DispatchPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\drawPass\OGL_BaseDrawPass.h">
+      <Filter>头文件\DrawPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\drawPass\OGL_ForwardGeometryPass.h">
+      <Filter>头文件\DrawPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\drawPass\OGL_OverlayPass.h">
+      <Filter>头文件\DrawPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\drawPass\OGL_ShadowMapPass.h">
+      <Filter>头文件\DrawPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\drawSubPass\OGL_BaseSubPass.h">
+      <Filter>头文件\DrawSubPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\drawSubPass\OGL_GeometrySubPass.h">
+      <Filter>头文件\DrawSubPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\drawSubPass\OGL_SkyBoxSubPass.h">
+      <Filter>头文件\DrawSubPass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\manager\OGL_AssetLoader.h">
+      <Filter>头文件\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\manager\OGL_BaseApplication.h">
+      <Filter>头文件\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\manager\OGL_GraphicsManager.h">
+      <Filter>头文件\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\manager\OGL_PipelineStateManager.h">
+      <Filter>头文件\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\manager\OGL_SceneManager.h">
+      <Filter>头文件\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsCommonBaseManager.h">
+      <Filter>头文件\RHI\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsManager.h">
+      <Filter>头文件\RHI\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateCommonBaseManager.h">
+      <Filter>头文件\RHI\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateManager.h">
+      <Filter>头文件\RHI\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\dispatchPass\BaseDispatchPass.cpp">
-      <Filter>源文件\DispatchPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\dispatchPass\BRDFIntegrator.cpp">
-      <Filter>源文件\DispatchPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\drawPass\BaseDrawPass.cpp">
-      <Filter>源文件\DrawPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\drawPass\ForwardGeometryPass.cpp">
-      <Filter>源文件\DrawPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\drawPass\OverlayPass.cpp">
-      <Filter>源文件\DrawPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\drawPass\ShadowMapPass.cpp">
-      <Filter>源文件\DrawPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\drawSubPass\BaseSubPass.cpp">
-      <Filter>源文件\DrawSubPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\drawSubPass\GeometrySubPass.cpp">
-      <Filter>源文件\DrawSubPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\drawSubPass\SkyBoxSubPass.cpp">
-      <Filter>源文件\DrawSubPass</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\manager\AssetLoader.cpp">
-      <Filter>源文件\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\manager\BaseApplication.cpp">
-      <Filter>源文件\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\manager\GraphicsManager.cpp">
-      <Filter>源文件\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\manager\PipelineStateManager.cpp">
-      <Filter>源文件\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\manager\SceneManager.cpp">
-      <Filter>源文件\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\platform\windows\OGL_Application.cpp">
       <Filter>源文件\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\rhi\opengl\OpenGLGraphicsCommonBaseManager.cpp">
-      <Filter>源文件\RHI\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\rhi\opengl\OpenGLGraphicsManager.cpp">
-      <Filter>源文件\RHI\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\rhi\opengl\OpenGLPipelineStateCommonBaseManager.cpp">
-      <Filter>源文件\RHI\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\rhi\opengl\OpenGLPipelineStateManager.cpp">
-      <Filter>源文件\RHI\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sceneGraph\OGL_Asset.cpp">
       <Filter>源文件\SceneGraph</Filter>
@@ -349,6 +286,60 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dispatchPass\OGL_BaseDispatchPass.cpp">
+      <Filter>源文件\DispatchPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\dispatchPass\OGL_BRDFIntegrator.cpp">
+      <Filter>源文件\DispatchPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\drawPass\OGL_BaseDrawPass.cpp">
+      <Filter>源文件\DrawPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\drawPass\OGL_ForwardGeometryPass.cpp">
+      <Filter>源文件\DrawPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\drawPass\OGL_OverlayPass.cpp">
+      <Filter>源文件\DrawPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\drawPass\OGL_ShadowMapPass.cpp">
+      <Filter>源文件\DrawPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\drawSubPass\OGL_BaseSubPass.cpp">
+      <Filter>源文件\DrawSubPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\drawSubPass\OGL_GeometrySubPass.cpp">
+      <Filter>源文件\DrawSubPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\drawSubPass\OGL_SkyBoxSubPass.cpp">
+      <Filter>源文件\DrawSubPass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\manager\OGL_AssetLoader.cpp">
+      <Filter>源文件\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\manager\OGL_BaseApplication.cpp">
+      <Filter>源文件\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\manager\OGL_GraphicsManager.cpp">
+      <Filter>源文件\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\manager\OGL_PipelineStateManager.cpp">
+      <Filter>源文件\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\manager\OGL_SceneManager.cpp">
+      <Filter>源文件\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsCommonBaseManager.cpp">
+      <Filter>源文件\RHI\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsManager.cpp">
+      <Filter>源文件\RHI\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateCommonBaseManager.cpp">
+      <Filter>源文件\RHI\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateManager.cpp">
+      <Filter>源文件\RHI\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

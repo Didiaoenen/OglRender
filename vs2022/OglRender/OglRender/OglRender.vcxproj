@@ -135,11 +135,8 @@
     <ClInclude Include="..\..\..\src\base\OGL_RefCounts.h" />
     <ClInclude Include="..\..\..\src\base\OGL_TreeNode.h" />
     <ClInclude Include="..\..\..\src\common\OGL_Define.h" />
-    <ClInclude Include="..\..\..\src\common\OGL_FrameStructure.h" />
-    <ClInclude Include="..\..\..\src\common\OGL_GfxConfiguration.h" />
     <ClInclude Include="..\..\..\src\common\OGL_Image.h" />
     <ClInclude Include="..\..\..\src\common\OGL_Buffer.h" />
-    <ClInclude Include="..\..\..\src\common\OGL_ParameterValueMap.h" />
     <ClInclude Include="..\..\..\src\dispatchPass\OGL_BaseDispatchPass.h" />
     <ClInclude Include="..\..\..\src\dispatchPass\OGL_BRDFIntegrator.h" />
     <ClInclude Include="..\..\..\src\drawPass\OGL_BaseDrawPass.h" />
