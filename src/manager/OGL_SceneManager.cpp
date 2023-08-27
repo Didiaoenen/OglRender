@@ -249,7 +249,7 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 
 						oglMaterial->mDiffuseMap = _ProcessTexture(_aiMaterial, aiTextureType_DIFFUSE);
 						oglMaterial->mNormalMap = _ProcessTexture(_aiMaterial, aiTextureType_NORMALS);
-						oglMaterial->mMaskMap = _ProcessTexture(_aiMaterial, aiTextureType_LIGHTMAP);
+						oglMaterial->mLightMap = _ProcessTexture(_aiMaterial, aiTextureType_LIGHTMAP);
 
 						auto keyName = _aiMesh->mName.C_Str();
 						oglMashRenderer.mMaterials.emplace(keyName, oglMaterial);

@@ -264,7 +264,7 @@ struct MaterialTexture
     Texture2D ambientMap;
     Texture2D emissiveMap;
     Texture2D normalMap;
-    Texture2D maskMap;
+    Texture2D lightMap;
 };
 
 const size_t kSizeLightInfo = ALIGN(sizeof(LightInfo), 256);

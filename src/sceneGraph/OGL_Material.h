@@ -18,6 +18,6 @@ public:
 	std::string mName;
 	Color mDiffuseMap;
 	Color mNormalMap;
-	Color mMaskMap;
+	Color mLightMap;
 };
 }

@@ -141,7 +141,7 @@ void OGL_Application::ProcessInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
-		glfwSetWindowShouldClose(window, true);
+		//glfwSetWindowShouldClose(window, true);
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
@@ -187,7 +187,14 @@ void OGL_Application::GLFWWindowMouseCallback(GLFWwindow* window, double xpos, d
 {
 	if (mApp)
 	{
-		mApp->MouseCallback(window, xpos, ypos);
+		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+		{
+			mApp->MouseCallback(window, xpos, ypos);
+		}
+		else
+		{
+			mApp->mFirstMouse = true;
+		}
 	}
 }
 
@@ -215,7 +222,7 @@ bool OGL_Application::WindowHint()
 	glfwSetScrollCallback(mWindow, OGL_Application::GLFWWindowScrollCallback);
 	glfwSetCursorPosCallback(mWindow, OGL_Application::GLFWWindowMouseCallback);
 
-	glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	return true;
 }

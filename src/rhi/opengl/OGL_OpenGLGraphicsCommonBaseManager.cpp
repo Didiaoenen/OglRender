@@ -132,9 +132,9 @@ void OGL_OpenGLGraphicsCommonBaseManager::DrawBatch(const Frame& frame)
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, dbc.material.normalMap.handler);
 
-		SetShaderParameter("maskMap", 2);
+		SetShaderParameter("lightMap", 2);
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, dbc.material.maskMap.handler);
+		glBindTexture(GL_TEXTURE_2D, dbc.material.lightMap.handler);
 
 		//
 		glBindVertexArray(dbc.vao);
@@ -409,14 +409,14 @@ void OGL_OpenGLGraphicsCommonBaseManager::InitializeGeometries(const OGL_Scene& 
 					}
 				}
 
-				const auto& mask = oglMaerial->mMaskMap;
+				const auto& mask = oglMaerial->mLightMap;
 				if (mask.ValueMap)
 				{
 					const auto& keyName = mask.ValueMap->mName;
 					const auto& image = mask.ValueMap->GetTextureImage();
 					if (image)
 					{
-						dbc->material.maskMap = uploadTexture(keyName, image);
+						dbc->material.lightMap = uploadTexture(keyName, image);
 					}
 				}
 
