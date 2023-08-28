@@ -21,10 +21,6 @@ public:
 
 	Ref<OGL_Bone> FindBone(const std::string& name);
 
-	inline float GetDuration() { return mDuration; }
-	inline float GetTicksPerSecond() { return mTicksPerSecond; }
-	inline const BoneNode& GetRootNode() { return mRootNode; }
-
 public:
 	BoneNode mRootNode;
 	float mDuration{ 0.0 };

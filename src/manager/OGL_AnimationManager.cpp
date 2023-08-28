@@ -59,7 +59,8 @@ bool OGL_AnimationManager::LoadAnimation(const std::string& animationName, Ref<O
 		auto _aiAnimation = _aiScene->mAnimations[i];
 		
 		auto oglAnimation = CreateRef<OGL_Animation>();
-		mAnimations.emplace(_aiAnimation->mName.C_Str(), oglAnimation);
+		auto keyName = _aiAnimation->mName.C_Str();
+		mAnimations.emplace(keyName, oglAnimation);
 		
 		oglAnimation->mDuration = _aiAnimation->mDuration;
 		oglAnimation->mTicksPerSecond = _aiAnimation->mTicksPerSecond;

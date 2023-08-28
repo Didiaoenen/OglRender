@@ -15,6 +15,8 @@ namespace OGL
 
 #define MAX_LIGHTS 100
 
+#define MAX_BONE 1000
+
 #define MAX_BONE_INFLUENCE 4
 
 enum class VertAttrib

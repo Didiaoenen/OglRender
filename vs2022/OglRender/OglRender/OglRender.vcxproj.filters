@@ -249,6 +249,9 @@
     <ClInclude Include="..\..\..\src\sceneGraph\OGL_Bone.h">
       <Filter>头文件\SceneGraph</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Animator.h">
+      <Filter>头文件\SceneGraph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\platform\windows\OGL_Application.cpp">
@@ -360,6 +363,9 @@
       <Filter>源文件\SceneGraph</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sceneGraph\OGL_Bone.cpp">
+      <Filter>源文件\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Animator.cpp">
       <Filter>源文件\SceneGraph</Filter>
     </ClCompile>
   </ItemGroup>

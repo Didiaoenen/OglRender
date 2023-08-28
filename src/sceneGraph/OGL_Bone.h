@@ -50,16 +50,16 @@ public:
 	float GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime);
 
 public:
-	std::vector<KeyPosition> mPositions;
-	std::vector<KeyRotation> mRotations;
-	std::vector<KeyScale> mScales;
-	int mNumPositions;
-	int mNumRotations;
-	int mNumScalings;
+	std::vector<KeyPosition> mPositions{};
+	std::vector<KeyRotation> mRotations{};
+	std::vector<KeyScale> mScales{};
+	int mNumPositions{ 0 };
+	int mNumRotations{ 0 };
+	int mNumScalings{ 0 };
 
-	glm::mat4 mLocalTransform;
-	std::string mName;
-	int mID;
+	glm::mat4 mLocalTransform{ glm::identity<glm::mat4>() };
+	std::string mName{ std::string() };
+	int mID{ 0 };
 
 };
 }
