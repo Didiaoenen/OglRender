@@ -1,6 +1,7 @@
 #include "rhi/opengl/OGL_OpenGLGraphicsManager.h"
 #include "rhi/opengl/OGL_OpenGLPipelineStateManager.h"
 #include "manager/OGL_AssetLoader.h"
+#include "manager/OGL_AnimationManager.h"
 #include "manager/OGL_SceneManager.h"
 #include "sceneGraph/OGL_EditorCamera.h"
 #include "OGL_Application.h"
@@ -33,11 +34,13 @@ OGL_Application::OGL_Application()
 	mPipelineStateManager = new OGL_OpenGLPipelineStateManager();
 
 	mSceneManager = new OGL_SceneManager();
+	mAnimationManager = new OGL_AnimationManager();
 	mAssetLoader = new OGL_AssetLoader();
 
 	RegisterRuntimeModule(mGraphicManager);
 	RegisterRuntimeModule(mPipelineStateManager);
 	RegisterRuntimeModule(mSceneManager);
+	RegisterRuntimeModule(mAnimationManager);
 	RegisterRuntimeModule(mAssetLoader);
 
 	mEditorCamera = new OGL_EditorCamera();
@@ -64,7 +67,7 @@ void OGL_Application::Setup()
 	mApp = this;
 
 	//
-	mSceneManager->LoadScene("blender/AnisiaRoon_v1.0_2.79.gltf");
+	mSceneManager->LoadScene("blender/PC108.gltf");
 }
 
 void OGL_Application::Update(double dt)

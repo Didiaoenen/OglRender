@@ -47,5 +47,5 @@ void main()
 
     float NdotH = dot(Normal, normalize(viewDir + lightDir));
 
-    FragColor = vec4(lightTex.bbb, 1.0);
+    FragColor = vec4(diffuseTex.rgb, 1.0);
 }

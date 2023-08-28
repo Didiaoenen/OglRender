@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+#include <vector>
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
@@ -12,6 +14,8 @@ namespace OGL
 #define ALIGN(x, a) (((x) + ((a)-1)) & ~((a)-1))
 
 #define MAX_LIGHTS 100
+
+#define MAX_BONE_INFLUENCE 4
 
 enum class VertAttrib
 {
@@ -165,6 +169,22 @@ struct Vertex
     glm::vec2 texcoord;
     glm::vec3 tangent;
     glm::vec3 bitangent;
+    int boneIDs[MAX_BONE_INFLUENCE];
+    float weights[MAX_BONE_INFLUENCE];
+};
+
+struct BoneInfo
+{
+    int id;
+    glm::mat4 offset;
+};
+
+struct BoneNode
+{
+    glm::mat4 transformation;
+    std::string name;
+    int childrenCount;
+    std::vector<BoneNode> children;
 };
 
 struct TextureBase

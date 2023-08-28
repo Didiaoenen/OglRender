@@ -134,6 +134,7 @@
     <ClInclude Include="..\..\..\src\base\OGL_Base.h" />
     <ClInclude Include="..\..\..\src\base\OGL_RefCounts.h" />
     <ClInclude Include="..\..\..\src\base\OGL_TreeNode.h" />
+    <ClInclude Include="..\..\..\src\common\OGL_AssimpGLMHelpers.h" />
     <ClInclude Include="..\..\..\src\common\OGL_Define.h" />
     <ClInclude Include="..\..\..\src\common\OGL_Image.h" />
     <ClInclude Include="..\..\..\src\common\OGL_Buffer.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="..\..\..\src\interface\OGL_IRuntimeModule.h" />
     <ClInclude Include="..\..\..\src\interface\OGL_ISceneManager.h" />
     <ClInclude Include="..\..\..\src\interface\OGL_ISubPass.h" />
+    <ClInclude Include="..\..\..\src\manager\OGL_AnimationManager.h" />
     <ClInclude Include="..\..\..\src\manager\OGL_AssetLoader.h" />
     <ClInclude Include="..\..\..\src\manager\OGL_BaseApplication.h" />
     <ClInclude Include="..\..\..\src\manager\OGL_GraphicsManager.h" />
@@ -168,7 +170,9 @@
     <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsManager.h" />
     <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateCommonBaseManager.h" />
     <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateManager.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Animation.h" />
     <ClInclude Include="..\..\..\src\sceneGraph\OGL_Asset.h" />
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Bone.h" />
     <ClInclude Include="..\..\..\src\sceneGraph\OGL_Camera.h" />
     <ClInclude Include="..\..\..\src\sceneGraph\OGL_Component.h" />
     <ClInclude Include="..\..\..\src\sceneGraph\OGL_EditorCamera.h" />
@@ -193,6 +197,7 @@
     <ClCompile Include="..\..\..\src\drawSubPass\OGL_BaseSubPass.cpp" />
     <ClCompile Include="..\..\..\src\drawSubPass\OGL_GeometrySubPass.cpp" />
     <ClCompile Include="..\..\..\src\drawSubPass\OGL_SkyBoxSubPass.cpp" />
+    <ClCompile Include="..\..\..\src\manager\OGL_AnimationManager.cpp" />
     <ClCompile Include="..\..\..\src\manager\OGL_AssetLoader.cpp" />
     <ClCompile Include="..\..\..\src\manager\OGL_BaseApplication.cpp" />
     <ClCompile Include="..\..\..\src\manager\OGL_GraphicsManager.cpp" />
@@ -203,7 +208,9 @@
     <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLGraphicsManager.cpp" />
     <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateCommonBaseManager.cpp" />
     <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateManager.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Animation.cpp" />
     <ClCompile Include="..\..\..\src\sceneGraph\OGL_Asset.cpp" />
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Bone.cpp" />
     <ClCompile Include="..\..\..\src\sceneGraph\OGL_Camera.cpp" />
     <ClCompile Include="..\..\..\src\sceneGraph\OGL_Component.cpp" />
     <ClCompile Include="..\..\..\src\sceneGraph\OGL_EditorCamera.cpp" />

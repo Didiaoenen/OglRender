@@ -237,6 +237,18 @@
     <ClInclude Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateManager.h">
       <Filter>头文件\RHI\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\common\OGL_AssimpGLMHelpers.h">
+      <Filter>头文件\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\manager\OGL_AnimationManager.h">
+      <Filter>头文件\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Animation.h">
+      <Filter>头文件\SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sceneGraph\OGL_Bone.h">
+      <Filter>头文件\SceneGraph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\platform\windows\OGL_Application.cpp">
@@ -340,6 +352,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\rhi\opengl\OGL_OpenGLPipelineStateManager.cpp">
       <Filter>源文件\RHI\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\manager\OGL_AnimationManager.cpp">
+      <Filter>源文件\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Animation.cpp">
+      <Filter>源文件\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sceneGraph\OGL_Bone.cpp">
+      <Filter>源文件\SceneGraph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

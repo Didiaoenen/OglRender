@@ -14,6 +14,7 @@ namespace OGL
 class OGL_GraphicsManager;
 class OGL_PipelineStateManager;
 class OGL_SceneManager;
+class OGL_AnimationManager;
 class OGL_AssetLoader;
 class OGL_EditorCamera;
 
@@ -70,7 +71,7 @@ protected:
 	static void GLFWWindowMouseCallback(GLFWwindow* window, double xpos, double ypos);
 	static void GLFWWindowScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 
-private:
+public:
 	bool mFirstMouse{ true };
 	double mLastX{ 0 };
 	double mLastY{ 0 };
@@ -78,6 +79,7 @@ private:
 	OGL_GraphicsManager* mGraphicManager;
 	OGL_PipelineStateManager* mPipelineStateManager;
 	OGL_SceneManager* mSceneManager;
+	OGL_AnimationManager* mAnimationManager;
 	OGL_AssetLoader* mAssetLoader;
 
 public:

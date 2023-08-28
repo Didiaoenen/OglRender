@@ -6,6 +6,9 @@
 #include <assimp/postprocess.h>
 #include <assimp/Importer.hpp>
 
+#include "common/OGL_AssimpGLMHelpers.h"
+#include "platform/windows/OGL_Application.h"
+#include "manager/OGL_AnimationManager.h"
 #include "manager/OGL_AssetLoader.h"
 #include "sceneGraph/OGL_Scene.h"
 #include "sceneGraph/OGL_Entity.h"
@@ -41,7 +44,7 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 		auto buffer = assetLoader.SyncOpenAndReadBinary(sceneName.c_str());
 		Assimp::Importer importer;
 		const aiScene* _aiScene = importer.ReadFile("./../../../" + sceneName, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
-		if (!_aiScene || _aiScene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !_aiScene->mRootNode)
+		if (!_aiScene || !_aiScene->mRootNode)
 		{
 			std::cout << "Error::Assimp: " << importer.GetErrorString() << std::endl;
 			return false;
@@ -58,28 +61,12 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 			auto oglEntity = scenePtr->CreateEntity(keyName);
 			auto& oglLight = oglEntity->AddComponent<OGL_Light>();
 
-			oglLight.mUp.x = _aiLight->mUp.x;
-			oglLight.mUp.y = _aiLight->mUp.y;
-			oglLight.mUp.z = _aiLight->mUp.z;
-
-			oglLight.mSize.x = _aiLight->mSize.x;
-			oglLight.mSize.y = _aiLight->mSize.y;
-
-			oglLight.mDirection.x = _aiLight->mDirection.x;
-			oglLight.mDirection.y = _aiLight->mDirection.y;
-			oglLight.mDirection.z = _aiLight->mDirection.z;
-
-			oglLight.mColorDiffuse.r = _aiLight->mColorDiffuse.r;
-			oglLight.mColorDiffuse.g = _aiLight->mColorDiffuse.g;
-			oglLight.mColorDiffuse.b = _aiLight->mColorDiffuse.b;
-
-			oglLight.mColorSpecular.r = _aiLight->mColorSpecular.r;
-			oglLight.mColorSpecular.g = _aiLight->mColorSpecular.g;
-			oglLight.mColorSpecular.b = _aiLight->mColorSpecular.b;
-
-			oglLight.mColorAmbient.r = _aiLight->mColorAmbient.r;
-			oglLight.mColorAmbient.g = _aiLight->mColorAmbient.g;
-			oglLight.mColorAmbient.b = _aiLight->mColorAmbient.b;
+			oglLight.mUp = OGL_AssimpGLMHelpers::GetGLMVec(_aiLight->mUp);
+			oglLight.mSize = OGL_AssimpGLMHelpers::GetGLMVec(_aiLight->mSize);
+			oglLight.mDirection = OGL_AssimpGLMHelpers::GetGLMVec(_aiLight->mDirection);
+			oglLight.mColorDiffuse = OGL_AssimpGLMHelpers::GetGLMColor(_aiLight->mColorDiffuse);
+			oglLight.mColorSpecular = OGL_AssimpGLMHelpers::GetGLMColor(_aiLight->mColorSpecular);
+			oglLight.mColorAmbient = OGL_AssimpGLMHelpers::GetGLMColor(_aiLight->mColorAmbient);
 
 			oglLight.mAngleInnerCone = _aiLight->mAngleInnerCone;
 			oglLight.mAngleOuterCone = _aiLight->mAngleOuterCone;
@@ -96,13 +83,8 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 			auto oglEntity = scenePtr->CreateEntity(keyName);
 			auto& oglCamera = oglEntity->AddComponent<OGL_Camera>();
 
-			oglCamera.mUp.x = _aiCamera->mUp.x;
-			oglCamera.mUp.y = _aiCamera->mUp.y;
-			oglCamera.mUp.z = _aiCamera->mUp.z;
-
-			oglCamera.mLookAt.x = _aiCamera->mLookAt.x;
-			oglCamera.mLookAt.y = _aiCamera->mLookAt.y;
-			oglCamera.mLookAt.z = _aiCamera->mLookAt.z;
+			oglCamera.mUp = OGL_AssimpGLMHelpers::GetGLMVec(_aiCamera->mUp);
+			oglCamera.mLookAt = OGL_AssimpGLMHelpers::GetGLMVec(_aiCamera->mLookAt);
 
 			oglCamera.mClipPlaneFar = _aiCamera->mClipPlaneFar;
 			oglCamera.mClipPlaneNear = _aiCamera->mClipPlaneNear;
@@ -124,38 +106,25 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 			{
 				Vertex vertex;
 
-				vertex.position.x = mesh->mVertices[i].x;
-				vertex.position.y = mesh->mVertices[i].y;
-				vertex.position.z = mesh->mVertices[i].z;
+				vertex.position = OGL_AssimpGLMHelpers::GetGLMVec(mesh->mVertices[i]);
 
 				if (mesh->HasNormals())
 				{
 					oglMesh->hasNormal = true;
-
-					vertex.normal.x = mesh->mNormals[i].x;
-					vertex.normal.y = mesh->mNormals[i].y;
-					vertex.normal.z = mesh->mNormals[i].z;
+					vertex.normal = OGL_AssimpGLMHelpers::GetGLMVec(mesh->mNormals[i]);
 				}
 
 				if (mesh->HasTangentsAndBitangents())
 				{
 					oglMesh->hasTangentsAndBitangents = true;
-
-					vertex.tangent.x = mesh->mTangents[i].x;
-					vertex.tangent.y = mesh->mTangents[i].y;
-					vertex.tangent.z = mesh->mTangents[i].z;
-
-					vertex.bitangent.x = mesh->mBitangents[i].x;
-					vertex.bitangent.y = mesh->mBitangents[i].y;
-					vertex.bitangent.z = mesh->mBitangents[i].z;
+					vertex.tangent = OGL_AssimpGLMHelpers::GetGLMVec(mesh->mTangents[i]);
+					vertex.bitangent = OGL_AssimpGLMHelpers::GetGLMVec(mesh->mBitangents[i]);
 				}
 
 				if (mesh->HasTextureCoords(0))
 				{
 					oglMesh->hasTextureCoords = true;
-
-					vertex.texcoord.x = mesh->mTextureCoords[0][i].x;
-					vertex.texcoord.y = mesh->mTextureCoords[0][i].y;
+					vertex.texcoord = OGL_AssimpGLMHelpers::GetGLMVec(mesh->mTextureCoords[0][i]);
 				}
 				else
 				{
@@ -163,6 +132,7 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 				}
 
 				oglMesh->mVertices.push_back(vertex);
+				oglMesh->SetVertexBoneDataToDefault(vertex);
 			}
 
 			for (uint32_t i = 0; i < mesh->mNumFaces; i++)
@@ -173,6 +143,9 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 					oglMesh->mIndices.push_back(face.mIndices[j]);
 				}
 			}
+
+			auto app = static_cast<OGL_Application*>(mApp);
+			app->mAnimationManager->LoadAnimation("./../../../" + sceneName, oglMesh);
 
 			return oglMesh;
 		};
@@ -193,28 +166,7 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 		_ProcessNode = [&](const aiScene* scene, aiNode* node) 
 		{
 			auto transform = node->mTransformation;
-			auto tempTransform = glm::identity<glm::mat4>();
-
-			tempTransform[0][0] = transform.a1;
-			tempTransform[0][1] = transform.a2;
-			tempTransform[0][2] = transform.a3;
-			tempTransform[0][3] = transform.d1;
-
-			tempTransform[1][0] = transform.b1;
-			tempTransform[1][1] = transform.b2;
-			tempTransform[1][2] = transform.b3;
-			tempTransform[1][3] = transform.d2;
-
-			tempTransform[2][0] = transform.c1;
-			tempTransform[2][1] = transform.c2;
-			tempTransform[2][2] = transform.c3;
-			tempTransform[2][3] = transform.d3;
-
-			tempTransform[3][0] = transform.a4;
-			tempTransform[3][1] = transform.b4;
-			tempTransform[3][2] = transform.c4;
-			tempTransform[3][3] = transform.d4;
-
+			auto tempTransform = OGL_AssimpGLMHelpers::ConvertMatrixToGLMFormat(transform);
 			auto keyName = node->mName.C_Str();
 			auto oglEntity = scenePtr->GetEntity(keyName);
 			if (oglEntity)
@@ -235,7 +187,9 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 					{
 						auto _aiMesh = scene->mMeshes[node->mMeshes[i]];
 
-						oglMashRenderer.mMeshs.push_back(_ProcessMesh(_aiMesh));
+						auto oglMesh = _ProcessMesh(_aiMesh);
+						oglMashRenderer.mMeshs.push_back(oglMesh);
+						oglMesh->ExtractBoneWeightForVertices(_aiMesh, scene);
 
 						auto _aiMaterial = scene->mMaterials[_aiMesh->mMaterialIndex];
 
