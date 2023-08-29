@@ -14,7 +14,7 @@ public:
 	virtual bool Initialize() = 0;
 	virtual void Finalize() = 0;
 	
-	virtual void Tick() = 0;
+	virtual void Tick(double dt) = 0;
 
 	void SetApp(OGL_IApplication* pApp) { mApp = pApp; }
 

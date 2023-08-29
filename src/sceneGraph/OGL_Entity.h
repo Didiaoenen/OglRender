@@ -2,6 +2,7 @@
 
 #include <entt/entt.hpp>
 
+#include "base/OGL_Base.h"
 #include "base/OGL_RefCounts.h"
 #include "sceneGraph/OGL_Scene.h"
 #include "sceneGraph/OGL_UUID.h"
@@ -16,7 +17,7 @@ class OGL_Entity : public OGL_RefCounts
 {
 public:
 	OGL_Entity();
-	OGL_Entity(entt::entity handle, OGL_Scene* scene);
+	OGL_Entity(entt::entity handle, OGL_Scene* scene, const std::string& mName);
 	OGL_Entity(const OGL_Entity& other);
 	virtual ~OGL_Entity() = default;
 
@@ -24,7 +25,7 @@ public:
 	T& AddComponent(Args&&... args)
 	{
 		auto& component = mScene->mRegistry.emplace<T>(mEntityHandle, std::forward<Args>(args)...);
-		component.mEntity = mEntityHandle;
+		component.mEntity = CreateRef<OGL_Entity>(*this);
 		return component;
 	}
 
@@ -53,14 +54,10 @@ public:
 	OGL_UUID GetUUID();
 	const std::string& GetName();
 
-protected:
-	bool Init()
-	{
-		AddComponent<OGL_IDComponent>(OGL_UUID());
-		return true;
-	}
 
 public:
+	std::string mName{ std::string() };
+
 	OGL_Scene* mScene{ nullptr };
 	entt::entity mEntityHandle{ entt::null };
 };

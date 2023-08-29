@@ -3,18 +3,24 @@
 #include <string>
 #include <entt/entt.hpp>
 
+#include "base/OGL_Base.h"
 #include "sceneGraph/OGL_UUID.h"
 
 namespace OGL
 {
+
+class OGL_Entity;
+
 class OGL_Component
 {
 public:
 	OGL_Component() = default;
 	virtual ~OGL_Component() = default;
 
+	virtual void Tick(double dt) {}
+
 public:
-	entt::entity mEntity{ entt::null };
+	Ref<OGL_Entity> mEntity{ nullptr };
 
 };
 

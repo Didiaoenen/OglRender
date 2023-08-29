@@ -23,15 +23,15 @@ void OGL_AnimationManager::Finalize()
 {
 }
 
-void OGL_AnimationManager::Tick()
+void OGL_AnimationManager::Tick(double dt)
 {
 
 }
 
-bool OGL_AnimationManager::LoadAnimation(const std::string& animationName, Ref<OGL_Mesh> mesh)
+bool OGL_AnimationManager::LoadAnimation(const std::string& animationName)
 {
 	Assimp::Importer importer;
-	const aiScene* _aiScene = importer.ReadFile(animationName, aiProcess_Triangulate);
+	const aiScene* _aiScene = importer.ReadFile("./../../../" + animationName, aiProcess_Triangulate);
 	if (!_aiScene || !_aiScene->mRootNode)
 	{
 		std::cout << "Error::Assimp: " << importer.GetErrorString() << std::endl;
@@ -67,21 +67,17 @@ bool OGL_AnimationManager::LoadAnimation(const std::string& animationName, Ref<O
 
 		_ProcessNode(oglAnimation->mRootNode, _aiScene->mRootNode);
 
-		auto& boneInfoMap = mesh->mBoneInfoMap;
-		int& boneCount = mesh->mBoneCounter;
+		auto& boneInfoMap = oglAnimation->mBoneInfoMap;
 
 		for (int i = 0; i < _aiAnimation->mNumChannels; i++)
 		{
 			auto channel = _aiAnimation->mChannels[i];
 			std::string keyName = channel->mNodeName.C_Str();
 
-			if (boneInfoMap.find(keyName) == boneInfoMap.end())
-			{
-				boneInfoMap[keyName].id = boneCount;
-				boneCount++;
-			}
+			AnimationTranslate translate;
 
-			auto oglBone = CreateRef<OGL_Bone>(keyName, boneInfoMap[keyName].id);
+			//auto oglBone = CreateRef<OGL_Bone>(keyName, i);
+			//oglBone->mNumPositions = channel->mNumPositionKeys;
 			for (size_t i = 0; i < channel->mNumPositionKeys; i++)
 			{
 				auto _aiPosition = channel->mPositionKeys[i].mValue;
@@ -89,9 +85,10 @@ bool OGL_AnimationManager::LoadAnimation(const std::string& animationName, Ref<O
 				KeyPosition data;
 				data.position = AssimpGLMHelpers::GetGLMVec(_aiPosition);
 				data.timeStamp = timeStamp;
-				oglBone->mPositions.push_back(data);
+				translate.mPositions.push_back(data);
 			}
 
+			//oglBone->mNumRotations = channel->mNumRotationKeys;
 			for (size_t i = 0; i < channel->mNumRotationKeys; i++)
 			{
 				auto _aiOrientation = channel->mRotationKeys[i].mValue;
@@ -99,23 +96,24 @@ bool OGL_AnimationManager::LoadAnimation(const std::string& animationName, Ref<O
 				KeyRotation data;
 				data.orientation = AssimpGLMHelpers::GetGLMQuat(_aiOrientation);
 				data.timeStamp = timeStamp;
-				oglBone->mRotations.push_back(data);
+				translate.mRotations.push_back(data);
 			}
 
+			//oglBone->mNumScalings = channel->mNumScalingKeys;
 			for (size_t i = 0; i < channel->mNumScalingKeys; i++)
 			{
-				auto _scale = channel->mScalingKeys[i].mValue;
+				auto _aiScale = channel->mScalingKeys[i].mValue;
 				float timeStamp = channel->mScalingKeys[i].mTime;
 				KeyScale data;
-				data.scale = AssimpGLMHelpers::GetGLMVec(_scale);
+				data.scale = AssimpGLMHelpers::GetGLMVec(_aiScale);
 				data.timeStamp = timeStamp;
-				oglBone->mScales.push_back(data);
+				translate.mScales.push_back(data);
 			}
 
-			oglAnimation->mBones.push_back(oglBone);
-		}
+			oglAnimation->mAniamtionTranslateMap[keyName] = translate;
 
-		oglAnimation->mBoneInfoMap = boneInfoMap;
+			//oglAnimation->mBones.push_back(oglBone);
+		}
 	}
 
 	return true;

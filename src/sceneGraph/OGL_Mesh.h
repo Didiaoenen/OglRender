@@ -20,7 +20,8 @@ public:
 
     void SetVertexBoneDataToDefault(Vertex& vertex);
     void SetVertexBoneData(Vertex& vertex, int boneID, float weight);
-    void ExtractBoneWeightForVertices(aiMesh* mesh, const aiScene* scene);
+
+    std::map<std::string, BoneInfo>& GetBoneInfoMap() { return mBoneInfoMap; }
 
 public:
     std::string mName;

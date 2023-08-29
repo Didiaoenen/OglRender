@@ -26,7 +26,7 @@ public:
 	bool Initialize() override;
 	void Finalize() override;
 
-	void Tick() override;
+	void Tick(double dt) override;
 
 	void Draw() override;
 	void Present() override {}
@@ -83,7 +83,7 @@ private:
 	void CalculateCameraMatrix();
 	void CalculateLights();
 
-	void UpdateConstants();
+	void UpdateConstants(double dt);
 
 protected:
 	uint64_t mSceneRevision{ 0 };

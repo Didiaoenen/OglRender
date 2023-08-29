@@ -67,12 +67,13 @@ void OGL_Application::Setup()
 	mApp = this;
 
 	//
+	mAnimationManager->LoadAnimation("blender/PC108.gltf");
 	mSceneManager->LoadScene("blender/PC108.gltf");
 }
 
 void OGL_Application::Update(double dt)
 {
-	OGL_BaseApplication::Tick();
+	OGL_BaseApplication::Tick(dt);
 }
 
 void OGL_Application::Input()
@@ -93,7 +94,7 @@ void OGL_Application::Run()
 
 		ProcessInput(mWindow);
 
-		Update(time);
+		Update(mDT);
 
 		glfwSwapBuffers(mWindow);
 		glfwPollEvents();

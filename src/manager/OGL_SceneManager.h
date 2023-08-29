@@ -17,7 +17,7 @@ public:
 	bool Initialize() override;
 	void Finalize() override;
 
-	void Tick() override;
+	void Tick(double dt) override;
 
 	bool LoadScene(const std::string& sceneName) override;
 

@@ -7,8 +7,10 @@
 #include "drawPass/OGL_ShadowMapPass.h"
 #include "drawPass/OGL_ForwardGeometryPass.h"
 #include "sceneGraph/OGL_Scene.h"
+#include "sceneGraph/OGL_Mesh.h"
 #include "sceneGraph/OGL_Entity.h"
 #include "sceneGraph/OGL_Light.h"
+#include "sceneGraph/OGL_Animator.h"
 #include "sceneGraph/OGL_Transform.h"
 #include "sceneGraph/OGL_EditorCamera.h"
 #include "platform/windows/OGL_Application.h"
@@ -48,7 +50,7 @@ void OGL_GraphicsManager::Finalize()
     EndScene();
 }
 
-void OGL_GraphicsManager::Tick()
+void OGL_GraphicsManager::Tick(double dt)
 {
     auto app = static_cast<OGL_BaseApplication*>(mApp);
     auto sceneManager = app->GetModule<OGL_SceneManager>();
@@ -69,7 +71,7 @@ void OGL_GraphicsManager::Tick()
         }
     }
 
-    UpdateConstants();
+    UpdateConstants(dt);
 
     BeginFrame(mFrames[mFrameIndex]);
     Draw();
@@ -329,7 +331,7 @@ void OGL_GraphicsManager::CalculateLights()
     }
 }
 
-void OGL_GraphicsManager::UpdateConstants()
+void OGL_GraphicsManager::UpdateConstants(double dt)
 {
     auto& frame = mFrames[mFrameIndex];
 
@@ -337,6 +339,17 @@ void OGL_GraphicsManager::UpdateConstants()
     {
         const auto& transform = dbc->entity->GetComponent<OGL_Transform>();
         dbc->modelMatrix = transform.GetTransform();
+
+        if (dbc->entity->HasComponent<OGL_Animator>())
+        {
+            auto& animator = dbc->entity->GetComponent<OGL_Animator>();
+            animator.Tick(dt);
+
+            for (size_t i = 0; i < animator.mFinalBoneMatrices.size(); i++)
+            {
+                dbc->finalBonesMatrices[i] = animator.mFinalBoneMatrices[i];
+            }
+        }
     }
 
     CalculateCameraMatrix();

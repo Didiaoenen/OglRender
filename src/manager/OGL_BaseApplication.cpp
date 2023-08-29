@@ -26,11 +26,11 @@ void OGL_BaseApplication::Finalize()
 	mRuntimeModules.clear();
 }
 
-void OGL_BaseApplication::Tick()
+void OGL_BaseApplication::Tick(double dt)
 {
 	for (const auto& rmodule : mRuntimeModules)
 	{
-		rmodule->Tick();
+		rmodule->Tick(dt);
 	}
 }
 

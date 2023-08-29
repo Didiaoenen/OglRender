@@ -343,6 +343,12 @@ void OGL_OpenGLGraphicsCommonBaseManager::InitializeGeometries(const OGL_Scene& 
 					glVertexAttribPointer((GLuint)VertAttrib::Bitangent, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Vertex::bitangent));
 				}
 
+				glEnableVertexAttribArray((GLuint)VertAttrib::BoneIDs);
+				glVertexAttribIPointer((GLuint)VertAttrib::BoneIDs, 4, GL_INT, sizeof(Vertex), (void*)offsetof(Vertex, Vertex::boneIDs));
+
+				glEnableVertexAttribArray((GLuint)VertAttrib::Weights);
+				glVertexAttribPointer((GLuint)VertAttrib::Weights, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Vertex::weights));
+
 				mBuffers.push_back(vbo);
 
 				glGenBuffers(1, &ebo);

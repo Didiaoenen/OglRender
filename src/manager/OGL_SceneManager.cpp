@@ -18,6 +18,8 @@
 #include "sceneGraph/OGL_Texture.h"
 #include "sceneGraph/OGL_Material.h"
 #include "sceneGraph/OGL_Transform.h"
+#include "sceneGraph/OGL_Animator.h"
+#include "sceneGraph/OGL_Animation.h"
 #include "sceneGraph/OGL_MeshRenderer.h"
 #include "OGL_SceneManager.h"
 
@@ -32,8 +34,13 @@ void OGL_SceneManager::Finalize()
 {
 }
 
-void OGL_SceneManager::Tick()
+void OGL_SceneManager::Tick(double dt)
 {
+	const auto& scene = mScenes.top();
+	if (scene)
+	{
+		scene->Tick(dt);
+	}
 }
 
 bool OGL_SceneManager::LoadScene(const std::string& sceneName)
@@ -144,9 +151,6 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 				}
 			}
 
-			auto app = static_cast<OGL_Application*>(mApp);
-			app->mAnimationManager->LoadAnimation("./../../../" + sceneName, oglMesh);
-
 			return oglMesh;
 		};
 
@@ -185,12 +189,41 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 					auto& oglMashRenderer = oglEntity->AddComponent<OGL_MeshRenderer>();
 					for (size_t i = 0; i < node->mNumMeshes; i++)
 					{
+						//
 						auto _aiMesh = scene->mMeshes[node->mMeshes[i]];
 
 						auto oglMesh = _ProcessMesh(_aiMesh);
 						oglMashRenderer.mMeshs.push_back(oglMesh);
-						oglMesh->ExtractBoneWeightForVertices(_aiMesh, scene);
 
+						for (int boneIndex = 0; boneIndex < _aiMesh->mNumBones; ++boneIndex)
+						{
+							int boneID = -1;
+							std::string boneName = _aiMesh->mBones[boneIndex]->mName.C_Str();
+							if (oglMesh->mBoneInfoMap.find(boneName) == oglMesh->mBoneInfoMap.end())
+							{
+								BoneInfo newBoneInfo;
+								newBoneInfo.id = oglMesh->mBoneCounter;
+								newBoneInfo.offset = OGL_AssimpGLMHelpers::ConvertMatrixToGLMFormat(_aiMesh->mBones[boneIndex]->mOffsetMatrix);
+								oglMesh->mBoneInfoMap[boneName] = newBoneInfo;
+								boneID = oglMesh->mBoneCounter;
+								oglMesh->mBoneCounter++;
+							}
+							else
+							{
+								boneID = oglMesh->mBoneInfoMap[boneName].id;
+							}
+							auto weights = _aiMesh->mBones[boneIndex]->mWeights;
+							int numWeights = _aiMesh->mBones[boneIndex]->mNumWeights;
+
+							for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
+							{
+								int vertexId = weights[weightIndex].mVertexId;
+								float weight = weights[weightIndex].mWeight;
+								oglMesh->SetVertexBoneData(oglMesh->mVertices[vertexId], boneID, weight);
+							}
+						}
+
+						//
 						auto _aiMaterial = scene->mMaterials[_aiMesh->mMaterialIndex];
 
 						auto oglMaterial = CreateRef<OGL_Material>();
@@ -207,6 +240,16 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 
 						auto keyName = _aiMesh->mName.C_Str();
 						oglMashRenderer.mMaterials.emplace(keyName, oglMaterial);
+					}
+
+					//
+					auto app = static_cast<OGL_Application*>(mApp);
+					auto animationName = node->mParent->mName.C_Str();
+					if (app->mAnimationManager->mAnimations[animationName])
+					{
+						auto& oglAnimator = oglEntity->AddComponent<OGL_Animator>();
+						oglAnimator.mCurrentAnimation = app->mAnimationManager->mAnimations[animationName];
+						oglAnimator.mCurrentAnimation->InitBones(oglMashRenderer);
 					}
 				}
 

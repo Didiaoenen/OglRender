@@ -20,7 +20,7 @@ public:
 
 	[[nodiscard]] Ref<OGL_Entity> GetEntity(const std::string& name);
 
-	void Tick();
+	void Tick(double dt);
 
 public:
 	entt::registry mRegistry{};

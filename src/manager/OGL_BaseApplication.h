@@ -21,7 +21,7 @@ public:
 	virtual bool Initialize();
 	virtual void Finalize();
 
-	virtual void Tick();
+	virtual void Tick(double dt);
 
 	virtual void* GetMainWindowHandler() override { return nullptr; }
 

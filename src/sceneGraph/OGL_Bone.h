@@ -6,6 +6,8 @@
 #include <glm/gtx/quaternion.hpp>
 #include <learnopengl/assimp_glm_helpers.h>
 
+#include "OGL_Asset.h"
+
 namespace OGL
 {
 
@@ -27,7 +29,7 @@ struct KeyScale
 	float timeStamp;
 };
 
-class OGL_Bone
+class OGL_Bone : public OGL_Asset
 {
 public:
 	OGL_Bone(const std::string& name, int ID)

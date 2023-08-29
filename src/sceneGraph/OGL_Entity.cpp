@@ -5,18 +5,16 @@ using namespace OGL;
 
 OGL_Entity::OGL_Entity()
 {
-	Init();
 }
 
-OGL_Entity::OGL_Entity(entt::entity handle, OGL_Scene* scene)
-	: mEntityHandle(handle), mScene(scene)
+OGL_Entity::OGL_Entity(entt::entity handle, OGL_Scene* scene, const std::string& name)
+	: mEntityHandle(handle), mScene(scene), mName(name)
 {
-	Init();
 }
 
 OGL_Entity::OGL_Entity(const OGL_Entity& other)
-	: OGL_Entity()
 {
+	*this = other;
 }
 
 OGL_UUID OGL_Entity::GetUUID()

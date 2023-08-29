@@ -15,7 +15,7 @@ public:
 
 	bool Initialize() override;
 	void Finalize() override;
-	void Tick() override {}
+	void Tick(double dt) override {}
 
 	void RegisterPipelineState(OGL_PipelineState& pipelineState) override;
 	void UnregisterPipelineState(OGL_PipelineState& pipelineState) override;

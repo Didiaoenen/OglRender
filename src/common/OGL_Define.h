@@ -15,7 +15,7 @@ namespace OGL
 
 #define MAX_LIGHTS 100
 
-#define MAX_BONE 1000
+#define MAX_BONE 200
 
 #define MAX_BONE_INFLUENCE 4
 
@@ -26,6 +26,8 @@ enum class VertAttrib
     TexCoord,
     Tangent,
     Bitangent,
+    BoneIDs,
+    Weights,
 };
 
 enum class DepthTest
@@ -229,6 +231,7 @@ struct Texture2DArray : Texture2D, TextureArrayBase
 struct PerBatchConstants
 {
     glm::mat4 modelMatrix;  // 64 bytes
+    glm::mat4 finalBonesMatrices[MAX_BONE];
 };
 
 struct PerFrameConstants

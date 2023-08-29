@@ -22,9 +22,9 @@ public:
 	bool Initialize() override;
 	void Finalize() override;
 
-	void Tick() override;
+	void Tick(double dt) override;
 
-	bool LoadAnimation(const std::string& animationName, Ref<OGL_Mesh> mesh);
+	bool LoadAnimation(const std::string& animationName);
 
 public:
 	std::map<std::string, Ref<OGL_Animation>> mAnimations;

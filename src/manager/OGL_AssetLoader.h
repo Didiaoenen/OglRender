@@ -16,7 +16,7 @@ public:
 
     bool Initialize() override;
     void Finalize() override {}
-    void Tick() override {}
+    void Tick(double dt) override {}
 
     bool AddSearchPath(const char* path) override;
 
