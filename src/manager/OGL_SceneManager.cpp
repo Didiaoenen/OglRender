@@ -138,8 +138,8 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 					vertex.texcoord = glm::vec2(0);
 				}
 
-				oglMesh->mVertices.push_back(vertex);
 				oglMesh->SetVertexBoneDataToDefault(vertex);
+				oglMesh->mVertices.push_back(vertex);
 			}
 
 			for (uint32_t i = 0; i < mesh->mNumFaces; i++)
@@ -197,13 +197,15 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 
 						for (int boneIndex = 0; boneIndex < _aiMesh->mNumBones; ++boneIndex)
 						{
+							auto _aiBone = _aiMesh->mBones[boneIndex];
+
 							int boneID = -1;
-							std::string boneName = _aiMesh->mBones[boneIndex]->mName.C_Str();
+							std::string boneName = _aiBone->mName.C_Str();
 							if (oglMesh->mBoneInfoMap.find(boneName) == oglMesh->mBoneInfoMap.end())
 							{
 								BoneInfo newBoneInfo;
 								newBoneInfo.id = oglMesh->mBoneCounter;
-								newBoneInfo.offset = OGL_AssimpGLMHelpers::ConvertMatrixToGLMFormat(_aiMesh->mBones[boneIndex]->mOffsetMatrix);
+								newBoneInfo.offset = OGL_AssimpGLMHelpers::ConvertMatrixToGLMFormat(_aiBone->mOffsetMatrix);
 								oglMesh->mBoneInfoMap[boneName] = newBoneInfo;
 								boneID = oglMesh->mBoneCounter;
 								oglMesh->mBoneCounter++;
@@ -212,13 +214,11 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 							{
 								boneID = oglMesh->mBoneInfoMap[boneName].id;
 							}
-							auto weights = _aiMesh->mBones[boneIndex]->mWeights;
-							int numWeights = _aiMesh->mBones[boneIndex]->mNumWeights;
 
-							for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
+							for (int weightIndex = 0; weightIndex < _aiBone->mNumWeights; ++weightIndex)
 							{
-								int vertexId = weights[weightIndex].mVertexId;
-								float weight = weights[weightIndex].mWeight;
+								int vertexId = _aiBone->mWeights[weightIndex].mVertexId;
+								float weight = _aiBone->mWeights[weightIndex].mWeight;
 								oglMesh->SetVertexBoneData(oglMesh->mVertices[vertexId], boneID, weight);
 							}
 						}

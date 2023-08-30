@@ -28,23 +28,15 @@ uniform mat4 projection;
 
 void main()
 {
-    vec4 totalPosition = vec4(0.0f);
-    for(int i = 0 ; i < MAX_BONE_INFLUENCE ; i++)
+    vec4 totalPosition = vec4(aPos, 1.0);
+    if (aWeights[0] > 0.0 || aWeights[1] > 0.0 || aWeights[2] > 0.0 || aWeights[3] > 0.0)
     {
-        if(aBoneIds[i] == -1) 
-        {
-            continue;
-        }
-        if(aBoneIds[i] >= MAX_BONES) 
-        {
-            totalPosition = vec4(aPos, 1.0f);
-            break;
-        }
-        vec4 localPosition = finalBonesMatrices[aBoneIds[i]] * vec4(aPos, 1.0f);
-        totalPosition += localPosition * aWeights[i];
-        
-        vec3 localNormal = mat3(finalBonesMatrices[aBoneIds[i]]) * aNormal;
-   }
+        mat4 boneTransform = finalBonesMatrices[aBoneIds[0]] * aWeights[0];
+        boneTransform += finalBonesMatrices[aBoneIds[1]] * aWeights[1];
+        boneTransform += finalBonesMatrices[aBoneIds[2]] * aWeights[2];
+        boneTransform += finalBonesMatrices[aBoneIds[3]] * aWeights[3];
+        totalPosition = boneTransform * totalPosition;
+    }
 
     Model = model;
     TexCoords = aTexCoords;    
