@@ -3,12 +3,38 @@
 #include "manager/OGL_AssetLoader.h"
 #include "manager/OGL_AnimationManager.h"
 #include "manager/OGL_SceneManager.h"
+#include "sceneGraph/OGL_Entity.h"
+#include "sceneGraph/OGL_Animator.h"
+#include "sceneGraph/OGL_Animation.h"
 #include "sceneGraph/OGL_EditorCamera.h"
 #include "OGL_Application.h"
 
 using namespace OGL;
 
 OGL_Application* OGL_Application::mApp = nullptr;
+
+static int animationIndex = 0;
+static bool animationKeyDown = false;
+
+static void TestPlayAnimation()
+{
+	auto app = OGL_Application::mApp;
+	auto scene = app->mSceneManager->mScenes.top();
+	for (auto [_, entity] : scene->mEntitys)
+	{
+		if (entity->HasComponent<OGL_Animator>())
+		{
+			auto animation = app->mAnimationManager->mAnimations[animationIndex];
+			auto it = app->mAnimationManager->mAnimationMap.find(animation);
+			if (it != app->mAnimationManager->mAnimationMap.end())
+			{
+				auto [_, animations] = *it;
+				auto& oglAnimator = entity->GetComponent<OGL_Animator>();
+				oglAnimator.PlayAnimation(animations[oglAnimator.mCurrentAnimation->mName]);
+			}
+		}
+	}
+}
 
 OGL_Application::OGL_Application()
 {
@@ -67,8 +93,10 @@ void OGL_Application::Setup()
 	mApp = this;
 
 	//
-	mAnimationManager->LoadAnimation("blender/PC108.gltf");
-	mSceneManager->LoadScene("blender/PC108.gltf");
+	mAnimationManager->LoadAnimation("blender/PC103.gltf", "Idle");
+	mAnimationManager->LoadAnimation("blender/PC103_Run01.gltf", "Run01");
+	mAnimationManager->LoadAnimation("blender/PC103_Run02.gltf", "Run02");
+	mSceneManager->LoadScene("blender/PC103.gltf");
 }
 
 void OGL_Application::Update(double dt)
@@ -202,6 +230,53 @@ void OGL_Application::GLFWWindowMouseCallback(GLFWwindow* window, double xpos, d
 	}
 }
 
+void OGL_Application::GLFWWindowGetKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (mApp)
+	{
+		switch (action)
+		{
+		case GLFW_PRESS:
+		{
+			switch (key)
+			{
+			case (int)GLFW_KEY_UP:
+			{
+				animationIndex++;
+				if (animationIndex > mApp->mAnimationManager->mAnimations.size() - 1)
+				{
+					animationIndex = 0;
+				}
+				TestPlayAnimation();
+			}
+				break;
+			case (int)GLFW_KEY_DOWN:
+			{
+				animationIndex--;
+				if (animationIndex < 0)
+				{
+					animationIndex = mApp->mAnimationManager->mAnimations.size() - 1;
+				}
+				TestPlayAnimation();
+			}
+				break;
+			}
+
+			break;
+		}
+		case GLFW_RELEASE:
+		{
+			break;
+		}
+		case GLFW_REPEAT:
+		{
+			break;
+		}
+		}
+
+	}
+}
+
 bool OGL_Application::InitGLAD()
 {
 	return gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -225,6 +300,7 @@ bool OGL_Application::WindowHint()
 
 	glfwSetScrollCallback(mWindow, OGL_Application::GLFWWindowScrollCallback);
 	glfwSetCursorPosCallback(mWindow, OGL_Application::GLFWWindowMouseCallback);
+	glfwSetKeyCallback(mWindow, OGL_Application::GLFWWindowGetKeyCallback);
 
 	//glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 

@@ -27,7 +27,7 @@ public:
 
 	void ResetScene() override { mSceneRevision++; };
 
-protected:
+public:
 	std::stack<Ref<OGL_Scene>> mScenes;
 	uint64_t mSceneRevision{ 0 };
 };

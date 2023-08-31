@@ -7,6 +7,11 @@ using namespace OGL;
 
 bool OGL_Animation::InitBones(const OGL_MeshRenderer& meshRenderer)
 {
+	if (mInited)
+	{
+		return mInited;
+	}
+
 	for (size_t i = 0; i < meshRenderer.mMeshs.size(); i++)
 	{
 		const auto& oglMesh = meshRenderer.mMeshs[i];
@@ -27,7 +32,10 @@ bool OGL_Animation::InitBones(const OGL_MeshRenderer& meshRenderer)
 			}
 		}
 	}
-	return true;
+
+	mInited = true;
+
+	return mInited;
 }
 
 Ref<OGL_Bone> OGL_Animation::FindBone(const std::string& name)

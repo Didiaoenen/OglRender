@@ -24,10 +24,11 @@ public:
 
 	void Tick(double dt) override;
 
-	bool LoadAnimation(const std::string& animationName);
+	bool LoadAnimation(const std::string& path, const std::string& name);
 
 public:
-	std::map<std::string, Ref<OGL_Animation>> mAnimations;
+	std::vector<std::string> mAnimations;
+	std::map<std::string, std::map<std::string, Ref<OGL_Animation>>> mAnimationMap;
 
 };
 }

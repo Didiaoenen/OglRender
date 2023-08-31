@@ -48,6 +48,8 @@ void OGL_Animator::Tick(double dt)
 
 void OGL_Animator::PlayAnimation(Ref<OGL_Animation> animation)
 {
+	auto oglMeshRender = mEntity->GetComponent<OGL_MeshRenderer>();
+	animation->InitBones(oglMeshRender);
 	mCurrentAnimation = animation;
 	mCurrentTime = 0.0f;
 }

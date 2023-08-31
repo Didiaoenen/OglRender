@@ -232,6 +232,7 @@ struct PerBatchConstants
 {
     glm::mat4 modelMatrix;  // 64 bytes
     glm::mat4 finalBonesMatrices[MAX_BONE];
+    bool skinMesh;
 };
 
 struct PerFrameConstants

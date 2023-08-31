@@ -8,6 +8,7 @@
 #include "sceneGraph/OGL_Mesh.h"
 #include "sceneGraph/OGL_Texture.h"
 #include "sceneGraph/OGL_Material.h"
+#include "sceneGraph/OGL_Animator.h"
 #include "sceneGraph/OGL_MeshRenderer.h"
 #include "rhi/opengl/OGL_OpenGLPipelineStateManager.h"
 #include "OGL_OpenGLGraphicsCommonBaseManager.h"
@@ -301,6 +302,9 @@ void OGL_OpenGLGraphicsCommonBaseManager::InitializeGeometries(const OGL_Scene& 
 			continue;
 		}
 
+		// TODO
+		bool bAnimator = oglEntity->HasComponent<OGL_Animator>();
+
 		const auto& oglMeshRenderer = oglEntity->GetComponent<OGL_MeshRenderer>();
 		for (size_t i = 0; i < oglMeshRenderer.mMeshs.size(); i++)
 		{
@@ -452,13 +456,15 @@ void OGL_OpenGLGraphicsCommonBaseManager::InitializeGeometries(const OGL_Scene& 
 				dbc->type = (uint32_t)GL_UNSIGNED_INT;
 				dbc->count = oglMesh->mIndices.size();
 				dbc->entity = oglEntity;
+				dbc->animator = bAnimator;
 
 				for (size_t i = 0; i < OGL_GfxConfiguration::kMaxInFlightFrameCount; i++) 
 				{
 					mFrames[i].batchContexts.push_back(dbc);
 				}
-			}
 
+				bAnimator = false;
+			}
 		}
 	}
 }

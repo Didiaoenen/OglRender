@@ -245,11 +245,15 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 					//
 					auto app = static_cast<OGL_Application*>(mApp);
 					auto animationName = node->mParent->mName.C_Str();
-					if (app->mAnimationManager->mAnimations[animationName])
+					auto it = app->mAnimationManager->mAnimationMap.find("Run02");
+					if (it != app->mAnimationManager->mAnimationMap.end())
 					{
-						auto& oglAnimator = oglEntity->AddComponent<OGL_Animator>();
-						oglAnimator.mCurrentAnimation = app->mAnimationManager->mAnimations[animationName];
-						oglAnimator.mCurrentAnimation->InitBones(oglMashRenderer);
+						auto& [_, animation] = *it;
+						if (animation[animationName])
+						{
+							auto& oglAnimator = oglEntity->AddComponent<OGL_Animator>();
+							oglAnimator.PlayAnimation(animation[animationName]);
+						}
 					}
 				}
 

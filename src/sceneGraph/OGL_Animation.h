@@ -35,6 +35,8 @@ public:
 
 public:
 	BoneNode mRootNode;
+	std::string mName;
+	bool mInited{ false };
 	float mDuration{ 0.0 };
 	int mTicksPerSecond{ 0 };
 	std::vector<Ref<OGL_Bone>> mBones;

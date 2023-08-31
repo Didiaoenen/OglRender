@@ -24,6 +24,7 @@ struct DrawBatchContext : PerBatchConstants
 	int32_t batchIndex{ 0 };
 	MaterialTexture material;
 	Ref<OGL_Entity> entity;
+	bool animator;
 };
 
 struct Frame : GlobalTexture

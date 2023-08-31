@@ -20,6 +20,7 @@ layout (std140) uniform PerBatchConstants
 {
     mat4 model;
     mat4 finalBonesMatrices[MAX_BONES];
+    bool skinMesh;
 };
 
 //uniform mat4 model;
@@ -29,13 +30,16 @@ uniform mat4 projection;
 void main()
 {
     vec4 totalPosition = vec4(aPos, 1.0);
-    if (aWeights[0] > 0.0 || aWeights[1] > 0.0 || aWeights[2] > 0.0 || aWeights[3] > 0.0)
+    if (skinMesh)
     {
-        mat4 boneTransform = finalBonesMatrices[aBoneIds[0]] * aWeights[0];
-        boneTransform += finalBonesMatrices[aBoneIds[1]] * aWeights[1];
-        boneTransform += finalBonesMatrices[aBoneIds[2]] * aWeights[2];
-        boneTransform += finalBonesMatrices[aBoneIds[3]] * aWeights[3];
-        totalPosition = boneTransform * totalPosition;
+        if (aWeights[0] > 0.0 || aWeights[1] > 0.0 || aWeights[2] > 0.0 || aWeights[3] > 0.0)
+        {
+            mat4 boneTransform = finalBonesMatrices[aBoneIds[0]] * aWeights[0];
+            boneTransform += finalBonesMatrices[aBoneIds[1]] * aWeights[1];
+            boneTransform += finalBonesMatrices[aBoneIds[2]] * aWeights[2];
+            boneTransform += finalBonesMatrices[aBoneIds[3]] * aWeights[3];
+            totalPosition = boneTransform * totalPosition;
+        }
     }
 
     Model = model;

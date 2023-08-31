@@ -56,7 +56,7 @@ public:
 
 	void ProcessInput(GLFWwindow* window);
 
-protected:
+public:
 	AppInfo info;
 
 	static OGL_Application* mApp;
@@ -70,6 +70,7 @@ protected:
 
 	static void GLFWWindowMouseCallback(GLFWwindow* window, double xpos, double ypos);
 	static void GLFWWindowScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+	static void GLFWWindowGetKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 public:
 	bool mFirstMouse{ true };

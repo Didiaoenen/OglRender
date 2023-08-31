@@ -340,7 +340,7 @@ void OGL_GraphicsManager::UpdateConstants(double dt)
         const auto& transform = dbc->entity->GetComponent<OGL_Transform>();
         dbc->modelMatrix = transform.GetTransform();
 
-        if (dbc->entity->HasComponent<OGL_Animator>())
+        if (dbc->animator)
         {
             auto& animator = dbc->entity->GetComponent<OGL_Animator>();
             animator.Tick(dt);
@@ -349,6 +349,8 @@ void OGL_GraphicsManager::UpdateConstants(double dt)
             {
                 dbc->finalBonesMatrices[i] = animator.mFinalBoneMatrices[i];
             }
+
+            dbc->skinMesh = true;
         }
     }
 
