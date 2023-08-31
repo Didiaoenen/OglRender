@@ -93,10 +93,14 @@ void OGL_Application::Setup()
 	mApp = this;
 
 	//
-	mAnimationManager->LoadAnimation("blender/PC103.gltf", "Idle");
-	mAnimationManager->LoadAnimation("blender/PC103_Run01.gltf", "Run01");
-	mAnimationManager->LoadAnimation("blender/PC103_Run02.gltf", "Run02");
-	mSceneManager->LoadScene("blender/PC103.gltf");
+	mAnimationManager->LoadAnimation("blender/PC101_Idle01.gltf", "Idle");
+	mAnimationManager->LoadAnimation("blender/PC101_Walk01.gltf", "Walk01");
+	mAnimationManager->LoadAnimation("blender/PC101_Run01.gltf", "Run01");
+	mAnimationManager->LoadAnimation("blender/PC101_Run02.gltf", "Run02");
+	mAnimationManager->LoadAnimation("blender/PC101_Attack01.gltf", "Attack01");
+	mAnimationManager->LoadAnimation("blender/PC101_Attack02.gltf", "Attack02");
+	mAnimationManager->LoadAnimation("blender/PC101_Attack03.gltf", "Attack03");
+	mSceneManager->LoadScene("blender/PC101.gltf");
 }
 
 void OGL_Application::Update(double dt)

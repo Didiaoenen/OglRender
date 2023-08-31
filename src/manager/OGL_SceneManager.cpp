@@ -245,7 +245,7 @@ bool OGL_SceneManager::LoadScene(const std::string& sceneName)
 					//
 					auto app = static_cast<OGL_Application*>(mApp);
 					auto animationName = node->mParent->mName.C_Str();
-					auto it = app->mAnimationManager->mAnimationMap.find("Run02");
+					auto it = app->mAnimationManager->mAnimationMap.find("Idle");
 					if (it != app->mAnimationManager->mAnimationMap.end())
 					{
 						auto& [_, animation] = *it;
