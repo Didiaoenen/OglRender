@@ -16,6 +16,51 @@ OGL_Application* OGL_Application::mApp = nullptr;
 static int animationIndex = 0;
 static bool animationKeyDown = false;
 
+struct animationInfo
+{
+	std::string path;
+	std::string name;
+};
+
+struct modelInfo
+{
+	std::string path;
+	std::vector<animationInfo> animations;
+};
+
+static std::vector<animationInfo> PC101 =
+{
+	{"blender/PC101_Idle01.gltf", "Idle"},
+	{"blender/PC101_Walk01.gltf", "Walk01"},
+	{"blender/PC101_Run01.gltf", "Run01"},
+	{"blender/PC101_Run02.gltf", "Run02"},
+	{"blender/PC101_Attack01.gltf", "Attack01"},
+	{"blender/PC101_Attack02.gltf", "Attack02"},
+	{"blender/PC101_Attack03.gltf", "Attack03"},
+};
+
+static std::vector<animationInfo> PC103 =
+{
+	{"blender/PC103_Idle01.gltf", "Idle"},
+	{"blender/PC103_Walk01.gltf", "Walk01"},
+	{"blender/PC103_Run01.gltf", "Run01"},
+	{"blender/PC103_Run02.gltf", "Run02"},
+	{"blender/PC103_Attack01.gltf", "Attack01"},
+	{"blender/PC103_Attack02.gltf", "Attack02"},
+	{"blender/PC103_Attack03.gltf", "Attack03"},
+	{"blender/PC103_Skill03_End.gltf", "Skill03_End"},
+	{"blender/PC103_Skill04_End.gltf", "Skill04_End"},
+	{"blender/PC103_Skill06_01_End.gltf", "Skill06_01_End"},
+	{"blender/PC103_Skill024_01_End.gltf", "Skill024_01_End"},
+	{"blender/PC103_Skill026_01_End.gltf", "Skill026_01_End"},
+};
+
+static std::map<std::string, modelInfo> modelMap
+{
+	{"PC101", {"blender/PC101.gltf", PC101}},
+	{"PC103", {"blender/PC103.gltf", PC103}},
+};
+
 static void TestPlayAnimation()
 {
 	auto app = OGL_Application::mApp;
@@ -93,14 +138,12 @@ void OGL_Application::Setup()
 	mApp = this;
 
 	//
-	mAnimationManager->LoadAnimation("blender/PC101_Idle01.gltf", "Idle");
-	mAnimationManager->LoadAnimation("blender/PC101_Walk01.gltf", "Walk01");
-	mAnimationManager->LoadAnimation("blender/PC101_Run01.gltf", "Run01");
-	mAnimationManager->LoadAnimation("blender/PC101_Run02.gltf", "Run02");
-	mAnimationManager->LoadAnimation("blender/PC101_Attack01.gltf", "Attack01");
-	mAnimationManager->LoadAnimation("blender/PC101_Attack02.gltf", "Attack02");
-	mAnimationManager->LoadAnimation("blender/PC101_Attack03.gltf", "Attack03");
-	mSceneManager->LoadScene("blender/PC101.gltf");
+	const auto& [path, animations] = modelMap["PC101"];
+	for (const auto& [path, name] : animations)
+	{
+		mAnimationManager->LoadAnimation(path, name);
+	}
+	mSceneManager->LoadScene(path);
 }
 
 void OGL_Application::Update(double dt)

@@ -32,14 +32,11 @@ void main()
     vec4 totalPosition = vec4(aPos, 1.0);
     if (skinMesh)
     {
-        if (aWeights[0] > 0.0 || aWeights[1] > 0.0 || aWeights[2] > 0.0 || aWeights[3] > 0.0)
-        {
-            mat4 boneTransform = finalBonesMatrices[aBoneIds[0]] * aWeights[0];
-            boneTransform += finalBonesMatrices[aBoneIds[1]] * aWeights[1];
-            boneTransform += finalBonesMatrices[aBoneIds[2]] * aWeights[2];
-            boneTransform += finalBonesMatrices[aBoneIds[3]] * aWeights[3];
-            totalPosition = boneTransform * totalPosition;
-        }
+        mat4 boneTransform = finalBonesMatrices[aBoneIds[0]] * aWeights[0];
+        boneTransform += finalBonesMatrices[aBoneIds[1]] * aWeights[1];
+        boneTransform += finalBonesMatrices[aBoneIds[2]] * aWeights[2];
+        boneTransform += finalBonesMatrices[aBoneIds[3]] * aWeights[3];
+        totalPosition = boneTransform * totalPosition;
     }
 
     Model = model;

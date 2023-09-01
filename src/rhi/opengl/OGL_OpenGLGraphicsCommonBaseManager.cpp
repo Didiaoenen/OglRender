@@ -462,8 +462,6 @@ void OGL_OpenGLGraphicsCommonBaseManager::InitializeGeometries(const OGL_Scene& 
 				{
 					mFrames[i].batchContexts.push_back(dbc);
 				}
-
-				bAnimator = false;
 			}
 		}
 	}

@@ -343,7 +343,6 @@ void OGL_GraphicsManager::UpdateConstants(double dt)
         if (dbc->animator)
         {
             auto& animator = dbc->entity->GetComponent<OGL_Animator>();
-            animator.Tick(dt);
 
             for (size_t i = 0; i < animator.mFinalBoneMatrices.size(); i++)
             {

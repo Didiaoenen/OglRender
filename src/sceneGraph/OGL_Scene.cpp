@@ -27,5 +27,10 @@ Ref<OGL_Entity> OGL_Scene::GetEntity(const std::string& name)
 
 void OGL_Scene::Tick(double dt)
 {
-
+    auto view = mRegistry.view<OGL_Animator>();
+    for (auto& entity : view)
+    {
+        auto& animator = view.get<OGL_Animator>(entity);
+        animator.Tick(dt);
+    }
 }

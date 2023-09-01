@@ -17,7 +17,7 @@ void OGL_Mesh::SetVertexBoneData(Vertex& vertex, int boneID, float weight)
 {
 	for (int i = 0; i < MAX_BONE_INFLUENCE; ++i)
 	{
-		if (vertex.boneIDs[i] <= 0)
+		if (vertex.weights[i] == 0.0f)
 		{
 			vertex.boneIDs[i] = boneID;
 			vertex.weights[i] = weight;
