@@ -5,6 +5,7 @@
 
 #include "UI_IDrawable.h"
 #include "UI_Pluginable.h"
+#include "UI_DataDispatcher.h"
 
 namespace UI
 {

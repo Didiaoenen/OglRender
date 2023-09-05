@@ -13,5 +13,168 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\API">
+      <UniqueIdentifier>{d401a19b-70ad-44f7-82ad-236476c348e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets">
+      <UniqueIdentifier>{3230885c-ee69-40fc-b4d4-0677ac62ad56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Types">
+      <UniqueIdentifier>{f81c04e0-b00d-4b4d-a448-77c84847c676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Panels">
+      <UniqueIdentifier>{915b880b-0a2e-448d-9982-ca173b58718f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Internal">
+      <UniqueIdentifier>{af325760-f764-4b12-b444-5d3e6742292b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ImGui">
+      <UniqueIdentifier>{4d8f7570-1d8a-42be-b627-a841007255c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Plugins">
+      <UniqueIdentifier>{2b69cec2-73ae-454f-a54b-d2f17faba24f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Buttons">
+      <UniqueIdentifier>{b58c17d7-804f-443b-8821-6bd85e20c0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Drags">
+      <UniqueIdentifier>{dd3a9b5c-3b51-476f-9bc0-373e6476416f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ImGui">
+      <UniqueIdentifier>{ff2c624b-e490-4027-8cec-d43420b0ebc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Internal">
+      <UniqueIdentifier>{fd7cd5d5-c74a-4f9c-bf6c-43d14738f114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Panels">
+      <UniqueIdentifier>{011d85e7-7034-423d-893d-b44dc9d0e2ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Plugins">
+      <UniqueIdentifier>{75cf49d3-6853-4405-be7a-8af659f98153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Types">
+      <UniqueIdentifier>{cd5e7f1a-2955-4624-82c6-c75fd2d3f022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets">
+      <UniqueIdentifier>{afa051be-fe5d-4343-8227-521d370a419b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Buttons">
+      <UniqueIdentifier>{73df41d3-d45e-4f7e-b242-27ea01218c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Drags">
+      <UniqueIdentifier>{541c793e-befd-4a07-af51-f494c170aa27}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UI_IDrawable.h">
+      <Filter>头文件\API</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_glfw.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Converter.h">
+      <Filter>头文件\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_EMemoryMode.h">
+      <Filter>头文件\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TextureID.h">
+      <Filter>头文件\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_WidgetContainer.h">
+      <Filter>头文件\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_IPlugin.h">
+      <Filter>头文件\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_AButton.h">
+      <Filter>头文件\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Button.h">
+      <Filter>头文件\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ButtonArrow.h">
+      <Filter>头文件\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ButtonColored.h">
+      <Filter>头文件\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ButtonImage.h">
+      <Filter>头文件\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ButtonSmall.h">
+      <Filter>头文件\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_AWidget.h">
+      <Filter>头文件\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DataWidget.h">
+      <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DragSingleScalar.h">
+      <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DataDispatcher.h">
+      <Filter>头文件\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DragInt.h">
+      <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UI_Pluginable.cpp">
+      <Filter>头文件\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Converter.cpp">
+      <Filter>源文件\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_WidgetContainer.cpp">
+      <Filter>源文件\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_AWidget.cpp">
+      <Filter>源文件\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Button.cpp">
+      <Filter>源文件\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ButtonArrow.cpp">
+      <Filter>源文件\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ButtonColored.cpp">
+      <Filter>源文件\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ButtonImage.cpp">
+      <Filter>源文件\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ButtonSmall.cpp">
+      <Filter>源文件\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_DragSingleScalar.cpp">
+      <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_DragInt.cpp">
+      <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
