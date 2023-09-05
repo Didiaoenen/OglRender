@@ -55,10 +55,16 @@ static std::vector<animationInfo> PC103 =
 	{"blender/PC103_Skill026_01_End.gltf", "Skill026_01_End"},
 };
 
+static std::vector<animationInfo> PC108 =
+{
+	{"blender/PC108_Idle00.gltf", "Idle"},
+};
+
 static std::map<std::string, modelInfo> modelMap
 {
 	{"PC101", {"blender/PC101.gltf", PC101}},
 	{"PC103", {"blender/PC103.gltf", PC103}},
+	{"PC108", {"blender/PC108.gltf", PC108}},
 };
 
 static void TestPlayAnimation()
@@ -138,7 +144,7 @@ void OGL_Application::Setup()
 	mApp = this;
 
 	//
-	const auto& [path, animations] = modelMap["PC101"];
+	const auto& [path, animations] = modelMap["PC103"];
 	for (const auto& [path, name] : animations)
 	{
 		mAnimationManager->LoadAnimation(path, name);
