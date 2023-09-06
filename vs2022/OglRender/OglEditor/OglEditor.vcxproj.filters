@@ -13,5 +13,69 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\Core">
+      <UniqueIdentifier>{db3ee79c-a13c-466d-bd19-8bd6a2ae7ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core">
+      <UniqueIdentifier>{580358dc-4275-4435-a6e8-7a6e56c02064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Panels">
+      <UniqueIdentifier>{5357e4e5-e4c9-4ce0-baee-a939b4bdc573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Panels">
+      <UniqueIdentifier>{29de3b93-136b-4aa2-b03a-77d26497bae9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EditorEditor.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorApplication.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorContext.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorAssetBrowser.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorAssetProperties.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorAssetView.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorAView.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorAViewControllable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EditorApplication.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorContext.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorEditor.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorAssetBrowser.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorAssetProperties.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorAssetView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorAView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorAViewControllable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

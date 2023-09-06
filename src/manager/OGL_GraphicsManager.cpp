@@ -196,7 +196,7 @@ void OGL_GraphicsManager::CalculateCameraMatrix()
             i = glm::translate(i, glm::vec3(0.0f, -1.5f, -3.0f));
 
             auto camPos = app->mEditorCamera->mPosition;
-            frameContext.camPos = camPos;
+            frameContext.camPos = glm::vec4(camPos, 1.0);
             
             frameContext.viewMatrix = glm::lookAt(camPos, camPos + app->mEditorCamera->mFront, app->mEditorCamera->mUp) * i;
 
@@ -233,7 +233,7 @@ void OGL_GraphicsManager::CalculateLights()
             auto& light = lightInfo.lights[frameContext.numLights];
             light.lightPosition = glm::vec4(transform[3][0], transform[3][1], transform[3][2], 1.0);
             light.lightDirection = glm::vec4(oglLight.mDirection, 1.0);
-            light.lightColor = glm::vec4(1.0);
+            //light.lightColor = glm::vec4(1.0);
             //light.lightIntensity = lightObject->mAttenuationLinear;
             //light.lightCastShadow = false;
 

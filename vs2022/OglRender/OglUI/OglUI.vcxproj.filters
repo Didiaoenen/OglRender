@@ -14,60 +14,96 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="头文件\API">
-      <UniqueIdentifier>{d401a19b-70ad-44f7-82ad-236476c348e7}</UniqueIdentifier>
+      <UniqueIdentifier>{df20b307-67c8-42e7-91b8-e1e5c9c5cbb1}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\Widgets">
-      <UniqueIdentifier>{3230885c-ee69-40fc-b4d4-0677ac62ad56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Types">
-      <UniqueIdentifier>{f81c04e0-b00d-4b4d-a448-77c84847c676}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Panels">
-      <UniqueIdentifier>{915b880b-0a2e-448d-9982-ca173b58718f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Internal">
-      <UniqueIdentifier>{af325760-f764-4b12-b444-5d3e6742292b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\ImGui">
-      <UniqueIdentifier>{4d8f7570-1d8a-42be-b627-a841007255c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Plugins">
-      <UniqueIdentifier>{2b69cec2-73ae-454f-a54b-d2f17faba24f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Widgets\Buttons">
-      <UniqueIdentifier>{b58c17d7-804f-443b-8821-6bd85e20c0a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\Widgets\Drags">
-      <UniqueIdentifier>{dd3a9b5c-3b51-476f-9bc0-373e6476416f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\ImGui">
-      <UniqueIdentifier>{ff2c624b-e490-4027-8cec-d43420b0ebc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\Internal">
-      <UniqueIdentifier>{fd7cd5d5-c74a-4f9c-bf6c-43d14738f114}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\Panels">
-      <UniqueIdentifier>{011d85e7-7034-423d-893d-b44dc9d0e2ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\Plugins">
-      <UniqueIdentifier>{75cf49d3-6853-4405-be7a-8af659f98153}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="源文件\Types">
-      <UniqueIdentifier>{cd5e7f1a-2955-4624-82c6-c75fd2d3f022}</UniqueIdentifier>
+      <UniqueIdentifier>{1939d4e0-6c97-409e-803d-b56b0debb6a6}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\Widgets">
-      <UniqueIdentifier>{afa051be-fe5d-4343-8227-521d370a419b}</UniqueIdentifier>
+      <UniqueIdentifier>{1c8f4fcf-28d5-4e7c-8a6d-b6bcce8f11a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Internal">
+      <UniqueIdentifier>{5c18084e-338f-4e51-9b46-80281f060d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Internal">
+      <UniqueIdentifier>{b7ce3d03-2de7-43f0-ad6e-9860bea0e0b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Plugins">
+      <UniqueIdentifier>{7ecdef7f-c4c3-4d4d-9419-a15a4f3a7ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Plugins">
+      <UniqueIdentifier>{9b49f799-fcf6-43d4-b5b3-5676e8660bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ImGui">
+      <UniqueIdentifier>{ea639440-6575-40c9-aed4-22db52f9f674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Buttons">
+      <UniqueIdentifier>{3f87b438-78c6-4561-88f3-b8606e8b5d33}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\Widgets\Buttons">
-      <UniqueIdentifier>{73df41d3-d45e-4f7e-b242-27ea01218c84}</UniqueIdentifier>
+      <UniqueIdentifier>{b80a2283-2106-41f3-92d3-2b14b495a23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Styling">
+      <UniqueIdentifier>{9ff41601-bf7c-4f84-aefd-45cabcfa59ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Drags">
+      <UniqueIdentifier>{4213c6d2-cb74-42a8-a25a-d942e510bec6}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\Widgets\Drags">
-      <UniqueIdentifier>{541c793e-befd-4a07-af51-f494c170aa27}</UniqueIdentifier>
+      <UniqueIdentifier>{083456f1-140a-4edd-a0f9-83ce93a60600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\InputFields">
+      <UniqueIdentifier>{bf16c66c-396e-4f76-901f-a28e490f2683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\InputFields">
+      <UniqueIdentifier>{7bf5f208-af64-4156-934c-06441be08db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Layout">
+      <UniqueIdentifier>{aaf61734-5a93-42ff-a086-12efd6b58fac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Layout">
+      <UniqueIdentifier>{5fccf3d1-33d3-4813-8551-0d9eca0986fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Menu">
+      <UniqueIdentifier>{6ae05427-c67b-4e70-94bf-b34cf953a574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Menu">
+      <UniqueIdentifier>{604e87c3-4cee-46a1-b820-d7bb46fd3e4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Plots">
+      <UniqueIdentifier>{5f61315b-2e4e-4b90-b7ac-b2d0dc8259b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Plots">
+      <UniqueIdentifier>{125623b4-4bbd-40b4-b504-a52e9b2126d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Selection">
+      <UniqueIdentifier>{04588e6d-b3e9-431a-936a-4db659c85fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Selection">
+      <UniqueIdentifier>{52f7c711-b513-4ca4-9d64-cff513c0f58e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Sliders">
+      <UniqueIdentifier>{0ff6d2df-f176-4230-8ceb-dac9fb4308d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Sliders">
+      <UniqueIdentifier>{0b182bd8-c5ce-47e4-8a3f-4817fc8e4690}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI_IDrawable.h">
       <Filter>头文件\API</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_AWidget.h">
+      <Filter>头文件\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_WidgetContainer.h">
+      <Filter>头文件\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_EMemoryMode.h">
+      <Filter>头文件\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_IPlugin.h">
+      <Filter>头文件\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="imconfig.h">
       <Filter>头文件\ImGui</Filter>
@@ -93,28 +129,22 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>头文件\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Converter.h">
-      <Filter>头文件\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_EMemoryMode.h">
-      <Filter>头文件\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_TextureID.h">
-      <Filter>头文件\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_WidgetContainer.h">
-      <Filter>头文件\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_IPlugin.h">
-      <Filter>头文件\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="UI_AButton.h">
       <Filter>头文件\Widgets\Buttons</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Button.h">
-      <Filter>头文件\Widgets\Buttons</Filter>
+    <ClInclude Include="UI_Color.h">
+      <Filter>头文件\Styling</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Converter.h">
+      <Filter>头文件\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Pluginable.h">
+      <Filter>头文件\Plugins</Filter>
     </ClInclude>
     <ClInclude Include="UI_ButtonArrow.h">
+      <Filter>头文件\Widgets\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Button.h">
       <Filter>头文件\Widgets\Buttons</Filter>
     </ClInclude>
     <ClInclude Include="UI_ButtonColored.h">
@@ -123,42 +153,153 @@
     <ClInclude Include="UI_ButtonImage.h">
       <Filter>头文件\Widgets\Buttons</Filter>
     </ClInclude>
+    <ClInclude Include="UI_TextureID.h">
+      <Filter>头文件\Internal</Filter>
+    </ClInclude>
     <ClInclude Include="UI_ButtonSmall.h">
       <Filter>头文件\Widgets\Buttons</Filter>
     </ClInclude>
-    <ClInclude Include="UI_AWidget.h">
+    <ClInclude Include="UI_DataWidget.h">
       <Filter>头文件\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="UI_DataWidget.h">
+    <ClInclude Include="UI_DragInt.h">
       <Filter>头文件\Widgets\Drags</Filter>
     </ClInclude>
     <ClInclude Include="UI_DragSingleScalar.h">
       <Filter>头文件\Widgets\Drags</Filter>
     </ClInclude>
-    <ClInclude Include="UI_DataDispatcher.h">
-      <Filter>头文件\Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_DragInt.h">
+    <ClInclude Include="UI_DragFloat.h">
       <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DragDouble.h">
+      <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DragMultipleScalars.h">
+      <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DragMultipleInts.h">
+      <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DragMultipleFloats.h">
+      <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DragMultipleDoubles.h">
+      <Filter>头文件\Widgets\Drags</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputSingleScalar.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputText.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputInt.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputFloat.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputDouble.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputMultipleScalars.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputMultipleInts.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputMultipleDoubles.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_InputMultipleFloats.h">
+      <Filter>头文件\Widgets\InputFields</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TreeNode.h">
+      <Filter>头文件\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Columns.h">
+      <Filter>头文件\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Dummy.h">
+      <Filter>头文件\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_GroupCollapsable.h">
+      <Filter>头文件\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Group.h">
+      <Filter>头文件\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_NewLine.h">
+      <Filter>头文件\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Spacing.h">
+      <Filter>头文件\Widgets\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_MenuItem.h">
+      <Filter>头文件\Widgets\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_MenuList.h">
+      <Filter>头文件\Widgets\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_APlot.h">
+      <Filter>头文件\Widgets\Plots</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_PlotHistogram.h">
+      <Filter>头文件\Widgets\Plots</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_PlotLines.h">
+      <Filter>头文件\Widgets\Plots</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_CheckBox.h">
+      <Filter>头文件\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ColorEdit.h">
+      <Filter>头文件\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ColorPicker.h">
+      <Filter>头文件\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ComboBox.h">
+      <Filter>头文件\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_RadioButton.h">
+      <Filter>头文件\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_RadioButtonLinker.h">
+      <Filter>头文件\Widgets\Selection</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ESliderOrientation.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SliderSingleScalar.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SliderInt.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SliderFloat.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SliderDouble.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UI_Pluginable.cpp">
-      <Filter>头文件\Plugins</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Converter.cpp">
-      <Filter>源文件\Internal</Filter>
+    <ClCompile Include="UI_AWidget.cpp">
+      <Filter>源文件\Widgets</Filter>
     </ClCompile>
     <ClCompile Include="UI_WidgetContainer.cpp">
       <Filter>源文件\Internal</Filter>
     </ClCompile>
-    <ClCompile Include="UI_AWidget.cpp">
-      <Filter>源文件\Widgets</Filter>
+    <ClCompile Include="UI_Converter.cpp">
+      <Filter>源文件\Internal</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Button.cpp">
-      <Filter>源文件\Widgets\Buttons</Filter>
+    <ClCompile Include="UI_Pluginable.cpp">
+      <Filter>源文件\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="UI_ButtonArrow.cpp">
+      <Filter>源文件\Widgets\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Button.cpp">
       <Filter>源文件\Widgets\Buttons</Filter>
     </ClCompile>
     <ClCompile Include="UI_ButtonColored.cpp">
@@ -170,11 +311,122 @@
     <ClCompile Include="UI_ButtonSmall.cpp">
       <Filter>源文件\Widgets\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="UI_DragInt.cpp">
+      <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
     <ClCompile Include="UI_DragSingleScalar.cpp">
       <Filter>源文件\Widgets\Drags</Filter>
     </ClCompile>
-    <ClCompile Include="UI_DragInt.cpp">
+    <ClCompile Include="UI_DragFloat.cpp">
       <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_DragDouble.cpp">
+      <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_DragMultipleScalars.cpp">
+      <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_DragMultipleFloats.cpp">
+      <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_DragMultipleInts.cpp">
+      <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_DragMultipleDoubles.cpp">
+      <Filter>源文件\Widgets\Drags</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputSingleScalar.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputText.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputInt.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputFloat.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputDouble.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputMultipleScalars.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputMultipleInts.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputMultipleFloats.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_InputMultipleDoubles.cpp">
+      <Filter>源文件\Widgets\InputFields</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_TreeNode.cpp">
+      <Filter>源文件\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Columns.cpp">
+      <Filter>源文件\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Dummy.cpp">
+      <Filter>源文件\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_GroupCollapsable.cpp">
+      <Filter>源文件\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Group.cpp">
+      <Filter>源文件\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_NewLine.cpp">
+      <Filter>源文件\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Spacing.cpp">
+      <Filter>源文件\Widgets\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_MenuItem.cpp">
+      <Filter>源文件\Widgets\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_MenuList.cpp">
+      <Filter>源文件\Widgets\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_APlot.cpp">
+      <Filter>源文件\Widgets\Plots</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_PlotHistogram.cpp">
+      <Filter>源文件\Widgets\Plots</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_PlotLines.cpp">
+      <Filter>源文件\Widgets\Plots</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_CheckBox.cpp">
+      <Filter>源文件\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ColorEdit.cpp">
+      <Filter>源文件\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ColorPicker.cpp">
+      <Filter>源文件\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ComboBox.cpp">
+      <Filter>源文件\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_RadioButton.cpp">
+      <Filter>源文件\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_RadioButtonLinker.cpp">
+      <Filter>源文件\Widgets\Selection</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SliderSingleScalar.cpp">
+      <Filter>源文件\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SliderInt.cpp">
+      <Filter>源文件\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SliderFloat.cpp">
+      <Filter>源文件\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SliderDouble.cpp">
+      <Filter>源文件\Widgets\Sliders</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

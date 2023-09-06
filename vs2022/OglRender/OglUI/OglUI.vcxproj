@@ -105,6 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../;./../../../includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,34 +138,110 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="UI_AButton.h" />
+    <ClInclude Include="UI_APlot.h" />
     <ClInclude Include="UI_AWidget.h" />
-    <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_ButtonArrow.h" />
+    <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_ButtonColored.h" />
     <ClInclude Include="UI_ButtonImage.h" />
     <ClInclude Include="UI_ButtonSmall.h" />
+    <ClInclude Include="UI_CheckBox.h" />
+    <ClInclude Include="UI_Color.h" />
+    <ClInclude Include="UI_ColorEdit.h" />
+    <ClInclude Include="UI_ColorPicker.h" />
+    <ClInclude Include="UI_Columns.h" />
+    <ClInclude Include="UI_ComboBox.h" />
     <ClInclude Include="UI_Converter.h" />
-    <ClInclude Include="UI_DataDispatcher.h" />
     <ClInclude Include="UI_DataWidget.h" />
+    <ClInclude Include="UI_DragDouble.h" />
+    <ClInclude Include="UI_DragFloat.h" />
     <ClInclude Include="UI_DragInt.h" />
+    <ClInclude Include="UI_DragMultipleDoubles.h" />
+    <ClInclude Include="UI_DragMultipleFloats.h" />
+    <ClInclude Include="UI_DragMultipleInts.h" />
+    <ClInclude Include="UI_DragMultipleScalars.h" />
     <ClInclude Include="UI_DragSingleScalar.h" />
+    <ClInclude Include="UI_Dummy.h" />
     <ClInclude Include="UI_EMemoryMode.h" />
+    <ClInclude Include="UI_ESliderOrientation.h" />
+    <ClInclude Include="UI_Group.h" />
+    <ClInclude Include="UI_GroupCollapsable.h" />
     <ClInclude Include="UI_IDrawable.h" />
+    <ClInclude Include="UI_InputDouble.h" />
+    <ClInclude Include="UI_InputFloat.h" />
+    <ClInclude Include="UI_InputInt.h" />
+    <ClInclude Include="UI_InputMultipleDoubles.h" />
+    <ClInclude Include="UI_InputMultipleFloats.h" />
+    <ClInclude Include="UI_InputMultipleInts.h" />
+    <ClInclude Include="UI_InputMultipleScalars.h" />
+    <ClInclude Include="UI_InputSingleScalar.h" />
+    <ClInclude Include="UI_InputText.h" />
     <ClInclude Include="UI_IPlugin.h" />
+    <ClInclude Include="UI_MenuItem.h" />
+    <ClInclude Include="UI_MenuList.h" />
+    <ClInclude Include="UI_NewLine.h" />
+    <ClInclude Include="UI_PlotHistogram.h" />
+    <ClInclude Include="UI_PlotLines.h" />
+    <ClInclude Include="UI_Pluginable.h" />
+    <ClInclude Include="UI_RadioButton.h" />
+    <ClInclude Include="UI_RadioButtonLinker.h" />
+    <ClInclude Include="UI_SliderDouble.h" />
+    <ClInclude Include="UI_SliderFloat.h" />
+    <ClInclude Include="UI_SliderInt.h" />
+    <ClInclude Include="UI_SliderSingleScalar.h" />
+    <ClInclude Include="UI_Spacing.h" />
     <ClInclude Include="UI_TextureID.h" />
+    <ClInclude Include="UI_TreeNode.h" />
     <ClInclude Include="UI_WidgetContainer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="UI_APlot.cpp" />
     <ClCompile Include="UI_AWidget.cpp" />
-    <ClCompile Include="UI_Button.cpp" />
     <ClCompile Include="UI_ButtonArrow.cpp" />
+    <ClCompile Include="UI_Button.cpp" />
     <ClCompile Include="UI_ButtonColored.cpp" />
     <ClCompile Include="UI_ButtonImage.cpp" />
     <ClCompile Include="UI_ButtonSmall.cpp" />
+    <ClCompile Include="UI_CheckBox.cpp" />
+    <ClCompile Include="UI_ColorEdit.cpp" />
+    <ClCompile Include="UI_ColorPicker.cpp" />
+    <ClCompile Include="UI_Columns.cpp" />
+    <ClCompile Include="UI_ComboBox.cpp" />
     <ClCompile Include="UI_Converter.cpp" />
+    <ClCompile Include="UI_DragDouble.cpp" />
+    <ClCompile Include="UI_DragFloat.cpp" />
     <ClCompile Include="UI_DragInt.cpp" />
+    <ClCompile Include="UI_DragMultipleDoubles.cpp" />
+    <ClCompile Include="UI_DragMultipleFloats.cpp" />
+    <ClCompile Include="UI_DragMultipleInts.cpp" />
+    <ClCompile Include="UI_DragMultipleScalars.cpp" />
     <ClCompile Include="UI_DragSingleScalar.cpp" />
+    <ClCompile Include="UI_Dummy.cpp" />
+    <ClCompile Include="UI_Group.cpp" />
+    <ClCompile Include="UI_GroupCollapsable.cpp" />
+    <ClCompile Include="UI_InputDouble.cpp" />
+    <ClCompile Include="UI_InputFloat.cpp" />
+    <ClCompile Include="UI_InputInt.cpp" />
+    <ClCompile Include="UI_InputMultipleDoubles.cpp" />
+    <ClCompile Include="UI_InputMultipleFloats.cpp" />
+    <ClCompile Include="UI_InputMultipleInts.cpp" />
+    <ClCompile Include="UI_InputMultipleScalars.cpp" />
+    <ClCompile Include="UI_InputSingleScalar.cpp" />
+    <ClCompile Include="UI_InputText.cpp" />
+    <ClCompile Include="UI_MenuItem.cpp" />
+    <ClCompile Include="UI_MenuList.cpp" />
+    <ClCompile Include="UI_NewLine.cpp" />
+    <ClCompile Include="UI_PlotHistogram.cpp" />
+    <ClCompile Include="UI_PlotLines.cpp" />
     <ClCompile Include="UI_Pluginable.cpp" />
+    <ClCompile Include="UI_RadioButton.cpp" />
+    <ClCompile Include="UI_RadioButtonLinker.cpp" />
+    <ClCompile Include="UI_SliderDouble.cpp" />
+    <ClCompile Include="UI_SliderFloat.cpp" />
+    <ClCompile Include="UI_SliderInt.cpp" />
+    <ClCompile Include="UI_SliderSingleScalar.cpp" />
+    <ClCompile Include="UI_Spacing.cpp" />
+    <ClCompile Include="UI_TreeNode.cpp" />
     <ClCompile Include="UI_WidgetContainer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -55,7 +55,7 @@ namespace UI
 		float mSpeed;
 		std::string mLabel;
 		std::string mFormat;
-		Tools::Tools_Event mValueChangeEvent;
+		Tools::Tools_Event mValueChangeEvent; 
 
 	private:
 		ImGuiDataType mDataType;
