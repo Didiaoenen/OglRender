@@ -88,6 +88,33 @@
     <Filter Include="源文件\Widgets\Sliders">
       <UniqueIdentifier>{0b182bd8-c5ce-47e4-8a3f-4817fc8e4690}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Widgets\Texts">
+      <UniqueIdentifier>{f61ae3b1-814a-42d3-9c9c-eb43dddc70f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Texts">
+      <UniqueIdentifier>{5801dcd4-46ab-4a24-b761-4f8ea0503d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widgets\Visual">
+      <UniqueIdentifier>{ac450efe-2298-499a-a99c-e632b062caf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Visual">
+      <UniqueIdentifier>{af4d6ae8-b52e-462c-b7ba-d04bacd505f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Core">
+      <UniqueIdentifier>{e8b6f072-cae3-442e-b4bc-6fa48d92a171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Modules">
+      <UniqueIdentifier>{34b6f71c-ca96-4617-ad3e-70233e5831a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Panels">
+      <UniqueIdentifier>{55eee55a-bfe8-4774-b17d-8cb0edc1348c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Widgets\Panels">
+      <UniqueIdentifier>{70eb24fb-2bbd-489b-9944-d36af3c9a9e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Types">
+      <UniqueIdentifier>{280f01f0-b28e-4803-b921-1e63cfb25da6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI_IDrawable.h">
@@ -132,9 +159,6 @@
     <ClInclude Include="UI_AButton.h">
       <Filter>头文件\Widgets\Buttons</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Color.h">
-      <Filter>头文件\Styling</Filter>
-    </ClInclude>
     <ClInclude Include="UI_Converter.h">
       <Filter>头文件\Internal</Filter>
     </ClInclude>
@@ -158,9 +182,6 @@
     </ClInclude>
     <ClInclude Include="UI_ButtonSmall.h">
       <Filter>头文件\Widgets\Buttons</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_DataWidget.h">
-      <Filter>头文件\Widgets</Filter>
     </ClInclude>
     <ClInclude Include="UI_DragInt.h">
       <Filter>头文件\Widgets\Drags</Filter>
@@ -281,6 +302,69 @@
     </ClInclude>
     <ClInclude Include="UI_SliderDouble.h">
       <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SliderMultipleScalars.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SliderMultipleInts.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SliderMultipleFloats.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_SliderMultipleDoubles.h">
+      <Filter>头文件\Widgets\Sliders</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Text.h">
+      <Filter>头文件\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TextClickable.h">
+      <Filter>头文件\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DataWidget.h">
+      <Filter>头文件\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TextColored.h">
+      <Filter>头文件\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TextDisabled.h">
+      <Filter>头文件\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TextLabelled.h">
+      <Filter>头文件\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TextSelectable.h">
+      <Filter>头文件\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TextWrapped.h">
+      <Filter>头文件\Widgets\Texts</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Bullet.h">
+      <Filter>头文件\Widgets\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Image.h">
+      <Filter>头文件\Widgets\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ProgressBar.h">
+      <Filter>头文件\Widgets\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Separator.h">
+      <Filter>头文件\Widgets\Visual</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Manager.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Canvas.h">
+      <Filter>头文件\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_APanel.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Color.h">
+      <Filter>头文件\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_EStyle.h">
+      <Filter>头文件\Styling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -427,6 +511,54 @@
     </ClCompile>
     <ClCompile Include="UI_SliderDouble.cpp">
       <Filter>源文件\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SliderMultipleScalars.cpp">
+      <Filter>源文件\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SliderMultipleInts.cpp">
+      <Filter>源文件\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SliderMultipleFloats.cpp">
+      <Filter>源文件\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_SliderMultipleDoubles.cpp">
+      <Filter>源文件\Widgets\Sliders</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Text.cpp">
+      <Filter>源文件\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_TextClickable.cpp">
+      <Filter>源文件\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_TextColored.cpp">
+      <Filter>源文件\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_TextDisabled.cpp">
+      <Filter>源文件\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_TextLabelled.cpp">
+      <Filter>源文件\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_TextSelectable.cpp">
+      <Filter>源文件\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_TextWrapped.cpp">
+      <Filter>源文件\Widgets\Texts</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Bullet.cpp">
+      <Filter>源文件\Widgets\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Image.cpp">
+      <Filter>源文件\Widgets\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ProgressBar.cpp">
+      <Filter>源文件\Widgets\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Separator.cpp">
+      <Filter>源文件\Widgets\Visual</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_APanel.cpp">
+      <Filter>源文件\Widgets\Panels</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
