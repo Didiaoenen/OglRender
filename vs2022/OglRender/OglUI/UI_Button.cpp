@@ -1,6 +1,6 @@
 
-#include "UI_Converter.h"
 #include "UI_Button.h"
+#include "UI_Converter.h"
 #include "imgui_internal.h"
 
 UI::UI_Button::UI_Button(const std::string& pLabel, const glm::vec2& pSize, bool pDisabled)
@@ -28,9 +28,9 @@ void UI::UI_Button::_Draw_Impl()
 	style.Colors[ImGuiCol_ButtonActive] = UI::UI_Converter::ToImVec4(mClickedBackgroundColor);
 	style.Colors[ImGuiCol_Text] = UI::UI_Converter::ToImVec4(mTextColor);
 
-	if (ImGui::ButtonEx((mLable + mWidgetID).c_str(), UI::UI_Converter::ToImVec2(mSize), mDisabled ? ImGuiButtonFlags_Disabled : 0))
+	if (ImGui::ButtonEx((mLabel + mWidgetID).c_str(), UI::UI_Converter::ToImVec2(mSize), mDisabled ? ImGuiButtonFlags_Disabled : 0))
 	{
-		ClickEvent.Invoke();
+		mClickedEvent.Invoke();
 	}
 
 	style.Colors[ImGuiCol_Button] = defaultIdleColor;

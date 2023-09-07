@@ -2,7 +2,6 @@
 
 #include <vector>
 
-#include "UI_AWidget.h"
 #include "UI_WidgetContainer.h"
 
 namespace UI

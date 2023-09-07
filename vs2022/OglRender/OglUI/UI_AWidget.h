@@ -1,51 +1,50 @@
 #pragma once
 
 #include <string>
-#include "imgui.h"
 
 #include "UI_IDrawable.h"
 #include "UI_Pluginable.h"
 #include "UI_DataDispatcher.h"
+#include "imgui.h"
 
 namespace UI
 {
+	class UI_WidgetContainer;
 
-class UI_WidgetContainer;
+	class UI_AWidget : public UI_IDrawable, public UI_Pluginable
+	{
+	public:
+		UI_AWidget();
 
-class UI_AWidget : public UI_Drawable, public UI_Pluginable
-{
-public:
-	UI_AWidget();
+		virtual void Draw() override;
 
-	virtual void Draw() override;
+		void LinkTo(const UI_AWidget& pWidget);
 
-	void LinkTo(const UI_AWidget& pWidget);
+		void Destroy();
 
-	void Destroy();
+		bool IsDestroyed() const;
 
-	bool IsDestroyed() const;
+		void SetParent(UI_WidgetContainer* pParent);
 
-	void SetParent(UI_WidgetContainer* pParent);
+		bool HasParent() const;
 
-	bool HasParent() const;
+		UI_WidgetContainer* GetParent();
 
-	UI_WidgetContainer* GetParent();
+	protected:
+		virtual void _Draw_Impl() = 0;
 
-protected:
-	virtual void _Draw_Impl() = 0;
+	public:
+		bool mEnabled{ true };
+		bool mLineBreak{ true };
 
-public:
-	bool mEnabled{ true };
-	bool mLineBreak{ true };
+	protected:
+		UI_WidgetContainer* mParent{ nullptr };
+		std::string mWidgetID{ std::string("?") };
+		bool mAutoExecutePlugins{ true };
 
-protected:
-	UI_WidgetContainer* mParent;
-	std::string mWidgetID{ std::string("?") };
-	bool mAutoExecutePlugins{ true };
-
-private:
-	static uint64_t __WIDGET_ID_INCREMENT;
-	bool mDestroyed{ false };
-};
+	private:
+		static uint64_t __WIDGET_ID_INCREMENT;
+		bool mDestroyed{ false };
+	};
 }
 

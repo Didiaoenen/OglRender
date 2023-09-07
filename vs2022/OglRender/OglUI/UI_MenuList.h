@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
+
 #include "OglTools/Tools_Event.h"
+
 #include "UI_Group.h"
 
 namespace UI

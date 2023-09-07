@@ -1,7 +1,6 @@
 
 #include <algorithm>
 
-#include "UI_AWidget.h"
 #include "UI_WidgetContainer.h"
 
 void UI::UI_WidgetContainer::RemoveWidget(UI_AWidget& pWidget)

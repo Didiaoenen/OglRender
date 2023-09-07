@@ -1,5 +1,6 @@
 #pragma once
 
+#include "UI_AWidget.h"
 #include "UI_DataWidget.h"
 
 namespace UI

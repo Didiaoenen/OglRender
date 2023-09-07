@@ -109,11 +109,23 @@
     <Filter Include="头文件\Panels">
       <UniqueIdentifier>{55eee55a-bfe8-4774-b17d-8cb0edc1348c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Widgets\Panels">
-      <UniqueIdentifier>{70eb24fb-2bbd-489b-9944-d36af3c9a9e9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\Types">
       <UniqueIdentifier>{280f01f0-b28e-4803-b921-1e63cfb25da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Settings">
+      <UniqueIdentifier>{63d67ab4-231f-44e0-8925-38b23ef4aa7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Panels">
+      <UniqueIdentifier>{58bb86ff-3ea3-4c83-a690-188940da8c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core">
+      <UniqueIdentifier>{09ccec69-0440-4d89-ac02-320230691e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ImGui">
+      <UniqueIdentifier>{6b0724c4-c378-4444-823f-27da893eac87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Modules">
+      <UniqueIdentifier>{04a3900a-0f03-41d8-bf7b-116dea6dec56}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -366,6 +378,36 @@
     <ClInclude Include="UI_EStyle.h">
       <Filter>头文件\Styling</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Alignment.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_APanelTransformable.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_PanelUndecorated.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_PanelMenuBar.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_PanelWindow.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_PanelWindowSettings.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ContextualMenu.h">
+      <Filter>头文件\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DataDispatcher.h">
+      <Filter>头文件\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DDSource.h">
+      <Filter>头文件\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DDTarget.h">
+      <Filter>头文件\Plugins</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI_AWidget.cpp">
@@ -376,9 +418,6 @@
     </ClCompile>
     <ClCompile Include="UI_Converter.cpp">
       <Filter>源文件\Internal</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Pluginable.cpp">
-      <Filter>源文件\Plugins</Filter>
     </ClCompile>
     <ClCompile Include="UI_ButtonArrow.cpp">
       <Filter>源文件\Widgets\Buttons</Filter>
@@ -398,29 +437,11 @@
     <ClCompile Include="UI_DragInt.cpp">
       <Filter>源文件\Widgets\Drags</Filter>
     </ClCompile>
-    <ClCompile Include="UI_DragSingleScalar.cpp">
-      <Filter>源文件\Widgets\Drags</Filter>
-    </ClCompile>
     <ClCompile Include="UI_DragFloat.cpp">
       <Filter>源文件\Widgets\Drags</Filter>
     </ClCompile>
     <ClCompile Include="UI_DragDouble.cpp">
       <Filter>源文件\Widgets\Drags</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_DragMultipleScalars.cpp">
-      <Filter>源文件\Widgets\Drags</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_DragMultipleFloats.cpp">
-      <Filter>源文件\Widgets\Drags</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_DragMultipleInts.cpp">
-      <Filter>源文件\Widgets\Drags</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_DragMultipleDoubles.cpp">
-      <Filter>源文件\Widgets\Drags</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_InputSingleScalar.cpp">
-      <Filter>源文件\Widgets\InputFields</Filter>
     </ClCompile>
     <ClCompile Include="UI_InputText.cpp">
       <Filter>源文件\Widgets\InputFields</Filter>
@@ -434,25 +455,7 @@
     <ClCompile Include="UI_InputDouble.cpp">
       <Filter>源文件\Widgets\InputFields</Filter>
     </ClCompile>
-    <ClCompile Include="UI_InputMultipleScalars.cpp">
-      <Filter>源文件\Widgets\InputFields</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_InputMultipleInts.cpp">
-      <Filter>源文件\Widgets\InputFields</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_InputMultipleFloats.cpp">
-      <Filter>源文件\Widgets\InputFields</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_InputMultipleDoubles.cpp">
-      <Filter>源文件\Widgets\InputFields</Filter>
-    </ClCompile>
     <ClCompile Include="UI_TreeNode.cpp">
-      <Filter>源文件\Widgets\Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Columns.cpp">
-      <Filter>源文件\Widgets\Layout</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Dummy.cpp">
       <Filter>源文件\Widgets\Layout</Filter>
     </ClCompile>
     <ClCompile Include="UI_GroupCollapsable.cpp">
@@ -500,9 +503,6 @@
     <ClCompile Include="UI_RadioButtonLinker.cpp">
       <Filter>源文件\Widgets\Selection</Filter>
     </ClCompile>
-    <ClCompile Include="UI_SliderSingleScalar.cpp">
-      <Filter>源文件\Widgets\Sliders</Filter>
-    </ClCompile>
     <ClCompile Include="UI_SliderInt.cpp">
       <Filter>源文件\Widgets\Sliders</Filter>
     </ClCompile>
@@ -510,18 +510,6 @@
       <Filter>源文件\Widgets\Sliders</Filter>
     </ClCompile>
     <ClCompile Include="UI_SliderDouble.cpp">
-      <Filter>源文件\Widgets\Sliders</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_SliderMultipleScalars.cpp">
-      <Filter>源文件\Widgets\Sliders</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_SliderMultipleInts.cpp">
-      <Filter>源文件\Widgets\Sliders</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_SliderMultipleFloats.cpp">
-      <Filter>源文件\Widgets\Sliders</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_SliderMultipleDoubles.cpp">
       <Filter>源文件\Widgets\Sliders</Filter>
     </ClCompile>
     <ClCompile Include="UI_Text.cpp">
@@ -557,8 +545,50 @@
     <ClCompile Include="UI_Separator.cpp">
       <Filter>源文件\Widgets\Visual</Filter>
     </ClCompile>
+    <ClCompile Include="UI_APanelTransformable.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Manager.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>源文件\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>源文件\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>源文件\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_glfw.cpp">
+      <Filter>源文件\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>源文件\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>源文件\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Canvas.cpp">
+      <Filter>源文件\Modules</Filter>
+    </ClCompile>
     <ClCompile Include="UI_APanel.cpp">
-      <Filter>源文件\Widgets\Panels</Filter>
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_PanelMenuBar.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_PanelUndecorated.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_PanelWindow.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ContextualMenu.cpp">
+      <Filter>源文件\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Dummy.cpp">
+      <Filter>源文件\Widgets\Layout</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

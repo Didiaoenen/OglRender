@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "UI_RadioButtonLinker.h"
 
 UI::UI_RadioButtonLinker::UI_RadioButtonLinker()

@@ -30,13 +30,13 @@ namespace UI
 		{
 			TRY_GATHER(T, mData);
 			UI_AWidget::Draw();
-			TRY_GATHER(T, mData);
+			TRY_PROVIDE(T, mData);
 		}
 	}
 
 	template<typename T>
 	inline void UI_DataWidget<T>::NotifyChange()
 	{
-		TRY_NOTIFY_CHANGE(t);
+		TRY_NOTIFY_CHANGE(T);
 	}
 }

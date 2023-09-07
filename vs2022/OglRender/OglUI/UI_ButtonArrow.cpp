@@ -9,6 +9,6 @@ void UI::UI_ButtonArrow::_Draw_Impl()
 {
 	if (ImGui::ArrowButton(mWidgetID.c_str(), mDirection))
 	{
-		ClickEvent.Invoke();
+		mClickedEvent.Invoke();
 	}
 }

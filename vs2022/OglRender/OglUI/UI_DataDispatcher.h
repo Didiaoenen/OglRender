@@ -4,14 +4,14 @@
 
 #include "UI_IPlugin.h"
 
-#define TRY_GATHER(type, output)	if (auto plugin = GetPlugin<OvUI::Plugins::DataDispatcher<type>>(); plugin) output = plugin->Gather();
-#define TRY_PROVIDE(type, output)	if (auto plugin = GetPlugin<OvUI::Plugins::DataDispatcher<type>>(); plugin) plugin->Provide(output);
-#define TRY_NOTIFY_CHANGE(type)		if (auto plugin = GetPlugin<OvUI::Plugins::DataDispatcher<type>>(); plugin) plugin->NotifyChange();
+#define TRY_GATHER(type, output)	if (auto plugin = GetPlugin<UI_DataDispatcher<type>>(); plugin) output = plugin->Gather();
+#define TRY_PROVIDE(type, output)	if (auto plugin = GetPlugin<UI_DataDispatcher<type>>(); plugin) plugin->Provide(output);
+#define TRY_NOTIFY_CHANGE(type)		if (auto plugin = GetPlugin<UI_DataDispatcher<type>>(); plugin) plugin->NotifyChange();
 
 namespace UI
 {
 	template<typename T>
-	class DataDispatcher : public UI_IPlugin
+	class UI_DataDispatcher : public UI_IPlugin
 	{
 	public:
 		void RegisterReference(T& pReference)
@@ -48,7 +48,7 @@ namespace UI
 			mValueChanged = true;
 		}
 
-		T Gether()
+		T Gather()
 		{
 			return mDataPointer ? *mDataPointer : mGatherer();
 		}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "OglTools/Tools_Event.h"
+
 #include "UI_DataWidget.h"
 
 namespace UI
@@ -27,10 +28,10 @@ namespace UI
 	protected:
 		void _Draw_Impl() override
 		{
-			T previousValue = value;
+			T previousValue = mValue;
 
 			ImGuiInputTextFlags flags = ImGuiInputTextFlags_EnterReturnsTrue;
-			if (selectAllOnClick)
+			if (mSelectAllOnClick)
 			{
 				flags |= ImGuiInputTextFlags_AutoSelectAll;
 			}

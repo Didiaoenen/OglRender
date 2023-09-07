@@ -1,10 +1,8 @@
 #pragma once
 
-#include <string>
 #include <vector>
 #include <unordered_map>
 
-#include "UI_IDrawable.h"
 #include "UI_WidgetContainer.h"
 
 namespace UI

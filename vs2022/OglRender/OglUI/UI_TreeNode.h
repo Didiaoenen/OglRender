@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
+
 #include "OglTools/Tools_Event.h"
+
 #include "UI_WidgetContainer.h"
 #include "UI_DataWidget.h"
 

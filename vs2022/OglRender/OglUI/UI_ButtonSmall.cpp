@@ -23,7 +23,7 @@ void UI::UI_ButtonSmall::_Draw_Impl()
 
 	if (ImGui::SmallButton((mLabel + mWidgetID).c_str()))
 	{
-		ClickEvent.Invoke();
+		mClickedEvent.Invoke();
 	}
 
 	style.Colors[ImGuiCol_Button] = UI::UI_Converter::ToImVec4(mIdleBackgroundColor);

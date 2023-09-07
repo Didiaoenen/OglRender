@@ -5,30 +5,30 @@
 
 namespace Tools
 {
-using ListenerID = uint64_t;
+	using ListenerID = uint64_t;
 
-template<class... ArgTypes>
-class Tools_Event
-{
-public:
-	using Callback = std::function<void(ArgTypes...)>;
+	template<class... ArgTypes>
+	class Tools_Event
+	{
+	public:
+		using Callback = std::function<void(ArgTypes...)>;
 
-	ListenerID AddListener(Callback pCallback);
+		ListenerID AddListener(Callback pCallback);
 
-	ListenerID operator+=(Callback pCallback);
+		ListenerID operator+=(Callback pCallback);
 
-	bool RemoveListener(ListenerID pListenerID);
+		bool RemoveListener(ListenerID pListenerID);
 
-	bool operator-=(ListenerID pListenerID);
+		bool operator-=(ListenerID pListenerID);
 
-	void RemoveAllListeners();
+		void RemoveAllListeners();
 
-	uint64_t GetListenerCount();
+		uint64_t GetListenerCount();
 
-	void Invoke(ArgTypes... pArgs);
+		void Invoke(ArgTypes... pArgs);
 
-private:
-	std::unordered_map<ListenerID, Callback> mCallbacks;
-	ListenerID mAvailableListenerID{ 0 };
-};
+	private:
+		std::unordered_map<ListenerID, Callback> mCallbacks;
+		ListenerID mAvailableListenerID{ 0 };
+	};
 }

@@ -1,26 +1,28 @@
 #pragma once
 
-#include "UI_Color.h"
+#include <string>
+
 #include "UI_AButton.h"
+#include "UI_Color.h"
 
 namespace UI
 {
-class UI_ButtonSmall : public UI_AButton
-{
-public:
-	UI_ButtonSmall(const std::string& pLabel = "");
+	class UI_ButtonSmall : public UI_AButton
+	{
+	public:
+		UI_ButtonSmall(const std::string& pLabel = "");
 
-protected:
-	void _Draw_Impl() override;
+	protected:
+		void _Draw_Impl() override;
 
-public:
-	std::string mLabel;
+	public:
+		std::string mLabel;
 
-	Color mIdleBackgroundColor;
-	Color mHoveredBackgroundColor;
-	Color mClickedBackgroundColor;
+		Color mIdleBackgroundColor;
+		Color mHoveredBackgroundColor;
+		Color mClickedBackgroundColor;
 
-	Color mTextColor;
-};
+		Color mTextColor;
+	};
 }
 

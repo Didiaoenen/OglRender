@@ -14,7 +14,7 @@ namespace UI
 			double pValue = 0,
 			float pSpeed = 0.f,
 			const std::string& pLabel = "",
-			const std::string& pFormat = "%d"
+			const std::string& pFormat = "%.6f"
 		);
 	};
 }

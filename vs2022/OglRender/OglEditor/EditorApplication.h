@@ -4,19 +4,19 @@
 
 namespace Editor
 {
-class EditorApplication
-{
-public:
-	EditorApplication(const std::string& pProjectPath, const std::string& pProjectName);
+	class EditorApplication
+	{
+	public:
+		EditorApplication(const std::string& pProjectPath, const std::string& pProjectName);
 	
-	~EditorApplication();
+		~EditorApplication();
 
-	void Run();
+		void Run();
 
-	bool IsRunning() const;
+		bool IsRunning() const;
 
-private:
+	private:
 
-};
+	};
 }
 

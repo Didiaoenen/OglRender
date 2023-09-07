@@ -1,6 +1,7 @@
 #pragma once
 
 #include "OglTools/Tools_Event.h"
+
 #include "UI_DataWidget.h"
 
 namespace UI
@@ -22,7 +23,7 @@ namespace UI
 		Tools::Tools_Event<bool> mValueChangedEvent;
 
 	private:
-		bool m_selected;
+		bool mSelected;
 	};
 }
 

@@ -52,8 +52,8 @@ namespace UI
 		void PopCurrentFont();
 
 	private:
-		bool mDockingState;
-		UI_Canvas* mCurrentCanvas = nullptr;
+		bool mDockingState{ false };
+		UI_Canvas* mCurrentCanvas{ nullptr };
 		std::unordered_map<std::string, ImFont*> mFonts;
 		std::string mLayoutSaveFilename = "imgui.ini";
 	};

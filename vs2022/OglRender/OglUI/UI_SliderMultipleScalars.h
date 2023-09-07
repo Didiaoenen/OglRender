@@ -1,12 +1,15 @@
 #pragma once
 
+#include <array>
+
 #include "OglTools/Tools_Event.h"
+
 #include "UI_DataWidget.h"
 
 namespace UI
 {
 	template<typename T, size_t _Size>
-	class UI_SliderMultipleScalars : public UI_DataWidget<T, _Size>
+	class UI_SliderMultipleScalars : public UI_DataWidget<std::array<T, _Size>>
 	{
 		static_assert(_Size > 1, "Invalid SliderMultipleScalars _Size (2 or more requiered)");
 
