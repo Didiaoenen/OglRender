@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2a87fa5a-7c46-4b00-ac0b-ebfcbeabbde5}</ProjectGuid>
-    <RootNamespace>OglTools</RootNamespace>
+    <ProjectGuid>{bf73c5e1-cb4a-483e-88d9-a8f9c54a7469}</ProjectGuid>
+    <RootNamespace>OglWindowing</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -43,7 +43,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -102,8 +102,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../;./../../../includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -128,10 +129,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Tools_Event.h" />
+    <ClInclude Include="Window_Device.h" />
+    <ClInclude Include="Window_DeviceSettings.h" />
+    <ClInclude Include="Window_ECursorMode.h" />
+    <ClInclude Include="Window_ECursorShape.h" />
+    <ClInclude Include="Window_EDeviceError.h" />
+    <ClInclude Include="Window_EKey.h" />
+    <ClInclude Include="Window_EKeyState.h" />
+    <ClInclude Include="Window_EMouseButton.h" />
+    <ClInclude Include="Window_EMouseButtonState.h" />
+    <ClInclude Include="Window_FileDialog.h" />
+    <ClInclude Include="Window_InputManager.h" />
+    <ClInclude Include="Window_MessageBox.h" />
+    <ClInclude Include="Window_OpenFileDialog.h" />
+    <ClInclude Include="Window_SaveFileDialog.h" />
+    <ClInclude Include="Window_Window.h" />
+    <ClInclude Include="Window_WindowSettings.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tools_Event.inl" />
+    <ClCompile Include="Window_Device.cpp" />
+    <ClCompile Include="Window_FileDialog.cpp" />
+    <ClCompile Include="Window_InputManager.cpp" />
+    <ClCompile Include="Window_MessageBox.cpp" />
+    <ClCompile Include="Window_OpenFileDialog.cpp" />
+    <ClCompile Include="Window_SaveFileDialog.cpp" />
+    <ClCompile Include="Window_Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

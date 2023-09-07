@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\Context">
+      <UniqueIdentifier>{fd211068-2eb0-4279-a607-5cf07366b3c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Context">
+      <UniqueIdentifier>{2747f30b-c146-4006-b556-8ee7a2736107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Settings">
+      <UniqueIdentifier>{0ec6bd79-91f2-4705-bd6c-ac12c69fcddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Cursor">
+      <UniqueIdentifier>{8fe274d1-186b-4ba8-b4a1-adf0da832f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Dialogs">
+      <UniqueIdentifier>{69035ff5-ba3c-4ca3-a1b8-99342c0f1842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Dialogs">
+      <UniqueIdentifier>{8378efdf-9807-4d2e-8aaa-451cd7e4f443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Inputs">
+      <UniqueIdentifier>{b0f3188b-0343-4bb5-9f7b-86f26cdcc8cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Inputs">
+      <UniqueIdentifier>{4c0d6cb4-5f42-4983-b21d-58fb6ea3a257}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window_Device.h">
+      <Filter>头文件\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_EDeviceError.h">
+      <Filter>头文件\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_DeviceSettings.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_ECursorShape.h">
+      <Filter>头文件\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_ECursorMode.h">
+      <Filter>头文件\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_FileDialog.h">
+      <Filter>头文件\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_MessageBox.h">
+      <Filter>头文件\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_OpenFileDialog.h">
+      <Filter>头文件\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_SaveFileDialog.h">
+      <Filter>头文件\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_WindowSettings.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_EKey.h">
+      <Filter>头文件\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_EKeyState.h">
+      <Filter>头文件\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_EMouseButton.h">
+      <Filter>头文件\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_EMouseButtonState.h">
+      <Filter>头文件\Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Window_InputManager.h">
+      <Filter>头文件\Inputs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Window_Device.cpp">
+      <Filter>源文件\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_FileDialog.cpp">
+      <Filter>源文件\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_MessageBox.cpp">
+      <Filter>源文件\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_OpenFileDialog.cpp">
+      <Filter>源文件\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_SaveFileDialog.cpp">
+      <Filter>源文件\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Window_InputManager.cpp">
+      <Filter>源文件\Inputs</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

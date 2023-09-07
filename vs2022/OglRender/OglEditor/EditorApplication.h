@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "EditorEditor.h"
 
 namespace Editor
 {
