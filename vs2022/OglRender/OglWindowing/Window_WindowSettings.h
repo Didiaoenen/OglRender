@@ -7,7 +7,7 @@
 
 namespace Window
 {
-	struct WindowSettings
+	struct Window_WindowSettings
 	{
 		static const int32_t DontCare = -1;
 
@@ -41,7 +41,7 @@ namespace Window
 
 		bool autoIconify = true;
 
-		int32_t refreshRate = WindowSettings::DontCare;
+		int32_t refreshRate = Window_WindowSettings::DontCare;
 
 		ECursorMode cursorMode = ECursorMode::NORMAL;
 
