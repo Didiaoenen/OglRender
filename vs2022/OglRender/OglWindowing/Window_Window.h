@@ -7,6 +7,7 @@
 #include "Window_Device.h"
 #include "Window_WindowSettings.h"
 #include "Window_ECursorMode.h"
+#include "Window_ECursorMode.h"
 
 namespace Window
 {
@@ -85,7 +86,6 @@ namespace Window
 		void MakeCurrentContext() const;
 
 		void SwapBuffers() const;
-
 
 		void SetCursorMode(ECursorMode pCursorMode);
 

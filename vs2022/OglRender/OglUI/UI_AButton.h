@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "OglTools/Tools_Event.h"
+#include <OglTools/Tools_Event.h>
 
 #include "UI_AWidget.h"
 
