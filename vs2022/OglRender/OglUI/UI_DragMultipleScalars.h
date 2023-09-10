@@ -23,7 +23,7 @@ namespace UI
 			float pSpeed,
 			const std::string& pLabel,
 			const std::string& pFormat
-		) : UI_DataWidget<std::array<T, _Size>>(mValue), mDataType(pDataType), mMin(pMin), mMax(pMax), pValue(mValue), mSpeed(pSpeed), mLabel(pLabel), mFormat(pFormat)
+		) : UI_DataWidget<std::array<T, _Size>>(mValues), mDataType(pDataType), mMin(pMin), mMax(pMax), mSpeed(pSpeed), mLabel(pLabel), mFormat(pFormat)
 		{
 			mValues.fill(pValue);
 		}
@@ -62,10 +62,10 @@ namespace UI
 		std::array<T, _Size> mValues;
 		std::string mLabel;
 		std::string mFormat;
-		Tools::Tools_Event<std::array<T, _Size>&> mValueChangeEvent;
+		Tools::Tools_Event<std::array<T, _Size>&> mValueChangedEvent;
 
 	protected:
-		ImGuiDataType_ m_dataType;
+		ImGuiDataType_ mDataType;
 	};
 }
 

@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\Resources">
+      <UniqueIdentifier>{568fa37d-4342-4d5b-a06c-51daaebc10f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Resources\Loaders">
+      <UniqueIdentifier>{19cc061d-a893-4be6-9252-a75ed2512db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Resources">
+      <UniqueIdentifier>{1c37072d-5783-48c0-b057-b8e2f90f93fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Resources\Loaders">
+      <UniqueIdentifier>{cf2483ba-225f-44e1-852c-fa1a4459d3d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Resources\Parsers">
+      <UniqueIdentifier>{b8798fbe-2ff0-400c-9b1d-60628d5f51e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Resources\Parsers">
+      <UniqueIdentifier>{301a47ab-018b-4ffd-b324-a22fad51c975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Settings">
+      <UniqueIdentifier>{b3cd4a39-d4c3-4591-9bec-75cde269303b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Geometry">
+      <UniqueIdentifier>{69f9ed02-66d5-4ef3-adcc-9219532a57a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Entities">
+      <UniqueIdentifier>{73441468-ef1d-4ad7-8296-fe32ca883ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Entities">
+      <UniqueIdentifier>{7242b4d0-4043-4f94-a57d-6852cb4d60ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\LowRenderer">
+      <UniqueIdentifier>{df8d5320-1129-4d40-947a-f18d8a60742c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Data">
+      <UniqueIdentifier>{0671f1e7-5535-48bd-899c-fc81fa43e9f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Data">
+      <UniqueIdentifier>{dcd75dc1-1820-40c6-9a1e-4dc22af12794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\LowRenderer">
+      <UniqueIdentifier>{a790343a-1be3-45c5-b886-99efa29d8224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Buffers">
+      <UniqueIdentifier>{c061171b-33fa-4d0f-8454-f7a2ed039ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Context">
+      <UniqueIdentifier>{04196144-5c94-4004-898c-7bae5eef1a5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Core">
+      <UniqueIdentifier>{46164820-04b8-4e2f-acb3-ac7615071879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Buffers">
+      <UniqueIdentifier>{44889877-ee4e-444d-a178-d36dd18bb6fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Utils">
+      <UniqueIdentifier>{4cf261e6-1fd3-4817-8fb7-8f7bfe0baed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Context">
+      <UniqueIdentifier>{6c9c711c-3001-47b3-a798-23ba4aa9f72d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core">
+      <UniqueIdentifier>{bc97bd47-9c9b-4df0-9599-36bd7e3d3ff3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Render_ModelLoader.h">
+      <Filter>头文件\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_ShaderLoader.h">
+      <Filter>头文件\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_TextureLoader.h">
+      <Filter>头文件\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_IMesh.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Mesh.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Model.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_BoundingSphere.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Shader.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_UniformType.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_UniformInfo.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Texture.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_ETextureFilteringMode.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Light.h">
+      <Filter>头文件\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Camera.h">
+      <Filter>头文件\LowRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Frustum.h">
+      <Filter>头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_EProjectionMode.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Vertex.h">
+      <Filter>头文件\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_AssimpParser.h">
+      <Filter>头文件\Resources\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_EModelParserFlags.h">
+      <Filter>头文件\Resources\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_IModelParser.h">
+      <Filter>头文件\Resources\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_UniformBuffer.h">
+      <Filter>头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_DriverSettings.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Driver.h">
+      <Filter>头文件\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_EAccessSpecifier.h">
+      <Filter>头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_VertexArray.h">
+      <Filter>头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_VertexBuffer.h">
+      <Filter>头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_IndexBuffer.h">
+      <Filter>头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_ShaderStorageBuffer.h">
+      <Filter>头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_ShapeDrawer.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Renderer.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_EComparaisonAlgorithm.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_ECullFace.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_ECullingOptions.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_EOperation.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_EPixelDataFormat.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_EPixelDataType.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_EPrimitiveMode.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_ERasterizationMode.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_ERenderingCapability.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_Framebuffer.h">
+      <Filter>头文件\Buffers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Render_ModelLoader.cpp">
+      <Filter>源文件\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_ShaderLoader.cpp">
+      <Filter>源文件\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_TextureLoader.cpp">
+      <Filter>源文件\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Mesh.cpp">
+      <Filter>源文件\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Model.cpp">
+      <Filter>源文件\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Shader.cpp">
+      <Filter>源文件\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Texture.cpp">
+      <Filter>源文件\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Light.cpp">
+      <Filter>源文件\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Frustum.cpp">
+      <Filter>源文件\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Camera.cpp">
+      <Filter>源文件\LowRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_AssimpParser.cpp">
+      <Filter>源文件\Resources\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_UniformBuffer.cpp">
+      <Filter>源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_VertexArray.cpp">
+      <Filter>源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_IndexBuffer.cpp">
+      <Filter>源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Driver.cpp">
+      <Filter>源文件\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_ShaderStorageBuffer.cpp">
+      <Filter>源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_ShapeDrawer.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Renderer.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Framebuffer.cpp">
+      <Filter>源文件\Buffers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Render_UniformBuffer.inl">
+      <Filter>头文件\Buffers</Filter>
+    </None>
+    <None Include="Render_VertexBuffer.inl">
+      <Filter>头文件\Buffers</Filter>
+    </None>
+    <None Include="Render_VertexArray.inl">
+      <Filter>头文件\Buffers</Filter>
+    </None>
+    <None Include="Render_ShaderStorageBuffer.inl">
+      <Filter>头文件\Buffers</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -15,13 +15,13 @@ namespace UI
 		}
 
 		template<typename T, typename... Args>
-		T& AppPlugin(Args&&... pArgs)
+		T& AddPlugin(Args&& ... p_args)
 		{
-			static_assert(std::is_base_of<UI_IPlugin, T>::value, "T Should Derive From IPlugin");
+			static_assert(std::is_base_of<UI_IPlugin, T>::value, "T should derive from IPlugin");
 
-			T* newPlugin = new T(std::forward<Args>(pArgs)...);
+			T* newPlugin = new T(std::forward<Args>(p_args)...);
 			mPlugins.push_back(newPlugin);
-			return newPlugin;
+			return *newPlugin;
 		}
 
 		template<typename T>

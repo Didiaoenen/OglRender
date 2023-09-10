@@ -13,18 +13,86 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\Filesystem">
+      <UniqueIdentifier>{732f155b-dd1b-4d95-9edc-3e4a929596fa}</UniqueIdentifier>
+    </Filter>
     <Filter Include="头文件\Event">
       <UniqueIdentifier>{c53da253-772c-480b-b862-32543d5670c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Utils">
+      <UniqueIdentifier>{6bc80a32-6750-4719-9921-31b9786877fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Utils">
+      <UniqueIdentifier>{60e97aff-7787-4afe-85c4-5b3f2f21b590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Filesystem">
+      <UniqueIdentifier>{feb34858-39de-4cf6-8b9f-fa2801ee7b57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Time">
+      <UniqueIdentifier>{9ae63573-df2d-44cc-beef-97b731fb5aee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Time">
+      <UniqueIdentifier>{eba28d93-a373-4ff4-9fb9-43144e71aef6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tools_Event.h">
       <Filter>头文件\Event</Filter>
     </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>头文件\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools_ReferenceOrValue.h">
+      <Filter>头文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools_PathParser.h">
+      <Filter>头文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools_IniFile.h">
+      <Filter>头文件\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools_Clock.h">
+      <Filter>头文件\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools_String.h">
+      <Filter>头文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools_SystemCalls.h">
+      <Filter>头文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools_SizeConverter.h">
+      <Filter>头文件\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Tools_Event.inl">
       <Filter>头文件\Event</Filter>
     </None>
+    <None Include="Tools_IniFile.inl">
+      <Filter>头文件\Filesystem</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tools_PathParser.cpp">
+      <Filter>源文件\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools_IniFile.cpp">
+      <Filter>源文件\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>源文件\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools_Clock.cpp">
+      <Filter>源文件\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools_String.cpp">
+      <Filter>源文件\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools_SystemCalls.cpp">
+      <Filter>源文件\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools_SizeConverter.cpp">
+      <Filter>源文件\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

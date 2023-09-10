@@ -363,7 +363,7 @@
     <ClInclude Include="UI_Separator.h">
       <Filter>头文件\Widgets\Visual</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Manager.h">
+    <ClInclude Include="UI_UIManager.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
     <ClInclude Include="UI_Canvas.h">

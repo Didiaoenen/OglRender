@@ -1,6 +1,6 @@
-#include "UI_Manager.h"
+#include "UI_UIManager.h"
 
-UI::UI_Manager::UI_Manager(GLFWwindow* pGlfwWindow, EStyle pStyle, const std::string& pGlslVersion)
+UI::UI_UIManager::UI_UIManager(GLFWwindow* pGlfwWindow, EStyle pStyle, const std::string& pGlslVersion)
 {
 	ImGui::CreateContext();
 
@@ -13,14 +13,14 @@ UI::UI_Manager::UI_Manager(GLFWwindow* pGlfwWindow, EStyle pStyle, const std::st
 	ImGui_ImplOpenGL3_Init(pGlslVersion.c_str());
 }
 
-UI::UI_Manager::~UI_Manager()
+UI::UI_UIManager::~UI_UIManager()
 {
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
 }
 
-void UI::UI_Manager::ApplyStyle(EStyle pStyle)
+void UI::UI_UIManager::ApplyStyle(EStyle pStyle)
 {
     ImGuiStyle* style = &ImGui::GetStyle();
 
@@ -162,7 +162,7 @@ void UI::UI_Manager::ApplyStyle(EStyle pStyle)
     }
 }
 
-bool UI::UI_Manager::LoadFont(const std::string& pId, const std::string& pPath, float pFontSize)
+bool UI::UI_UIManager::LoadFont(const std::string& pId, const std::string& pPath, float pFontSize)
 {
     if (mFonts.find(pId) == mFonts.end())
     {
@@ -179,7 +179,7 @@ bool UI::UI_Manager::LoadFont(const std::string& pId, const std::string& pPath, 
     return false;
 }
 
-bool UI::UI_Manager::UnloadFont(const std::string& pId)
+bool UI::UI_UIManager::UnloadFont(const std::string& pId)
 {
     if (mFonts.find(pId) != mFonts.end())
     {
@@ -190,7 +190,7 @@ bool UI::UI_Manager::UnloadFont(const std::string& pId)
     return false;
 }
 
-bool UI::UI_Manager::UseFont(const std::string& pId)
+bool UI::UI_UIManager::UseFont(const std::string& pId)
 {
     auto foundFont = mFonts.find(pId);
 
@@ -203,12 +203,12 @@ bool UI::UI_Manager::UseFont(const std::string& pId)
     return false;
 }
 
-void UI::UI_Manager::UseDefaultFont()
+void UI::UI_UIManager::UseDefaultFont()
 {
     ImGui::GetIO().FontDefault = nullptr;
 }
 
-void UI::UI_Manager::EnableEditorLayoutSave(bool pValue)
+void UI::UI_UIManager::EnableEditorLayoutSave(bool pValue)
 {
     if (pValue)
     {
@@ -220,12 +220,12 @@ void UI::UI_Manager::EnableEditorLayoutSave(bool pValue)
     }
 }
 
-bool UI::UI_Manager::IsEditorLayoutSaveEnabled() const
+bool UI::UI_UIManager::IsEditorLayoutSaveEnabled() const
 {
     return ImGui::GetIO().IniFilename != nullptr;
 }
 
-void UI::UI_Manager::SetEditorLayoutSaveFilename(const std::string& pFilename)
+void UI::UI_UIManager::SetEditorLayoutSaveFilename(const std::string& pFilename)
 {
     mLayoutSaveFilename = pFilename;
     if (IsEditorLayoutSaveEnabled())
@@ -234,17 +234,17 @@ void UI::UI_Manager::SetEditorLayoutSaveFilename(const std::string& pFilename)
     }
 }
 
-void UI::UI_Manager::SetEditorLayoutAutosaveFrequency(float pFrequency)
+void UI::UI_UIManager::SetEditorLayoutAutosaveFrequency(float pFrequency)
 {
     ImGui::GetIO().IniSavingRate = pFrequency;
 }
 
-float UI::UI_Manager::GetEditorLayoutAutosaveFrequency(float pFrequeny)
+float UI::UI_UIManager::GetEditorLayoutAutosaveFrequency(float pFrequeny)
 {
     return ImGui::GetIO().IniSavingRate;
 }
 
-void UI::UI_Manager::EnableDocking(bool pValue)
+void UI::UI_UIManager::EnableDocking(bool pValue)
 {
     mDockingState = pValue;
 
@@ -258,29 +258,29 @@ void UI::UI_Manager::EnableDocking(bool pValue)
     }
 }
 
-void UI::UI_Manager::ResetLayout(const std::string& pConfig) const
+void UI::UI_UIManager::ResetLayout(const std::string& pConfig) const
 {
     ImGui::LoadIniSettingsFromDisk(pConfig.c_str());
 }
 
-bool UI::UI_Manager::IsDockingEnabled() const
+bool UI::UI_UIManager::IsDockingEnabled() const
 {
     return mDockingState;
 }
 
-void UI::UI_Manager::SetCanvas(UI_Canvas& pCanvas)
+void UI::UI_UIManager::SetCanvas(UI_Canvas& pCanvas)
 {
     RemoveCanvas();
 
     mCurrentCanvas = &pCanvas;
 }
 
-void UI::UI_Manager::RemoveCanvas()
+void UI::UI_UIManager::RemoveCanvas()
 {
     mCurrentCanvas = nullptr;
 }
 
-void UI::UI_Manager::Render()
+void UI::UI_UIManager::Render()
 {
     if (mCurrentCanvas)
     {
@@ -289,10 +289,10 @@ void UI::UI_Manager::Render()
     }
 }
 
-void UI::UI_Manager::PushCurrentFont()
+void UI::UI_UIManager::PushCurrentFont()
 {
 }
 
-void UI::UI_Manager::PopCurrentFont()
+void UI::UI_UIManager::PopCurrentFont()
 {
 }

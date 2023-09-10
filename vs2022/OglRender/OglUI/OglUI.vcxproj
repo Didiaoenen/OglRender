@@ -188,7 +188,7 @@
     <ClInclude Include="UI_InputSingleScalar.h" />
     <ClInclude Include="UI_InputText.h" />
     <ClInclude Include="UI_IPlugin.h" />
-    <ClInclude Include="UI_Manager.h" />
+    <ClInclude Include="UI_UIManager.h" />
     <ClInclude Include="UI_MenuItem.h" />
     <ClInclude Include="UI_MenuList.h" />
     <ClInclude Include="UI_NewLine.h" />

@@ -2,7 +2,7 @@
 
 namespace UI
 {
-	struct PanelWindowSettings
+	struct UI_PanelWindowSettings
 	{
 		bool closable = false;
 		bool resizable = true;

@@ -102,8 +102,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -128,10 +128,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Tools_SizeConverter.h" />
+    <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="Tools_Clock.h" />
     <ClInclude Include="Tools_Event.h" />
+    <ClInclude Include="Tools_IniFile.h" />
+    <ClInclude Include="Tools_PathParser.h" />
+    <ClInclude Include="Tools_ReferenceOrValue.h" />
+    <ClInclude Include="Tools_String.h" />
+    <ClInclude Include="Tools_SystemCalls.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Tools_IniFile.inl" />
     <None Include="Tools_Event.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tools_SizeConverter.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="Tools_Clock.cpp" />
+    <ClCompile Include="Tools_IniFile.cpp" />
+    <ClCompile Include="Tools_PathParser.cpp" />
+    <ClCompile Include="Tools_String.cpp" />
+    <ClCompile Include="Tools_SystemCalls.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

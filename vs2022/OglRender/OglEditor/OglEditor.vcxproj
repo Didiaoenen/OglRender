@@ -102,15 +102,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./../../../includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>Default</ConformanceMode>
+      <AdditionalIncludeDirectories>../;./../../../includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>./../../../lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,24 +131,71 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="EditorApplication.h" />
-    <ClInclude Include="EditorAssetBrowser.h" />
-    <ClInclude Include="EditorAssetProperties.h" />
-    <ClInclude Include="EditorAssetView.h" />
-    <ClInclude Include="EditorAView.h" />
-    <ClInclude Include="EditorAViewControllable.h" />
-    <ClInclude Include="EditorContext.h" />
-    <ClInclude Include="EditorEditor.h" />
+    <ClInclude Include="Editor_ActorCreationMenu.h" />
+    <ClInclude Include="Editor_Application.h" />
+    <ClInclude Include="Editor_AssetBrowser.h" />
+    <ClInclude Include="Editor_AssetProperties.h" />
+    <ClInclude Include="Editor_AssetView.h" />
+    <ClInclude Include="Editor_AView.h" />
+    <ClInclude Include="Editor_AViewControllable.h" />
+    <ClInclude Include="Editor_CameraController.h" />
+    <ClInclude Include="Editor_Console.h" />
+    <ClInclude Include="Editor_Context.h" />
+    <ClInclude Include="Editor_Editor.h" />
+    <ClInclude Include="Editor_EditorActions.h" />
+    <ClInclude Include="Editor_EditorRenderer.h" />
+    <ClInclude Include="Editor_EditorResources.h" />
+    <ClInclude Include="Editor_EditorSettings.h" />
+    <ClInclude Include="Editor_GameView.h" />
+    <ClInclude Include="Editor_GizmoBehaviour.h" />
+    <ClInclude Include="Editor_HardwareInfo.h" />
+    <ClInclude Include="Editor_Hierarchy.h" />
+    <ClInclude Include="Editor_Inspector.h" />
+    <ClInclude Include="Editor_MaterialEditor.h" />
+    <ClInclude Include="Editor_MenuBar.h" />
+    <ClInclude Include="Editor_PanelsManager.h" />
+    <ClInclude Include="Editor_Profiler.h" />
+    <ClInclude Include="Editor_ProjectHub.h" />
+    <ClInclude Include="Editor_ProjectSettings.h" />
+    <ClInclude Include="Editor_RawShaders.h" />
+    <ClInclude Include="Editor_RawTextures.h" />
+    <ClInclude Include="Editor_SceneView.h" />
+    <ClInclude Include="Editor_Toolbar.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EditorApplication.cpp" />
-    <ClCompile Include="EditorAssetBrowser.cpp" />
-    <ClCompile Include="EditorAssetProperties.cpp" />
-    <ClCompile Include="EditorAssetView.cpp" />
-    <ClCompile Include="EditorAView.cpp" />
-    <ClCompile Include="EditorAViewControllable.cpp" />
-    <ClCompile Include="EditorContext.cpp" />
-    <ClCompile Include="EditorEditor.cpp" />
+    <ClCompile Include="Editor_ActorCreationMenu.cpp" />
+    <ClCompile Include="Editor_Application.cpp" />
+    <ClCompile Include="Editor_AssetBrowser.cpp" />
+    <ClCompile Include="Editor_AssetProperties.cpp" />
+    <ClCompile Include="Editor_AssetView.cpp" />
+    <ClCompile Include="Editor_AView.cpp" />
+    <ClCompile Include="Editor_AViewControllable.cpp" />
+    <ClCompile Include="Editor_CameraController.cpp" />
+    <ClCompile Include="Editor_Console.cpp" />
+    <ClCompile Include="Editor_Context.cpp" />
+    <ClCompile Include="Editor_Editor.cpp" />
+    <ClCompile Include="Editor_EditorActions.cpp" />
+    <ClCompile Include="Editor_EditorRenderer.cpp" />
+    <ClCompile Include="Editor_EditorResources.cpp" />
+    <ClCompile Include="Editor_EditorSettings.cpp" />
+    <ClCompile Include="Editor_GameView.cpp" />
+    <ClCompile Include="Editor_GizmoBehaviour.cpp" />
+    <ClCompile Include="Editor_HardwareInfo.cpp" />
+    <ClCompile Include="Editor_Hierarchy.cpp" />
+    <ClCompile Include="Editor_Inspector.cpp" />
+    <ClCompile Include="Editor_MaterialEditor.cpp" />
+    <ClCompile Include="Editor_MenuBar.cpp" />
+    <ClCompile Include="Editor_PanelsManager.cpp" />
+    <ClCompile Include="Editor_Profiler.cpp" />
+    <ClCompile Include="Editor_ProjectHub.cpp" />
+    <ClCompile Include="Editor_ProjectSettings.cpp" />
+    <ClCompile Include="Editor_RawShaders.cpp" />
+    <ClCompile Include="Editor_SceneView.cpp" />
+    <ClCompile Include="Editor_Toolbar.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Editor_EditorActions.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

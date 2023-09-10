@@ -25,57 +25,212 @@
     <Filter Include="源文件\Panels">
       <UniqueIdentifier>{29de3b93-136b-4aa2-b03a-77d26497bae9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Resources">
+      <UniqueIdentifier>{91048d08-a4fa-4100-ad72-ca7aa5a0fae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Resources">
+      <UniqueIdentifier>{1ebb1312-fd9d-4caa-ac92-a13512117d55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Utils">
+      <UniqueIdentifier>{f6773114-91a7-43b9-9408-870e7976b9b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Utils">
+      <UniqueIdentifier>{d6fd0563-3ef5-4346-ac34-5f1d521610b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Settings">
+      <UniqueIdentifier>{ab4f4825-6bf0-458a-9c64-3ed5d657405b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Settings">
+      <UniqueIdentifier>{5095a232-0ddf-4644-960c-a911558c5cb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EditorEditor.h">
+    <ClInclude Include="Editor_Editor.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
-    <ClInclude Include="EditorApplication.h">
+    <ClInclude Include="Editor_Application.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
-    <ClInclude Include="EditorContext.h">
+    <ClInclude Include="Editor_Context.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
-    <ClInclude Include="EditorAssetBrowser.h">
+    <ClInclude Include="Editor_AssetBrowser.h">
       <Filter>头文件\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="EditorAssetProperties.h">
+    <ClInclude Include="Editor_AssetProperties.h">
       <Filter>头文件\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="EditorAssetView.h">
+    <ClInclude Include="Editor_AssetView.h">
       <Filter>头文件\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="EditorAView.h">
+    <ClInclude Include="Editor_AView.h">
       <Filter>头文件\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="EditorAViewControllable.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="Editor_EditorActions.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_EditorRenderer.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_EditorResources.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_GizmoBehaviour.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_PanelsManager.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_ProjectHub.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_AViewControllable.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_Console.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_GameView.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_HardwareInfo.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_Hierarchy.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_Inspector.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_MaterialEditor.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_MenuBar.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_Profiler.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_ProjectSettings.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_SceneView.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_Toolbar.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_RawTextures.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_RawShaders.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_ActorCreationMenu.h">
+      <Filter>头文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_EditorSettings.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_CameraController.h">
+      <Filter>头文件\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EditorApplication.cpp">
+    <ClCompile Include="Editor_Application.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
-    <ClCompile Include="EditorContext.cpp">
+    <ClCompile Include="Editor_Context.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
-    <ClCompile Include="EditorEditor.cpp">
+    <ClCompile Include="Editor_Editor.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
-    <ClCompile Include="EditorAssetBrowser.cpp">
+    <ClCompile Include="Editor_AssetBrowser.cpp">
       <Filter>源文件\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="EditorAssetProperties.cpp">
+    <ClCompile Include="Editor_AssetProperties.cpp">
       <Filter>源文件\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="EditorAssetView.cpp">
+    <ClCompile Include="Editor_EditorActions.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_EditorRenderer.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_EditorResources.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_GizmoBehaviour.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_PanelsManager.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_ProjectHub.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_AViewControllable.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_AssetView.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_AView.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_Console.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_GameView.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_HardwareInfo.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_Hierarchy.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_Inspector.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_MaterialEditor.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_MenuBar.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_Profiler.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_ProjectSettings.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_SceneView.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_Toolbar.cpp">
+      <Filter>源文件\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_RawShaders.cpp">
+      <Filter>源文件\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_ActorCreationMenu.cpp">
+      <Filter>源文件\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="EditorAView.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="Editor_EditorSettings.cpp">
+      <Filter>源文件\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="EditorAViewControllable.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="Editor_CameraController.cpp">
+      <Filter>源文件\Core</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Editor_EditorActions.inl">
+      <Filter>头文件\Core</Filter>
+    </None>
   </ItemGroup>
 </Project>

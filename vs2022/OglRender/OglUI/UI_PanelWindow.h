@@ -17,7 +17,7 @@ namespace UI
 		(
 			const std::string& pName = "",
 			bool pOpened = true,
-			const PanelWindowSettings& pPanelSettings = PanelWindowSettings{}
+			const UI::UI_PanelWindowSettings& pPanelSettings = {}
 		);
 
 		void Open();

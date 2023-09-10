@@ -36,7 +36,7 @@ namespace UI
 					target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
 				}
 
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(identifier.c_str(), target_flags))
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(mIdentifier.c_str(), target_flags))
 				{
 					T data = *(T*)payload->Data;
 					mDataReceivedEvent.Invoke(data);

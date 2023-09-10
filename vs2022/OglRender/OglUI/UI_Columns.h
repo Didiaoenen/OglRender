@@ -52,7 +52,7 @@ namespace UI
 		}
 
 	public:
-		std::array<float, _Size> mWidths;
+		std::array<float, _Size> m_widgets;
 	};
 }
 

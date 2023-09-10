@@ -103,8 +103,9 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>Default</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>../;./../../../includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +129,68 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Core_AComponent.h" />
+    <ClInclude Include="Core_Actor.h" />
+    <ClInclude Include="Core_AResourceManager.h" />
+    <ClInclude Include="Core_Behaviour.h" />
+    <ClInclude Include="Core_CAmbientBoxLight.h" />
+    <ClInclude Include="Core_CAmbientSphereLight.h" />
+    <ClInclude Include="Core_CCamera.h" />
+    <ClInclude Include="Core_CDirectionalLight.h" />
+    <ClInclude Include="Core_CLight.h" />
+    <ClInclude Include="Core_CMaterialRenderer.h" />
+    <ClInclude Include="Core_CModelRenderer.h" />
+    <ClInclude Include="Core_CPointLight.h" />
+    <ClInclude Include="Core_CSpotLight.h" />
+    <ClInclude Include="Core_CTransform.h" />
+    <ClInclude Include="Core_GUIDrawer.h" />
+    <ClInclude Include="Core_IInspectorItem.h" />
+    <ClInclude Include="Core_ISerializable.h" />
+    <ClInclude Include="Core_Material.h" />
+    <ClInclude Include="Core_MaterialLoader.h" />
+    <ClInclude Include="Core_MaterialManager.h" />
+    <ClInclude Include="Core_ModelManager.h" />
+    <ClInclude Include="Core_Renderer.h" />
+    <ClInclude Include="Core_Scene.h" />
+    <ClInclude Include="Core_SceneManager.h" />
+    <ClInclude Include="Core_Serializer.h" />
+    <ClInclude Include="Core_ServiceLocator.h" />
+    <ClInclude Include="Core_ShaderManager.h" />
+    <ClInclude Include="Core_TextureManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core_AComponent.cpp" />
+    <ClCompile Include="Core_Actor.cpp" />
+    <ClCompile Include="Core_Behaviour.cpp" />
+    <ClCompile Include="Core_CAmbientBoxLight.cpp" />
+    <ClCompile Include="Core_CAmbientSphereLight.cpp" />
+    <ClCompile Include="Core_CCamera.cpp" />
+    <ClCompile Include="Core_CDirectionalLight.cpp" />
+    <ClCompile Include="Core_CLight.cpp" />
+    <ClCompile Include="Core_CMaterialRenderer.cpp" />
+    <ClCompile Include="Core_CModelRenderer.cpp" />
+    <ClCompile Include="Core_CPointLight.cpp" />
+    <ClCompile Include="Core_CSpotLight.cpp" />
+    <ClCompile Include="Core_CTransform.cpp" />
+    <ClCompile Include="Core_GUIDrawer.cpp" />
+    <ClCompile Include="Core_Material.cpp" />
+    <ClCompile Include="Core_MaterialLoader.cpp" />
+    <ClCompile Include="Core_MaterialManager.cpp" />
+    <ClCompile Include="Core_ModelManager.cpp" />
+    <ClCompile Include="Core_Renderer.cpp" />
+    <ClCompile Include="Core_Scene.cpp" />
+    <ClCompile Include="Core_SceneManager.cpp" />
+    <ClCompile Include="Core_Serializer.cpp" />
+    <ClCompile Include="Core_ServiceLocator.cpp" />
+    <ClCompile Include="Core_ShaderManager.cpp" />
+    <ClCompile Include="Core_TextureManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Core_Actor.inl" />
+    <None Include="Core_AResourceManager.inl" />
+    <None Include="Core_Behaviour.inl" />
+    <None Include="Core_GUIDrawer.inl" />
+    <None Include="Core_Material.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,5 +13,239 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\API">
+      <UniqueIdentifier>{b4698c19-7552-4049-aabc-ca0215e06798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Helpers">
+      <UniqueIdentifier>{b423af6e-46e1-43ed-85c6-65bc3b783775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Helpers">
+      <UniqueIdentifier>{a402236e-fb02-484d-a8a2-564bc454e163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ResourceManagement">
+      <UniqueIdentifier>{69c027c6-3ded-4443-b02d-e6cc38f1e76a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ResourceManagement">
+      <UniqueIdentifier>{30521e30-d3fc-4008-ba70-387ced375d17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Resources">
+      <UniqueIdentifier>{a3003a7c-ceae-4eab-9922-68971b2e3722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Resources\Loaders">
+      <UniqueIdentifier>{dc515ed3-79df-4c59-9632-50c21a0432d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Resources">
+      <UniqueIdentifier>{a8636857-4f8e-4dc4-99d3-597620f0a59c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Resources\Loaders">
+      <UniqueIdentifier>{935e1f51-4459-4fae-8227-da12f45c9744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Global">
+      <UniqueIdentifier>{41df277c-d65e-4fb1-b468-d4f81a95510e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Global">
+      <UniqueIdentifier>{e0fcd92d-2445-4fab-934f-c2e5d20bd529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ECS">
+      <UniqueIdentifier>{bf59c262-85e8-4741-b80b-f780e6c9813c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\ECS\Components">
+      <UniqueIdentifier>{7c482a21-7655-4555-8190-9c957c31b1c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ECS">
+      <UniqueIdentifier>{3e58f8cf-3556-40a2-9b6e-f67369a8229a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\ECS\Components">
+      <UniqueIdentifier>{24343eae-44b2-4437-b35f-86ebbf990dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\SceneSystem">
+      <UniqueIdentifier>{c353ba05-cb5b-4904-b7de-d2b4288dfeb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\SceneSystem">
+      <UniqueIdentifier>{0dedb5cd-bc55-4c71-bac6-657f5a9be7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Scripting">
+      <UniqueIdentifier>{50fbc684-6913-4e5c-946d-f5f83b5b5e5c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core_IInspectorItem.h">
+      <Filter>头文件\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_ISerializable.h">
+      <Filter>头文件\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_Serializer.h">
+      <Filter>头文件\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_ModelManager.h">
+      <Filter>头文件\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_AResourceManager.h">
+      <Filter>头文件\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_ShaderManager.h">
+      <Filter>头文件\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_TextureManager.h">
+      <Filter>头文件\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_Material.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_MaterialManager.h">
+      <Filter>头文件\ResourceManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_MaterialLoader.h">
+      <Filter>头文件\Resources\Loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_ServiceLocator.h">
+      <Filter>头文件\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_GUIDrawer.h">
+      <Filter>头文件\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_Actor.h">
+      <Filter>头文件\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_AComponent.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CTransform.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_Behaviour.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_Scene.h">
+      <Filter>头文件\SceneSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_SceneManager.h">
+      <Filter>头文件\SceneSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CLight.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CCamera.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CMaterialRenderer.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CModelRenderer.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CSpotLight.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CAmbientBoxLight.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CAmbientSphereLight.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CDirectionalLight.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_CPointLight.h">
+      <Filter>头文件\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_Renderer.h">
+      <Filter>头文件\ECS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core_Serializer.cpp">
+      <Filter>源文件\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_ModelManager.cpp">
+      <Filter>源文件\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_ShaderManager.cpp">
+      <Filter>源文件\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_TextureManager.cpp">
+      <Filter>源文件\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_MaterialManager.cpp">
+      <Filter>源文件\ResourceManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_MaterialLoader.cpp">
+      <Filter>源文件\Resources\Loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_ServiceLocator.cpp">
+      <Filter>源文件\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_Actor.cpp">
+      <Filter>源文件\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_AComponent.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_Behaviour.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CTransform.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_Scene.cpp">
+      <Filter>源文件\SceneSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_SceneManager.cpp">
+      <Filter>源文件\SceneSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CLight.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CAmbientBoxLight.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CAmbientSphereLight.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CCamera.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CDirectionalLight.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CMaterialRenderer.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CModelRenderer.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CPointLight.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_CSpotLight.cpp">
+      <Filter>源文件\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_GUIDrawer.cpp">
+      <Filter>源文件\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_Material.cpp">
+      <Filter>源文件\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_Renderer.cpp">
+      <Filter>源文件\ECS</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Core_AResourceManager.inl">
+      <Filter>头文件\ResourceManagement</Filter>
+    </None>
+    <None Include="Core_GUIDrawer.inl">
+      <Filter>头文件\Helpers</Filter>
+    </None>
+    <None Include="Core_Actor.inl">
+      <Filter>头文件\ECS</Filter>
+    </None>
+    <None Include="Core_Behaviour.inl">
+      <Filter>头文件\ECS\Components</Filter>
+    </None>
+    <None Include="Core_Material.inl">
+      <Filter>头文件\Resources</Filter>
+    </None>
   </ItemGroup>
 </Project>
