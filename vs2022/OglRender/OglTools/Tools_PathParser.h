@@ -22,19 +22,19 @@ namespace Tools
 
 		Tools_PathParser() = delete;
 
-		static std::string MakeWindowsStyle(const std::string& p_path);
+		static std::string MakeWindowsStyle(const std::string& pPath);
 
-		static std::string MakeNonWindowsStyle(const std::string& p_path);
+		static std::string MakeNonWindowsStyle(const std::string& pPath);
 
-		static std::string GetContainingFolder(const std::string& p_path);
+		static std::string GetContainingFolder(const std::string& pPath);
 
-		static std::string GetElementName(const std::string& p_path);
+		static std::string GetElementName(const std::string& pPath);
 
-		static std::string GetExtension(const std::string& p_path);
+		static std::string GetExtension(const std::string& pPath);
 
-		static std::string FileTypeToString(EFileType p_fileType);
+		static std::string FileTypeToString(EFileType pFileType);
 
-		static EFileType GetFileType(const std::string& p_path);
+		static EFileType GetFileType(const std::string& pPath);
 	};
 }
 

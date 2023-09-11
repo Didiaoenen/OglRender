@@ -8,22 +8,22 @@ namespace Tools
 	class Tools_ReferenceOrValue
 	{
 	public:
-		Tools_ReferenceOrValue(std::reference_wrapper<T> p_reference) : m_data{ &p_reference.get() }
+		Tools_ReferenceOrValue(std::reference_wrapper<T> pReference) : mData{ &pReference.get() }
 		{
 		}
 
-		Tools_ReferenceOrValue(T p_value = T()) : m_data{ p_value }
+		Tools_ReferenceOrValue(T pValue = T()) : mData{ pValue }
 		{
 		}
 
-		void MakeReference(T& p_reference)
+		void MakeReference(T& pReference)
 		{
-			m_data = &p_reference;
+			mData = &pReference;
 		}
 
-		void MakeValue(T p_value = T())
+		void MakeValue(T pValue = T())
 		{
-			m_data = p_value;
+			mData = pValue;
 		}
 
 		operator T& ()
@@ -31,29 +31,37 @@ namespace Tools
 			return Get();
 		}
 
-		Tools_ReferenceOrValue<T>& operator=(T p_value)
+		Tools_ReferenceOrValue<T>& operator=(T pValue)
 		{
-			Set(p_value);
+			Set(pValue);
 			return *this;
 		}
 
 		T& Get() const
 		{
-			if (auto pval = std::get_if<T>(&m_data))
+			if (auto pval = std::get_if<T>(&mData))
+			{
 				return *pval;
+			}
 			else
-				return *std::get<T*>(m_data);
+			{
+				return *std::get<T*>(mData);
+			}
 		}
 
-		void Set(T p_value)
+		void Set(T pValue)
 		{
-			if (auto pval = std::get_if<T>(&m_data))
-				*pval = p_value;
+			if (auto pval = std::get_if<T>(&mData))
+			{
+				*pval = pValue;
+			}
 			else
-				*std::get<T*>(m_data) = p_value;
+			{
+				*std::get<T*>(mData) = pValue;
+			}
 		}
 
 	private:
-		std::variant<T, T*> m_data;
+		std::variant<T, T*> mData;
 	};
 }

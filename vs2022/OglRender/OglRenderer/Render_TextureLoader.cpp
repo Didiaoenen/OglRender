@@ -18,7 +18,7 @@ Render::Render_Texture* Render::Render_TextureLoader::CreateFromMemory(uint8_t* 
     return nullptr;
 }
 
-void Render::Render_TextureLoader::Reload(Render_Texture& p_texture, const std::string& p_filePath, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
+void Render::Render_TextureLoader::Reload(Render_Texture& p_texture, const std::string& pFilePath, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap)
 {
 }
 

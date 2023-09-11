@@ -20,11 +20,11 @@ namespace Tools
 
         Tools_SizeConverter() = delete;
 
-        static std::pair<float, ESizeUnit> ConvertToOptimalUnit(float p_value, ESizeUnit p_unit);
+        static std::pair<float, ESizeUnit> ConvertToOptimalUnit(float pValue, ESizeUnit pUnit);
 
-        static float Convert(float p_value, ESizeUnit p_from, ESizeUnit p_to);
+        static float Convert(float pValue, ESizeUnit pFrom, ESizeUnit pTo);
 
-        static std::string UnitToString(ESizeUnit p_unit);
+        static std::string UnitToString(ESizeUnit pUnit);
 	};
 }
 

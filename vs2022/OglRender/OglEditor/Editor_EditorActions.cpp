@@ -45,11 +45,11 @@ Editor::Editor_PanelsManager& Editor::Editor_EditorActions::GetPanelsManager()
 	return m_panelsManager;
 }
 
-void Editor::Editor_EditorActions::SetActorSpawnAtOrigin(bool p_value)
+void Editor::Editor_EditorActions::SetActorSpawnAtOrigin(bool pValue)
 {
 }
 
-void Editor::Editor_EditorActions::SetActorSpawnMode(EActorSpawnMode p_value)
+void Editor::Editor_EditorActions::SetActorSpawnMode(EActorSpawnMode pValue)
 {
 }
 
@@ -132,13 +132,13 @@ Core::Core_Actor& Editor::Editor_EditorActions::CreateEmptyActor(bool p_focusOnC
 	return instance;
 }
 
-Core::Core_Actor& Editor::Editor_EditorActions::CreateActorWithModel(const std::string& p_path, bool p_focusOnCreation, Core::Core_Actor* p_parent, const std::string& p_name)
+Core::Core_Actor& Editor::Editor_EditorActions::CreateActorWithModel(const std::string& pPath, bool p_focusOnCreation, Core::Core_Actor* p_parent, const std::string& p_name)
 {
 	auto& instance = CreateEmptyActor(false, p_parent, p_name);
 
 	auto& modelRenderer = instance.AddComponent<Core::Core_CModelRenderer>();
 
-	const auto model = m_context.modelManager[p_path];
+	const auto model = m_context.modelManager[pPath];
 	if (model)
 		modelRenderer.SetModel(model);
 
@@ -202,17 +202,17 @@ bool Editor::Editor_EditorActions::ImportAssetAtLocation(const std::string& p_de
 	return false;
 }
 
-std::string Editor::Editor_EditorActions::GetRealPath(const std::string& p_path)
+std::string Editor::Editor_EditorActions::GetRealPath(const std::string& pPath)
 {
 	return std::string();
 }
 
-std::string Editor::Editor_EditorActions::GetResourcePath(const std::string& p_path, bool p_isFromEngine)
+std::string Editor::Editor_EditorActions::GetResourcePath(const std::string& pPath, bool p_isFromEngine)
 {
 	return std::string();
 }
 
-std::string Editor::Editor_EditorActions::GetScriptPath(const std::string& p_path)
+std::string Editor::Editor_EditorActions::GetScriptPath(const std::string& pPath)
 {
 	return std::string();
 }
@@ -233,7 +233,7 @@ void Editor::Editor_EditorActions::PropagateFileRename(std::string p_previousNam
 {
 }
 
-void Editor::Editor_EditorActions::PropagateFileRenameThroughSavedFilesOfType(const std::string& p_previousName, const std::string& p_newName, Tools::Tools_PathParser::EFileType p_fileType)
+void Editor::Editor_EditorActions::PropagateFileRenameThroughSavedFilesOfType(const std::string& p_previousName, const std::string& p_newName, Tools::Tools_PathParser::EFileType pFileType)
 {
 }
 
@@ -241,11 +241,11 @@ void Editor::Editor_EditorActions::LoadEmptyScene()
 {
 }
 
-void Editor::Editor_EditorActions::SaveCurrentSceneTo(const std::string& p_path)
+void Editor::Editor_EditorActions::SaveCurrentSceneTo(const std::string& pPath)
 {
 }
 
-void Editor::Editor_EditorActions::LoadSceneFromDisk(const std::string& p_path, bool p_absolute)
+void Editor::Editor_EditorActions::LoadSceneFromDisk(const std::string& pPath, bool p_absolute)
 {
 }
 

@@ -39,7 +39,7 @@ namespace Core
 
 		void UpdateMaterialList();
 
-		void SetUserMatrixElement(uint32_t p_row, uint32_t p_column, float p_value);
+		void SetUserMatrixElement(uint32_t p_row, uint32_t p_column, float pValue);
 
 		float GetUserMatrixElement(uint32_t p_row, uint32_t p_column) const;
 

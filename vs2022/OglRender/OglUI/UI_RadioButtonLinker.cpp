@@ -22,9 +22,9 @@ void UI::UI_RadioButtonLinker::Link(UI_RadioButton& pRadioButton)
 
 void UI::UI_RadioButtonLinker::Unlink(UI_RadioButton& pRadioButton)
 {
-	auto it = std::find_if(mRadioButtons.begin(), mRadioButtons.end(), [&pRadioButton](std::pair<Tools::ListenerID, std::reference_wrapper<UI_RadioButton>>& p_pair)
+	auto it = std::find_if(mRadioButtons.begin(), mRadioButtons.end(), [&pRadioButton](std::pair<Tools::ListenerID, std::reference_wrapper<UI_RadioButton>>& pPair)
 		{
-			return &p_pair.second.get() == &pRadioButton;
+			return &pPair.second.get() == &pRadioButton;
 		});
 
 	if (it != mRadioButtons.end())

@@ -290,9 +290,9 @@ void Core::Core_GUIDrawer::DrawBoolean(UI::UI_WidgetContainer& pRoot, const std:
 			return reinterpret_cast<bool&>(value);
 		});
 
-	dispatcher.RegisterProvider([pProvider](bool p_value)
+	dispatcher.RegisterProvider([pProvider](bool pValue)
 		{
-			pProvider(reinterpret_cast<bool&>(p_value));
+			pProvider(reinterpret_cast<bool&>(pValue));
 		});
 }
 
@@ -308,9 +308,9 @@ void Core::Core_GUIDrawer::DrawVec2(UI::UI_WidgetContainer& pRoot, const std::st
 			return reinterpret_cast<const std::array<float, 2>&>(value);
 		});
 
-	dispatcher.RegisterProvider([pProvider](std::array<float, 2> p_value)
+	dispatcher.RegisterProvider([pProvider](std::array<float, 2> pValue)
 		{
-			pProvider(reinterpret_cast<glm::vec2&>(p_value));
+			pProvider(reinterpret_cast<glm::vec2&>(pValue));
 		});
 }
 
@@ -326,9 +326,9 @@ void Core::Core_GUIDrawer::DrawVec3(UI::UI_WidgetContainer& pRoot, const std::st
 			return reinterpret_cast<const std::array<float, 3>&>(value);
 		});
 
-	dispatcher.RegisterProvider([pProvider](std::array<float, 3> p_value)
+	dispatcher.RegisterProvider([pProvider](std::array<float, 3> pValue)
 		{
-			pProvider(reinterpret_cast<glm::vec3&>(p_value));
+			pProvider(reinterpret_cast<glm::vec3&>(pValue));
 		});
 }
 
@@ -344,9 +344,9 @@ void Core::Core_GUIDrawer::DrawVec4(UI::UI_WidgetContainer& pRoot, const std::st
 			return reinterpret_cast<const std::array<float, 4>&>(value);
 		});
 
-	dispatcher.RegisterProvider([pProvider](std::array<float, 4> p_value)
+	dispatcher.RegisterProvider([pProvider](std::array<float, 4> pValue)
 		{
-			pProvider(reinterpret_cast<glm::vec4&>(p_value));
+			pProvider(reinterpret_cast<glm::vec4&>(pValue));
 		});
 }
 
@@ -362,9 +362,9 @@ void Core::Core_GUIDrawer::DrawQuat(UI::UI_WidgetContainer& pRoot, const std::st
 			return reinterpret_cast<const std::array<float, 4>&>(value);
 		});
 
-	dispatcher.RegisterProvider([&dispatcher, pProvider](std::array<float, 4> p_value)
+	dispatcher.RegisterProvider([&dispatcher, pProvider](std::array<float, 4> pValue)
 		{
-			pProvider(glm::normalize(reinterpret_cast<glm::quat&>(p_value)));
+			pProvider(glm::normalize(reinterpret_cast<glm::quat&>(pValue)));
 		});
 }
 

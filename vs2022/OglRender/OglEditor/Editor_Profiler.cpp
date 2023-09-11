@@ -11,7 +11,7 @@ void Editor::Editor_Profiler::Update(float p_deltaTime)
 {
 }
 
-void Editor::Editor_Profiler::Enable(bool p_value, bool p_disableLog)
+void Editor::Editor_Profiler::Enable(bool pValue, bool p_disableLog)
 {
 }
 

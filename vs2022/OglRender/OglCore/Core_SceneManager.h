@@ -13,13 +13,13 @@ namespace Core
 
 		void Update();
 
-		void LoadAndPlayDelayed(const std::string& p_path, bool p_absolute = false);
+		void LoadAndPlayDelayed(const std::string& pPath, bool p_absolute = false);
 
 		void LoadEmptyScene();
 
 		void LoadEmptyLightedScene();
 
-		bool LoadScene(const std::string& p_path, bool p_absolute = false);
+		bool LoadScene(const std::string& pPath, bool p_absolute = false);
 
 		bool LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc);
 
@@ -33,7 +33,7 @@ namespace Core
 
 		bool IsCurrentSceneLoadedFromDisk() const;
 
-		void StoreCurrentSceneSourcePath(const std::string& p_path);
+		void StoreCurrentSceneSourcePath(const std::string& pPath);
 
 		void ForgetCurrentSceneSourcePath();
 

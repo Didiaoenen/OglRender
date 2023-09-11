@@ -9,11 +9,11 @@ namespace Core
 	public:
 		Core_MaterialLoader() = delete;
 
-		static Core_Material* Create(const std::string& p_path);
+		static Core_Material* Create(const std::string& pPath);
 
-		static void Reload(Core_Material& p_material, const std::string& p_path);
+		static void Reload(Core_Material& p_material, const std::string& pPath);
 
-		static void Save(Core_Material& p_material, const std::string& p_path);
+		static void Save(Core_Material& p_material, const std::string& pPath);
 
 		static bool Destroy(Core_Material*& p_material);
 	};

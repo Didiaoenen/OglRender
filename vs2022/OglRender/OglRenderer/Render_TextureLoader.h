@@ -18,7 +18,7 @@ namespace Render
 
 		static Render_Texture* CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
 
-		static void Reload(Render_Texture& p_texture, const std::string& p_filePath, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static void Reload(Render_Texture& p_texture, const std::string& pFilePath, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
 
 		static bool Destroy(Render_Texture*& p_textureInstance);
 	};

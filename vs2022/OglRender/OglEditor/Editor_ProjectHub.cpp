@@ -33,6 +33,6 @@ void Editor::Editor_ProjectHub::SetupContext()
 {
 }
 
-void Editor::Editor_ProjectHub::RegisterProject(const std::string& p_path)
+void Editor::Editor_ProjectHub::RegisterProject(const std::string& pPath)
 {
 }

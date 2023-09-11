@@ -73,8 +73,8 @@ namespace Window
 		std::string mInitialDirectory;
 		std::string mFilter;
 		std::string mError;
-		std::string mFilename;
-		std::string mFilepath;
+		std::string mFileName;
+		std::string mFilePath;
 		bool mSucceeded{ false };
 	};
 }

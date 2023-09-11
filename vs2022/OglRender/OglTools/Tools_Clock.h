@@ -32,10 +32,10 @@ namespace Tools
 		std::chrono::steady_clock::time_point	__CURRENT_TIME;
 		std::chrono::duration<double>			__ELAPSED;
 
-		bool	__INITIALIZED = false;
-		float	__TIME_SCALE = 1.0f;
-		float	__DELTA_TIME = 0.0f;
-		float	__TIME_SINCE_START = 0.0f;
+		bool	__INITIALIZED{ false };
+		float	__TIME_SCALE{ 1.0f };
+		float	__DELTA_TIME{ 0.0f };
+		float	__TIME_SINCE_START{ 0.0f };
 	};
 }
 

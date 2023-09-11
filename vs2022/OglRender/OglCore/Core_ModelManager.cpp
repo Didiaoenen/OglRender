@@ -2,9 +2,9 @@
 
 #include "Core_ModelManager.h"
 
-Render::EModelParserFlags GetAssetMetadata(const std::string& p_path)
+Render::EModelParserFlags GetAssetMetadata(const std::string& pPath)
 {
-	auto metaFile = Tools::Tools_IniFile(p_path + ".meta");
+	auto metaFile = Tools::Tools_IniFile(pPath + ".meta");
 
 	Render::EModelParserFlags flags = Render::EModelParserFlags::NONE;
 
@@ -43,12 +43,12 @@ Render::EModelParserFlags GetAssetMetadata(const std::string& p_path)
 	return { flags };
 }
 
-Render::Render_Model* Core::Core_ModelManager::CreateResource(const std::string& p_path)
+Render::Render_Model* Core::Core_ModelManager::CreateResource(const std::string& pPath)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = GetRealPath(pPath);
 	auto model = Render::Render_ModelLoader::Create(realPath, GetAssetMetadata(realPath));
 	if (model)
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(model) + offsetof(Render::Render_Model, path)) = p_path;
+		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(model) + offsetof(Render::Render_Model, path)) = pPath;
 
 	return model;
 }
@@ -58,8 +58,8 @@ void Core::Core_ModelManager::DestroyResource(Render::Render_Model* p_resource)
 	Render::Render_ModelLoader::Destroy(p_resource);
 }
 
-void Core::Core_ModelManager::ReloadResource(Render::Render_Model* p_resource, const std::string& p_path)
+void Core::Core_ModelManager::ReloadResource(Render::Render_Model* p_resource, const std::string& pPath)
 {
-	std::string realPath = GetRealPath(p_path);
+	std::string realPath = GetRealPath(pPath);
 	Render::Render_ModelLoader::Reload(*p_resource, realPath, GetAssetMetadata(realPath));
 }

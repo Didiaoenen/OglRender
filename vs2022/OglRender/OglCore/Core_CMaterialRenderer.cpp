@@ -94,7 +94,7 @@ void Core::Core_CMaterialRenderer::UpdateMaterialList()
 	}
 }
 
-void Core::Core_CMaterialRenderer::SetUserMatrixElement(uint32_t p_row, uint32_t p_column, float p_value)
+void Core::Core_CMaterialRenderer::SetUserMatrixElement(uint32_t p_row, uint32_t p_column, float pValue)
 {
 
 }

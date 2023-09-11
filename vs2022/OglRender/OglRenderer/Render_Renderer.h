@@ -43,11 +43,11 @@ namespace Render
 
 		void SetRasterizationMode(ERasterizationMode p_rasterizationMode);
 
-		void SetCapability(ERenderingCapability p_capability, bool p_value);
+		void SetCapability(ERenderingCapability p_capability, bool pValue);
 
 		bool GetCapability(ERenderingCapability p_capability) const;
 
-		void SetStencilAlgorithm(EComparaisonAlgorithm p_algorithm, int32_t p_reference, uint32_t p_mask);
+		void SetStencilAlgorithm(EComparaisonAlgorithm p_algorithm, int32_t pReference, uint32_t p_mask);
 
 		void SetDepthAlgorithm(EComparaisonAlgorithm p_algorithm);
 

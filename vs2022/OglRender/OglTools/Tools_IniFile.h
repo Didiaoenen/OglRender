@@ -11,45 +11,45 @@ namespace Tools
 		using AttributePair = std::pair<std::string, std::string>;
 		using AttributeMap = std::unordered_map<std::string, std::string>;
 
-		Tools_IniFile(const std::string& p_filePath);
+		Tools_IniFile(const std::string& pFilePath);
 
 		void Reload();
 
 		void Rewrite() const;
 
 		template<typename T>
-		T Get(const std::string& p_key);
+		T Get(const std::string& pKey);
 
 		template<typename T>
-		T GetOrDefault(const std::string& p_key, T p_default);
+		T GetOrDefault(const std::string& pKey, T pDefault);
 
 		template<typename T>
-		bool Set(const std::string& p_key, const T& p_value);
+		bool Set(const std::string& pKey, const T& pValue);
 
 		template<typename T>
-		bool Add(const std::string& p_key, const T& p_value);
+		bool Add(const std::string& pKey, const T& pValue);
 
-		bool Remove(const std::string& p_key);
+		bool Remove(const std::string& pKey);
 
 		void RemoveAll();
 
-		bool IsKeyExisting(const std::string& p_key) const;
+		bool IsKeyExisting(const std::string& pKey) const;
 
 		std::vector<std::string> GetFormattedContent() const;
 
 	private:
-		void RegisterPair(const std::string& p_key, const std::string& p_value);
-		void RegisterPair(const AttributePair& p_pair);
+		void RegisterPair(const std::string& pKey, const std::string& pValue);
+		void RegisterPair(const AttributePair& pPair);
 
 		void Load();
 
-		AttributePair	ExtractKeyAndValue(const std::string& p_attributeLine)	const;
-		bool			IsValidLine(const std::string& p_attributeLine)	const;
-		bool			StringToBoolean(const std::string& p_value)			const;
+		AttributePair	ExtractKeyAndValue(const std::string& pAttributeLine) const;
+		bool			IsValidLine(const std::string& pAttributeLine)	const;
+		bool			StringToBoolean(const std::string& pValue) const;
 
 	private:
-		std::string		m_filePath;
-		AttributeMap	m_data;
+		std::string		mFilePath;
+		AttributeMap	mData;
 	};
 }
 

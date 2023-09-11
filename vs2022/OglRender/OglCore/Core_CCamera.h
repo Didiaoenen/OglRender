@@ -17,13 +17,13 @@ namespace Core
 
 		std::string GetName() override;
 
-		void SetFov(float p_value);
+		void SetFov(float pValue);
 
-		void SetSize(float p_value);
+		void SetSize(float pValue);
 
-		void SetNear(float p_value);
+		void SetNear(float pValue);
 
-		void SetFar(float p_value);
+		void SetFar(float pValue);
 
 		void SetClearColor(const glm::vec3& p_clearColor);
 

@@ -16,24 +16,24 @@ std::string Core::Core_CCamera::GetName()
 	return "Camera";
 }
 
-void Core::Core_CCamera::SetFov(float p_value)
+void Core::Core_CCamera::SetFov(float pValue)
 {
-	m_camera.SetFov(p_value);
+	m_camera.SetFov(pValue);
 }
 
-void Core::Core_CCamera::SetSize(float p_value)
+void Core::Core_CCamera::SetSize(float pValue)
 {
-	m_camera.SetSize(p_value);
+	m_camera.SetSize(pValue);
 }
 
-void Core::Core_CCamera::SetNear(float p_value)
+void Core::Core_CCamera::SetNear(float pValue)
 {
-	m_camera.SetNear(p_value);
+	m_camera.SetNear(pValue);
 }
 
-void Core::Core_CCamera::SetFar(float p_value)
+void Core::Core_CCamera::SetFar(float pValue)
 {
-	m_camera.SetFar(p_value);
+	m_camera.SetFar(pValue);
 }
 
 void Core::Core_CCamera::SetClearColor(const glm::vec3& p_clearColor)

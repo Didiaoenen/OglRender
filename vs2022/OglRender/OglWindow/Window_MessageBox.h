@@ -16,7 +16,7 @@ namespace Window
 			QUESTION = 0x00000020L,
 			INFORMATION = 0x00000040L,
 			WARNING = 0x00000030L,
-			ERROR = 0x00000010L
+			ERROR = 0x00000010L,
 		};
 
 		enum class EButtonLayout
@@ -28,7 +28,7 @@ namespace Window
 			RETRY_CANCEL = 0x00000005L,
 			ABORT_RETRY_IGNORE = 0x00000002L,
 			CANCEL_TRYAGAIN_CONTINUE = 0x00000006L,
-			HELP = 0x00004000L
+			HELP = 0x00004000L,
 		};
 
 		enum class EUserAction
@@ -40,7 +40,7 @@ namespace Window
 			CONTINUE = 11,
 			IGNORE = 5,
 			RETRY = 4,
-			TRYAGAIN = 10
+			TRYAGAIN = 10,
 		};
 
 		Window_MessageBox(std::string pTitle, std::string pMessage, EMessageType pMessageType = EMessageType::INFORMATION, EButtonLayout pButtonLayout = EButtonLayout::OK, bool pAutoSpawn = true);

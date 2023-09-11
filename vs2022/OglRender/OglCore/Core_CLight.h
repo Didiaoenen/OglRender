@@ -32,7 +32,7 @@ namespace Core
 		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
 
 	protected:
-		Render::Render_Light m_data;
+		Render::Render_Light mData;
 	};
 }
 

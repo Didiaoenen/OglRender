@@ -12,7 +12,9 @@ void Tools::Tools_Clock::Update()
 		__TIME_SINCE_START += __DELTA_TIME * __TIME_SCALE;
 	}
 	else
+	{
 		Initialize();
+	}
 }
 
 float Tools::Tools_Clock::GetFramerate()

@@ -25,18 +25,18 @@ void Editor::Editor_Console::FilterLogs()
 {
 }
 
-void Editor::Editor_Console::SetShowDefaultLogs(bool p_value)
+void Editor::Editor_Console::SetShowDefaultLogs(bool pValue)
 {
 }
 
-void Editor::Editor_Console::SetShowInfoLogs(bool p_value)
+void Editor::Editor_Console::SetShowInfoLogs(bool pValue)
 {
 }
 
-void Editor::Editor_Console::SetShowWarningLogs(bool p_value)
+void Editor::Editor_Console::SetShowWarningLogs(bool pValue)
 {
 }
 
-void Editor::Editor_Console::SetShowErrorLogs(bool p_value)
+void Editor::Editor_Console::SetShowErrorLogs(bool pValue)
 {
 }

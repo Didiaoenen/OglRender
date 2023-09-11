@@ -34,9 +34,9 @@ namespace Editor
 #pragma region SETTINGS
 		enum class EActorSpawnMode { ORIGIN, FRONT };
 
-		void SetActorSpawnAtOrigin(bool p_value);
+		void SetActorSpawnAtOrigin(bool pValue);
 
-		void SetActorSpawnMode(EActorSpawnMode p_value);
+		void SetActorSpawnMode(EActorSpawnMode pValue);
 
 		void ResetLayout();
 
@@ -76,7 +76,7 @@ namespace Editor
 
 		Core::Core_Actor& CreateEmptyActor(bool p_focusOnCreation = true, Core::Core_Actor* p_parent = nullptr, const std::string& p_name = "");
 
-		Core::Core_Actor& CreateActorWithModel(const std::string& p_path, bool p_focusOnCreation = true, Core::Core_Actor* p_parent = nullptr, const std::string& p_name = "");
+		Core::Core_Actor& CreateActorWithModel(const std::string& pPath, bool p_focusOnCreation = true, Core::Core_Actor* p_parent = nullptr, const std::string& p_name = "");
 
 		bool DestroyActor(Core::Core_Actor& p_actor);
 
@@ -104,11 +104,11 @@ namespace Editor
 
 		bool ImportAssetAtLocation(const std::string& p_destination);
 
-		std::string GetRealPath(const std::string& p_path);
+		std::string GetRealPath(const std::string& pPath);
 
-		std::string GetResourcePath(const std::string& p_path, bool p_isFromEngine = false);
+		std::string GetResourcePath(const std::string& pPath, bool p_isFromEngine = false);
 
-		std::string GetScriptPath(const std::string& p_path);
+		std::string GetScriptPath(const std::string& pPath);
 
 		void PropagateFolderRename(std::string p_previousName, const std::string p_newName);
 
@@ -118,15 +118,15 @@ namespace Editor
 
 		void PropagateFileRename(std::string p_previousName, std::string p_newName);
 
-		void PropagateFileRenameThroughSavedFilesOfType(const std::string& p_previousName, const std::string& p_newName, Tools::Tools_PathParser::EFileType p_fileType);
+		void PropagateFileRenameThroughSavedFilesOfType(const std::string& p_previousName, const std::string& p_newName, Tools::Tools_PathParser::EFileType pFileType);
 #pragma endregion
 
 #pragma region SCENE
 		void LoadEmptyScene();
 
-		void SaveCurrentSceneTo(const std::string& p_path);
+		void SaveCurrentSceneTo(const std::string& pPath);
 
-		void LoadSceneFromDisk(const std::string& p_path, bool p_absolute = false);
+		void LoadSceneFromDisk(const std::string& pPath, bool p_absolute = false);
 
 		bool IsCurrentSceneLoadedFromDisk() const;
 

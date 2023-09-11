@@ -1,8 +1,10 @@
+
 #include <Windows.h>
+
 #include "Window_SaveFileDialog.h"
 
-Window::Window_SaveFileDialog::Window_SaveFileDialog(const std::string& pDialogTitle)
-	: Window_FileDialog(GetSaveFileNameA, pDialogTitle)
+Window::Window_SaveFileDialog::Window_SaveFileDialog(const std::string& pDialogTitle) : 
+	Window_FileDialog(GetSaveFileNameA, pDialogTitle)
 {
 }
 
@@ -24,19 +26,19 @@ void Window::Window_SaveFileDialog::DefineExtension(const std::string& pLabel, c
 
 void Window::Window_SaveFileDialog::AddExtensionToFilePathAndName()
 {
-	if (mFilename.size() >= mExtension.size())
+	if (mFileName.size() >= mExtension.size())
 	{
-		std::string fileEnd(mFilename.data() + mFilename.size() - mExtension.size(), mFilename.data() + mFilename.size());
+		std::string fileEnd(mFileName.data() + mFileName.size() - mExtension.size(), mFileName.data() + mFileName.size());
 
 		if (fileEnd != mExtension)
 		{
-			mFilepath += mExtension;
-			mFilename += mExtension;
+			mFilePath += mExtension;
+			mFileName += mExtension;
 		}
 	}
 	else
 	{
-		mFilepath += mExtension;
-		mFilename += mExtension;
+		mFilePath += mExtension;
+		mFileName += mExtension;
 	}
 }

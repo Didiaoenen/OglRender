@@ -11,19 +11,19 @@ namespace Editor
 		class Property
 		{
 		public:
-			Property(T p_value) : m_value(p_value) {}
+			Property(T pValue) : m_value(pValue) {}
 
 			Tools::Tools_Event<T> OnValueChanged;
 
-			inline T& operator=(T p_value)
+			inline T& operator=(T pValue)
 			{
-				Set(p_value);
+				Set(pValue);
 				return m_value;
 			}
 
-			inline void Set(T p_value)
+			inline void Set(T pValue)
 			{
-				m_value = p_value;
+				m_value = pValue;
 				OnValueChanged.Invoke(m_value);
 			}
 

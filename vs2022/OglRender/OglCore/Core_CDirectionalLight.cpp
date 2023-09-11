@@ -8,7 +8,7 @@
 Core::Core_CDirectionalLight::Core_CDirectionalLight(Core_Actor& p_owner) :
 	Core_CLight(p_owner)
 {
-	m_data.type = static_cast<float>(Render::Render_Light::Type::DIRECTIONAL);
+	mData.type = static_cast<float>(Render::Render_Light::Type::DIRECTIONAL);
 }
 
 std::string Core::Core_CDirectionalLight::GetName()

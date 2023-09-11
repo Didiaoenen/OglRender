@@ -22,7 +22,7 @@ namespace Render
 		const Render_BoundingSphere& GetBoundingSphere() const;
 
 	private:
-		Render_Model(const std::string& p_path);
+		Render_Model(const std::string& pPath);
 		~Render_Model();
 
 		void ComputeBoundingSphere();

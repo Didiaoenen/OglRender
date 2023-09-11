@@ -21,9 +21,9 @@ namespace Core
 
 		void UnBind();
 
-		template<typename T> void Set(const std::string p_key, const T& p_value);
+		template<typename T> void Set(const std::string pKey, const T& pValue);
 
-		template<typename T> const T& Get(const std::string p_key);
+		template<typename T> const T& Get(const std::string pKey);
 
 		Render::Render_Shader*& GetShader();
 

@@ -15,8 +15,8 @@ const Render::Render_BoundingSphere& Render::Render_Model::GetBoundingSphere() c
 	return m_boundingSphere;
 }
 
-Render::Render_Model::Render_Model(const std::string& p_path) :
-	path(p_path)
+Render::Render_Model::Render_Model(const std::string& pPath) :
+	path(pPath)
 {
 }
 

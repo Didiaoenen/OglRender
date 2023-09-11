@@ -27,7 +27,7 @@ void Render::Render_Renderer::SetRasterizationMode(ERasterizationMode p_rasteriz
 {
 }
 
-void Render::Render_Renderer::SetCapability(ERenderingCapability p_capability, bool p_value)
+void Render::Render_Renderer::SetCapability(ERenderingCapability p_capability, bool pValue)
 {
 }
 
@@ -36,7 +36,7 @@ bool Render::Render_Renderer::GetCapability(ERenderingCapability p_capability) c
 	return false;
 }
 
-void Render::Render_Renderer::SetStencilAlgorithm(EComparaisonAlgorithm p_algorithm, int32_t p_reference, uint32_t p_mask)
+void Render::Render_Renderer::SetStencilAlgorithm(EComparaisonAlgorithm p_algorithm, int32_t pReference, uint32_t p_mask)
 {
 }
 

@@ -27,7 +27,7 @@ namespace Editor
 			const UI::UI_PanelWindowSettings& p_windowSettings
 		);
 
-		void SetTarget(const std::string& p_path);
+		void SetTarget(const std::string& pPath);
 
 		void Refresh();
 

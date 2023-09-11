@@ -89,24 +89,24 @@ Render::EProjectionMode Render::Render_Camera::GetProjectionMode() const
 	return m_projectionMode;
 }
 
-void Render::Render_Camera::SetFov(float p_value)
+void Render::Render_Camera::SetFov(float pValue)
 {
-	m_fov = p_value;
+	m_fov = pValue;
 }
 
-void Render::Render_Camera::SetSize(float p_value)
+void Render::Render_Camera::SetSize(float pValue)
 {
-	m_size = p_value;
+	m_size = pValue;
 }
 
-void Render::Render_Camera::SetNear(float p_value)
+void Render::Render_Camera::SetNear(float pValue)
 {
-	m_near = p_value;
+	m_near = pValue;
 }
 
-void Render::Render_Camera::SetFar(float p_value)
+void Render::Render_Camera::SetFar(float pValue)
 {
-	m_far = p_value;
+	m_far = pValue;
 }
 
 void Render::Render_Camera::SetClearColor(const glm::vec3& p_clearColor)

@@ -5,8 +5,8 @@
 
 #include "Window_FileDialog.h"
 
-Window::Window_FileDialog::Window_FileDialog(std::function<int(tagOFNA*)> pCallback, const std::string& pDialogTitle)
-	: mCallback(pCallback), mDialogTitle(pDialogTitle), mInitialDirectory("")
+Window::Window_FileDialog::Window_FileDialog(std::function<int(tagOFNA*)> pCallback, const std::string& pDialogTitle) : 
+	mCallback(pCallback), mDialogTitle(pDialogTitle), mInitialDirectory("")
 {
 }
 
@@ -21,16 +21,16 @@ void Window::Window_FileDialog::Show(EExplorerFlags pFlags)
 
 	if (!mInitialDirectory.empty())
 	{
-		mFilepath = mInitialDirectory;
+		mFilePath = mInitialDirectory;
 	}
 
-	mFilepath.resize(MAX_PATH);
+	mFilePath.resize(MAX_PATH);
 
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFilter = mFilter.c_str();
-	ofn.lpstrFile = mFilepath.data();
+	ofn.lpstrFile = mFilePath.data();
 	ofn.nMaxFile = MAX_PATH;
 	ofn.lpstrTitle = mDialogTitle.c_str();
 
@@ -49,15 +49,15 @@ void Window::Window_FileDialog::Show(EExplorerFlags pFlags)
 	}
 	else
 	{
-		mFilepath = mFilepath.c_str();
+		mFilePath = mFilePath.c_str();
 	}
 
-	mFilepath.clear();
-	for (auto it = mFilepath.rbegin(); it != mFilepath.rend() && *it != '\\' && *it != '/'; ++it)
+	mFileName.clear();
+	for (auto it = mFilePath.rbegin(); it != mFilePath.rend() && *it != '\\' && *it != '/'; ++it)
 	{
-		mFilepath += *it;
+		mFileName += *it;
 	}
-	std::reverse(mFilepath.begin(), mFilepath.end());
+	std::reverse(mFileName.begin(), mFileName.end());
 }
 
 bool Window::Window_FileDialog::HasSucceeded() const
@@ -67,12 +67,12 @@ bool Window::Window_FileDialog::HasSucceeded() const
 
 std::string Window::Window_FileDialog::GetSelectedFileName()
 {
-	return mFilename;
+	return mFileName;
 }
 
 std::string Window::Window_FileDialog::GetSelectedFilePath()
 {
-	return mFilepath;
+	return mFilePath;
 }
 
 std::string Window::Window_FileDialog::GetErrorInfo()
@@ -82,7 +82,7 @@ std::string Window::Window_FileDialog::GetErrorInfo()
 
 bool Window::Window_FileDialog::IsFileExisting() const
 {
-	return std::filesystem::exists(mFilepath);
+	return std::filesystem::exists(mFilePath);
 }
 
 void Window::Window_FileDialog::HandleError()

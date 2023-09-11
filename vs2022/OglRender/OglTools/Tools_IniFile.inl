@@ -7,35 +7,43 @@
 namespace Tools
 {
 	template<typename T>
-	inline T Tools_IniFile::Get(const std::string& p_key)
+	inline T Tools_IniFile::Get(const std::string& pKey)
 	{
 		if constexpr (std::is_same<bool, T>::value)
 		{
-			if (!IsKeyExisting(p_key))
+			if (!IsKeyExisting(pKey))
+			{
 				return false;
+			}
 
-			return StringToBoolean(m_data[p_key]);
+			return StringToBoolean(mData[pKey]);
 		}
 		else if constexpr (std::is_same<std::string, T>::value)
 		{
-			if (!IsKeyExisting(p_key))
+			if (!IsKeyExisting(pKey))
+			{
 				return std::string("NULL");
+			}
 
-			return m_data[p_key];
+			return mData[pKey];
 		}
 		else if constexpr (std::is_integral<T>::value)
 		{
-			if (!IsKeyExisting(p_key))
+			if (!IsKeyExisting(pKey))
+			{
 				return static_cast<T>(0);
+			}
 
-			return static_cast<T>(std::atoi(m_data[p_key].c_str()));
+			return static_cast<T>(std::atoi(mData[pKey].c_str()));
 		}
 		else if constexpr (std::is_floating_point<T>::value)
 		{
-			if (!IsKeyExisting(p_key))
+			if (!IsKeyExisting(pKey))
+			{
 				return static_cast<T>(0.0f);
+			}
 
-			return static_cast<T>(std::atof(m_data[p_key].c_str()));
+			return static_cast<T>(std::atof(mData[pKey].c_str()));
 		}
 		else
 		{
@@ -45,31 +53,31 @@ namespace Tools
 	}
 
 	template<typename T>
-	inline T Tools_IniFile::GetOrDefault(const std::string& p_key, T p_default)
+	inline T Tools_IniFile::GetOrDefault(const std::string& pKey, T pDefault)
 	{
-		return IsKeyExisting(p_key) ? Get<T>(p_key) : p_default;
+		return IsKeyExisting(pKey) ? Get<T>(pKey) : pDefault;
 	}
 
 	template<typename T>
-	inline bool Tools_IniFile::Set(const std::string& p_key, const T& p_value)
+	inline bool Tools_IniFile::Set(const std::string& pKey, const T& pValue)
 	{
-		if (IsKeyExisting(p_key))
+		if (IsKeyExisting(pKey))
 		{
 			if constexpr (std::is_same<bool, T>::value)
 			{
-				m_data[p_key] = p_value ? "true" : "false";
+				mData[pKey] = pValue ? "true" : "false";
 			}
 			else if constexpr (std::is_same<std::string, T>::value)
 			{
-				m_data[p_key] = p_value;
+				mData[pKey] = pValue;
 			}
 			else if constexpr (std::is_integral<T>::value)
 			{
-				m_data[p_key] = std::to_string(p_value);
+				mData[pKey] = std::to_string(pValue);
 			}
 			else if constexpr (std::is_floating_point<T>::value)
 			{
-				m_data[p_key] = std::to_string(p_value);
+				mData[pKey] = std::to_string(pValue);
 			}
 			else
 			{
@@ -83,25 +91,25 @@ namespace Tools
 	}
 
 	template<typename T>
-	inline bool Tools_IniFile::Add(const std::string& p_key, const T& p_value)
+	inline bool Tools_IniFile::Add(const std::string& pKey, const T& pValue)
 	{
-		if (!IsKeyExisting(p_key))
+		if (!IsKeyExisting(pKey))
 		{
 			if constexpr (std::is_same<bool, T>::value)
 			{
-				RegisterPair(p_key, p_value ? "true" : "false");
+				RegisterPair(pKey, pValue ? "true" : "false");
 			}
 			else if constexpr (std::is_same<std::string, T>::value)
 			{
-				RegisterPair(p_key, p_value);
+				RegisterPair(pKey, pValue);
 			}
 			else if constexpr (std::is_integral<T>::value)
 			{
-				RegisterPair(p_key, std::to_string(p_value));
+				RegisterPair(pKey, std::to_string(pValue));
 			}
 			else if constexpr (std::is_floating_point<T>::value)
 			{
-				RegisterPair(p_key, std::to_string(p_value));
+				RegisterPair(pKey, std::to_string(pValue));
 			}
 			else
 			{

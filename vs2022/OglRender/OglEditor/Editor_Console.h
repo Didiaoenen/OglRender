@@ -27,10 +27,10 @@ namespace Editor
 		//bool IsAllowedByFilter(OvDebug::ELogLevel p_logLevel);
 
 	private:
-		void SetShowDefaultLogs(bool p_value);
-		void SetShowInfoLogs(bool p_value);
-		void SetShowWarningLogs(bool p_value);
-		void SetShowErrorLogs(bool p_value);
+		void SetShowDefaultLogs(bool pValue);
+		void SetShowInfoLogs(bool pValue);
+		void SetShowWarningLogs(bool pValue);
+		void SetShowErrorLogs(bool pValue);
 
 	private:
 		UI::UI_Group* m_logGroup;

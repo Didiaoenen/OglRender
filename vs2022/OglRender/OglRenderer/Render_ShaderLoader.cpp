@@ -7,16 +7,16 @@
 
 std::string Render::Render_ShaderLoader::__FILE_TRACE;
 
-Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& p_filePath)
+Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pFilePath)
 {
-	__FILE_TRACE = p_filePath;
+	__FILE_TRACE = pFilePath;
 
-	std::pair<std::string, std::string> source = ParseShader(p_filePath);
+	std::pair<std::string, std::string> source = ParseShader(pFilePath);
 
 	uint32_t programID = CreateProgram(source.first, source.second);
 
 	if (programID)
-		return new Render_Shader(p_filePath, programID);
+		return new Render_Shader(pFilePath, programID);
 
 	return nullptr;
 }
@@ -31,11 +31,11 @@ Render::Render_Shader* Render::Render_ShaderLoader::CreateFromSource(const std::
 	return nullptr;
 }
 
-void Render::Render_ShaderLoader::Recompile(Render_Shader& p_shader, const std::string& p_filePath)
+void Render::Render_ShaderLoader::Recompile(Render_Shader& p_shader, const std::string& pFilePath)
 {
-	__FILE_TRACE = p_filePath;
+	__FILE_TRACE = pFilePath;
 
-	std::pair<std::string, std::string> source = ParseShader(p_filePath);
+	std::pair<std::string, std::string> source = ParseShader(pFilePath);
 
 	uint32_t newProgram = CreateProgram(source.first, source.second);
 
@@ -70,9 +70,9 @@ bool Render::Render_ShaderLoader::Destroy(Render_Shader*& p_shader)
 	return false;
 }
 
-std::pair<std::string, std::string> Render::Render_ShaderLoader::ParseShader(const std::string& p_filePath)
+std::pair<std::string, std::string> Render::Render_ShaderLoader::ParseShader(const std::string& pFilePath)
 {
-	std::ifstream stream(p_filePath);
+	std::ifstream stream(pFilePath);
 
 	enum class ShaderType { NONE = -1, VERTEX = 0, FRAGMENT = 1 };
 
@@ -141,11 +141,11 @@ uint32_t Render::Render_ShaderLoader::CreateProgram(const std::string& p_vertexS
 	return program;
 }
 
-uint32_t Render::Render_ShaderLoader::CompileShader(uint32_t p_type, const std::string& p_source)
+uint32_t Render::Render_ShaderLoader::CompileShader(uint32_t p_type, const std::string& pSource)
 {
 	const uint32_t id = glCreateShader(p_type);
 
-	const char* src = p_source.c_str();
+	const char* src = pSource.c_str();
 
 	glShaderSource(id, 1, &src, nullptr);
 

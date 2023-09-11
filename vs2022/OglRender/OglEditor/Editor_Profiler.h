@@ -22,7 +22,7 @@ namespace Editor
 
 		void Update(float p_deltaTime);
 
-		void Enable(bool p_value, bool p_disableLog = false);
+		void Enable(bool pValue, bool p_disableLog = false);
 
 	private:
 		UI::Color CalculateActionColor(double p_percentage) const;

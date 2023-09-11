@@ -39,9 +39,6 @@
     <ClInclude Include="Tools_Event.h">
       <Filter>头文件\Event</Filter>
     </ClInclude>
-    <ClInclude Include="tinyxml2.h">
-      <Filter>头文件\Filesystem</Filter>
-    </ClInclude>
     <ClInclude Include="Tools_ReferenceOrValue.h">
       <Filter>头文件\Utils</Filter>
     </ClInclude>
@@ -62,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="Tools_SizeConverter.h">
       <Filter>头文件\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>头文件\Filesystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

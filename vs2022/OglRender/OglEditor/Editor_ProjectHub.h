@@ -20,7 +20,7 @@ namespace Editor
 
 		void SetupContext();
 
-		void RegisterProject(const std::string& p_path);
+		void RegisterProject(const std::string& pPath);
 
 	private:
 		std::unique_ptr<Window::Window_Device>		m_device;

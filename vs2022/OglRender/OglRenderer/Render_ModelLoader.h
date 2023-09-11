@@ -14,7 +14,7 @@ namespace Render
 
 		static Render_Model* Create(const std::string& p_filepath, EModelParserFlags p_parserFlags = EModelParserFlags::NONE);
 
-		static void Reload(Render_Model& p_model, const std::string& p_filePath, EModelParserFlags p_parserFlags = EModelParserFlags::NONE);
+		static void Reload(Render_Model& p_model, const std::string& pFilePath, EModelParserFlags p_parserFlags = EModelParserFlags::NONE);
 
 		static bool Destroy(Render_Model*& p_modelInstance);
 

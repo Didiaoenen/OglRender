@@ -1,9 +1,9 @@
 #include "Core_MaterialLoader.h"
 
-Core::Core_Material* Core::Core_MaterialLoader::Create(const std::string& p_path)
+Core::Core_Material* Core::Core_MaterialLoader::Create(const std::string& pPath)
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile(p_path.c_str());
+	doc.LoadFile(pPath.c_str());
 	if (!doc.Error())
 	{
 		tinyxml2::XMLNode* root = doc.FirstChild();
@@ -20,10 +20,10 @@ Core::Core_Material* Core::Core_MaterialLoader::Create(const std::string& p_path
 	}
 }
 
-void Core::Core_MaterialLoader::Reload(Core_Material& p_material, const std::string& p_path)
+void Core::Core_MaterialLoader::Reload(Core_Material& p_material, const std::string& pPath)
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile(p_path.c_str());
+	doc.LoadFile(pPath.c_str());
 	if (!doc.Error())
 	{
 		tinyxml2::XMLNode* root = doc.FirstChild();
@@ -32,7 +32,7 @@ void Core::Core_MaterialLoader::Reload(Core_Material& p_material, const std::str
 	}
 }
 
-void Core::Core_MaterialLoader::Save(Core_Material& p_material, const std::string& p_path)
+void Core::Core_MaterialLoader::Save(Core_Material& p_material, const std::string& pPath)
 {
 	tinyxml2::XMLDocument doc;
 	tinyxml2::XMLNode* node = doc.NewElement("root");
@@ -40,10 +40,10 @@ void Core::Core_MaterialLoader::Save(Core_Material& p_material, const std::strin
 
 	p_material.OnSerialize(doc, node);
 
-	//if (doc.SaveFile(p_path.c_str()) == tinyxml2::XML_SUCCESS)
-	//	OVLOG_INFO("[MATERIAL] \"" + p_path + "\": Saved");
+	//if (doc.SaveFile(pPath.c_str()) == tinyxml2::XML_SUCCESS)
+	//	OVLOG_INFO("[MATERIAL] \"" + pPath + "\": Saved");
 	//else
-	//	OVLOG_ERROR("[MATERIAL] \"" + p_path + "\": Failed to save");
+	//	OVLOG_ERROR("[MATERIAL] \"" + pPath + "\": Failed to save");
 }
 
 bool Core::Core_MaterialLoader::Destroy(Core_Material*& p_material)

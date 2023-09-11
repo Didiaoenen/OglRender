@@ -18,9 +18,9 @@ namespace Render
 
 		void Unbind() const;
 
-		void SetUniformInt(const std::string& p_name, int p_value);
+		void SetUniformInt(const std::string& p_name, int pValue);
 
-		void SetUniformFloat(const std::string& p_name, float p_value);
+		void SetUniformFloat(const std::string& p_name, float pValue);
 
 		void SetUniformVec2(const std::string& p_name, const glm::vec2& p_vec2);
 
@@ -47,7 +47,7 @@ namespace Render
 		void QueryUniforms();
 
 	private:
-		Render_Shader(const std::string p_path, uint32_t p_id);
+		Render_Shader(const std::string pPath, uint32_t p_id);
 		~Render_Shader();
 
 		static bool IsEngineUBOMember(const std::string& p_uniformName);

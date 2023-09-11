@@ -8,11 +8,11 @@ namespace Core
 	class Core_MaterialManager : public Core_AResourceManager<Core_Material>
 	{
 	public:
-		virtual Core_Material* CreateResource(const std::string& p_path) override;
+		virtual Core_Material* CreateResource(const std::string& pPath) override;
 
 		virtual void DestroyResource(Core_Material* p_resource) override;
 
-		virtual void ReloadResource(Core_Material* p_resource, const std::string& p_path) override;
+		virtual void ReloadResource(Core_Material* p_resource, const std::string& pPath) override;
 	};
 }
 

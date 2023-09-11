@@ -1,8 +1,10 @@
+
 #include <Windows.h>
+
 #include "Window_MessageBox.h"
 
-Window::Window_MessageBox::Window_MessageBox(std::string pTitle, std::string pMessage, EMessageType pMessageType, EButtonLayout pButtonLayout, bool pAutoSpawn)
-	: mTitle(pTitle), mMessage(pMessage), mButtonLayout(pButtonLayout), mMessageType(pMessageType)
+Window::Window_MessageBox::Window_MessageBox(std::string pTitle, std::string pMessage, EMessageType pMessageType, EButtonLayout pButtonLayout, bool pAutoSpawn) : 
+	mTitle(pTitle), mMessage(pMessage), mButtonLayout(pButtonLayout), mMessageType(pMessageType)
 {
 	if (pAutoSpawn)
 	{

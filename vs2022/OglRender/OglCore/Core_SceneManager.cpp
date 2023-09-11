@@ -26,12 +26,12 @@ void Core::Core_SceneManager::Update()
 	}
 }
 
-void Core::Core_SceneManager::LoadAndPlayDelayed(const std::string& p_path, bool p_absolute)
+void Core::Core_SceneManager::LoadAndPlayDelayed(const std::string& pPath, bool p_absolute)
 {
-	m_delayedLoadCall = [this, p_path, p_absolute]
+	m_delayedLoadCall = [this, pPath, p_absolute]
 		{
 			std::string previousSourcePath = GetCurrentSceneSourcePath();
-			LoadScene(p_path, p_absolute);
+			LoadScene(pPath, p_absolute);
 			StoreCurrentSceneSourcePath(previousSourcePath);
 			GetCurrentScene()->Play();
 		};
@@ -68,9 +68,9 @@ void Core::Core_SceneManager::LoadEmptyLightedScene()
 	camera.transform.SetLocalRotation(glm::quat({ 20.0f, 180.0f, 0.0f }));
 }
 
-bool Core::Core_SceneManager::LoadScene(const std::string & p_path, bool p_absolute)
+bool Core::Core_SceneManager::LoadScene(const std::string & pPath, bool p_absolute)
 {
-	std::string completePath = (p_absolute ? "" : m_sceneRootFolder) + p_path;
+	std::string completePath = (p_absolute ? "" : m_sceneRootFolder) + pPath;
 
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(completePath.c_str());
@@ -137,9 +137,9 @@ bool Core::Core_SceneManager::IsCurrentSceneLoadedFromDisk() const
 	return m_currentSceneLoadedFromPath;
 }
 
-void Core::Core_SceneManager::StoreCurrentSceneSourcePath(const std::string& p_path)
+void Core::Core_SceneManager::StoreCurrentSceneSourcePath(const std::string& pPath)
 {
-	m_currentSceneSourcePath = p_path;
+	m_currentSceneSourcePath = pPath;
 	m_currentSceneLoadedFromPath = true;
 	CurrentSceneSourcePathChangedEvent.Invoke(m_currentSceneSourcePath);
 }

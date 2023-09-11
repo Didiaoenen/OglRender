@@ -17,9 +17,9 @@ Render::Render_Model* Render::Render_ModelLoader::Create(const std::string& p_fi
 	return nullptr;
 }
 
-void Render::Render_ModelLoader::Reload(Render_Model& p_model, const std::string& p_filePath, EModelParserFlags p_parserFlags)
+void Render::Render_ModelLoader::Reload(Render_Model& p_model, const std::string& pFilePath, EModelParserFlags p_parserFlags)
 {
-	Render_Model* newModel = Create(p_filePath, p_parserFlags);
+	Render_Model* newModel = Create(pFilePath, p_parserFlags);
 
 	if (newModel)
 	{

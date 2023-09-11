@@ -7,27 +7,27 @@
 namespace Core
 {
 	template<typename T>
-	inline T* Core_AResourceManager<T>::LoadResource(const std::string& p_path)
+	inline T* Core_AResourceManager<T>::LoadResource(const std::string& pPath)
 	{
-		if (auto resource = GetResource(p_path, false); resource)
+		if (auto resource = GetResource(pPath, false); resource)
 			return resource;
 		else
 		{
-			auto newResource = CreateResource(p_path);
+			auto newResource = CreateResource(pPath);
 			if (newResource)
-				return RegisterResource(p_path, newResource);
+				return RegisterResource(pPath, newResource);
 			else
 				return nullptr;
 		}
 	}
 
 	template<typename T>
-	inline void Core_AResourceManager<T>::UnloadResource(const std::string& p_path)
+	inline void Core_AResourceManager<T>::UnloadResource(const std::string& pPath)
 	{
-		if (auto resource = GetResource(p_path, false); resource)
+		if (auto resource = GetResource(pPath, false); resource)
 		{
 			DestroyResource(resource);
-			UnregisterResource(p_path);
+			UnregisterResource(pPath);
 		}
 	}
 
@@ -46,18 +46,18 @@ namespace Core
 	}
 
 	template<typename T>
-	inline void Core_AResourceManager<T>::ReloadResource(const std::string& p_path)
+	inline void Core_AResourceManager<T>::ReloadResource(const std::string& pPath)
 	{
-		if (auto resource = GetResource(p_path, false); resource)
+		if (auto resource = GetResource(pPath, false); resource)
 		{
-			ReloadResource(resource, p_path);
+			ReloadResource(resource, pPath);
 		}
 	}
 
 	template<typename T>
-	inline bool Core_AResourceManager<T>::IsResourceRegistered(const std::string& p_path)
+	inline bool Core_AResourceManager<T>::IsResourceRegistered(const std::string& pPath)
 	{
-		return m_resources.find(p_path) != m_resources.end();
+		return m_resources.find(pPath) != m_resources.end();
 	}
 
 	template<typename T>
@@ -70,41 +70,41 @@ namespace Core
 	}
 
 	template<typename T>
-	inline T* Core_AResourceManager<T>::RegisterResource(const std::string& p_path, T* p_instance)
+	inline T* Core_AResourceManager<T>::RegisterResource(const std::string& pPath, T* p_instance)
 	{
-		if (auto resource = GetResource(p_path, false); resource)
+		if (auto resource = GetResource(pPath, false); resource)
 			DestroyResource(resource);
 
-		m_resources[p_path] = p_instance;
+		m_resources[pPath] = p_instance;
 
 		return p_instance;
 	}
 
 	template<typename T>
-	inline void Core_AResourceManager<T>::UnregisterResource(const std::string& p_path)
+	inline void Core_AResourceManager<T>::UnregisterResource(const std::string& pPath)
 	{
-		m_resources.erase(p_path);
+		m_resources.erase(pPath);
 	}
 
 	template<typename T>
-	inline T* Core_AResourceManager<T>::GetResource(const std::string& p_path, bool p_tryToLoadIfNotFound)
+	inline T* Core_AResourceManager<T>::GetResource(const std::string& pPath, bool p_tryToLoadIfNotFound)
 	{
-		if (auto resource = m_resources.find(p_path); resource != m_resources.end())
+		if (auto resource = m_resources.find(pPath); resource != m_resources.end())
 		{
 			return resource->second;
 		}
 		else if (p_tryToLoadIfNotFound)
 		{
-			return LoadResource(p_path);
+			return LoadResource(pPath);
 		}
 
 		return nullptr;
 	}
 
 	template<typename T>
-	inline T* Core_AResourceManager<T>::operator[](const std::string& p_path)
+	inline T* Core_AResourceManager<T>::operator[](const std::string& pPath)
 	{
-		return GetResource(p_path);
+		return GetResource(pPath);
 	}
 
 	template<typename T>
@@ -121,17 +121,17 @@ namespace Core
 	}
 
 	template<typename T>
-	inline std::string Core_AResourceManager<T>::GetRealPath(const std::string& p_path) const
+	inline std::string Core_AResourceManager<T>::GetRealPath(const std::string& pPath) const
 	{
 		std::string result;
 
-		if (p_path[0] == ':')
+		if (pPath[0] == ':')
 		{
-			result = __ENGINE_ASSETS_PATH + std::string(p_path.data() + 1, p_path.data() + p_path.size());
+			result = __ENGINE_ASSETS_PATH + std::string(pPath.data() + 1, pPath.data() + pPath.size());
 		}
 		else
 		{
-			result = __PROJECT_ASSETS_PATH + p_path;
+			result = __PROJECT_ASSETS_PATH + pPath;
 		}
 
 		return result;
