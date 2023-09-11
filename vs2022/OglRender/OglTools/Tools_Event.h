@@ -32,3 +32,5 @@ namespace Tools
 		ListenerID mAvailableListenerID{ 0 };
 	};
 }
+
+#include "Tools_Event.inl"

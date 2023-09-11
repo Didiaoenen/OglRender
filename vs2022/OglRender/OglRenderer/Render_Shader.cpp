@@ -74,6 +74,11 @@ void Render::Render_Shader::QueryUniforms()
 {
 }
 
+Render::Render_Shader::Render_Shader(const std::string p_path, uint32_t p_id) :
+	path(p_path), id(p_id)
+{
+}
+
 Render::Render_Shader::~Render_Shader()
 {
 }

@@ -85,7 +85,7 @@ void Render::Render_Driver::GLDebugMessageCallback(uint32_t source, uint32_t typ
 	case GL_DEBUG_SEVERITY_NOTIFICATION:	output += "Severity: Notification";		break;
 	}
 
-	switch (severity)
+	//switch (severity)
 	{
 	//case GL_DEBUG_SEVERITY_HIGH:			OVLOG_ERROR(output);	break;
 	//case GL_DEBUG_SEVERITY_MEDIUM:			OVLOG_WARNING(output);	break;

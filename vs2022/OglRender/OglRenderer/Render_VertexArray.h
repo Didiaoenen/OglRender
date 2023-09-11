@@ -36,3 +36,5 @@ namespace Render
 		GLuint m_bufferID;
 	};
 }
+
+#include "Render_VertexArray.inl"

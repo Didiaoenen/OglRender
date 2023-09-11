@@ -5,6 +5,8 @@
 
 #include "Render_ShaderLoader.h"
 
+std::string Render::Render_ShaderLoader::__FILE_TRACE;
+
 Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& p_filePath)
 {
 	__FILE_TRACE = p_filePath;

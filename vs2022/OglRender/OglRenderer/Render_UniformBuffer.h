@@ -40,3 +40,4 @@ namespace Render
 	};
 }
 
+#include "Render_UniformBuffer.inl"

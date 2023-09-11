@@ -1,16 +1,10 @@
 #include "Render_ModelLoader.h"
 
-void t(int& i)
-{
-
-}
+Render::Render_AssimpParser Render::Render_ModelLoader::__ASSIMP;
 
 Render::Render_Model* Render::Render_ModelLoader::Create(const std::string& p_filepath, EModelParserFlags p_parserFlags)
 {
 	Render_Model* result = new Render_Model(p_filepath);
-
-	int i = 0;
-	t(i);
 
 	if (__ASSIMP.LoadModel(p_filepath, result->m_meshes, result->m_materialNames, p_parserFlags))
 	{

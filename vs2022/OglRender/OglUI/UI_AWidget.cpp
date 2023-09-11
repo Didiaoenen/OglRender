@@ -1,5 +1,7 @@
 #include "UI_AWidget.h"
 
+uint64_t UI::UI_AWidget::__WIDGET_ID_INCREMENT = 0;
+
 UI::UI_AWidget::UI_AWidget()
 {
 	mWidgetID = "##" + std::to_string(__WIDGET_ID_INCREMENT++);

@@ -1,6 +1,10 @@
 #include <iostream>
-#include "Window_Window.h"
+
 #include <stb_image.h>
+
+#include "Window_Window.h"
+
+std::unordered_map<GLFWwindow*, Window::Window_Window*> Window::Window_Window::__WINDOWS_MAP;
 
 Window::Window_Window::Window_Window(const Window_Device& pDevice, const Window_WindowSettings& pWindowSettings)
 	: mDevice(pDevice), mTitle(pWindowSettings.title), mSize{ pWindowSettings.width, pWindowSettings.height },

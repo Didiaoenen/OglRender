@@ -1,7 +1,9 @@
 #pragma once
 
 #include <array>
+
 #include <OglUI/UI_Columns.h>
+
 #include <OglRenderer/Render_Mesh.h>
 
 #include "Core_Material.h"

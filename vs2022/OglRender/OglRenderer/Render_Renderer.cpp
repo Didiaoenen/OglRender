@@ -164,5 +164,5 @@ void Render::Render_Renderer::SetState(uint8_t p_state)
 
 const Render::Render_Renderer::FrameInfo& Render::Render_Renderer::GetFrameInfo() const
 {
-	// TODO: 在此处插入 return 语句
+	return m_frameInfo;
 }
