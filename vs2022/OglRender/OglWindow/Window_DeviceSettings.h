@@ -12,7 +12,7 @@ namespace Window
 
 		uint8_t mContextMajorVersion = 3;
 
-		uint8_t mContextMinorVersion = 2;
+		uint8_t mContextMinorVersion = 3;
 
 		uint8_t mSamples = 4;
 

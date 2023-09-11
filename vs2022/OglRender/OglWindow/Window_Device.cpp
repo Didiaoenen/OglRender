@@ -1,4 +1,6 @@
+
 #include <stdexcept>
+
 #include "Window_Device.h"
 
 Tools::Tools_Event<Window::EDeviceError, std::string> Window::Window_Device::mErrorEvent;

@@ -7,8 +7,8 @@
 #include <OglTools/Tools_Event.h>
 
 #include "Window_EDeviceError.h"
-#include "Window_DeviceSettings.h"
 #include "Window_ECursorShape.h"
+#include "Window_DeviceSettings.h"
 
 namespace Window
 {
