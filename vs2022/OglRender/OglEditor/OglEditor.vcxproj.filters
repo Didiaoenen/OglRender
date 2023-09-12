@@ -218,14 +218,14 @@
     <ClCompile Include="Editor_ActorCreationMenu.cpp">
       <Filter>源文件\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Editor_EditorSettings.cpp">
       <Filter>源文件\Settings</Filter>
     </ClCompile>
     <ClCompile Include="Editor_CameraController.cpp">
       <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@
 
 namespace Editor
 {
-	class Editor_AssetProperties
+	class Editor_AssetProperties : public UI::UI_PanelWindow
 	{
 	public:
 		using EditableAssets = std::variant<Render::Render_Model*, Render::Render_Texture*>;

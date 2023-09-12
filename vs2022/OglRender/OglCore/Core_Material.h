@@ -80,3 +80,5 @@ namespace Core
 		int m_gpuInstances = 1;
 	};
 }
+
+#include "Core_Material.inl"

@@ -33,7 +33,7 @@ namespace Editor
 		void SetShowErrorLogs(bool pValue);
 
 	private:
-		UI::UI_Group* m_logGroup;
+		UI::UI_Group* m_logGroup{ nullptr };
 		//std::unordered_map<UI::UI_TextColored*, OvDebug::ELogLevel> m_logTextWidgets;
 
 		bool m_clearOnPlay = true;

@@ -12,18 +12,66 @@ Editor::Editor_GameView::Editor_GameView(const std::string& p_title, bool p_open
 
 void Editor::Editor_GameView::Update(float pDeltaTime)
 {
+	Editor_AView::Update(pDeltaTime);
+
+	auto currentScene = EDITOR_CONTEXT(sceneManager).GetCurrentScene();
+
+	if (currentScene)
+	{
+		auto cameraComponent = EDITOR_CONTEXT(renderer)->FindMainCamera(*currentScene);
+		if (cameraComponent)
+		{
+			mCamera = cameraComponent->GetCamera();
+			m_cameraPosition = cameraComponent->mOwner.transform.GetWorldPosition();
+			m_cameraRotation = cameraComponent->mOwner.transform.GetWorldRotation();
+			m_hasCamera = true;
+			PrepareCamera();
+		}
+		else
+		{
+			mCamera.SetClearColor({ 0.f, 0.f, 0.f });
+			m_hasCamera = false;
+		}
+	}
 }
 
 void Editor::Editor_GameView::_Render_Impl()
 {
+	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
+	auto& currentScene = *m_sceneManager.GetCurrentScene();
+
+	m_fbo.Bind();
+
+	baseRenderer.Clear(mCamera);
+
+	uint8_t glState = baseRenderer.FetchGLState();
+	baseRenderer.ApplyStateMask(glState);
+
+	if (m_hasCamera)
+	{
+		if (mCamera.HasFrustumLightCulling())
+		{
+			m_editorRenderer.UpdateLightsInFrustum(currentScene, mCamera.GetFrustum());
+		}
+		else
+		{
+			m_editorRenderer.UpdateLights(currentScene);
+		}
+
+		m_editorRenderer.RenderScene(m_cameraPosition, mCamera);
+	}
+
+	baseRenderer.ApplyStateMask(glState);
+
+	m_fbo.Unbind();
 }
 
 bool Editor::Editor_GameView::HasCamera() const
 {
-	return false;
+	return m_hasCamera;
 }
 
 std::optional<Render::Render_Frustum> Editor::Editor_GameView::GetActiveFrustum() const
 {
-	return std::optional<Render::Render_Frustum>();
+	return m_hasCamera ? mCamera.GetFrustum() : std::optional<Render::Render_Frustum>{};
 }

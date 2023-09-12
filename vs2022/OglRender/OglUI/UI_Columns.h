@@ -7,7 +7,7 @@
 namespace UI
 {
 	template <size_t _Size>
-	class UI_Columns : public UI_WidgetContainer
+	class UI_Columns : public UI_AWidget, public UI_WidgetContainer
 	{
 	public:
 		UI_Columns()

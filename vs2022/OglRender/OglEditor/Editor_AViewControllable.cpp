@@ -7,6 +7,9 @@ Editor::Editor_AViewControllable::Editor_AViewControllable(const std::string& p_
 
 void Editor::Editor_AViewControllable::Update(float pDeltaTime)
 {
+	m_cameraController.HandleInputs(pDeltaTime);
+
+	Editor_AView::Update(pDeltaTime);
 }
 
 Editor::Editor_CameraController& Editor::Editor_AViewControllable::GetCameraController()

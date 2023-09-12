@@ -432,65 +432,12 @@ void DrawFrustumLines(Render::Render_ShapeDrawer& p_drawer,
 
 void Editor::Editor_EditorRenderer::RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& p_camera)
 {
-	const auto& owner = p_camera.mOwner;
-	auto& camera = p_camera.GetCamera();
 
-	const auto& cameraPos = owner.transform.GetWorldPosition();
-	const auto& cameraRotation = owner.transform.GetWorldRotation();
-	const auto& cameraForward = owner.transform.GetWorldForward();
-
-	camera.CacheMatrices(pSize.first, pSize.second, cameraPos, cameraRotation);
-	const auto proj = glm::transpose(camera.GetProjectionMatrix());
-	const auto near = camera.GetNear();
-	const auto far = camera.GetFar();
-
-	const auto nLeft = near * (proj[2] - 1.0f) / proj[0];
-	const auto nRight = near * (1.0f + proj[2]) / proj[0];
-	const auto nTop = near * (1.0f + proj[6]) / proj[5];
-	const auto nBottom = near * (proj[6] - 1.0f) / proj[5];
-
-	const auto fLeft = far * (proj[2] - 1.0f) / proj[0];
-	const auto fRight = far * (1.0f + proj[2]) / proj[0];
-	const auto fTop = far * (1.0f + proj[6]) / proj[5];
-	const auto fBottom = far * (proj[6] - 1.0f) / proj[5];
-
-	auto a = cameraRotation * glm::vec3{ nLeft, nTop, 0 };
-	auto b = cameraRotation * glm::vec3{ nRight, nTop, 0 };
-	auto c = cameraRotation * glm::vec3{ nLeft, nBottom, 0 };
-	auto d = cameraRotation * glm::vec3{ nRight, nBottom, 0 };
-	auto e = cameraRotation * glm::vec3{ fLeft, fTop, 0 };
-	auto f = cameraRotation * glm::vec3{ fRight, fTop, 0 };
-	auto g = cameraRotation * glm::vec3{ fLeft, fBottom, 0 };
-	auto h = cameraRotation * glm::vec3{ fRight, fBottom, 0 };
-
-	DrawFrustumLines(*mContext.shapeDrawer, cameraPos, cameraForward, near, far, a, b, c, d, e, f, g, h);
 }
 
 void Editor::Editor_EditorRenderer::RenderCameraOrthographicFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& p_camera)
 {
-	auto& owner = p_camera.mOwner;
-	auto& camera = p_camera.GetCamera();
-	const auto ratio = pSize.first / static_cast<float>(pSize.second);
 
-	const auto& cameraPos = owner.transform.GetWorldPosition();
-	const auto& cameraRotation = owner.transform.GetWorldRotation();
-	const auto& cameraForward = owner.transform.GetWorldForward();
-
-	const auto near = camera.GetNear();
-	const auto far = camera.GetFar();
-	const auto size = p_camera.GetSize();
-
-	const auto right = ratio * size;
-	const auto left = -right;
-	const auto top = size;
-	const auto bottom = -top;
-
-	const auto a = cameraRotation * glm::vec3{ left, top, 0 };
-	const auto b = cameraRotation * glm::vec3{ right, top, 0 };
-	const auto c = cameraRotation * glm::vec3{ left, bottom, 0 };
-	const auto d = cameraRotation * glm::vec3{ right, bottom, 0 };
-
-	DrawFrustumLines(*mContext.shapeDrawer, cameraPos, cameraForward, near, far, a, b, c, d, a, b, c, d);
 }
 
 void Editor::Editor_EditorRenderer::RenderCameraFrustum(Core::Core_CCamera& p_camera)

@@ -22,7 +22,7 @@ namespace Editor
 			{
 				m_panels.emplace(pId, std::make_unique<T>(pId, std::forward<Args>(pArgs)...));
 				T& instance = *static_cast<T*>(m_panels.at(pId).get());
-				GetPanelAs<Editor_MenuBar>("Menu Bar").RegisterPanel(instance.name, instance);
+				GetPanelAs<Editor_MenuBar>("Menu Bar").RegisterPanel(instance.mName, instance);
 			}
 			else
 			{

@@ -16,7 +16,7 @@ namespace Core
 		}
 		else
 		{
-			OVLOG_ERROR("Material Set failed: No attached shader");
+			//OVLOG_ERROR("Material Set failed: No attached shader");
 		}
 	}
 
