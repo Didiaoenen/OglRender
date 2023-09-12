@@ -9,8 +9,7 @@ namespace UI
 	class UI_DataWidget : public UI_AWidget
 	{
 	public:
-		UI_DataWidget(T& pDataHolder)
-			: mData(pDataHolder)
+		UI_DataWidget(T& pDataHolder) : mData(pDataHolder)
 		{
 
 		}

@@ -21,7 +21,7 @@ namespace Core
 
 		void UnloadResources();
 
-		T* RegisterResource(const std::string& pPath, T* p_instance);
+		T* RegisterResource(const std::string& pPath, T* pInstance);
 
 		void UnregisterResource(const std::string& pPath);
 

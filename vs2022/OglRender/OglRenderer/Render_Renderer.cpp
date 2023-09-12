@@ -56,7 +56,7 @@ void Render::Render_Renderer::SetCullFace(ECullFace p_cullFace)
 {
 }
 
-void Render::Render_Renderer::SetDepthWriting(bool p_enable)
+void Render::Render_Renderer::SetDepthWriting(bool pEnable)
 {
 }
 
@@ -64,7 +64,7 @@ void Render::Render_Renderer::SetColorWriting(bool p_enableRed, bool p_enableGre
 {
 }
 
-void Render::Render_Renderer::SetColorWriting(bool p_enable)
+void Render::Render_Renderer::SetColorWriting(bool pEnable)
 {
 }
 
@@ -81,7 +81,7 @@ bool Render::Render_Renderer::GetBool(GLenum p_parameter)
 	return false;
 }
 
-bool Render::Render_Renderer::GetBool(GLenum p_parameter, uint32_t p_index)
+bool Render::Render_Renderer::GetBool(GLenum p_parameter, uint32_t pIndex)
 {
 	return false;
 }
@@ -91,7 +91,7 @@ int Render::Render_Renderer::GetInt(GLenum p_parameter)
 	return 0;
 }
 
-int Render::Render_Renderer::GetInt(GLenum p_parameter, uint32_t p_index)
+int Render::Render_Renderer::GetInt(GLenum p_parameter, uint32_t pIndex)
 {
 	return 0;
 }
@@ -101,7 +101,7 @@ float Render::Render_Renderer::GetFloat(GLenum p_parameter)
 	return 0.0f;
 }
 
-float Render::Render_Renderer::GetFloat(GLenum p_parameter, uint32_t p_index)
+float Render::Render_Renderer::GetFloat(GLenum p_parameter, uint32_t pIndex)
 {
 	return 0.0f;
 }
@@ -111,7 +111,7 @@ double Render::Render_Renderer::GetDouble(GLenum p_parameter)
 	return 0.0;
 }
 
-double Render::Render_Renderer::GetDouble(GLenum p_parameter, uint32_t p_index)
+double Render::Render_Renderer::GetDouble(GLenum p_parameter, uint32_t pIndex)
 {
 	return 0.0;
 }
@@ -121,7 +121,7 @@ int64_t Render::Render_Renderer::GetInt64(GLenum p_parameter)
 	return 0;
 }
 
-int64_t Render::Render_Renderer::GetInt64(GLenum p_parameter, uint32_t p_index)
+int64_t Render::Render_Renderer::GetInt64(GLenum p_parameter, uint32_t pIndex)
 {
 	return 0;
 }
@@ -131,7 +131,7 @@ std::string Render::Render_Renderer::GetString(GLenum p_parameter)
 	return std::string();
 }
 
-std::string Render::Render_Renderer::GetString(GLenum p_parameter, uint32_t p_index)
+std::string Render::Render_Renderer::GetString(GLenum p_parameter, uint32_t pIndex)
 {
 	return std::string();
 }
@@ -144,7 +144,7 @@ void Render::Render_Renderer::Draw(Render_IMesh& p_mesh, EPrimitiveMode p_primit
 {
 }
 
-std::vector<std::reference_wrapper<Render::Render_Mesh>> Render::Render_Renderer::GetMeshesInFrustum(const Render_Model& p_model, const Render_BoundingSphere& p_modelBoundingSphere, const Maths::Maths_FTransform& p_modelTransform, const Render_Frustum& p_frustum, ECullingOptions p_cullingOptions)
+std::vector<std::reference_wrapper<Render::Render_Mesh>> Render::Render_Renderer::GetMeshesInFrustum(const Render_Model& pModel, const Render_BoundingSphere& p_modelBoundingSphere, const Maths::Maths_FTransform& p_modelTransform, const Render_Frustum& p_frustum, ECullingOptions p_cullingOptions)
 {
 	return std::vector<std::reference_wrapper<Render_Mesh>>();
 }

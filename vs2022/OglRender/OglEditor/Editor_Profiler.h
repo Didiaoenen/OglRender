@@ -20,7 +20,7 @@ namespace Editor
 			float p_frequency
 		);
 
-		void Update(float p_deltaTime);
+		void Update(float pDeltaTime);
 
 		void Enable(bool pValue, bool p_disableLog = false);
 

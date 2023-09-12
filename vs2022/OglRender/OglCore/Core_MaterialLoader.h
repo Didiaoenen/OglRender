@@ -11,11 +11,11 @@ namespace Core
 
 		static Core_Material* Create(const std::string& pPath);
 
-		static void Reload(Core_Material& p_material, const std::string& pPath);
+		static void Reload(Core_Material& pMaterial, const std::string& pPath);
 
-		static void Save(Core_Material& p_material, const std::string& pPath);
+		static void Save(Core_Material& pMaterial, const std::string& pPath);
 
-		static bool Destroy(Core_Material*& p_material);
+		static bool Destroy(Core_Material*& pMaterial);
 	};
 }
 

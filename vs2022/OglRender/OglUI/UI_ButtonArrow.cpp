@@ -1,7 +1,7 @@
 #include "UI_ButtonArrow.h"
 
-UI::UI_ButtonArrow::UI_ButtonArrow(ImGuiDir pDirection)
-	: mDirection(pDirection)
+UI::UI_ButtonArrow::UI_ButtonArrow(ImGuiDir pDirection) : 
+	mDirection(pDirection)
 {
 }
 

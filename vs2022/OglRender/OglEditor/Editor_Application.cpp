@@ -3,8 +3,8 @@
 #include "Editor_Application.h"
 
 Editor::Editor_Application::Editor_Application(const std::string& pProjectPath, const std::string& pProjectName) :
-	m_context(pProjectPath, pProjectName),
-	m_editor(m_context)
+	mContext(pProjectPath, pProjectName),
+	mEditor(mContext)
 {
 }
 
@@ -18,9 +18,9 @@ void Editor::Editor_Application::Run()
 
 	while (IsRunning())
 	{
-		m_editor.PreUpdate();
-		m_editor.Update(clock.GetDeltaTime());
-		m_editor.PostUpdate();
+		mEditor.PreUpdate();
+		mEditor.Update(clock.GetDeltaTime());
+		mEditor.PostUpdate();
 
 		clock.Update();
 	}
@@ -28,5 +28,5 @@ void Editor::Editor_Application::Run()
 
 bool Editor::Editor_Application::IsRunning() const
 {
-	return !m_context.window->ShouldClose();
+	return !mContext.window->ShouldClose();
 }

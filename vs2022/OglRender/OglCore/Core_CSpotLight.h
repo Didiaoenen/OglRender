@@ -9,7 +9,7 @@ namespace Core
 	class Core_CSpotLight : public Core_CLight
 	{
 	public:
-		Core_CSpotLight(Core_Actor& p_owner);
+		Core_CSpotLight(Core_Actor& pOwner);
 
 		std::string GetName() override;
 
@@ -23,21 +23,21 @@ namespace Core
 
 		float GetOuterCutoff() const;
 
-		void SetConstant(float p_constant);
+		void SetConstant(float pConstant);
 
-		void SetLinear(float p_linear);
+		void SetLinear(float pLinear);
 
-		void SetQuadratic(float p_quadratic);
+		void SetQuadratic(float pQuadratic);
 
-		void SetCutoff(float p_cutoff);
+		void SetCutoff(float pCutoff);
 
-		void SetOuterCutoff(float p_outerCutoff);
+		void SetOuterCutoff(float pOuterCutoff);
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) override;
 	};
 }
 

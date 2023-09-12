@@ -43,7 +43,7 @@ namespace Core
 		static void DrawVec4(UI::UI_WidgetContainer& pRoot, const std::string& pName, glm::vec4& pData, float pStep = 1.f, float pMin = _MIN_FLOAT, float pMax = _MAX_FLOAT);
 		static void DrawQuat(UI::UI_WidgetContainer& pRoot, const std::string& pName, glm::quat& pData, float pStep = 1.f, float pMin = _MIN_FLOAT, float pMax = _MAX_FLOAT);
 		static void DrawString(UI::UI_WidgetContainer& pRoot, const std::string& pName, std::string& pData);
-		static void DrawColor(UI::UI_WidgetContainer& pRoot, const std::string& pName, UI::Color& p_color, bool p_hasAlpha = false);
+		static void DrawColor(UI::UI_WidgetContainer& pRoot, const std::string& pName, UI::Color& pColor, bool p_hasAlpha = false);
 		static UI::UI_Text& DrawMesh(UI::UI_WidgetContainer& pRoot, const std::string& pName, Render::Render_Model*& pData, Tools::Tools_Event<>* pUpdateNotifier = nullptr);
 		static UI::UI_Image& DrawTexture(UI::UI_WidgetContainer& pRoot, const std::string& pName, Render::Render_Texture*& pData, Tools::Tools_Event<>* pUpdateNotifier = nullptr);
 		static UI::UI_Text& DrawShader(UI::UI_WidgetContainer& pRoot, const std::string& pName, Render::Render_Shader*& pData, Tools::Tools_Event<>* pUpdateNotifier = nullptr);

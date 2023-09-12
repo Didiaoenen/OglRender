@@ -37,13 +37,13 @@ namespace Editor
 		void ApplyProjectSettings();
 
 	public:
-		const std::string projectPath;
-		const std::string projectName;
-		const std::string projectFilePath;
-		const std::string engineAssetsPath;
-		const std::string projectAssetsPath;
-		const std::string projectScriptsPath;
-		const std::string editorAssetsPath;
+		const std::string mProjectPath;
+		const std::string mProjectName;
+		const std::string mProjectFilePath;
+		const std::string mEngineAssetsPath;
+		const std::string mProjectAssetsPath;
+		const std::string mProjectScriptsPath;
+		const std::string mEditorAssetsPath;
 
 		std::unique_ptr<Window::Window_Device>			device;
 		std::unique_ptr<Window::Window_Window>			window;

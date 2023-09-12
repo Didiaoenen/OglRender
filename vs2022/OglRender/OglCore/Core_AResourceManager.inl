@@ -10,14 +10,20 @@ namespace Core
 	inline T* Core_AResourceManager<T>::LoadResource(const std::string& pPath)
 	{
 		if (auto resource = GetResource(pPath, false); resource)
+		{
 			return resource;
+		}
 		else
 		{
 			auto newResource = CreateResource(pPath);
 			if (newResource)
+			{
 				return RegisterResource(pPath, newResource);
+			}
 			else
+			{
 				return nullptr;
+			}
 		}
 	}
 
@@ -64,20 +70,24 @@ namespace Core
 	inline void Core_AResourceManager<T>::UnloadResources()
 	{
 		for (auto& [key, value] : m_resources)
+		{
 			DestroyResource(value);
+		}
 
 		m_resources.clear();
 	}
 
 	template<typename T>
-	inline T* Core_AResourceManager<T>::RegisterResource(const std::string& pPath, T* p_instance)
+	inline T* Core_AResourceManager<T>::RegisterResource(const std::string& pPath, T* pInstance)
 	{
 		if (auto resource = GetResource(pPath, false); resource)
+		{
 			DestroyResource(resource);
+		}
 
-		m_resources[pPath] = p_instance;
+		m_resources[pPath] = pInstance;
 
-		return p_instance;
+		return pInstance;
 	}
 
 	template<typename T>

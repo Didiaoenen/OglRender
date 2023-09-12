@@ -1,7 +1,7 @@
 #include "UI_TextLabelled.h"
 
-UI::UI_TextLabelled::UI_TextLabelled(const std::string& pContent, const std::string& pLabel)
-	: UI_Text(pContent), mLabel(pLabel)
+UI::UI_TextLabelled::UI_TextLabelled(const std::string& pContent, const std::string& pLabel) : 
+	UI_Text(pContent), mLabel(pLabel)
 {
 }
 

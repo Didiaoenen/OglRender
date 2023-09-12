@@ -24,11 +24,11 @@ Editor::Editor_MenuBar::Editor_MenuBar()
 {
 }
 
-void Editor::Editor_MenuBar::HandleShortcuts(float p_deltaTime)
+void Editor::Editor_MenuBar::HandleShortcuts(float pDeltaTime)
 {
 }
 
-void Editor::Editor_MenuBar::RegisterPanel(const std::string& p_name, UI::UI_PanelWindow& p_panel)
+void Editor::Editor_MenuBar::RegisterPanel(const std::string& pName, UI::UI_PanelWindow& p_panel)
 {
 }
 

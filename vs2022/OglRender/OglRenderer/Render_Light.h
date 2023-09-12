@@ -28,7 +28,7 @@ namespace Render
 		float				type = 0.0f;
 
 	protected:
-		Maths::Maths_FTransform& m_transform;
+		Maths::Maths_FTransform& mTransform;
 	};
 }
 

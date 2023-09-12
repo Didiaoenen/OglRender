@@ -3,7 +3,7 @@
 
 #include "Render_UniformBuffer.h"
 
-Render::Render_UniformBuffer::Render_UniformBuffer(size_t p_size, uint32_t p_bindingPoint, uint32_t p_offset, EAccessSpecifier p_accessSpecifier)
+Render::Render_UniformBuffer::Render_UniformBuffer(size_t pSize, uint32_t p_bindingPoint, uint32_t p_offset, EAccessSpecifier p_accessSpecifier)
 {
 }
 
@@ -28,11 +28,11 @@ void Render::Render_UniformBuffer::BindBlockToShader(Render_Shader& p_shader, ui
 {
 }
 
-void Render::Render_UniformBuffer::BindBlockToShader(Render_Shader& p_shader, const std::string& p_name, uint32_t p_bindingPoint)
+void Render::Render_UniformBuffer::BindBlockToShader(Render_Shader& p_shader, const std::string& pName, uint32_t p_bindingPoint)
 {
 }
 
-uint32_t Render::Render_UniformBuffer::GetBlockLocation(Render_Shader& p_shader, const std::string& p_name)
+uint32_t Render::Render_UniformBuffer::GetBlockLocation(Render_Shader& p_shader, const std::string& pName)
 {
 	return 0;
 }

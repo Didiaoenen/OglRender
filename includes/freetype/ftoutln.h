@@ -185,7 +185,7 @@ FT_BEGIN_HEADER
    *   FreeType error code.  0~means success.
    *
    * @note:
-   *   If the outline's 'owner' field is not set, only the outline descriptor
+   *   If the outline's 'mOwner' field is not set, only the outline descriptor
    *   will be released.
    */
   FT_EXPORT( FT_Error )

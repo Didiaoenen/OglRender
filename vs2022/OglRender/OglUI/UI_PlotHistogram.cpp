@@ -1,8 +1,9 @@
-#include "UI_PlotHistogram.h"
-#include "UI_Converter.h"
 
-UI::UI_PlotHistogram::UI_PlotHistogram(const std::vector<float>& pData, float pMinScale, float pMaxScale, const glm::vec2& pSize, const std::string& pOverlay, const std::string& pLabel, int pForceHover)
-	: UI_APlot(pData, pMinScale, pMaxScale, pSize, pOverlay, pLabel, pForceHover)
+#include "UI_Converter.h"
+#include "UI_PlotHistogram.h"
+
+UI::UI_PlotHistogram::UI_PlotHistogram(const std::vector<float>& pData, float pMinScale, float pMaxScale, const glm::vec2& pSize, const std::string& pOverlay, const std::string& pLabel, int pForceHover) : 
+	UI_APlot(pData, pMinScale, pMaxScale, pSize, pOverlay, pLabel, pForceHover)
 {
 }
 

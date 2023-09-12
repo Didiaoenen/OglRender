@@ -6552,7 +6552,7 @@ enum class any_operation : std::uint8_t {
 };
 
 enum class any_policy : std::uint8_t {
-    owner,
+    mOwner,
     ref,
     cref
 };
@@ -6588,7 +6588,7 @@ class basic_any {
         const Type *element = nullptr;
 
         if constexpr(in_situ<Type>) {
-            element = value.owner() ? reinterpret_cast<const Type *>(&value.storage) : static_cast<const Type *>(value.instance);
+            element = value.mOwner() ? reinterpret_cast<const Type *>(&value.storage) : static_cast<const Type *>(value.instance);
         } else {
             element = static_cast<const Type *>(value.instance);
         }
@@ -6601,7 +6601,7 @@ class basic_any {
             break;
         case operation::move:
             if constexpr(in_situ<Type>) {
-                if(value.owner()) {
+                if(value.mOwner()) {
                     return new(&static_cast<basic_any *>(const_cast<void *>(other))->storage) Type{std::move(*const_cast<Type *>(element))};
                 }
             }
@@ -6695,7 +6695,7 @@ public:
         : instance{},
           info{},
           vtable{},
-          mode{policy::owner} {
+          mode{policy::mOwner} {
         initialize<Type>(std::forward<Args>(args)...);
     }
 
@@ -6735,7 +6735,7 @@ public:
 
     /*! @brief Frees the internal storage, whatever it means. */
     ~basic_any() {
-        if(vtable && owner()) {
+        if(vtable && mOwner()) {
             vtable(operation::destroy, *this, nullptr);
         }
     }
@@ -6868,7 +6868,7 @@ public:
 
     /*! @brief Destroys contained object */
     void reset() {
-        if(vtable && owner()) {
+        if(vtable && mOwner()) {
             vtable(operation::destroy, *this, nullptr);
         }
 
@@ -6876,7 +6876,7 @@ public:
         ENTT_ASSERT((instance = nullptr) == nullptr, "");
         info = &type_id<void>();
         vtable = nullptr;
-        mode = policy::owner;
+        mode = policy::mOwner;
     }
 
     /**
@@ -6926,8 +6926,8 @@ public:
      * @brief Returns true if a wrapper owns its object, false otherwise.
      * @return True if the wrapper owns its object, false otherwise.
      */
-    [[nodiscard]] bool owner() const noexcept {
-        return (mode == policy::owner);
+    [[nodiscard]] bool mOwner() const noexcept {
+        return (mode == policy::mOwner);
     }
 
 private:
@@ -13670,7 +13670,7 @@ enum class any_operation : std::uint8_t {
 };
 
 enum class any_policy : std::uint8_t {
-    owner,
+    mOwner,
     ref,
     cref
 };
@@ -13706,7 +13706,7 @@ class basic_any {
         const Type *element = nullptr;
 
         if constexpr(in_situ<Type>) {
-            element = value.owner() ? reinterpret_cast<const Type *>(&value.storage) : static_cast<const Type *>(value.instance);
+            element = value.mOwner() ? reinterpret_cast<const Type *>(&value.storage) : static_cast<const Type *>(value.instance);
         } else {
             element = static_cast<const Type *>(value.instance);
         }
@@ -13719,7 +13719,7 @@ class basic_any {
             break;
         case operation::move:
             if constexpr(in_situ<Type>) {
-                if(value.owner()) {
+                if(value.mOwner()) {
                     return new(&static_cast<basic_any *>(const_cast<void *>(other))->storage) Type{std::move(*const_cast<Type *>(element))};
                 }
             }
@@ -13813,7 +13813,7 @@ public:
         : instance{},
           info{},
           vtable{},
-          mode{policy::owner} {
+          mode{policy::mOwner} {
         initialize<Type>(std::forward<Args>(args)...);
     }
 
@@ -13853,7 +13853,7 @@ public:
 
     /*! @brief Frees the internal storage, whatever it means. */
     ~basic_any() {
-        if(vtable && owner()) {
+        if(vtable && mOwner()) {
             vtable(operation::destroy, *this, nullptr);
         }
     }
@@ -13986,7 +13986,7 @@ public:
 
     /*! @brief Destroys contained object */
     void reset() {
-        if(vtable && owner()) {
+        if(vtable && mOwner()) {
             vtable(operation::destroy, *this, nullptr);
         }
 
@@ -13994,7 +13994,7 @@ public:
         ENTT_ASSERT((instance = nullptr) == nullptr, "");
         info = &type_id<void>();
         vtable = nullptr;
-        mode = policy::owner;
+        mode = policy::mOwner;
     }
 
     /**
@@ -14044,8 +14044,8 @@ public:
      * @brief Returns true if a wrapper owns its object, false otherwise.
      * @return True if the wrapper owns its object, false otherwise.
      */
-    [[nodiscard]] bool owner() const noexcept {
-        return (mode == policy::owner);
+    [[nodiscard]] bool mOwner() const noexcept {
+        return (mode == policy::mOwner);
     }
 
 private:
@@ -17956,20 +17956,20 @@ class sigh_storage_mixin final: public Type {
     using basic_iterator = typename Type::basic_iterator;
 
     void pop(basic_iterator first, basic_iterator last) override {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
 
         for(; first != last; ++first) {
             const auto entt = *first;
-            destruction.publish(*owner, entt);
+            destruction.publish(*mOwner, entt);
             const auto it = Type::find(entt);
             Type::pop(it, it + 1u);
         }
     }
 
     basic_iterator try_emplace(const typename basic_registry_type::entity_type entt, const bool force_back, const void *value) final {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
         Type::try_emplace(entt, force_back, value);
-        construction.publish(*owner, entt);
+        construction.publish(*mOwner, entt);
         return Type::find(entt);
     }
 
@@ -17991,7 +17991,7 @@ public:
      */
     explicit sigh_storage_mixin(const allocator_type &allocator)
         : Type{allocator},
-          owner{},
+          mOwner{},
           construction{allocator},
           destruction{allocator},
           update{allocator} {}
@@ -18002,7 +18002,7 @@ public:
      */
     sigh_storage_mixin(sigh_storage_mixin &&other) noexcept
         : Type{std::move(other)},
-          owner{other.owner},
+          mOwner{other.mOwner},
           construction{std::move(other.construction)},
           destruction{std::move(other.destruction)},
           update{std::move(other.update)} {}
@@ -18014,7 +18014,7 @@ public:
      */
     sigh_storage_mixin(sigh_storage_mixin &&other, const allocator_type &allocator) noexcept
         : Type{std::move(other), allocator},
-          owner{other.owner},
+          mOwner{other.mOwner},
           construction{std::move(other.construction), allocator},
           destruction{std::move(other.destruction), allocator},
           update{std::move(other.update), allocator} {}
@@ -18026,7 +18026,7 @@ public:
      */
     sigh_storage_mixin &operator=(sigh_storage_mixin &&other) noexcept {
         Type::operator=(std::move(other));
-        owner = other.owner;
+        mOwner = other.mOwner;
         construction = std::move(other.construction);
         destruction = std::move(other.destruction);
         update = std::move(other.update);
@@ -18040,7 +18040,7 @@ public:
     void swap(sigh_storage_mixin &other) {
         using std::swap;
         Type::swap(other);
-        swap(owner, other.owner);
+        swap(mOwner, other.mOwner);
         swap(construction, other.construction);
         swap(destruction, other.destruction);
         swap(update, other.update);
@@ -18100,9 +18100,9 @@ public:
      */
     template<typename... Args>
     decltype(auto) emplace(const entity_type entt, Args &&...args) {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
         Type::emplace(entt, std::forward<Args>(args)...);
-        construction.publish(*owner, entt);
+        construction.publish(*mOwner, entt);
         return this->get(entt);
     }
 
@@ -18115,9 +18115,9 @@ public:
      */
     template<typename... Func>
     decltype(auto) patch(const entity_type entt, Func &&...func) {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
         Type::patch(entt, std::forward<Func>(func)...);
-        update.publish(*owner, entt);
+        update.publish(*mOwner, entt);
         return this->get(entt);
     }
 
@@ -18133,11 +18133,11 @@ public:
      */
     template<typename It, typename... Args>
     void insert(It first, It last, Args &&...args) {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
         Type::insert(first, last, std::forward<Args>(args)...);
 
         for(auto it = construction.empty() ? last : first; it != last; ++it) {
-            construction.publish(*owner, *it);
+            construction.publish(*mOwner, *it);
         }
     }
 
@@ -18147,12 +18147,12 @@ public:
      */
     void bind(any value) noexcept final {
         auto *reg = any_cast<basic_registry_type>(&value);
-        owner = reg ? reg : owner;
+        mOwner = reg ? reg : mOwner;
         Type::bind(std::move(value));
     }
 
 private:
-    basic_registry_type *owner;
+    basic_registry_type *mOwner;
     sigh_type construction;
     sigh_type destruction;
     sigh_type update;
@@ -34694,12 +34694,12 @@ class basic_registry {
             : current{std::forward<Args>(args)...} {}
 
         template<typename Type>
-        void maybe_valid_if(basic_registry &owner, const Entity entt) {
-            [[maybe_unused]] const auto cpools = std::forward_as_tuple(owner.assure<Owned>()...);
+        void maybe_valid_if(basic_registry &mOwner, const Entity entt) {
+            [[maybe_unused]] const auto cpools = std::forward_as_tuple(mOwner.assure<Owned>()...);
 
             const auto is_valid = ((std::is_same_v<Type, Owned> || std::get<storage_for_type<Owned> &>(cpools).contains(entt)) && ...)
-                                  && ((std::is_same_v<Type, Get> || owner.assure<Get>().contains(entt)) && ...)
-                                  && ((std::is_same_v<Type, Exclude> || !owner.assure<Exclude>().contains(entt)) && ...);
+                                  && ((std::is_same_v<Type, Get> || mOwner.assure<Get>().contains(entt)) && ...)
+                                  && ((std::is_same_v<Type, Exclude> || !mOwner.assure<Exclude>().contains(entt)) && ...);
 
             if constexpr(sizeof...(Owned) == 0) {
                 if(is_valid && !current.contains(entt)) {
@@ -34713,11 +34713,11 @@ class basic_registry {
             }
         }
 
-        void discard_if([[maybe_unused]] basic_registry &owner, const Entity entt) {
+        void discard_if([[maybe_unused]] basic_registry &mOwner, const Entity entt) {
             if constexpr(sizeof...(Owned) == 0) {
                 current.remove(entt);
             } else {
-                if(const auto cpools = std::forward_as_tuple(owner.assure<Owned>()...); std::get<0>(cpools).contains(entt) && (std::get<0>(cpools).index(entt) < current)) {
+                if(const auto cpools = std::forward_as_tuple(mOwner.assure<Owned>()...); std::get<0>(cpools).contains(entt) && (std::get<0>(cpools).index(entt) < current)) {
                     const auto pos = --current;
                     (std::get<storage_for_type<Owned> &>(cpools).swap_elements(std::get<storage_for_type<Owned> &>(cpools).data()[pos], entt), ...);
                 }
@@ -38838,20 +38838,20 @@ class sigh_storage_mixin final: public Type {
     using basic_iterator = typename Type::basic_iterator;
 
     void pop(basic_iterator first, basic_iterator last) override {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
 
         for(; first != last; ++first) {
             const auto entt = *first;
-            destruction.publish(*owner, entt);
+            destruction.publish(*mOwner, entt);
             const auto it = Type::find(entt);
             Type::pop(it, it + 1u);
         }
     }
 
     basic_iterator try_emplace(const typename basic_registry_type::entity_type entt, const bool force_back, const void *value) final {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
         Type::try_emplace(entt, force_back, value);
-        construction.publish(*owner, entt);
+        construction.publish(*mOwner, entt);
         return Type::find(entt);
     }
 
@@ -38873,7 +38873,7 @@ public:
      */
     explicit sigh_storage_mixin(const allocator_type &allocator)
         : Type{allocator},
-          owner{},
+          mOwner{},
           construction{allocator},
           destruction{allocator},
           update{allocator} {}
@@ -38884,7 +38884,7 @@ public:
      */
     sigh_storage_mixin(sigh_storage_mixin &&other) noexcept
         : Type{std::move(other)},
-          owner{other.owner},
+          mOwner{other.mOwner},
           construction{std::move(other.construction)},
           destruction{std::move(other.destruction)},
           update{std::move(other.update)} {}
@@ -38896,7 +38896,7 @@ public:
      */
     sigh_storage_mixin(sigh_storage_mixin &&other, const allocator_type &allocator) noexcept
         : Type{std::move(other), allocator},
-          owner{other.owner},
+          mOwner{other.mOwner},
           construction{std::move(other.construction), allocator},
           destruction{std::move(other.destruction), allocator},
           update{std::move(other.update), allocator} {}
@@ -38908,7 +38908,7 @@ public:
      */
     sigh_storage_mixin &operator=(sigh_storage_mixin &&other) noexcept {
         Type::operator=(std::move(other));
-        owner = other.owner;
+        mOwner = other.mOwner;
         construction = std::move(other.construction);
         destruction = std::move(other.destruction);
         update = std::move(other.update);
@@ -38922,7 +38922,7 @@ public:
     void swap(sigh_storage_mixin &other) {
         using std::swap;
         Type::swap(other);
-        swap(owner, other.owner);
+        swap(mOwner, other.mOwner);
         swap(construction, other.construction);
         swap(destruction, other.destruction);
         swap(update, other.update);
@@ -38982,9 +38982,9 @@ public:
      */
     template<typename... Args>
     decltype(auto) emplace(const entity_type entt, Args &&...args) {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
         Type::emplace(entt, std::forward<Args>(args)...);
-        construction.publish(*owner, entt);
+        construction.publish(*mOwner, entt);
         return this->get(entt);
     }
 
@@ -38997,9 +38997,9 @@ public:
      */
     template<typename... Func>
     decltype(auto) patch(const entity_type entt, Func &&...func) {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
         Type::patch(entt, std::forward<Func>(func)...);
-        update.publish(*owner, entt);
+        update.publish(*mOwner, entt);
         return this->get(entt);
     }
 
@@ -39015,11 +39015,11 @@ public:
      */
     template<typename It, typename... Args>
     void insert(It first, It last, Args &&...args) {
-        ENTT_ASSERT(owner != nullptr, "Invalid pointer to registry");
+        ENTT_ASSERT(mOwner != nullptr, "Invalid pointer to registry");
         Type::insert(first, last, std::forward<Args>(args)...);
 
         for(auto it = construction.empty() ? last : first; it != last; ++it) {
-            construction.publish(*owner, *it);
+            construction.publish(*mOwner, *it);
         }
     }
 
@@ -39029,12 +39029,12 @@ public:
      */
     void bind(any value) noexcept final {
         auto *reg = any_cast<basic_registry_type>(&value);
-        owner = reg ? reg : owner;
+        mOwner = reg ? reg : mOwner;
         Type::bind(std::move(value));
     }
 
 private:
-    basic_registry_type *owner;
+    basic_registry_type *mOwner;
     sigh_type construction;
     sigh_type destruction;
     sigh_type update;
@@ -53924,7 +53924,7 @@ enum class any_operation : std::uint8_t {
 };
 
 enum class any_policy : std::uint8_t {
-    owner,
+    mOwner,
     ref,
     cref
 };
@@ -53960,7 +53960,7 @@ class basic_any {
         const Type *element = nullptr;
 
         if constexpr(in_situ<Type>) {
-            element = value.owner() ? reinterpret_cast<const Type *>(&value.storage) : static_cast<const Type *>(value.instance);
+            element = value.mOwner() ? reinterpret_cast<const Type *>(&value.storage) : static_cast<const Type *>(value.instance);
         } else {
             element = static_cast<const Type *>(value.instance);
         }
@@ -53973,7 +53973,7 @@ class basic_any {
             break;
         case operation::move:
             if constexpr(in_situ<Type>) {
-                if(value.owner()) {
+                if(value.mOwner()) {
                     return new(&static_cast<basic_any *>(const_cast<void *>(other))->storage) Type{std::move(*const_cast<Type *>(element))};
                 }
             }
@@ -54067,7 +54067,7 @@ public:
         : instance{},
           info{},
           vtable{},
-          mode{policy::owner} {
+          mode{policy::mOwner} {
         initialize<Type>(std::forward<Args>(args)...);
     }
 
@@ -54107,7 +54107,7 @@ public:
 
     /*! @brief Frees the internal storage, whatever it means. */
     ~basic_any() {
-        if(vtable && owner()) {
+        if(vtable && mOwner()) {
             vtable(operation::destroy, *this, nullptr);
         }
     }
@@ -54240,7 +54240,7 @@ public:
 
     /*! @brief Destroys contained object */
     void reset() {
-        if(vtable && owner()) {
+        if(vtable && mOwner()) {
             vtable(operation::destroy, *this, nullptr);
         }
 
@@ -54248,7 +54248,7 @@ public:
         ENTT_ASSERT((instance = nullptr) == nullptr, "");
         info = &type_id<void>();
         vtable = nullptr;
-        mode = policy::owner;
+        mode = policy::mOwner;
     }
 
     /**
@@ -54298,8 +54298,8 @@ public:
      * @brief Returns true if a wrapper owns its object, false otherwise.
      * @return True if the wrapper owns its object, false otherwise.
      */
-    [[nodiscard]] bool owner() const noexcept {
-        return (mode == policy::owner);
+    [[nodiscard]] bool mOwner() const noexcept {
+        return (mode == policy::mOwner);
     }
 
 private:
@@ -56715,7 +56715,7 @@ class meta_any {
     }
 
     void release() {
-        if(node.dtor.dtor && owner()) {
+        if(node.dtor.dtor && mOwner()) {
             node.dtor.dtor(storage.data());
         }
     }
@@ -56977,7 +56977,7 @@ public:
      */
     [[nodiscard]] bool allow_cast(const meta_type &type) {
         if(auto other = std::as_const(*this).allow_cast(type); other) {
-            if(other.owner()) {
+            if(other.mOwner()) {
                 std::swap(*this, other);
             }
 
@@ -57114,9 +57114,9 @@ public:
         return meta_any{*ctx, *this, storage.as_ref()};
     }
 
-    /*! @copydoc any::owner */
-    [[nodiscard]] bool owner() const noexcept {
-        return storage.owner();
+    /*! @copydoc any::mOwner */
+    [[nodiscard]] bool mOwner() const noexcept {
+        return storage.mOwner();
     }
 
 private:
@@ -59048,7 +59048,7 @@ struct meta_function_descriptor;
  * @brief Meta function descriptor.
  * @tparam Type Reflected type to which the meta function is associated.
  * @tparam Ret Function return type.
- * @tparam Class Actual owner of the member function.
+ * @tparam Class Actual mOwner of the member function.
  * @tparam Args Function arguments.
  */
 template<typename Type, typename Ret, typename Class, typename... Args>
@@ -59063,7 +59063,7 @@ struct meta_function_descriptor<Type, Ret (Class::*)(Args...) const>
  * @brief Meta function descriptor.
  * @tparam Type Reflected type to which the meta function is associated.
  * @tparam Ret Function return type.
- * @tparam Class Actual owner of the member function.
+ * @tparam Class Actual mOwner of the member function.
  * @tparam Args Function arguments.
  */
 template<typename Type, typename Ret, typename Class, typename... Args>
@@ -59077,7 +59077,7 @@ struct meta_function_descriptor<Type, Ret (Class::*)(Args...)>
 /**
  * @brief Meta function descriptor.
  * @tparam Type Reflected type to which the meta data is associated.
- * @tparam Class Actual owner of the data member.
+ * @tparam Class Actual mOwner of the data member.
  * @tparam Ret Data member type.
  */
 template<typename Type, typename Ret, typename Class>
@@ -59555,7 +59555,7 @@ namespace entt {
 
 namespace internal {
 
-inline decltype(auto) owner(meta_ctx &ctx, const type_info &info) {
+inline decltype(auto) mOwner(meta_ctx &ctx, const type_info &info) {
     auto &&context = internal::meta_context::from(ctx);
     ENTT_ASSERT(context.value.contains(info.hash()), "Type not available");
     return context.value[info.hash()];
@@ -59622,7 +59622,7 @@ class meta_factory {
         static_assert(Policy::template value<data_type>, "Invalid return type for the given policy");
 
         auto &&elem = internal::meta_extend(
-            internal::owner(*ctx, *info),
+            internal::mOwner(*ctx, *info),
             id,
             internal::meta_data_node{
                 /* this is never static */
@@ -59649,7 +59649,7 @@ public:
         : ctx{&area},
           bucket{},
           info{&type_id<Type>()} {
-        auto &&elem = internal::owner(*ctx, *info);
+        auto &&elem = internal::mOwner(*ctx, *info);
 
         if(!elem.details) {
             elem.details = std::make_shared<internal::meta_type_descriptor>();
@@ -59664,7 +59664,7 @@ public:
      * @return An extended meta factory for the given type.
      */
     auto type(const id_type id) noexcept {
-        auto &&elem = internal::owner(*ctx, *info);
+        auto &&elem = internal::mOwner(*ctx, *info);
         ENTT_ASSERT(elem.id == id || !resolve(*ctx, id), "Duplicate identifier");
         bucket = &elem.details->prop;
         elem.id = id;
@@ -59684,7 +59684,7 @@ public:
         static_assert(!std::is_same_v<Type, Base> && std::is_base_of_v<Base, Type>, "Invalid base type");
 
         internal::meta_extend(
-            internal::owner(*ctx, *info),
+            internal::mOwner(*ctx, *info),
             type_id<Base>().hash(),
             internal::meta_base_node{
                 &internal::resolve<Base>,
@@ -59713,7 +59713,7 @@ public:
         using conv_type = std::remove_cv_t<std::remove_reference_t<std::invoke_result_t<decltype(Candidate), Type &>>>;
 
         internal::meta_extend(
-            internal::owner(*ctx, *info),
+            internal::mOwner(*ctx, *info),
             type_id<conv_type>().hash(),
             internal::meta_conv_node{
                 +[](const meta_ctx &area, const void *instance) {
@@ -59738,7 +59738,7 @@ public:
         using conv_type = std::remove_cv_t<std::remove_reference_t<To>>;
 
         internal::meta_extend(
-            internal::owner(*ctx, *info),
+            internal::mOwner(*ctx, *info),
             type_id<conv_type>().hash(),
             internal::meta_conv_node{
                 +[](const meta_ctx &area, const void *instance) {
@@ -59769,7 +59769,7 @@ public:
         static_assert(std::is_same_v<std::remove_cv_t<std::remove_reference_t<typename descriptor::return_type>>, Type>, "The function doesn't return an object of the required type");
 
         internal::meta_extend(
-            internal::owner(*ctx, *info),
+            internal::mOwner(*ctx, *info),
             type_id<typename descriptor::args_type>().hash(),
             internal::meta_ctor_node{
                 descriptor::args_type::size,
@@ -59797,7 +59797,7 @@ public:
             using descriptor = meta_function_helper_t<Type, Type (*)(Args...)>;
 
             internal::meta_extend(
-                internal::owner(*ctx, *info),
+                internal::mOwner(*ctx, *info),
                 type_id<typename descriptor::args_type>().hash(),
                 internal::meta_ctor_node{
                     descriptor::args_type::size,
@@ -59832,7 +59832,7 @@ public:
         static_assert(std::is_invocable_v<decltype(Func), Type &>, "The function doesn't accept an object of the type provided");
 
         internal::meta_extend(
-            internal::owner(*ctx, *info),
+            internal::mOwner(*ctx, *info),
             internal::meta_dtor_node{
                 +[](void *instance) { std::invoke(Func, *static_cast<Type *>(instance)); }});
 
@@ -59859,7 +59859,7 @@ public:
             using data_type = std::remove_reference_t<std::invoke_result_t<decltype(Data), Type &>>;
 
             auto &&elem = internal::meta_extend(
-                internal::owner(*ctx, *info),
+                internal::mOwner(*ctx, *info),
                 id,
                 internal::meta_data_node{
                     /* this is never static */
@@ -59875,7 +59875,7 @@ public:
             using data_type = std::remove_reference_t<std::remove_pointer_t<decltype(Data)>>;
 
             auto &&elem = internal::meta_extend(
-                internal::owner(*ctx, *info),
+                internal::mOwner(*ctx, *info),
                 id,
                 internal::meta_data_node{
                     ((std::is_same_v<Type, std::remove_cv_t<data_type>> || std::is_const_v<data_type>) ? internal::meta_traits::is_const : internal::meta_traits::is_none) | internal::meta_traits::is_static,
@@ -59918,7 +59918,7 @@ public:
 
         if constexpr(std::is_same_v<decltype(Setter), std::nullptr_t>) {
             auto &&elem = internal::meta_extend(
-                internal::owner(*ctx, *info),
+                internal::mOwner(*ctx, *info),
                 id,
                 internal::meta_data_node{
                     /* this is never static */
@@ -59934,7 +59934,7 @@ public:
             using args_type = typename meta_function_helper_t<Type, decltype(Setter)>::args_type;
 
             auto &&elem = internal::meta_extend(
-                internal::owner(*ctx, *info),
+                internal::mOwner(*ctx, *info),
                 id,
                 internal::meta_data_node{
                     /* this is never static nor const */
@@ -59993,7 +59993,7 @@ public:
         static_assert(Policy::template value<typename descriptor::return_type>, "Invalid return type for the given policy");
 
         auto &&elem = internal::meta_extend(
-            internal::owner(*ctx, *info),
+            internal::mOwner(*ctx, *info),
             id,
             internal::meta_func_node{
                 (descriptor::is_const ? internal::meta_traits::is_const : internal::meta_traits::is_none) | (descriptor::is_static ? internal::meta_traits::is_static : internal::meta_traits::is_none),
@@ -60379,7 +60379,7 @@ class meta_any {
     }
 
     void release() {
-        if(node.dtor.dtor && owner()) {
+        if(node.dtor.dtor && mOwner()) {
             node.dtor.dtor(storage.data());
         }
     }
@@ -60641,7 +60641,7 @@ public:
      */
     [[nodiscard]] bool allow_cast(const meta_type &type) {
         if(auto other = std::as_const(*this).allow_cast(type); other) {
-            if(other.owner()) {
+            if(other.mOwner()) {
                 std::swap(*this, other);
             }
 
@@ -60778,9 +60778,9 @@ public:
         return meta_any{*ctx, *this, storage.as_ref()};
     }
 
-    /*! @copydoc any::owner */
-    [[nodiscard]] bool owner() const noexcept {
-        return storage.owner();
+    /*! @copydoc any::mOwner */
+    [[nodiscard]] bool mOwner() const noexcept {
+        return storage.mOwner();
     }
 
 private:
@@ -62921,7 +62921,7 @@ struct meta_function_descriptor;
  * @brief Meta function descriptor.
  * @tparam Type Reflected type to which the meta function is associated.
  * @tparam Ret Function return type.
- * @tparam Class Actual owner of the member function.
+ * @tparam Class Actual mOwner of the member function.
  * @tparam Args Function arguments.
  */
 template<typename Type, typename Ret, typename Class, typename... Args>
@@ -62936,7 +62936,7 @@ struct meta_function_descriptor<Type, Ret (Class::*)(Args...) const>
  * @brief Meta function descriptor.
  * @tparam Type Reflected type to which the meta function is associated.
  * @tparam Ret Function return type.
- * @tparam Class Actual owner of the member function.
+ * @tparam Class Actual mOwner of the member function.
  * @tparam Args Function arguments.
  */
 template<typename Type, typename Ret, typename Class, typename... Args>
@@ -62950,7 +62950,7 @@ struct meta_function_descriptor<Type, Ret (Class::*)(Args...)>
 /**
  * @brief Meta function descriptor.
  * @tparam Type Reflected type to which the meta data is associated.
- * @tparam Class Actual owner of the data member.
+ * @tparam Class Actual mOwner of the data member.
  * @tparam Ret Data member type.
  */
 template<typename Type, typename Ret, typename Class>
@@ -65164,7 +65164,7 @@ enum class any_operation : std::uint8_t {
 };
 
 enum class any_policy : std::uint8_t {
-    owner,
+    mOwner,
     ref,
     cref
 };
@@ -65200,7 +65200,7 @@ class basic_any {
         const Type *element = nullptr;
 
         if constexpr(in_situ<Type>) {
-            element = value.owner() ? reinterpret_cast<const Type *>(&value.storage) : static_cast<const Type *>(value.instance);
+            element = value.mOwner() ? reinterpret_cast<const Type *>(&value.storage) : static_cast<const Type *>(value.instance);
         } else {
             element = static_cast<const Type *>(value.instance);
         }
@@ -65213,7 +65213,7 @@ class basic_any {
             break;
         case operation::move:
             if constexpr(in_situ<Type>) {
-                if(value.owner()) {
+                if(value.mOwner()) {
                     return new(&static_cast<basic_any *>(const_cast<void *>(other))->storage) Type{std::move(*const_cast<Type *>(element))};
                 }
             }
@@ -65307,7 +65307,7 @@ public:
         : instance{},
           info{},
           vtable{},
-          mode{policy::owner} {
+          mode{policy::mOwner} {
         initialize<Type>(std::forward<Args>(args)...);
     }
 
@@ -65347,7 +65347,7 @@ public:
 
     /*! @brief Frees the internal storage, whatever it means. */
     ~basic_any() {
-        if(vtable && owner()) {
+        if(vtable && mOwner()) {
             vtable(operation::destroy, *this, nullptr);
         }
     }
@@ -65480,7 +65480,7 @@ public:
 
     /*! @brief Destroys contained object */
     void reset() {
-        if(vtable && owner()) {
+        if(vtable && mOwner()) {
             vtable(operation::destroy, *this, nullptr);
         }
 
@@ -65488,7 +65488,7 @@ public:
         ENTT_ASSERT((instance = nullptr) == nullptr, "");
         info = &type_id<void>();
         vtable = nullptr;
-        mode = policy::owner;
+        mode = policy::mOwner;
     }
 
     /**
@@ -65538,8 +65538,8 @@ public:
      * @brief Returns true if a wrapper owns its object, false otherwise.
      * @return True if the wrapper owns its object, false otherwise.
      */
-    [[nodiscard]] bool owner() const noexcept {
-        return (mode == policy::owner);
+    [[nodiscard]] bool mOwner() const noexcept {
+        return (mode == policy::mOwner);
     }
 
 private:
@@ -67750,17 +67750,17 @@ class scheduler {
     };
 
     template<typename Proc>
-    [[nodiscard]] static bool update(scheduler &owner, std::size_t pos, const Delta delta, void *data) {
-        auto *process = static_cast<Proc *>(owner.handlers[pos].instance.get());
+    [[nodiscard]] static bool update(scheduler &mOwner, std::size_t pos, const Delta delta, void *data) {
+        auto *process = static_cast<Proc *>(mOwner.handlers[pos].instance.get());
         process->tick(delta, data);
 
         if(process->rejected()) {
             return true;
         } else if(process->finished()) {
-            if(auto &&handler = owner.handlers[pos]; handler.next) {
+            if(auto &&handler = mOwner.handlers[pos]; handler.next) {
                 handler = std::move(*handler.next);
                 // forces the process to exit the uninitialized state
-                return handler.update(owner, pos, {}, nullptr);
+                return handler.update(mOwner, pos, {}, nullptr);
             }
 
             return true;
@@ -67770,8 +67770,8 @@ class scheduler {
     }
 
     template<typename Proc>
-    static void abort(scheduler &owner, std::size_t pos, const bool immediately) {
-        static_cast<Proc *>(owner.handlers[pos].instance.get())->abort(immediately);
+    static void abort(scheduler &mOwner, std::size_t pos, const bool immediately) {
+        static_cast<Proc *>(mOwner.handlers[pos].instance.get())->abort(immediately);
     }
 
     template<typename Proc>

@@ -70,13 +70,13 @@ namespace Editor
 #pragma endregion
 
 #pragma region ACTOR_CREATION_DESTRUCTION
-		template<typename T> Core::Core_Actor& CreateMonoComponentActor(bool p_focusOnCreation = true, Core::Core_Actor* p_parent = nullptr);
+		template<typename T> Core::Core_Actor& CreateMonoComponentActor(bool p_focusOnCreation = true, Core::Core_Actor* pParent = nullptr);
 
 		glm::vec3 CalculateActorSpawnPoint(float p_distanceToCamera);
 
-		Core::Core_Actor& CreateEmptyActor(bool p_focusOnCreation = true, Core::Core_Actor* p_parent = nullptr, const std::string& p_name = "");
+		Core::Core_Actor& CreateEmptyActor(bool p_focusOnCreation = true, Core::Core_Actor* pParent = nullptr, const std::string& pName = "");
 
-		Core::Core_Actor& CreateActorWithModel(const std::string& pPath, bool p_focusOnCreation = true, Core::Core_Actor* p_parent = nullptr, const std::string& p_name = "");
+		Core::Core_Actor& CreateActorWithModel(const std::string& pPath, bool p_focusOnCreation = true, Core::Core_Actor* pParent = nullptr, const std::string& pName = "");
 
 		bool DestroyActor(Core::Core_Actor& p_actor);
 
@@ -110,7 +110,7 @@ namespace Editor
 
 		std::string GetScriptPath(const std::string& pPath);
 
-		void PropagateFolderRename(std::string p_previousName, const std::string p_newName);
+		void PropagateFolderRename(std::string p_previousName, std::string p_newName);
 
 		void PropagateFolderDestruction(std::string p_folderPath);
 
@@ -160,7 +160,7 @@ namespace Editor
 		Tools::Tools_Event<> PlayEvent;
 
 	private:
-		Editor_Context& m_context;
+		Editor_Context& mContext;
 		Editor_PanelsManager& m_panelsManager;
 		Editor_EditorRenderer& m_renderer;
 

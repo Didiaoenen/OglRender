@@ -27,29 +27,29 @@ namespace Core
 
 		bool IsPlaying() const;
 
-		void Update(float p_deltaTime);
+		void Update(float pDeltaTime);
 
-		void FixedUpdate(float p_deltaTime);
+		void FixedUpdate(float pDeltaTime);
 
-		void LateUpdate(float p_deltaTime);
+		void LateUpdate(float pDeltaTime);
 
 		Core_Actor& CreateActor();
 
-		Core_Actor& CreateActor(const std::string& p_name, const std::string& p_tag = "");
+		Core_Actor& CreateActor(const std::string& pName, const std::string& pTag = "");
 
 		bool DestroyActor(Core_Actor& p_target);
 
 		void CollectGarbages();
 
-		Core_Actor* FindActorByName(const std::string& p_name);
+		Core_Actor* FindActorByName(const std::string& pName);
 
-		Core_Actor* FindActorByTag(const std::string& p_tag);
+		Core_Actor* FindActorByTag(const std::string& pTag);
 
-		Core_Actor* FindActorByID(int64_t p_id);
+		Core_Actor* FindActorByID(int64_t pId);
 
-		std::vector<std::reference_wrapper<Core_Actor>> FindActorsByName(const std::string& p_name);
+		std::vector<std::reference_wrapper<Core_Actor>> FindActorsByName(const std::string& pName);
 
-		std::vector<std::reference_wrapper<Core_Actor>> FindActorsByTag(const std::string& p_tag);
+		std::vector<std::reference_wrapper<Core_Actor>> FindActorsByTag(const std::string& pTag);
 
 		void OnComponentAdded(Core_AComponent& p_compononent);
 
@@ -59,13 +59,13 @@ namespace Core
 
 		const FastAccessComponents& GetFastAccessComponents() const;
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pRoot) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_root) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pRoot) override;
 
 	private:
-		int64_t m_availableID = 1;
-		bool m_isPlaying = false;
+		int64_t m_availableID{ 1 };
+		bool m_isPlaying{ false };
 		std::vector<Core_Actor*> m_actors;
 
 		FastAccessComponents m_fastAccessComponents;

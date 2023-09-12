@@ -1,7 +1,7 @@
 #include "UI_MenuList.h"
 
-UI::UI_MenuList::UI_MenuList(const std::string& pName, bool pLocked)
-	: mName(pName), mLocked(pLocked)
+UI::UI_MenuList::UI_MenuList(const std::string& pName, bool pLocked) :
+	mName(pName), mLocked(pLocked)
 {
 }
 

@@ -9,15 +9,15 @@ namespace Core
 	class Core_CDirectionalLight : public Core_CLight
 	{
 	public:
-		Core_CDirectionalLight(Core_Actor& p_owner);
+		Core_CDirectionalLight(Core_Actor& pOwner);
 
 		std::string GetName() override;
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) override;
 	};
 }
 

@@ -1,8 +1,9 @@
-#include "UI_Dummy.h"
-#include "UI_Converter.h"
 
-UI::UI_Dummy::UI_Dummy(const glm::vec2& pSize)
-	: mSize(pSize)
+#include "UI_Converter.h"
+#include "UI_Dummy.h"
+
+UI::UI_Dummy::UI_Dummy(const glm::vec2& pSize) : 
+	mSize(pSize)
 {
 }
 

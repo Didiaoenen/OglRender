@@ -1,7 +1,7 @@
 #include "UI_CheckBox.h"
 
-UI::UI_CheckBox::UI_CheckBox(bool pValue, const std::string& pLabel)
-	: UI_DataWidget<bool>(mValue), mValue(pValue), mLabel(pLabel)
+UI::UI_CheckBox::UI_CheckBox(bool pValue, const std::string& pLabel) : 
+	UI_DataWidget<bool>(mValue), mValue(pValue), mLabel(pLabel)
 {
 }
 

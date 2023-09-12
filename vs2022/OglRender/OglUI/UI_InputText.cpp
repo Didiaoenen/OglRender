@@ -1,7 +1,7 @@
 #include "UI_InputText.h"
 
-UI::UI_InputText::UI_InputText(const std::string& pContent, const std::string& pLabel)
-	: UI_DataWidget<std::string>(mContent), mContent(pContent), mLabel(pLabel)
+UI::UI_InputText::UI_InputText(const std::string& pContent, const std::string& pLabel) : 
+	UI_DataWidget<std::string>(mContent), mContent(pContent), mLabel(pLabel)
 {
 }
 

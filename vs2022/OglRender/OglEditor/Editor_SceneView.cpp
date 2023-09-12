@@ -12,7 +12,7 @@ Editor::Editor_SceneView::Editor_SceneView(const std::string& p_title, bool p_op
 {
 }
 
-void Editor::Editor_SceneView::Update(float p_deltaTime)
+void Editor::Editor_SceneView::Update(float pDeltaTime)
 {
 }
 

@@ -15,33 +15,33 @@ namespace Core
 	class Core_CTransform : public Core_AComponent
 	{
 	public:
-		Core_CTransform(Core_Actor& p_owner, glm::vec3 p_localPosition = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat p_localRotation = glm::identity<glm::quat>(), glm::vec3 p_localScale = glm::vec3(1.0f, 1.0f, 1.0f));
+		Core_CTransform(Core_Actor& pOwner, glm::vec3 pLocalPosition = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat pLocalRotation = glm::identity<glm::quat>(), glm::vec3 pLocalScale = glm::vec3(1.0f, 1.0f, 1.0f));
 
 		std::string GetName() override;
 
-		void SetParent(Core_CTransform& p_parent);
+		void SetParent(Core_CTransform& pParent);
 
 		bool RemoveParent();
 
 		bool HasParent() const;
 
-		void SetLocalPosition(glm::vec3 p_newPosition);
+		void SetLocalPosition(glm::vec3 pNewPosition);
 
-		void SetLocalRotation(glm::quat p_newRotation);
+		void SetLocalRotation(glm::quat pNewRotation);
 
-		void SetLocalScale(glm::vec3 p_newScale);
+		void SetLocalScale(glm::vec3 pNewScale);
 
-		void SetWorldPosition(glm::vec3 p_newPosition);
+		void SetWorldPosition(glm::vec3 pNewPosition);
 
-		void SetWorldRotation(glm::quat p_newRotation);
+		void SetWorldRotation(glm::quat pNewRotation);
 
-		void SetWorldScale(glm::vec3 p_newScale);
+		void SetWorldScale(glm::vec3 pNewScale);
 
-		void TranslateLocal(const glm::vec3& p_translation);
+		void TranslateLocal(const glm::vec3& pTranslation);
 
-		void RotateLocal(const glm::quat& p_rotation);
+		void RotateLocal(const glm::quat& pRotation);
 
-		void ScaleLocal(const glm::vec3& p_scale);
+		void ScaleLocal(const glm::vec3& pScale);
 
 		const glm::vec3& GetLocalPosition() const;
 
@@ -73,14 +73,14 @@ namespace Core
 
 		glm::vec3 GetLocalRight() const;
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) override;
 
 	private:
-		Maths::Maths_FTransform m_transform;
+		Maths::Maths_FTransform mTransform;
 	};
 }
 

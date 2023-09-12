@@ -6,15 +6,15 @@
 #include "Editor_Context.h"
 
 Editor::Editor_Context::Editor_Context(const std::string& p_projectPath, const std::string& p_projectName) :
-	projectPath(p_projectPath),
-	projectName(p_projectName),
-	projectFilePath(p_projectPath + p_projectName + ".ovproject"),
-	engineAssetsPath(std::filesystem::canonical("Data\\Engine").string() + "\\"),
-	projectAssetsPath(p_projectPath + "Assets\\"),
-	projectScriptsPath(p_projectPath + "Scripts\\"),
-	editorAssetsPath("Data\\Editor\\"),
-	sceneManager(projectAssetsPath),
-	projectSettings(projectFilePath)
+	mProjectPath(p_projectPath),
+	mProjectName(p_projectName),
+	mProjectFilePath(p_projectPath + p_projectName + ".ovproject"),
+	mEngineAssetsPath(std::filesystem::canonical("Data\\Engine").string() + "\\"),
+	mProjectAssetsPath(p_projectPath + "Assets\\"),
+	mProjectScriptsPath(p_projectPath + "Scripts\\"),
+	mEditorAssetsPath("Data\\Editor\\"),
+	sceneManager(mProjectAssetsPath),
+	projectSettings(mProjectFilePath)
 {
 	if (!IsProjectSettingsIntegrityVerified())
 	{
@@ -22,10 +22,10 @@ Editor::Editor_Context::Editor_Context(const std::string& p_projectPath, const s
 		projectSettings.Rewrite();
 	}
 
-	Core::Core_ModelManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
-	Core::Core_TextureManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
-	Core::Core_ShaderManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
-	Core::Core_MaterialManager::ProvideAssetPaths(projectAssetsPath, engineAssetsPath);
+	Core::Core_ModelManager::ProvideAssetPaths(mProjectAssetsPath, mEngineAssetsPath);
+	Core::Core_TextureManager::ProvideAssetPaths(mProjectAssetsPath, mEngineAssetsPath);
+	Core::Core_ShaderManager::ProvideAssetPaths(mProjectAssetsPath, mEngineAssetsPath);
+	Core::Core_MaterialManager::ProvideAssetPaths(mProjectAssetsPath, mEngineAssetsPath);
 
 	Window::Window_DeviceSettings deviceSettings;
 	deviceSettings.mContextMajorVersion = 4;
@@ -52,9 +52,9 @@ Editor::Editor_Context::Editor_Context(const std::string& p_projectPath, const s
 	std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\");
 
 	uiManager = std::make_unique<UI::UI_UIManager>(window->GetGlfwWindow(), UI::EStyle::ALTERNATIVE_DARK);
-	uiManager->LoadFont("Ruda_Big", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 16);
-	uiManager->LoadFont("Ruda_Small", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 12);
-	uiManager->LoadFont("Ruda_Medium", editorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 14);
+	uiManager->LoadFont("Ruda_Big", mEditorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 16);
+	uiManager->LoadFont("Ruda_Small", mEditorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 12);
+	uiManager->LoadFont("Ruda_Medium", mEditorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 14);
 	uiManager->UseFont("Ruda_Medium");
 	uiManager->SetEditorLayoutSaveFilename(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\layout.ini");
 	uiManager->SetEditorLayoutAutosaveFrequency(60.0f);
@@ -64,7 +64,7 @@ Editor::Editor_Context::Editor_Context(const std::string& p_projectPath, const s
 	if (!std::filesystem::exists(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\layout.ini"))
 		uiManager->ResetLayout("Config\\layout.ini");
 
-	editorResources = std::make_unique<Editor::Editor_EditorResources>(editorAssetsPath);
+	editorResources = std::make_unique<Editor::Editor_EditorResources>(mEditorAssetsPath);
 
 	Core::Core_ServiceLocator::Provide<Core::Core_ModelManager>(modelManager);
 	Core::Core_ServiceLocator::Provide<Core::Core_TextureManager>(textureManager);

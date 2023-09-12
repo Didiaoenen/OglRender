@@ -18,11 +18,11 @@ namespace UI
 
 	public:
 		std::string mName;
-		bool mLocked;
+		bool mLocked{ false };
 		Tools::Tools_Event<> mClickedEvent;
 
 	private:
-		bool mOpened;
+		bool mOpened{ false };
 	};
 }
 

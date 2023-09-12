@@ -5,8 +5,8 @@
 
 #include <OglTools/Tools_Event.h>
 
-#include "UI_APanelTransformable.h"
 #include "UI_PanelWindowSettings.h"
+#include "UI_APanelTransformable.h"
 
 namespace UI
 {

@@ -5019,7 +5019,7 @@ static void ShowExampleAppCustomRendering(bool* p_open)
             // Here we are using InvisibleButton() as a convenience to 1) advance the cursor and 2) allows us to use
             // IsItemHovered(). But you can also draw directly and poll mouse/keyboard by yourself.
             // You can manipulate the cursor using GetCursorPos() and SetCursorPos().
-            // If you only use the ImDrawList API, you can notify the owner window of its extends with SetCursorPos(max).
+            // If you only use the ImDrawList API, you can notify the mOwner window of its extends with SetCursorPos(max).
             ImVec2 canvas_p = ImGui::GetCursorScreenPos();       // ImDrawList API uses screen coordinates!
             ImVec2 canvas_sz = ImGui::GetContentRegionAvail();   // Resize canvas to what's available
             if (canvas_sz.x < 50.0f) canvas_sz.x = 50.0f;

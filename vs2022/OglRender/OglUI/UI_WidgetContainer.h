@@ -12,7 +12,7 @@ namespace UI
 	public:
 		void RemoveWidget(UI_AWidget& pWidget);
 
-		void RemoveAllWidget();
+		void RemoveAllWidgets();
 
 		void ConsiderWidget(UI_AWidget& pWidget, bool pManagerMemory = true);
 

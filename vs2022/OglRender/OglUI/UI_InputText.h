@@ -17,7 +17,7 @@ namespace UI
 	public:
 		std::string mContent;
 		std::string mLabel;
-		bool mSelectAllOnClick = false;
+		bool mSelectAllOnClick{ false };
 		Tools::Tools_Event<std::string> mContentChangedEvent;
 		Tools::Tools_Event<std::string> mEnterPressedEvent;
 	};

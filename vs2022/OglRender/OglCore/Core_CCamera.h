@@ -11,7 +11,7 @@ namespace Core
 	class Core_CCamera : public Core_AComponent
 	{
 	public:
-		Core_CCamera(Core_Actor& p_owner);
+		Core_CCamera(Core_Actor& pOwner);
 
 		~Core_CCamera() = default;
 
@@ -25,11 +25,11 @@ namespace Core
 
 		void SetFar(float pValue);
 
-		void SetClearColor(const glm::vec3& p_clearColor);
+		void SetClearColor(const glm::vec3& pClearColor);
 
-		void SetFrustumGeometryCulling(bool p_enable);
+		void SetFrustumGeometryCulling(bool pEnable);
 
-		void SetFrustumLightCulling(bool p_enable);
+		void SetFrustumLightCulling(bool pEnable);
 
 		void SetProjectionMode(Render::EProjectionMode p_projectionMode);
 
@@ -51,14 +51,14 @@ namespace Core
 
 		Render::Render_Camera& GetCamera();
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) override;
 
 	private:
-		Render::Render_Camera m_camera;
+		Render::Render_Camera mCamera;
 	};
 }
 

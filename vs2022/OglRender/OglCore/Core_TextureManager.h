@@ -1,6 +1,6 @@
 #pragma once
 
-#include <OglRenderer/Render_Texture.h>
+#include <OglRenderer/Render_TextureLoader.h>
 
 #include "Core_AResourceManager.h"
 

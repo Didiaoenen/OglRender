@@ -39,7 +39,7 @@ namespace Editor
 
 		void DrawComponent(Core::Core_AComponent& p_component);
 
-		void DrawBehaviour(Core::Core_Behaviour& p_behaviour);
+		void DrawBehaviour(Core::Core_Behaviour& pBehaviour);
 
 		void Refresh();
 

@@ -20,7 +20,7 @@ namespace Editor
 	public:
 		Editor_ActorCreationMenu() = delete;
 
-        static void GenerateActorCreationMenu(UI::UI_MenuList& p_menuList, Core::Core_Actor* p_parent = nullptr, std::optional<std::function<void()>> p_onItemClicked = {});
+        static void GenerateActorCreationMenu(UI::UI_MenuList& p_menuList, Core::Core_Actor* pParent = nullptr, std::optional<std::function<void()>> p_onItemClicked = {});
 	};
 }
 

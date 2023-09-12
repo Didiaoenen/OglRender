@@ -57,11 +57,11 @@ namespace Render
 
 		void SetCullFace(ECullFace p_cullFace);
 
-		void SetDepthWriting(bool p_enable);
+		void SetDepthWriting(bool pEnable);
 
 		void SetColorWriting(bool p_enableRed, bool p_enableGreen, bool p_enableBlue, bool p_enableAlpha);
 
-		void SetColorWriting(bool p_enable);
+		void SetColorWriting(bool pEnable);
 
 		void SetViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
 
@@ -69,27 +69,27 @@ namespace Render
 
 		bool GetBool(GLenum p_parameter);
 
-		bool GetBool(GLenum p_parameter, uint32_t p_index);
+		bool GetBool(GLenum p_parameter, uint32_t pIndex);
 
 		int GetInt(GLenum p_parameter);
 
-		int GetInt(GLenum p_parameter, uint32_t p_index);
+		int GetInt(GLenum p_parameter, uint32_t pIndex);
 
 		float GetFloat(GLenum p_parameter);
 
-		float GetFloat(GLenum p_parameter, uint32_t p_index);
+		float GetFloat(GLenum p_parameter, uint32_t pIndex);
 
 		double GetDouble(GLenum p_parameter);
 
-		double GetDouble(GLenum p_parameter, uint32_t p_index);
+		double GetDouble(GLenum p_parameter, uint32_t pIndex);
 
 		int64_t GetInt64(GLenum p_parameter);
 
-		int64_t GetInt64(GLenum p_parameter, uint32_t p_index);
+		int64_t GetInt64(GLenum p_parameter, uint32_t pIndex);
 
 		std::string GetString(GLenum p_parameter);
 
-		std::string GetString(GLenum p_parameter, uint32_t p_index);
+		std::string GetString(GLenum p_parameter, uint32_t pIndex);
 
 		void ClearFrameInfo();
 
@@ -97,7 +97,7 @@ namespace Render
 
 		std::vector<std::reference_wrapper<Render_Mesh>> GetMeshesInFrustum
 		(
-			const Render_Model& p_model,
+			const Render_Model& pModel,
 			const Render_BoundingSphere& p_modelBoundingSphere,
 			const Maths::Maths_FTransform& p_modelTransform,
 			const Render_Frustum& p_frustum,

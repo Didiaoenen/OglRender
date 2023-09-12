@@ -6,8 +6,8 @@
 #include "Core_Actor.h"
 #include "Core_CAmbientBoxLight.h"
 
-Core::Core_CAmbientBoxLight::Core_CAmbientBoxLight(Core_Actor& p_owner) :
-	Core_CLight(p_owner)
+Core::Core_CAmbientBoxLight::Core_CAmbientBoxLight(Core_Actor& pOwner) :
+	Core_CLight(pOwner)
 {
 	mData.type = static_cast<float>(Render::Render_Light::Type::AMBIENT_BOX);
 
@@ -27,36 +27,36 @@ glm::vec3 Core::Core_CAmbientBoxLight::GetSize() const
 	return { mData.constant, mData.linear, mData.quadratic };
 }
 
-void Core::Core_CAmbientBoxLight::SetSize(const glm::vec3& p_size)
+void Core::Core_CAmbientBoxLight::SetSize(const glm::vec3& pSize)
 {
-	mData.constant = p_size.x;
-	mData.linear = p_size.y;
-	mData.quadratic = p_size.z;
+	mData.constant = pSize.x;
+	mData.linear = pSize.y;
+	mData.quadratic = pSize.z;
 }
 
-void Core::Core_CAmbientBoxLight::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CAmbientBoxLight::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_CLight::OnSerialize(p_doc, p_node);
+	Core_CLight::OnSerialize(pDoc, pNode);
 	
-	Core_Serializer::SerializeVec3(p_doc, p_node, "size", { mData.constant, mData.linear, mData.quadratic });
+	Core_Serializer::SerializeVec3(pDoc, pNode, "size", { mData.constant, mData.linear, mData.quadratic });
 }
 
-void Core::Core_CAmbientBoxLight::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CAmbientBoxLight::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_CLight::OnDeserialize(p_doc, p_node);
+	Core_CLight::OnDeserialize(pDoc, pNode);
 
-	glm::vec3 size = Core_Serializer::DeserializeVec3(p_doc, p_node, "size");
+	glm::vec3 size = Core_Serializer::DeserializeVec3(pDoc, pNode, "size");
 	mData.constant = size.x;
 	mData.linear = size.y;
 	mData.quadratic = size.z;
 }
 
-void Core::Core_CAmbientBoxLight::OnInspector(UI::UI_WidgetContainer& p_root)
+void Core::Core_CAmbientBoxLight::OnInspector(UI::UI_WidgetContainer& pRoot)
 {
-	Core_CLight::OnInspector(p_root);
+	Core_CLight::OnInspector(pRoot);
 
 	auto sizeGatherer = [this]() -> glm::vec3 { return { mData.constant, mData.linear, mData.quadratic }; };
 	auto sizeProvider = [this](const glm::vec3 &p_data) { mData.constant = p_data.x; mData.linear = p_data.y, mData.quadratic = p_data.z; };
 
-	Core_GUIDrawer::DrawVec3(p_root, "Size", sizeGatherer, sizeProvider, 0.1f, 0.f);
+	Core_GUIDrawer::DrawVec3(pRoot, "Size", sizeGatherer, sizeProvider, 0.1f, 0.f);
 }

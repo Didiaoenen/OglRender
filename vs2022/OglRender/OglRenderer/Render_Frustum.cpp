@@ -40,17 +40,17 @@ bool Render::Render_Frustum::PointInFrustum(float p_x, float p_y, float p_z) con
 	return false;
 }
 
-bool Render::Render_Frustum::SphereInFrustum(float p_x, float p_y, float p_z, float p_radius) const
+bool Render::Render_Frustum::SphereInFrustum(float p_x, float p_y, float p_z, float pRadius) const
 {
 	return false;
 }
 
-bool Render::Render_Frustum::CubeInFrustum(float p_x, float p_y, float p_z, float p_size) const
+bool Render::Render_Frustum::CubeInFrustum(float p_x, float p_y, float p_z, float pSize) const
 {
 	return false;
 }
 
-bool Render::Render_Frustum::BoundingSphereInFrustum(const Render_BoundingSphere& p_boundingSphere, const Maths::Maths_FTransform& p_transform) const
+bool Render::Render_Frustum::BoundingSphereInFrustum(const Render_BoundingSphere& pBoundingSphere, const Maths::Maths_FTransform& p_transform) const
 {
 	return false;
 }

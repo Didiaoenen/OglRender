@@ -7,8 +7,8 @@
 #include "Core_Actor.h"
 #include "Core_CSpotLight.h"
 
-Core::Core_CSpotLight::Core_CSpotLight(Core_Actor& p_owner) :
-	Core_CLight(p_owner)
+Core::Core_CSpotLight::Core_CSpotLight(Core_Actor& pOwner) :
+	Core_CLight(pOwner)
 {
 	mData.type = static_cast<float>(Render::Render_Light::Type::SPOT);
 }
@@ -43,62 +43,62 @@ float Core::Core_CSpotLight::GetOuterCutoff() const
 	return mData.outerCutoff;
 }
 
-void Core::Core_CSpotLight::SetConstant(float p_constant)
+void Core::Core_CSpotLight::SetConstant(float pConstant)
 {
-	mData.constant = p_constant;
+	mData.constant = pConstant;
 }
 
-void Core::Core_CSpotLight::SetLinear(float p_linear)
+void Core::Core_CSpotLight::SetLinear(float pLinear)
 {
-	mData.linear = p_linear;
+	mData.linear = pLinear;
 }
 
-void Core::Core_CSpotLight::SetQuadratic(float p_quadratic)
+void Core::Core_CSpotLight::SetQuadratic(float pQuadratic)
 {
-	mData.quadratic = p_quadratic;
+	mData.quadratic = pQuadratic;
 }
 
-void Core::Core_CSpotLight::SetCutoff(float p_cutoff)
+void Core::Core_CSpotLight::SetCutoff(float pCutoff)
 {
-	mData.cutoff = p_cutoff;
+	mData.cutoff = pCutoff;
 }
 
-void Core::Core_CSpotLight::SetOuterCutoff(float p_outerCutoff)
+void Core::Core_CSpotLight::SetOuterCutoff(float pOuterCutoff)
 {
-	mData.outerCutoff = p_outerCutoff;
+	mData.outerCutoff = pOuterCutoff;
 }
 
-void Core::Core_CSpotLight::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CSpotLight::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_CLight::OnSerialize(p_doc, p_node);
+	Core_CLight::OnSerialize(pDoc, pNode);
 
-	Core_Serializer::SerializeFloat(p_doc, p_node, "constant", mData.constant);
-	Core_Serializer::SerializeFloat(p_doc, p_node, "linear", mData.linear);
-	Core_Serializer::SerializeFloat(p_doc, p_node, "quadratic", mData.quadratic);
-	Core_Serializer::SerializeFloat(p_doc, p_node, "cutoff", mData.cutoff);
-	Core_Serializer::SerializeFloat(p_doc, p_node, "outercutoff", mData.outerCutoff);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "constant", mData.constant);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "linear", mData.linear);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "quadratic", mData.quadratic);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "cutoff", mData.cutoff);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "outercutoff", mData.outerCutoff);
 }
 
-void Core::Core_CSpotLight::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CSpotLight::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_CLight::OnDeserialize(p_doc, p_node);
+	Core_CLight::OnDeserialize(pDoc, pNode);
 
-	Core_Serializer::DeserializeFloat(p_doc, p_node, "constant", mData.constant);
-	Core_Serializer::DeserializeFloat(p_doc, p_node, "linear", mData.linear);
-	Core_Serializer::DeserializeFloat(p_doc, p_node, "quadratic", mData.quadratic);
-	Core_Serializer::DeserializeFloat(p_doc, p_node, "cutoff", mData.cutoff);
-	Core_Serializer::DeserializeFloat(p_doc, p_node, "outercutoff", mData.outerCutoff);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "constant", mData.constant);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "linear", mData.linear);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "quadratic", mData.quadratic);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "cutoff", mData.cutoff);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "outercutoff", mData.outerCutoff);
 }
 
-void Core::Core_CSpotLight::OnInspector(UI::UI_WidgetContainer& p_root)
+void Core::Core_CSpotLight::OnInspector(UI::UI_WidgetContainer& pRoot)
 {
-	Core_CLight::OnInspector(p_root);
+	Core_CLight::OnInspector(pRoot);
 
-	Core_GUIDrawer::DrawScalar<float>(p_root, "Cut-Off", mData.cutoff, 0.1f, 0.f, 180.f);
-	Core_GUIDrawer::DrawScalar<float>(p_root, "Outer Cut-Off", mData.outerCutoff, 0.1f, 0.f, 180.f);
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Cut-Off", mData.cutoff, 0.1f, 0.f, 180.f);
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Outer Cut-Off", mData.outerCutoff, 0.1f, 0.f, 180.f);
 
-	Core_GUIDrawer::CreateTitle(p_root, "Fall-off presets");
-	auto& presetsRoot = p_root.CreateWidget<UI::UI_Group>();
+	Core_GUIDrawer::CreateTitle(pRoot, "Fall-off presets");
+	auto& presetsRoot = pRoot.CreateWidget<UI::UI_Group>();
 
 	auto& constantPreset = presetsRoot.CreateWidget<UI::UI_Button>("Constant");
 	constantPreset.mClickedEvent += [this] { mData.constant = 1.f, mData.linear = mData.quadratic = 0.f; };
@@ -114,7 +114,7 @@ void Core::Core_CSpotLight::OnInspector(UI::UI_WidgetContainer& p_root)
 	quadraticPreset.mClickedEvent += [this] { mData.quadratic = 1.f, mData.constant = mData.linear = 0.f; };
 	quadraticPreset.mIdleBackgroundColor = { 0.7f, 0.5f, 0.f, 1.f };
 
-	Core_GUIDrawer::DrawScalar<float>(p_root, "Constant", mData.constant, 0.005f, 0.f);
-	Core_GUIDrawer::DrawScalar<float>(p_root, "Linear", mData.linear, 0.005f, 0.f);
-	Core_GUIDrawer::DrawScalar<float>(p_root, "Quadratic", mData.quadratic, 0.005f, 0.f);
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Constant", mData.constant, 0.005f, 0.f);
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Linear", mData.linear, 0.005f, 0.f);
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Quadratic", mData.quadratic, 0.005f, 0.f);
 }

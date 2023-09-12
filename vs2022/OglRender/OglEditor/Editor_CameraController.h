@@ -19,11 +19,11 @@ namespace Editor
 			Editor_AView& p_view,
 			Render::Render_Camera& p_camera,
 			glm::vec3& p_position,
-			glm::quat& p_rotation,
+			glm::quat& pRotation,
 			bool p_enableFocusInputs = false
 		);
 
-		void HandleInputs(float p_deltaTime);
+		void HandleInputs(float pDeltaTime);
 
 		void MoveToTarget(Core::Core_Actor& p_target);
 
@@ -33,7 +33,7 @@ namespace Editor
 
 		void SetPosition(const glm::vec3& p_position);
 
-		void SetRotation(const glm::quat& p_rotation);
+		void SetRotation(const glm::quat& pRotation);
 
 		const glm::vec3& GetPosition() const;
 
@@ -47,14 +47,14 @@ namespace Editor
 		void HandleCameraFPSMouse(const glm::vec2& p_mouseOffset, bool p_firstMouse);
 
 		void HandleCameraZoom();
-		void HandleCameraFPSKeyboard(float p_deltaTime);
+		void HandleCameraFPSKeyboard(float pDeltaTime);
 		void UpdateMouseState();
 
 	private:
 		Window::Window_InputManager& m_inputManager;
 		Window::Window_Window& m_window;
 		Editor_AView& m_view;
-		Render::Render_Camera& m_camera;
+		Render::Render_Camera& mCamera;
 		glm::vec3& m_cameraPosition;
 		glm::quat& m_cameraRotation;
 

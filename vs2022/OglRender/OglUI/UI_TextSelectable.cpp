@@ -1,7 +1,7 @@
 #include "UI_TextSelectable.h"
 
-UI::UI_TextSelectable::UI_TextSelectable(const std::string& pContent, bool pSelected, bool pDisabled)
-	: UI_Text(pContent), mSelected(pSelected), mDisabled(pDisabled)
+UI::UI_TextSelectable::UI_TextSelectable(const std::string& pContent, bool pSelected, bool pDisabled) : 
+	UI_Text(pContent), mSelected(pSelected), mDisabled(pDisabled)
 {
 }
 

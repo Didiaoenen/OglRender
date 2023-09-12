@@ -10,7 +10,7 @@ Editor::Editor_GameView::Editor_GameView(const std::string& p_title, bool p_open
 {
 }
 
-void Editor::Editor_GameView::Update(float p_deltaTime)
+void Editor::Editor_GameView::Update(float pDeltaTime)
 {
 }
 

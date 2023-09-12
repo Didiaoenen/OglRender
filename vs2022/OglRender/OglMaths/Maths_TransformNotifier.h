@@ -10,22 +10,22 @@ namespace Maths
 		enum class ENotification
 		{
 			TRANSFORM_CHANGED,
-			TRANSFORM_DESTROYED
+			TRANSFORM_DESTROYED,
 		};
 
 		using NotificationHandler = std::function<void(ENotification)>;
 
 		using NotificationHandlerID = uint64_t;
 
-		NotificationHandlerID AddNotificationHandler(NotificationHandler p_notificationHandler);
+		NotificationHandlerID AddNotificationHandler(NotificationHandler pNotificationHandler);
 
-		void NotifyChildren(ENotification p_notification);
+		void NotifyChildren(ENotification pNotification);
 
-		bool RemoveNotificationHandler(const NotificationHandlerID& p_notificationHandlerID);
+		bool RemoveNotificationHandler(const NotificationHandlerID& pNotificationHandlerID);
 
 	private:
-		std::unordered_map<NotificationHandlerID, NotificationHandler> m_notificationHandlers;
-		NotificationHandlerID m_availableHandlerID = 0;
+		std::unordered_map<NotificationHandlerID, NotificationHandler> mNotificationHandlers;
+		NotificationHandlerID mAvailableHandlerID = 0;
 	};
 }
 

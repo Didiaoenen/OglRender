@@ -10,6 +10,6 @@ namespace Core
 	class Core_IInspectorItem : public Core_ISerializable
 	{
 	public:
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) = 0;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) = 0;
 	};
 }

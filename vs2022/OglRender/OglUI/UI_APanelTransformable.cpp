@@ -1,8 +1,9 @@
-#include "UI_APanelTransformable.h"
-#include "UI_Converter.h"
 
-UI::UI_APanelTransformable::UI_APanelTransformable(const glm::vec2& pDefaultPosition, const glm::vec2& pDefaultSize, EHorizontalAlignment pDefaultHorizontalAlignment, EVerticalAlignment pDefaultVerticalAlignment, bool pIgnoreConfigFile)
-	: mDefaultPosition(pDefaultPosition),
+#include "UI_Converter.h"
+#include "UI_APanelTransformable.h"
+
+UI::UI_APanelTransformable::UI_APanelTransformable(const glm::vec2& pDefaultPosition, const glm::vec2& pDefaultSize, EHorizontalAlignment pDefaultHorizontalAlignment, EVerticalAlignment pDefaultVerticalAlignment, bool pIgnoreConfigFile) : 
+	mDefaultPosition(pDefaultPosition),
 	mDefaultSize(pDefaultSize),
 	mDefaultHorizontalAlignment(pDefaultHorizontalAlignment),
 	mDefaultVerticalAlignment(pDefaultVerticalAlignment),

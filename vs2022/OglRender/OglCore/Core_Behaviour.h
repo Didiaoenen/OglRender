@@ -9,7 +9,7 @@ namespace Core
 	class Core_Behaviour : public Core_AComponent
 	{
 	public:
-		Core_Behaviour(Core_Actor& p_owner, const std::string& p_name);
+		Core_Behaviour(Core_Actor& pOwner, const std::string& pName);
 
 		~Core_Behaviour();
 
@@ -20,7 +20,7 @@ namespace Core
 		//void UnregisterFromLuaContext();
 
 		//template<typename... Args>
-		//void LuaCall(const std::string& p_functionName, Args&&... p_args);
+		//void LuaCall(const std::string& p_functionName, Args&&... pArgs);
 
 		//sol::table& GetTable();
 
@@ -34,33 +34,21 @@ namespace Core
 
 		virtual void OnDestroy() override;
 
-		virtual void OnUpdate(float p_deltaTime) override;
+		virtual void OnUpdate(float pDeltaTime) override;
 
-		virtual void OnFixedUpdate(float p_deltaTime) override;
+		virtual void OnFixedUpdate(float pDeltaTime) override;
 
-		virtual void OnLateUpdate(float p_deltaTime) override;
+		virtual void OnLateUpdate(float pDeltaTime) override;
 
-		//virtual void OnCollisionEnter(Core_CPhysicalObject& p_otherObject) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		//virtual void OnCollisionStay(Core_CPhysicalObject& p_otherObject) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		//virtual void OnCollisionExit(Core_CPhysicalObject& p_otherObject) override;
-
-		//virtual void OnTriggerEnter(Core_CPhysicalObject& p_otherObject) override;
-
-		//virtual void OnTriggerStay(Core_CPhysicalObject& p_otherObject) override;
-
-		//virtual void OnTriggerExit(Core_CPhysicalObject& p_otherObject) override;
-
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
-
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
-
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) override;
 
 	public:
-		static Tools::Tools_Event<Core_Behaviour*> CreatedEvent;
-		static Tools::Tools_Event<Core_Behaviour*> DestroyedEvent;
+		static Tools::Tools_Event<Core_Behaviour*> mCreatedEvent;
+		static Tools::Tools_Event<Core_Behaviour*> mDestroyedEvent;
 
 		const std::string name;
 

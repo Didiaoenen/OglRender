@@ -9,7 +9,7 @@ void Render::Render_AssimpParser::ProcessMaterials(const aiScene* p_scene, std::
 {
 }
 
-void Render::Render_AssimpParser::ProcessNode(void* p_transform, aiNode* p_node, const aiScene* p_scene, std::vector<Render_Mesh*>& p_meshes)
+void Render::Render_AssimpParser::ProcessNode(void* p_transform, aiNode* pNode, const aiScene* p_scene, std::vector<Render_Mesh*>& p_meshes)
 {
 }
 

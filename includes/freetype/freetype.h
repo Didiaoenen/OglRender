@@ -3994,7 +3994,7 @@ FT_BEGIN_HEADER
    *     `glyph->num_subglyphs`.
    *
    * @output:
-   *   p_index ::
+   *   pIndex ::
    *     The glyph index of the subglyph.
    *
    *   p_flags ::
@@ -4023,7 +4023,7 @@ FT_BEGIN_HEADER
   FT_EXPORT( FT_Error )
   FT_Get_SubGlyph_Info( FT_GlyphSlot  glyph,
                         FT_UInt       sub_index,
-                        FT_Int       *p_index,
+                        FT_Int       *pIndex,
                         FT_UInt      *p_flags,
                         FT_Int       *p_arg1,
                         FT_Int       *p_arg2,
@@ -4223,7 +4223,7 @@ FT_BEGIN_HEADER
    *   FT_FSTYPE_RESTRICTED_LICENSE_EMBEDDING ::
    *     Fonts that have only this bit set must not be modified, embedded or
    *     exchanged in any manner without first obtaining permission of the
-   *     font software copyright owner.
+   *     font software copyright mOwner.
    *
    *   FT_FSTYPE_PREVIEW_AND_PRINT_EMBEDDING ::
    *     The font may be embedded and temporarily loaded on the remote

@@ -32,7 +32,7 @@ namespace Render
 
 	private:
 		std::vector<Render_Mesh*> m_meshes;
-		std::vector<std::string> m_materialNames;
+		std::vector<std::string> mMaterialNames;
 
 		Render_BoundingSphere m_boundingSphere;
 	};

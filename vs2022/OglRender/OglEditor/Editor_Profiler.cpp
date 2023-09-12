@@ -7,7 +7,7 @@ Editor::Editor_Profiler::Editor_Profiler(const std::string& p_title, bool p_open
 {
 }
 
-void Editor::Editor_Profiler::Update(float p_deltaTime)
+void Editor::Editor_Profiler::Update(float pDeltaTime)
 {
 }
 

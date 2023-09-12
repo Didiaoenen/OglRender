@@ -1,8 +1,9 @@
-#include "UI_ProgressBar.h"
-#include "UI_Converter.h"
 
-UI::UI_ProgressBar::UI_ProgressBar(float pFraction, const glm::vec2& pSize, const std::string& pOverlay)
-	: mFraction(pFraction), mSize(pSize), mOverlay(pOverlay)
+#include "UI_Converter.h"
+#include "UI_ProgressBar.h"
+
+UI::UI_ProgressBar::UI_ProgressBar(float pFraction, const glm::vec2& pSize, const std::string& pOverlay) : 
+	mFraction(pFraction), mSize(pSize), mOverlay(pOverlay)
 {
 }
 

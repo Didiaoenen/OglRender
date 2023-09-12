@@ -22,7 +22,7 @@ namespace Editor
 
 		~Editor_HardwareInfo();
 
-		void Update(float p_deltaTime);
+		void Update(float pDeltaTime);
 
 	private:
 		float p_updateTimer = 0.f;

@@ -18,7 +18,7 @@ namespace Editor
 			const UI::UI_PanelWindowSettings& p_windowSettings
 		);
 
-		virtual void Update(float p_deltaTime) override;
+		virtual void Update(float pDeltaTime) override;
 
 		virtual void _Render_Impl() override;
 

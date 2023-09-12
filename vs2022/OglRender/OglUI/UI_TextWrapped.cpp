@@ -1,7 +1,7 @@
 #include "UI_TextWrapped.h"
 
-UI::UI_TextWrapped::UI_TextWrapped(const std::string& pContent)
-	: UI_Text(pContent)
+UI::UI_TextWrapped::UI_TextWrapped(const std::string& pContent) : 
+	UI_Text(pContent)
 {
 }
 

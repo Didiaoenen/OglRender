@@ -84,18 +84,18 @@ bool Core::Core_SceneManager::LoadScene(const std::string & pPath, bool p_absolu
 	return false;
 }
 
-bool Core::Core_SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc)
+bool Core::Core_SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& pDoc)
 {
-	if (!p_doc.Error())
+	if (!pDoc.Error())
 	{
-		tinyxml2::XMLNode* root = p_doc.FirstChild();
+		tinyxml2::XMLNode* root = pDoc.FirstChild();
 		if (root)
 		{
 			tinyxml2::XMLNode* sceneNode = root->FirstChildElement("scene");
 			if (sceneNode)
 			{
 				LoadEmptyScene();
-				m_currentScene->OnDeserialize(p_doc, sceneNode);
+				m_currentScene->OnDeserialize(pDoc, sceneNode);
 				return true;
 			}
 		}

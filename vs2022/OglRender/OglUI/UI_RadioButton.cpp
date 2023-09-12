@@ -1,7 +1,7 @@
 #include "UI_RadioButton.h"
 
-UI::UI_RadioButton::UI_RadioButton(bool pSelected, const std::string& pLabel)
-	: UI_DataWidget<bool>(mSelected), mLabel(pLabel)
+UI::UI_RadioButton::UI_RadioButton(bool pSelected, const std::string& pLabel) : 
+	UI_DataWidget<bool>(mSelected), mLabel(pLabel)
 {
 	if (pSelected)
 	{

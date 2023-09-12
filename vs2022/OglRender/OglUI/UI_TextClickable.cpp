@@ -1,7 +1,7 @@
 #include "UI_TextClickable.h"
 
-UI::UI_TextClickable::UI_TextClickable(const std::string& pContent)
-	: UI_Text(pContent)
+UI::UI_TextClickable::UI_TextClickable(const std::string& pContent) : 
+    UI_Text(pContent)
 {
 }
 

@@ -1,7 +1,7 @@
 #include "UI_Text.h"
 
-UI::UI_Text::UI_Text(const std::string& pContent)
-	: UI_DataWidget(mContent), mContent(pContent)
+UI::UI_Text::UI_Text(const std::string& pContent) : 
+	UI_DataWidget(mContent), mContent(pContent)
 {
 }
 

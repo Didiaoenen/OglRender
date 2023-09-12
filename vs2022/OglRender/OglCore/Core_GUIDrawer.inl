@@ -28,23 +28,23 @@ namespace Core
 	}
 
 	template<typename T>
-	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& p_root, const std::string& p_name, T& p_data, float p_step, T p_min, T p_max)
+	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& pRoot, const std::string& pName, T& p_data, float p_step, T p_min, T p_max)
 	{
 		static_assert(std::is_scalar<T>::value, "T must be a scalar");
 
-		CreateTitle(p_root, p_name);
-		auto& widget = p_root.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), p_min, p_max, p_data, p_step, "", GetFormat<T>());
+		CreateTitle(pRoot, pName);
+		auto& widget = pRoot.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), p_min, p_max, p_data, p_step, "", GetFormat<T>());
 		auto& dispatcher = widget.AddPlugin<UI::UI_DataDispatcher<T>>();
 		dispatcher.RegisterReference(p_data);
 	}
 
 	template<typename T>
-	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& p_root, const std::string& p_name, std::function<T(void)> p_gatherer, std::function<void(T)> p_provider, float p_step, T p_min, T p_max)
+	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& pRoot, const std::string& pName, std::function<T(void)> p_gatherer, std::function<void(T)> p_provider, float p_step, T p_min, T p_max)
 	{
 		static_assert(std::is_scalar<T>::value, "T must be a scalar");
 
-		CreateTitle(p_root, p_name);
-		auto& widget = p_root.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), p_min, p_max, static_cast<T>(0), p_step, "", GetFormat<T>());
+		CreateTitle(pRoot, pName);
+		auto& widget = pRoot.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), p_min, p_max, static_cast<T>(0), p_step, "", GetFormat<T>());
 		auto& dispatcher = widget.AddPlugin<UI::UI_DataDispatcher<T>>();
 		dispatcher.RegisterGatherer(p_gatherer);
 		dispatcher.RegisterProvider(p_provider);

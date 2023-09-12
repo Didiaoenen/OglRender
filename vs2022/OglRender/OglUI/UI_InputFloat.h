@@ -9,9 +9,9 @@ namespace UI
 	public:
 		UI_InputFloat
 		(
-			float pDefaultValue = 0,
-			float pStep = 1,
-			float pFastStep = 0,
+			float pDefaultValue = 0.0f,
+			float pStep = 0.1f,
+			float pFastStep = 0.0f,
 			const std::string& pLabel = "",
 			const std::string& pFormat = "%.3f",
 			bool pSelectAllOnClick = true

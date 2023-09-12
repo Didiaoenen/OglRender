@@ -13,9 +13,9 @@ namespace Editor
 	public:
 		Editor_MenuBar();
 
-		void HandleShortcuts(float p_deltaTime);
+		void HandleShortcuts(float pDeltaTime);
 
-		void RegisterPanel(const std::string& p_name, UI::UI_PanelWindow& p_panel);
+		void RegisterPanel(const std::string& pName, UI::UI_PanelWindow& p_panel);
 
 	private:
 		void CreateFileMenu();

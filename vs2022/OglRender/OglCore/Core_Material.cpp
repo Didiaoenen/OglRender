@@ -74,7 +74,9 @@ void Core::Core_Material::Bind(Render::Render_Texture* p_emptyTexture)
 void Core::Core_Material::UnBind()
 {
 	if (HasShader())
+	{
 		m_shader->Unbind();
+	}
 }
 
 Render::Render_Shader*& Core::Core_Material::GetShader()
@@ -177,91 +179,91 @@ std::map<std::string, std::any>& Core::Core_Material::GetUniformsData()
 	return m_uniformsData;
 }
 
-void Core::Core_Material::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_Material::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_Serializer::SerializeShader(p_doc, p_node, "shader", m_shader);
+	Core_Serializer::SerializeShader(pDoc, pNode, "shader", m_shader);
 
-	tinyxml2::XMLNode* settingsNode = p_doc.NewElement("settings");
-	p_node->InsertEndChild(settingsNode);
+	tinyxml2::XMLNode* settingsNode = pDoc.NewElement("settings");
+	pNode->InsertEndChild(settingsNode);
 
-	Core_Serializer::SerializeBoolean(p_doc, settingsNode, "blendable", m_blendable);
-	Core_Serializer::SerializeBoolean(p_doc, settingsNode, "backface_culling", m_backfaceCulling);
-	Core_Serializer::SerializeBoolean(p_doc, settingsNode, "frontface_culling", m_frontfaceCulling);
-	Core_Serializer::SerializeBoolean(p_doc, settingsNode, "depth_test", m_depthTest);
-	Core_Serializer::SerializeBoolean(p_doc, settingsNode, "depth_writing", m_depthWriting);
-	Core_Serializer::SerializeBoolean(p_doc, settingsNode, "color_writing", m_colorWriting);
-	Core_Serializer::SerializeInt(p_doc, settingsNode, "gpu_instances", m_gpuInstances);
+	Core_Serializer::SerializeBoolean(pDoc, settingsNode, "blendable", m_blendable);
+	Core_Serializer::SerializeBoolean(pDoc, settingsNode, "backface_culling", m_backfaceCulling);
+	Core_Serializer::SerializeBoolean(pDoc, settingsNode, "frontface_culling", m_frontfaceCulling);
+	Core_Serializer::SerializeBoolean(pDoc, settingsNode, "depth_test", m_depthTest);
+	Core_Serializer::SerializeBoolean(pDoc, settingsNode, "depth_writing", m_depthWriting);
+	Core_Serializer::SerializeBoolean(pDoc, settingsNode, "color_writing", m_colorWriting);
+	Core_Serializer::SerializeInt(pDoc, settingsNode, "gpu_instances", m_gpuInstances);
 
-	tinyxml2::XMLNode* uniformsNode = p_doc.NewElement("uniforms");
-	p_node->InsertEndChild(uniformsNode);
+	tinyxml2::XMLNode* uniformsNode = pDoc.NewElement("uniforms");
+	pNode->InsertEndChild(uniformsNode);
 
 	for (const auto& [uniformName, uniformValue] : m_uniformsData)
 	{
-		tinyxml2::XMLNode* uniform = p_doc.NewElement("uniform");
+		tinyxml2::XMLNode* uniform = pDoc.NewElement("uniform");
 		uniformsNode->InsertEndChild(uniform);
 
 		const Render::Render_UniformInfo* uniformInfo = m_shader->GetUniformInfo(uniformName);
 
-		Core_Serializer::SerializeString(p_doc, uniform, "name", uniformName);
+		Core_Serializer::SerializeString(pDoc, uniform, "name", uniformName);
 
 		if (uniformInfo && uniformValue.has_value())
 		{
 			switch (uniformInfo->type)
 			{
 			case Render::UniformType::UNIFORM_BOOL:
-				if (uniformValue.type() == typeid(bool)) Core_Serializer::SerializeInt(p_doc, uniform, "value", std::any_cast<bool>(uniformValue));
+				if (uniformValue.type() == typeid(bool)) Core_Serializer::SerializeInt(pDoc, uniform, "value", std::any_cast<bool>(uniformValue));
 				break;
 
 			case Render::UniformType::UNIFORM_INT:
-				if (uniformValue.type() == typeid(int)) Core_Serializer::SerializeInt(p_doc, uniform, "value", std::any_cast<int>(uniformValue));
+				if (uniformValue.type() == typeid(int)) Core_Serializer::SerializeInt(pDoc, uniform, "value", std::any_cast<int>(uniformValue));
 				break;
 
 			case Render::UniformType::UNIFORM_FLOAT:
-				if (uniformValue.type() == typeid(float)) Core_Serializer::SerializeFloat(p_doc, uniform, "value", std::any_cast<float>(uniformValue));
+				if (uniformValue.type() == typeid(float)) Core_Serializer::SerializeFloat(pDoc, uniform, "value", std::any_cast<float>(uniformValue));
 				break;
 
 			case Render::UniformType::UNIFORM_FLOAT_VEC2:
-				if (uniformValue.type() == typeid(glm::vec2)) Core_Serializer::SerializeVec2(p_doc, uniform, "value", std::any_cast<glm::vec2>(uniformValue));
+				if (uniformValue.type() == typeid(glm::vec2)) Core_Serializer::SerializeVec2(pDoc, uniform, "value", std::any_cast<glm::vec2>(uniformValue));
 				break;
 
 			case Render::UniformType::UNIFORM_FLOAT_VEC3:
-				if (uniformValue.type() == typeid(glm::vec3)) Core_Serializer::SerializeVec3(p_doc, uniform, "value", std::any_cast<glm::vec3>(uniformValue));
+				if (uniformValue.type() == typeid(glm::vec3)) Core_Serializer::SerializeVec3(pDoc, uniform, "value", std::any_cast<glm::vec3>(uniformValue));
 				break;
 
 			case Render::UniformType::UNIFORM_FLOAT_VEC4:
-				if (uniformValue.type() == typeid(glm::vec4)) Core_Serializer::SerializeVec4(p_doc, uniform, "value", std::any_cast<glm::vec4>(uniformValue));
+				if (uniformValue.type() == typeid(glm::vec4)) Core_Serializer::SerializeVec4(pDoc, uniform, "value", std::any_cast<glm::vec4>(uniformValue));
 				break;
 
 			case Render::UniformType::UNIFORM_SAMPLER_2D:
-				if (uniformValue.type() == typeid(Render::Render_Texture*)) Core_Serializer::SerializeTexture(p_doc, uniform, "value", std::any_cast<Render::Render_Texture*>(uniformValue));
+				if (uniformValue.type() == typeid(Render::Render_Texture*)) Core_Serializer::SerializeTexture(pDoc, uniform, "value", std::any_cast<Render::Render_Texture*>(uniformValue));
 				break;
 			}
 		}
 	}
 }
 
-void Core::Core_Material::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_Material::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	tinyxml2::XMLNode* settingsNode = p_node->FirstChildElement("settings");
+	tinyxml2::XMLNode* settingsNode = pNode->FirstChildElement("settings");
 
 	if (settingsNode)
 	{
-		Core_Serializer::DeserializeBoolean(p_doc, settingsNode, "blendable", m_blendable);
-		Core_Serializer::DeserializeBoolean(p_doc, settingsNode, "backface_culling", m_backfaceCulling);
-		Core_Serializer::DeserializeBoolean(p_doc, settingsNode, "frontface_culling", m_frontfaceCulling);
-		Core_Serializer::DeserializeBoolean(p_doc, settingsNode, "depth_test", m_depthTest);
-		Core_Serializer::DeserializeBoolean(p_doc, settingsNode, "depth_writing", m_depthWriting);
-		Core_Serializer::DeserializeBoolean(p_doc, settingsNode, "color_writing", m_colorWriting);
-		Core_Serializer::DeserializeInt(p_doc, settingsNode, "gpu_instances", m_gpuInstances);
+		Core_Serializer::DeserializeBoolean(pDoc, settingsNode, "blendable", m_blendable);
+		Core_Serializer::DeserializeBoolean(pDoc, settingsNode, "backface_culling", m_backfaceCulling);
+		Core_Serializer::DeserializeBoolean(pDoc, settingsNode, "frontface_culling", m_frontfaceCulling);
+		Core_Serializer::DeserializeBoolean(pDoc, settingsNode, "depth_test", m_depthTest);
+		Core_Serializer::DeserializeBoolean(pDoc, settingsNode, "depth_writing", m_depthWriting);
+		Core_Serializer::DeserializeBoolean(pDoc, settingsNode, "color_writing", m_colorWriting);
+		Core_Serializer::DeserializeInt(pDoc, settingsNode, "gpu_instances", m_gpuInstances);
 	}
 
-	Render::Render_Shader* deserializedShader = Core_Serializer::DeserializeShader(p_doc, p_node, "shader");
+	Render::Render_Shader* deserializedShader = Core_Serializer::DeserializeShader(pDoc, pNode, "shader");
 
 	if (deserializedShader)
 	{
 		SetShader(deserializedShader);
 
-		tinyxml2::XMLNode* uniformsNode = p_node->FirstChildElement("uniforms");
+		tinyxml2::XMLNode* uniformsNode = pNode->FirstChildElement("uniforms");
 
 		if (uniformsNode)
 		{
@@ -278,31 +280,31 @@ void Core::Core_Material::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::
 						switch (uniformInfo->type)
 						{
 						case Render::UniformType::UNIFORM_BOOL:
-							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeBoolean(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeBoolean(pDoc, uniform, "value");
 							break;
 
 						case Render::UniformType::UNIFORM_INT:
-							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeInt(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeInt(pDoc, uniform, "value");
 							break;
 
 						case Render::UniformType::UNIFORM_FLOAT:
-							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeFloat(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeFloat(pDoc, uniform, "value");
 							break;
 
 						case Render::UniformType::UNIFORM_FLOAT_VEC2:
-							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec2(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec2(pDoc, uniform, "value");
 							break;
 
 						case Render::UniformType::UNIFORM_FLOAT_VEC3:
-							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec3(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec3(pDoc, uniform, "value");
 							break;
 
 						case Render::UniformType::UNIFORM_FLOAT_VEC4:
-							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec4(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec4(pDoc, uniform, "value");
 							break;
 
 						case Render::UniformType::UNIFORM_SAMPLER_2D:
-							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeTexture(p_doc, uniform, "value");
+							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeTexture(pDoc, uniform, "value");
 							break;
 						}
 					}

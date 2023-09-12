@@ -16,11 +16,11 @@ namespace Render
 	public:
 		Render_Camera();
 
-		void CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const glm::vec3& p_position, const glm::quat& p_rotation);
+		void CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const glm::vec3& p_position, const glm::quat& pRotation);
 
 		void CacheProjectionMatrix(uint16_t p_windowWidth, uint16_t p_windowHeight);
 
-		void CacheViewMatrix(const glm::vec3& p_position, const glm::quat& p_rotation);
+		void CacheViewMatrix(const glm::vec3& p_position, const glm::quat& pRotation);
 
 		void CacheFrustum(const glm::mat4& p_view, const glm::mat4& p_projection);
 
@@ -54,17 +54,17 @@ namespace Render
 
 		void SetFar(float pValue);
 
-		void SetClearColor(const glm::vec3& p_clearColor);
+		void SetClearColor(const glm::vec3& pClearColor);
 
-		void SetFrustumGeometryCulling(bool p_enable);
+		void SetFrustumGeometryCulling(bool pEnable);
 
-		void SetFrustumLightCulling(bool p_enable);
+		void SetFrustumLightCulling(bool pEnable);
 
 		void SetProjectionMode(EProjectionMode p_projectionMode);
 
 	private:
 		glm::mat4 CalculateProjectionMatrix(uint16_t p_windowWidth, uint16_t p_windowHeight) const;
-		glm::mat4 CalculateViewMatrix(const glm::vec3& p_position, const glm::quat& p_rotation) const;
+		glm::mat4 CalculateViewMatrix(const glm::vec3& p_position, const glm::quat& pRotation) const;
 
 	private:
 		Render_Frustum m_frustum;

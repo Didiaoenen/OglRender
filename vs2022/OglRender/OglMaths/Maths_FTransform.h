@@ -11,43 +11,43 @@ namespace Maths
 	class Maths_FTransform
 	{
 	public:
-		Maths_FTransform(glm::vec3 p_localPosition = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat p_localRotation = glm::identity<glm::quat>(), glm::vec3 p_localScale = glm::vec3(1.0f, 1.0f, 1.0f));
+		Maths_FTransform(glm::vec3 pLocalPosition = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat pLocalRotation = glm::identity<glm::quat>(), glm::vec3 pLocalScale = glm::vec3(1.0f, 1.0f, 1.0f));
 
 		~Maths_FTransform();
 
-		void NotificationHandler(Maths_TransformNotifier::ENotification p_notification);
+		void NotificationHandler(Maths_TransformNotifier::ENotification pNotification);
 
-		void SetParent(Maths_FTransform& p_parent);
+		void SetParent(Maths_FTransform& pParent);
 
 		bool RemoveParent();
 
 		bool HasParent() const;
 
-		void GenerateMatricesWorld(glm::vec3 p_position, glm::quat p_rotation, glm::vec3 p_scale);
+		void GenerateMatricesWorld(glm::vec3 p_position, glm::quat pRotation, glm::vec3 pScale);
 
-		void GenerateMatricesLocal(glm::vec3 p_position, glm::quat p_rotation, glm::vec3 p_scale);
+		void GenerateMatricesLocal(glm::vec3 p_position, glm::quat pRotation, glm::vec3 pScale);
 
 		void UpdateWorldMatrix();
 
 		void UpdateLocalMatrix();
 
-		void SetLocalPosition(glm::vec3 p_newPosition);
+		void SetLocalPosition(glm::vec3 pNewPosition);
 
-		void SetLocalRotation(glm::quat p_newRotation);
+		void SetLocalRotation(glm::quat pNewRotation);
 
-		void SetLocalScale(glm::vec3 p_newScale);
+		void SetLocalScale(glm::vec3 pNewScale);
 
-		void SetWorldPosition(glm::vec3 p_newPosition);
+		void SetWorldPosition(glm::vec3 pNewPosition);
 
-		void SetWorldRotation(glm::quat p_newRotation);
+		void SetWorldRotation(glm::quat pNewRotation);
 
-		void SetWorldScale(glm::vec3 p_newScale);
+		void SetWorldScale(glm::vec3 pNewScale);
 
-		void TranslateLocal(const glm::vec3& p_translation);
+		void TranslateLocal(const glm::vec3& pTranslation);
 
-		void RotateLocal(const glm::quat& p_rotation);
+		void RotateLocal(const glm::quat& pRotation);
 
-		void ScaleLocal(const glm::vec3& p_scale);
+		void ScaleLocal(const glm::vec3& pScale);
 
 		const glm::vec3& GetLocalPosition() const;
 

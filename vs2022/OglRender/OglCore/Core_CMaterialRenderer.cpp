@@ -13,13 +13,13 @@
 #include "Core_ServiceLocator.h"
 #include "Core_CMaterialRenderer.h"
 
-Core::Core_CMaterialRenderer::Core_CMaterialRenderer(Core_Actor& p_owner) :
-	Core_AComponent(p_owner)
+Core::Core_CMaterialRenderer::Core_CMaterialRenderer(Core_Actor& pOwner) :
+	Core_AComponent(pOwner)
 {
-	m_materials.fill(nullptr);
+	mMaterials.fill(nullptr);
 
 	for (uint8_t i = 0; i < MAX_MATERIAL_COUNT; ++i)
-		m_materialFields[i].fill(nullptr);
+		mMaterialFields[i].fill(nullptr);
 
 	UpdateMaterialList();
 }
@@ -29,108 +29,117 @@ std::string Core::Core_CMaterialRenderer::GetName()
 	return "Material Renderer";
 }
 
-void Core::Core_CMaterialRenderer::FillWithMaterial(Core_Material& p_material)
+void Core::Core_CMaterialRenderer::FillWithMaterial(Core_Material& pMaterial)
 {
-	for (uint8_t i = 0; i < m_materials.size(); ++i)
-		m_materials[i] = &p_material;
+	for (uint8_t i = 0; i < mMaterials.size(); ++i)
+		mMaterials[i] = &pMaterial;
 }
 
-void Core::Core_CMaterialRenderer::SetMaterialAtIndex(uint8_t p_index, Core_Material& p_material)
+void Core::Core_CMaterialRenderer::SetMaterialAtIndex(uint8_t pIndex, Core_Material& pMaterial)
 {
-	m_materials[p_index] = &p_material;
+	mMaterials[pIndex] = &pMaterial;
 }
 
-Core::Core_Material* Core::Core_CMaterialRenderer::GetMaterialAtIndex(uint8_t p_index)
+Core::Core_Material* Core::Core_CMaterialRenderer::GetMaterialAtIndex(uint8_t pIndex)
 {
-	return m_materials.at(p_index);
+	return mMaterials.at(pIndex);
 }
 
-void Core::Core_CMaterialRenderer::RemoveMaterialAtIndex(uint8_t p_index)
+void Core::Core_CMaterialRenderer::RemoveMaterialAtIndex(uint8_t pIndex)
 {
-	if (p_index < m_materials.size())
+	if (pIndex < mMaterials.size())
 	{
-		m_materials[p_index] = nullptr;;
+		mMaterials[pIndex] = nullptr;;
 	}
 }
 
-void Core::Core_CMaterialRenderer::RemoveMaterialByInstance(Core_Material& p_instance)
+void Core::Core_CMaterialRenderer::RemoveMaterialByInstance(Core_Material& pInstance)
 {
-	for (uint8_t i = 0; i < m_materials.size(); ++i)
-		if (m_materials[i] == &p_instance)
-			m_materials[i] = nullptr;
+	for (uint8_t i = 0; i < mMaterials.size(); ++i)
+		if (mMaterials[i] == &pInstance)
+			mMaterials[i] = nullptr;
 }
 
 void Core::Core_CMaterialRenderer::RemoveAllMaterials()
 {
-	for (uint8_t i = 0; i < m_materials.size(); ++i)
-		m_materials[i] = nullptr;
+	for (uint8_t i = 0; i < mMaterials.size(); ++i)
+		mMaterials[i] = nullptr;
 }
 
 void Core::Core_CMaterialRenderer::UpdateMaterialList()
 {
-	if (auto modelRenderer = owner.GetComponent<Core_CModelRenderer>(); modelRenderer && modelRenderer->GetModel())
+	if (auto modelRenderer = mOwner.GetComponent<Core_CModelRenderer>(); modelRenderer && modelRenderer->GetModel())
 	{
 		uint8_t materialIndex = 0;
 
 		for (const std::string& materialName : modelRenderer->GetModel()->GetMaterialNames())
 		{
-			m_materialNames[materialIndex++] = materialName;
+			mMaterialNames[materialIndex++] = materialName;
 		}
 
 		for (uint8_t i = materialIndex; i < MAX_MATERIAL_COUNT; ++i)
-			m_materialNames[i] = "";
+			mMaterialNames[i] = "";
 	}
 
-	for (uint8_t i = 0; i < m_materialFields.size(); ++i)
+	for (uint8_t i = 0; i < mMaterialFields.size(); ++i)
 	{
-		if (m_materialFields[i][0])
+		if (mMaterialFields[i][0])
 		{
-			bool mEnabled = !m_materialNames[i].empty();
-			m_materialFields[i][0]->mEnabled = mEnabled;
-			m_materialFields[i][1]->mEnabled = mEnabled;
-			m_materialFields[i][2]->mEnabled = mEnabled;
-			reinterpret_cast<UI::UI_Text*>(m_materialFields[i][0])->mContent = m_materialNames[i];
+			bool mEnabled = !mMaterialNames[i].empty();
+			mMaterialFields[i][0]->mEnabled = mEnabled;
+			mMaterialFields[i][1]->mEnabled = mEnabled;
+			mMaterialFields[i][2]->mEnabled = mEnabled;
+			reinterpret_cast<UI::UI_Text*>(mMaterialFields[i][0])->mContent = mMaterialNames[i];
 		}
 	}
 }
 
-void Core::Core_CMaterialRenderer::SetUserMatrixElement(uint32_t p_row, uint32_t p_column, float pValue)
+void Core::Core_CMaterialRenderer::SetUserMatrixElement(uint32_t pRow, uint32_t pColumn, float pValue)
 {
-
+	if (pRow < 4 && pColumn < 4)
+	{
+	}
 }
 
-float Core::Core_CMaterialRenderer::GetUserMatrixElement(uint32_t p_row, uint32_t p_column) const
+float Core::Core_CMaterialRenderer::GetUserMatrixElement(uint32_t pRow, uint32_t pColumn) const
 {
-	return 0.0f;
+	if (pRow < 4 && pColumn < 4)
+	{
+		return 0.0f;
+	}
+	else
+	{
+		return 0.0f;
+	}
 }
 
 const glm::mat4& Core::Core_CMaterialRenderer::GetUserMatrix() const
 {
-	return m_userMatrix;
+	return mUserMatrix;
 }
 
 const Core::Core_CMaterialRenderer::MaterialList& Core::Core_CMaterialRenderer::GetMaterials() const
 {
-	return m_materials;
+	return mMaterials;
 }
 
-void Core::Core_CMaterialRenderer::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CMaterialRenderer::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	tinyxml2::XMLNode* materialsNode = p_doc.NewElement("materials");
-	p_node->InsertEndChild(materialsNode);
+	tinyxml2::XMLNode* materialsNode = pDoc.NewElement("materials");
+	pNode->InsertEndChild(materialsNode);
 
-	auto modelRenderer = owner.GetComponent<Core_CModelRenderer>();
+	auto modelRenderer = mOwner.GetComponent<Core_CModelRenderer>();
 	uint8_t elementsToSerialize = modelRenderer->GetModel() ? (uint8_t)std::min(modelRenderer->GetModel()->GetMaterialNames().size(), (size_t)MAX_MATERIAL_COUNT) : 0;
 
 	for (uint8_t i = 0; i < elementsToSerialize; ++i)
 	{
-		Core_Serializer::SerializeMaterial(p_doc, materialsNode, "material", m_materials[i]);
+		Core_Serializer::SerializeMaterial(pDoc, materialsNode, "material", mMaterials[i]);
 	}
 }
 
-void Core::Core_CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	tinyxml2::XMLNode* materialsRoot = p_node->FirstChildElement("materials");
+	tinyxml2::XMLNode* materialsRoot = pNode->FirstChildElement("materials");
 	if (materialsRoot)
 	{
 		tinyxml2::XMLElement* currentMaterial = materialsRoot->FirstChildElement("material");
@@ -140,7 +149,9 @@ void Core::Core_CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocument& p_doc, t
 		while (currentMaterial)
 		{
 			if (auto material = Core_ServiceLocator::Get<Core::Core_MaterialManager>()[currentMaterial->GetText()])
-				m_materials[materialIndex] = material;
+			{
+				mMaterials[materialIndex] = material;
+			}
 
 			currentMaterial = currentMaterial->NextSiblingElement("material");
 			++materialIndex;
@@ -150,14 +161,14 @@ void Core::Core_CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocument& p_doc, t
 	UpdateMaterialList();
 }
 
-std::array<UI::UI_AWidget*, 3> CustomMaterialDrawer(UI::UI_WidgetContainer& p_root, const std::string& p_name, Core::Core_Material*& p_data)
+std::array<UI::UI_AWidget*, 3> CustomMaterialDrawer(UI::UI_WidgetContainer& pRoot, const std::string& pName, Core::Core_Material*& p_data)
 {
 	std::array<UI::UI_AWidget*, 3> widgets;
 
-	widgets[0] = &p_root.CreateWidget<UI::UI_TextColored>(p_name, Core::Core_GUIDrawer::TitleColor);
+	widgets[0] = &pRoot.CreateWidget<UI::UI_TextColored>(pName, Core::Core_GUIDrawer::TitleColor);
 
 	std::string displayedText = (p_data ? p_data->path : std::string("Empty"));
-	auto& rightSide = p_root.CreateWidget<UI::UI_Group>();
+	auto& rightSide = pRoot.CreateWidget<UI::UI_Group>();
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);
 
@@ -190,10 +201,12 @@ std::array<UI::UI_AWidget*, 3> CustomMaterialDrawer(UI::UI_WidgetContainer& p_ro
 	return widgets;
 }
 
-void Core::Core_CMaterialRenderer::OnInspector(UI::UI_WidgetContainer& p_root)
+void Core::Core_CMaterialRenderer::OnInspector(UI::UI_WidgetContainer& pRoot)
 {
-	for (uint8_t i = 0; i < m_materials.size(); ++i)
-		m_materialFields[i] = CustomMaterialDrawer(p_root, "Material", m_materials[i]);
+	for (uint8_t i = 0; i < mMaterials.size(); ++i)
+	{
+		mMaterialFields[i] = CustomMaterialDrawer(pRoot, "Material", mMaterials[i]);
+	}
 
 	UpdateMaterialList();
 }

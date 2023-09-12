@@ -6,8 +6,8 @@
 #include "Core_Actor.h"
 #include "Core_CAmbientSphereLight.h"
 
-Core::Core_CAmbientSphereLight::Core_CAmbientSphereLight(Core_Actor& p_owner) :
-	Core_CLight(p_owner)
+Core::Core_CAmbientSphereLight::Core_CAmbientSphereLight(Core_Actor& pOwner) :
+	Core_CLight(pOwner)
 {
 	mData.intensity = 0.1f;
 	mData.constant = 1.0f;
@@ -25,28 +25,28 @@ float Core::Core_CAmbientSphereLight::GetRadius() const
 	return mData.quadratic;
 }
 
-void Core::Core_CAmbientSphereLight::SetRadius(float p_radius)
+void Core::Core_CAmbientSphereLight::SetRadius(float pRadius)
 {
-	mData.constant = p_radius;
+	mData.constant = pRadius;
 }
 
-void Core::Core_CAmbientSphereLight::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CAmbientSphereLight::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_CLight::OnSerialize(p_doc, p_node);
+	Core_CLight::OnSerialize(pDoc, pNode);
 
-	Core_Serializer::SerializeFloat(p_doc, p_node, "radius", mData.constant);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "radius", mData.constant);
 }
 
-void Core::Core_CAmbientSphereLight::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CAmbientSphereLight::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_CLight::OnDeserialize(p_doc, p_node);
+	Core_CLight::OnDeserialize(pDoc, pNode);
 
-	Core_Serializer::DeserializeFloat(p_doc, p_node, "radius", mData.constant);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "radius", mData.constant);
 }
 
-void Core::Core_CAmbientSphereLight::OnInspector(UI::UI_WidgetContainer& p_root)
+void Core::Core_CAmbientSphereLight::OnInspector(UI::UI_WidgetContainer& pRoot)
 {
-	Core_CLight::OnInspector(p_root);
+	Core_CLight::OnInspector(pRoot);
 
-	Core_GUIDrawer::DrawScalar<float>(p_root, "Radius", mData.constant, 0.1f, 0.f);
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Radius", mData.constant, 0.1f, 0.f);
 }

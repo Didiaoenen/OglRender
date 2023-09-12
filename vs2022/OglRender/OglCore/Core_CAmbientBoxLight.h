@@ -9,19 +9,19 @@ namespace Core
 	class Core_CAmbientBoxLight : public Core_CLight
 	{
 	public:
-		Core_CAmbientBoxLight(Core_Actor& p_owner);
+		Core_CAmbientBoxLight(Core_Actor& pOwner);
 
 		std::string GetName() override;
 
 		glm::vec3 GetSize() const;
 
-		void SetSize(const glm::vec3& p_size);
+		void SetSize(const glm::vec3& pSize);
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) override;
 	};
 }
 

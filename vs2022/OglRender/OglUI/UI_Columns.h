@@ -24,13 +24,13 @@ namespace UI
 
 			CollectGarbages();
 
-			for (auto it = m_widgets.begin(); it != m_widgets.end();)
+			for (auto it = mWidgets.begin(); it != mWidgets.end();)
 			{
 				it->first->Draw();
 
 				++it;
 
-				if (it != m_widgets.end())
+				if (it != mWidgets.end())
 				{
 					if (mWidths[counter] != -1.f)
 					{
@@ -52,7 +52,7 @@ namespace UI
 		}
 
 	public:
-		std::array<float, _Size> m_widgets;
+		std::array<float, _Size> mWidths;
 	};
 }
 

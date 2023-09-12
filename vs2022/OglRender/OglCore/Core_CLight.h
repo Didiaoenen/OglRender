@@ -13,7 +13,7 @@ namespace Core
 	class Core_CLight : public Core_AComponent
 	{
 	public:
-		Core_CLight(Core_Actor& p_owner);
+		Core_CLight(Core_Actor& pOwner);
 
 		const Render::Render_Light& GetData() const;
 
@@ -21,15 +21,15 @@ namespace Core
 
 		float GetIntensity() const;
 
-		void SetColor(const glm::vec3& p_color);
+		void SetColor(const glm::vec3& pColor);
 
-		void SetIntensity(float p_intensity);
+		void SetIntensity(float pIntensity);
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) override;
 
 	protected:
 		Render::Render_Light mData;

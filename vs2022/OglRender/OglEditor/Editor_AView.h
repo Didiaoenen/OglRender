@@ -12,7 +12,7 @@ namespace Editor
 {
 	class Editor_EditorRenderer;
 
-	class Editor_AView : UI::UI_PanelWindow
+	class Editor_AView : public UI::UI_PanelWindow
 	{
 	public:
 		Editor_AView
@@ -22,7 +22,7 @@ namespace Editor
 			const UI::UI_PanelWindowSettings& p_windowSettings
 		);
 
-		virtual void Update(float p_deltaTime);
+		virtual void Update(float pDeltaTime);
 
 		void _Draw_Impl() override;
 
@@ -32,7 +32,7 @@ namespace Editor
 
 		void SetCameraPosition(const glm::vec3& p_position);
 
-		void SetCameraRotation(const glm::quat& p_rotation);
+		void SetCameraRotation(const glm::quat& pRotation);
 
 		const glm::vec3& GetCameraPosition() const;
 
@@ -44,7 +44,7 @@ namespace Editor
 
 		const glm::vec3& GetGridColor() const;
 
-		void SetGridColor(const glm::vec3& p_color);
+		void SetGridColor(const glm::vec3& pColor);
 
 		void FillEngineUBO();
 
@@ -53,7 +53,7 @@ namespace Editor
 
 	protected:
 		Editor_EditorRenderer& m_editorRenderer;
-		Render::Render_Camera m_camera;
+		Render::Render_Camera mCamera;
 		glm::vec3 m_cameraPosition;
 		glm::quat m_cameraRotation;
 		UI::UI_Image* m_image;

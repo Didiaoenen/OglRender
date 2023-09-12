@@ -15,11 +15,11 @@ namespace Editor
 
 		Render::Render_Texture* GetFileIcon(const std::string& p_filename);
 
-		Render::Render_Texture* GetTexture(const std::string& p_id);
+		Render::Render_Texture* GetTexture(const std::string& pId);
 
-		Render::Render_Model* GetModel(const std::string& p_id);
+		Render::Render_Model* GetModel(const std::string& pId);
 
-		Render::Render_Shader* GetShader(const std::string& p_id);
+		Render::Render_Shader* GetShader(const std::string& pId);
 
 	private:
 		std::unordered_map<std::string, Render::Render_Texture*> m_textures;

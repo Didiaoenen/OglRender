@@ -16,11 +16,11 @@ namespace Render
 
 		bool PointInFrustum(float p_x, float p_y, float p_z) const;
 
-		bool SphereInFrustum(float p_x, float p_y, float p_z, float p_radius) const;
+		bool SphereInFrustum(float p_x, float p_y, float p_z, float pRadius) const;
 
-		bool CubeInFrustum(float p_x, float p_y, float p_z, float p_size) const;
+		bool CubeInFrustum(float p_x, float p_y, float p_z, float pSize) const;
 
-		bool BoundingSphereInFrustum(const Render_BoundingSphere& p_boundingSphere, const Maths::Maths_FTransform& p_transform) const;
+		bool BoundingSphereInFrustum(const Render_BoundingSphere& pBoundingSphere, const Maths::Maths_FTransform& p_transform) const;
 
 		std::array<float, 4> GetNearPlane() const;
 

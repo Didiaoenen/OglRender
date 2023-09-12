@@ -4,11 +4,12 @@
 
 #include <OglTools/Tools_Event.h>
 
-#include "UI_APanel.h"
-#include "UI_IDrawable.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+
+#include "UI_APanel.h"
+#include "UI_IDrawable.h"
 
 namespace UI
 {

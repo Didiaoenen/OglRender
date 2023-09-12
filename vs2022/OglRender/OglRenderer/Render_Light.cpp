@@ -1,7 +1,7 @@
 #include "Render_Light.h"
 
 Render::Render_Light::Render_Light(Maths::Maths_FTransform& p_tranform, Type p_type) :
-	m_transform(p_tranform), type(static_cast<float>(p_type))
+	mTransform(p_tranform), type(static_cast<float>(p_type))
 {
 }
 
@@ -17,5 +17,5 @@ float Render::Render_Light::GetEffectRange() const
 
 const Maths::Maths_FTransform& Render::Render_Light::GetTransform() const
 {
-	return m_transform;
+	return mTransform;
 }

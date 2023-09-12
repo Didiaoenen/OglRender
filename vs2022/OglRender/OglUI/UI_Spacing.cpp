@@ -1,7 +1,7 @@
 #include "UI_Spacing.h"
 
-UI::UI_Spacing::UI_Spacing(uint16_t pSpaces)
-	: mSpaces(pSpaces)
+UI::UI_Spacing::UI_Spacing(uint16_t pSpaces) : 
+	mSpaces(pSpaces)
 {
 }
 

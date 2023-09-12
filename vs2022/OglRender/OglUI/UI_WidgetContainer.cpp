@@ -22,7 +22,7 @@ void UI::UI_WidgetContainer::RemoveWidget(UI_AWidget& pWidget)
 	}
 }
 
-void UI::UI_WidgetContainer::RemoveAllWidget()
+void UI::UI_WidgetContainer::RemoveAllWidgets()
 {
 	std::for_each(mWidgets.begin(), mWidgets.end(), [](std::pair<UI_AWidget*, UI_EMemoryMode>& pPair)
 		{

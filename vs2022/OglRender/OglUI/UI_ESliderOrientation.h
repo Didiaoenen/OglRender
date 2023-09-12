@@ -5,6 +5,6 @@ namespace UI
 	enum class ESliderOrientation
 	{
 		HORIZONTAL,
-		VERTICAL
+		VERTICAL,
 	};
 }

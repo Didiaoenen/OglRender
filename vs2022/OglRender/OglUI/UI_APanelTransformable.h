@@ -6,8 +6,8 @@
 
 #include <OglTools/Tools_Event.h>
 
-#include "UI_APanel.h"
 #include "UI_Alignment.h"
+#include "UI_APanel.h"
 
 namespace UI
 {

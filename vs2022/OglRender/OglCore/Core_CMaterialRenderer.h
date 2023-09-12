@@ -21,43 +21,43 @@ namespace Core
 		using MaterialList = std::array<Core_Material*, MAX_MATERIAL_COUNT>;
 		using MaterialField = std::array<std::array<UI::UI_AWidget*, 3>, MAX_MATERIAL_COUNT>;
 
-		Core_CMaterialRenderer(Core_Actor& p_owner);
+		Core_CMaterialRenderer(Core_Actor& pOwner);
 
 		std::string GetName() override;
 
-		void FillWithMaterial(Core_Material& p_material);
+		void FillWithMaterial(Core_Material& pMaterial);
 
-		void SetMaterialAtIndex(uint8_t p_index, Core_Material& p_material);
+		void SetMaterialAtIndex(uint8_t pIndex, Core_Material& pMaterial);
 
-		Core_Material* GetMaterialAtIndex(uint8_t p_index);
+		Core_Material* GetMaterialAtIndex(uint8_t pIndex);
 
-		void RemoveMaterialAtIndex(uint8_t p_index);
+		void RemoveMaterialAtIndex(uint8_t pIndex);
 
-		void RemoveMaterialByInstance(Core_Material& p_instance);
+		void RemoveMaterialByInstance(Core_Material& pInstance);
 
 		void RemoveAllMaterials();
 
 		void UpdateMaterialList();
 
-		void SetUserMatrixElement(uint32_t p_row, uint32_t p_column, float pValue);
+		void SetUserMatrixElement(uint32_t pRow, uint32_t pColumn, float pValue);
 
-		float GetUserMatrixElement(uint32_t p_row, uint32_t p_column) const;
+		float GetUserMatrixElement(uint32_t pRow, uint32_t pColumn) const;
 
 		const glm::mat4& GetUserMatrix() const;
 
 		const MaterialList& GetMaterials() const;
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		virtual void OnInspector(UI::UI_WidgetContainer& p_root) override;
+		virtual void OnInspector(UI::UI_WidgetContainer& pRoot) override;
 
 	private:
-		MaterialList m_materials;
-		MaterialField m_materialFields;
-		std::array<std::string, MAX_MATERIAL_COUNT> m_materialNames;
-		glm::mat4 m_userMatrix;
+		MaterialList mMaterials;
+		MaterialField mMaterialFields;
+		std::array<std::string, MAX_MATERIAL_COUNT> mMaterialNames;
+		glm::mat4 mUserMatrix;
 	};
 }
 

@@ -8,6 +8,6 @@ Editor::Editor_HardwareInfo::~Editor_HardwareInfo()
 {
 }
 
-void Editor::Editor_HardwareInfo::Update(float p_deltaTime)
+void Editor::Editor_HardwareInfo::Update(float pDeltaTime)
 {
 }

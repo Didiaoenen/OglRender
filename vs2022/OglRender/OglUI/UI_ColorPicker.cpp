@@ -1,7 +1,7 @@
 #include "UI_ColorPicker.h"
 
-UI::UI_ColorPicker::UI_ColorPicker(bool pEnableAlpha, const Color& pDefaultColor)
-	: UI_DataWidget<Color>(mColor), mEnableAlpha(pEnableAlpha), mColor(pDefaultColor)
+UI::UI_ColorPicker::UI_ColorPicker(bool pEnableAlpha, const Color& pDefaultColor) : 
+	UI_DataWidget<Color>(mColor), mEnableAlpha(pEnableAlpha), mColor(pDefaultColor)
 {
 }
 

@@ -63,7 +63,7 @@ void Editor::Editor_Inspector::DrawComponent(Core::Core_AComponent& p_component)
 {
 }
 
-void Editor::Editor_Inspector::DrawBehaviour(Core::Core_Behaviour& p_behaviour)
+void Editor::Editor_Inspector::DrawBehaviour(Core::Core_Behaviour& pBehaviour)
 {
 }
 

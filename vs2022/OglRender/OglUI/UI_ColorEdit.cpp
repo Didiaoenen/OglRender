@@ -1,7 +1,7 @@
 #include "UI_ColorEdit.h"
 
-UI::UI_ColorEdit::UI_ColorEdit(bool pEnableAlpha, const Color& pDefaultColor)
-	: UI_DataWidget<Color>(mColor), mEnableAlpha(pEnableAlpha), mColor(pDefaultColor)
+UI::UI_ColorEdit::UI_ColorEdit(bool pEnableAlpha, const Color& pDefaultColor) : 
+	UI_DataWidget<Color>(mColor), mEnableAlpha(pEnableAlpha), mColor(pDefaultColor)
 {
 }
 

@@ -1,9 +1,9 @@
-#include "UI_PlotLines.h"
+
 #include "UI_Converter.h"
+#include "UI_PlotLines.h"
 
-
-UI::UI_PlotLines::UI_PlotLines(const std::vector<float>& pData, float pMinScale, float pMaxScale, const glm::vec2& pSize, const std::string& pOverlay, const std::string& pLabel, int pForceHover)
-	: UI_APlot(pData, pMinScale, pMaxScale, pSize, pOverlay, pLabel, pForceHover)
+UI::UI_PlotLines::UI_PlotLines(const std::vector<float>& pData, float pMinScale, float pMaxScale, const glm::vec2& pSize, const std::string& pOverlay, const std::string& pLabel, int pForceHover) : 
+	UI_APlot(pData, pMinScale, pMaxScale, pSize, pOverlay, pLabel, pForceHover)
 {
 }
 

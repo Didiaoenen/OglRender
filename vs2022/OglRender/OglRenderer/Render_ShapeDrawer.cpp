@@ -13,10 +13,10 @@ void Render::Render_ShapeDrawer::SetViewProjection(const glm::mat4& p_viewProjec
 {
 }
 
-void Render::Render_ShapeDrawer::DrawLine(const glm::vec3& p_start, const glm::vec3& p_end, const glm::vec3& p_color, float p_lineWidth)
+void Render::Render_ShapeDrawer::DrawLine(const glm::vec3& p_start, const glm::vec3& p_end, const glm::vec3& pColor, float p_lineWidth)
 {
 }
 
-void Render::Render_ShapeDrawer::DrawGrid(const glm::vec3& p_viewPos, const glm::vec3& p_color, int32_t p_gridSize, float p_linear, float p_quadratic, float p_fadeThreshold, float p_lineWidth)
+void Render::Render_ShapeDrawer::DrawGrid(const glm::vec3& p_viewPos, const glm::vec3& pColor, int32_t p_gridSize, float pLinear, float pQuadratic, float p_fadeThreshold, float p_lineWidth)
 {
 }

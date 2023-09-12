@@ -9,7 +9,7 @@ namespace Core
 	class Core_AComponent : public Core_IInspectorItem
 	{
 	public:
-		Core_AComponent(Core_Actor& p_owner);
+		Core_AComponent(Core_Actor& pOwner);
 
 		virtual ~Core_AComponent();
 
@@ -23,28 +23,16 @@ namespace Core
 
 		virtual void OnDestroy() {}
 
-		virtual void OnUpdate(float p_deltaTime) {}
+		virtual void OnUpdate(float pDeltaTime) {}
 
-		virtual void OnFixedUpdate(float p_deltaTime) {}
+		virtual void OnFixedUpdate(float pDeltaTime) {}
 
-		virtual void OnLateUpdate(float p_deltaTime) {}
-
-		//virtual void OnCollisionEnter(Core::CPhysicalObject& p_otherObject) {}
-
-		//virtual void OnCollisionStay(Core::CPhysicalObject& p_otherObject) {}
-
-		//virtual void OnCollisionExit(Core::CPhysicalObject& p_otherObject) {}
-
-		//virtual void OnTriggerEnter(Core::CPhysicalObject& p_otherObject) {}
-
-		//virtual void OnTriggerStay(Core::CPhysicalObject& p_otherObject) {}
-
-		//virtual void OnTriggerExit(Core::CPhysicalObject& p_otherObject) {}
+		virtual void OnLateUpdate(float pDeltaTime) {}
 
 		virtual std::string GetName() = 0;
 
 	public:
-		Core_Actor& owner;
+		Core_Actor& mOwner;
 	};
 }
 

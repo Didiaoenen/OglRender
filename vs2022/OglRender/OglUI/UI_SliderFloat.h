@@ -9,9 +9,9 @@ namespace UI
 	public:
 		UI_SliderFloat
 		(
-			float pMin = 0,
-			float pMax = 100,
-			float pValue = 50,
+			float pMin = 0.0f,
+			float pMax = 1.0f,
+			float pValue = 0.5f,
 			ESliderOrientation pOrientation = ESliderOrientation::HORIZONTAL,
 			const std::string& pLabel = "",
 			const std::string& pFormat = "%.3f"

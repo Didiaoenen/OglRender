@@ -3,8 +3,8 @@
 
 #include "UI_ComboBox.h"
 
-UI::UI_ComboBox::UI_ComboBox(int pCurrentChoice)
-	: UI_DataWidget<int>(mCurrentChoice), mCurrentChoice(pCurrentChoice)
+UI::UI_ComboBox::UI_ComboBox(int pCurrentChoice) : 
+	UI_DataWidget<int>(mCurrentChoice), mCurrentChoice(pCurrentChoice)
 {
 }
 

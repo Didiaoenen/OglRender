@@ -1,7 +1,7 @@
 #include "UI_GroupCollapsable.h"
 
-UI::UI_GroupCollapsable::UI_GroupCollapsable(const std::string& pName)
-	: mName(pName)
+UI::UI_GroupCollapsable::UI_GroupCollapsable(const std::string& pName) : 
+	mName(pName)
 {
 }
 

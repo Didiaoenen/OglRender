@@ -2,8 +2,8 @@
 
 #include "UI_RadioButtonLinker.h"
 
-UI::UI_RadioButtonLinker::UI_RadioButtonLinker()
-	: UI_DataWidget<int>(mSelected)
+UI::UI_RadioButtonLinker::UI_RadioButtonLinker() : 
+	UI_DataWidget<int>(mSelected)
 {
 }
 

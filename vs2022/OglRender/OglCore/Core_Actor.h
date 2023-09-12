@@ -15,7 +15,7 @@ namespace Core
 	class Core_Actor : public Core_ISerializable
 	{
 	public:
-		Core_Actor(int64_t p_actorID, const std::string& p_name, const std::string& p_tag, bool& p_playing);
+		Core_Actor(int64_t pActorID, const std::string& pName, const std::string& pTag, bool& pPlaying);
 
 		virtual ~Core_Actor() override;
 
@@ -23,21 +23,21 @@ namespace Core
 
 		const std::string& GetTag() const;
 
-		void SetName(const std::string& p_name);
+		void SetName(const std::string& pName);
 
-		void SetTag(const std::string& p_tag);
+		void SetTag(const std::string& pTag);
 
-		void SetActive(bool p_active);
+		void SetActive(bool pActive);
 
 		bool IsSelfActive() const;
 
 		bool IsActive() const;
 
-		void SetID(int64_t p_id);
+		void SetID(int64_t pId);
 
 		int64_t GetID() const;
 
-		void SetParent(Core_Actor& p_parent);
+		void SetParent(Core_Actor& pParent);
 
 		void DetachFromParent();
 
@@ -53,7 +53,7 @@ namespace Core
 
 		bool IsAlive() const;
 
-		void SetSleeping(bool p_sleeping);
+		void SetSleeping(bool pSleeping);
 
 		void OnAwake();
 
@@ -65,26 +65,14 @@ namespace Core
 
 		void OnDestroy();
 
-		void OnUpdate(float p_deltaTime);
+		void OnUpdate(float pDeltaTime);
 
-		void OnFixedUpdate(float p_deltaTime);
+		void OnFixedUpdate(float pDeltaTime);
 
-		void OnLateUpdate(float p_deltaTime);
-
-		//void OnCollisionEnter(CPhysicalObject& p_otherObject);
-
-		//void OnCollisionStay(CPhysicalObject& p_otherObject);
-
-		//void OnCollisionExit(CPhysicalObject& p_otherObject);
-
-		//void OnTriggerEnter(CPhysicalObject& p_otherObject);
-
-		//void OnTriggerStay(CPhysicalObject& p_otherObject);
-
-		//void OnTriggerExit(CPhysicalObject& p_otherObject);
+		void OnLateUpdate(float pDeltaTime);
 
 		template<typename T, typename ... Args>
-		T& AddComponent(Args&&... p_args);
+		T& AddComponent(Args&&... pArgs);
 
 		template<typename T>
 		bool RemoveComponent();
@@ -96,19 +84,19 @@ namespace Core
 
 		std::vector<std::shared_ptr<Core_AComponent>>& GetComponents();
 
-		Core_Behaviour& AddBehaviour(const std::string& p_name);
+		Core_Behaviour& AddBehaviour(const std::string& pName);
 
-		bool RemoveBehaviour(Core_Behaviour& p_behaviour);
+		bool RemoveBehaviour(Core_Behaviour& pBehaviour);
 
-		bool RemoveBehaviour(const std::string& p_name);
+		bool RemoveBehaviour(const std::string& pName);
 
-		Core_Behaviour* GetBehaviour(const std::string& p_name);
+		Core_Behaviour* GetBehaviour(const std::string& pName);
 
 		std::unordered_map<std::string, Core_Behaviour>& GetBehaviours();
 
-		virtual void OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot) override;
+		virtual void OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pActorsRoot) override;
 
-		virtual void OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_actorsRoot) override;
+		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pActorsRoot) override;
 
 	private:
 		Core_Actor(const Core_Actor& p_actor) = delete;
@@ -117,35 +105,35 @@ namespace Core
 		void RecursiveWasActiveUpdate();
 
 	public:
-		Tools::Tools_Event<Core_AComponent&> ComponentAddedEvent;
-		Tools::Tools_Event<Core_AComponent&> ComponentRemovedEvent;
-		Tools::Tools_Event<Core_Behaviour&>	BehaviourAddedEvent;
-		Tools::Tools_Event<Core_Behaviour&>	BehaviourRemovedEvent;
+		Tools::Tools_Event<Core_AComponent&> mComponentAddedEvent;
+		Tools::Tools_Event<Core_AComponent&> mComponentRemovedEvent;
+		Tools::Tools_Event<Core_Behaviour&>	mBehaviourAddedEvent;
+		Tools::Tools_Event<Core_Behaviour&>	mBehaviourRemovedEvent;
 
-		static Tools::Tools_Event<Core_Actor&>				DestroyedEvent;
-		static Tools::Tools_Event<Core_Actor&>				CreatedEvent;
-		static Tools::Tools_Event<Core_Actor&, Core_Actor&>	AttachEvent;
-		static Tools::Tools_Event<Core_Actor&>				DettachEvent;
+		static Tools::Tools_Event<Core_Actor&>				mDestroyedEvent;
+		static Tools::Tools_Event<Core_Actor&>				mCreatedEvent;
+		static Tools::Tools_Event<Core_Actor&, Core_Actor&>	mAttachEvent;
+		static Tools::Tools_Event<Core_Actor&>				mDettachEvent;
 
 	private:
-		std::string		m_name;
-		std::string		m_tag;
-		bool			m_active = true;
-		bool& m_playing;
+		std::string		mName;
+		std::string		mTag;
+		bool			mActive{ true };
+		bool&			mPlaying;
 
-		int64_t	m_actorID;
-		bool	m_destroyed = false;
-		bool	m_sleeping = true;
-		bool	m_awaked = false;
-		bool	m_started = false;
-		bool	m_wasActive = false;
+		int64_t	mActorID;
+		bool	mDestroyed{ false };
+		bool	mSleeping{ true };
+		bool	mAwaked{ false };
+		bool	mStarted{ false };
+		bool	mWasActive{ false };
 
-		int64_t		m_parentID = 0;
-		Core_Actor* m_parent = nullptr;
-		std::vector<Core_Actor*> m_children;
+		int64_t		mParentID{ 0 };
+		Core_Actor* m_parent{ nullptr };
+		std::vector<Core_Actor*> mChildren;
 
-		std::vector<std::shared_ptr<Core_AComponent>> m_components;
-		std::unordered_map<std::string, Core_Behaviour> m_behaviours;
+		std::vector<std::shared_ptr<Core_AComponent>> mComponents;
+		std::unordered_map<std::string, Core_Behaviour> mBehaviours;
 
 	public:
 		Core_CTransform& transform;

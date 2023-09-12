@@ -6,13 +6,13 @@ namespace UI
 	{
 		LEFT,
 		CENTER,
-		RIGHT
+		RIGHT,
 	};
 
 	enum class EVerticalAlignment
 	{
 		TOP,
 		MIDDLE,
-		BOTTOM
+		BOTTOM,
 	};
 }

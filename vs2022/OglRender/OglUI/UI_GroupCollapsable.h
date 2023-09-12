@@ -18,8 +18,8 @@ namespace UI
 
 	public:
 		std::string mName;
-		bool mClosable = false;
-		bool mOpened = true;
+		bool mClosable{ false };
+		bool mOpened{ true };
 		Tools::Tools_Event<> mCloseEvent;
 		Tools::Tools_Event<> mOpenEvent;
 	};

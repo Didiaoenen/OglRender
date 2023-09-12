@@ -10,6 +10,6 @@
 #include "Editor_EditorActions.h"
 #include "Editor_ActorCreationMenu.h"
 
-void Editor::Editor_ActorCreationMenu::GenerateActorCreationMenu(UI::UI_MenuList& p_menuList, Core::Core_Actor* p_parent, std::optional<std::function<void()>> p_onItemClicked)
+void Editor::Editor_ActorCreationMenu::GenerateActorCreationMenu(UI::UI_MenuList& p_menuList, Core::Core_Actor* pParent, std::optional<std::function<void()>> p_onItemClicked)
 {
 }

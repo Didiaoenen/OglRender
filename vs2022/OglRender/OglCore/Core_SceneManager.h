@@ -21,7 +21,7 @@ namespace Core
 
 		bool LoadScene(const std::string& pPath, bool p_absolute = false);
 
-		bool LoadSceneFromMemory(tinyxml2::XMLDocument& p_doc);
+		bool LoadSceneFromMemory(tinyxml2::XMLDocument& pDoc);
 
 		void UnloadCurrentScene();
 
@@ -44,10 +44,10 @@ namespace Core
 
 	private:
 		const std::string m_sceneRootFolder;
-		Core_Scene* m_currentScene = nullptr;
+		Core_Scene* m_currentScene{ nullptr };
 
-		bool m_currentSceneLoadedFromPath = false;
-		std::string m_currentSceneSourcePath = "";
+		bool m_currentSceneLoadedFromPath{ false };
+		std::string m_currentSceneSourcePath{ "" };
 
 		std::function<void()> m_delayedLoadCall;
 	};

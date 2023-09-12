@@ -20,7 +20,7 @@ Core::Core_Material* Core::Core_MaterialLoader::Create(const std::string& pPath)
 	}
 }
 
-void Core::Core_MaterialLoader::Reload(Core_Material& p_material, const std::string& pPath)
+void Core::Core_MaterialLoader::Reload(Core_Material& pMaterial, const std::string& pPath)
 {
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(pPath.c_str());
@@ -28,17 +28,17 @@ void Core::Core_MaterialLoader::Reload(Core_Material& p_material, const std::str
 	{
 		tinyxml2::XMLNode* root = doc.FirstChild();
 
-		p_material.OnDeserialize(doc, root);
+		pMaterial.OnDeserialize(doc, root);
 	}
 }
 
-void Core::Core_MaterialLoader::Save(Core_Material& p_material, const std::string& pPath)
+void Core::Core_MaterialLoader::Save(Core_Material& pMaterial, const std::string& pPath)
 {
 	tinyxml2::XMLDocument doc;
 	tinyxml2::XMLNode* node = doc.NewElement("root");
 	doc.InsertFirstChild(node);
 
-	p_material.OnSerialize(doc, node);
+	pMaterial.OnSerialize(doc, node);
 
 	//if (doc.SaveFile(pPath.c_str()) == tinyxml2::XML_SUCCESS)
 	//	OVLOG_INFO("[MATERIAL] \"" + pPath + "\": Saved");
@@ -46,12 +46,12 @@ void Core::Core_MaterialLoader::Save(Core_Material& p_material, const std::strin
 	//	OVLOG_ERROR("[MATERIAL] \"" + pPath + "\": Failed to save");
 }
 
-bool Core::Core_MaterialLoader::Destroy(Core_Material*& p_material)
+bool Core::Core_MaterialLoader::Destroy(Core_Material*& pMaterial)
 {
-	if (p_material)
+	if (pMaterial)
 	{
-		delete p_material;
-		p_material = nullptr;
+		delete pMaterial;
+		pMaterial = nullptr;
 
 		return true;
 	}

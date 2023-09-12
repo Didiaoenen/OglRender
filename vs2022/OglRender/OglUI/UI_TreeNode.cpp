@@ -1,7 +1,7 @@
 #include "UI_TreeNode.h"
 
-UI::UI_TreeNode::UI_TreeNode(const std::string& pName, bool pArrowClickToOpen)
-	: UI_DataWidget(mName), mName(pName), mArrowClickToOpen(pArrowClickToOpen)
+UI::UI_TreeNode::UI_TreeNode(const std::string& pName, bool pArrowClickToOpen) : 
+	UI_DataWidget(mName), mName(pName), mArrowClickToOpen(pArrowClickToOpen)
 {
 	mAutoExecutePlugins = false;
 }
@@ -58,7 +58,9 @@ void UI::UI_TreeNode::_Draw_Impl()
 	if (opened)
 	{
 		if (!prevOpened)
+		{
 			mOpenedEvent.Invoke();
+		}
 
 		mOpened = true;
 
@@ -71,7 +73,9 @@ void UI::UI_TreeNode::_Draw_Impl()
 	else
 	{
 		if (prevOpened)
+		{
 			mClosedEvent.Invoke();
+		}
 
 		mOpened = false;
 

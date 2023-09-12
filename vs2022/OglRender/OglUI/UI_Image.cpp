@@ -1,8 +1,9 @@
-#include "UI_Image.h"
-#include "UI_Converter.h"
 
-UI::UI_Image::UI_Image(uint32_t pTextureID, const glm::vec2& pSize)
-	: mTextureID{ pTextureID }, mSize(pSize)
+#include "UI_Converter.h"
+#include "UI_Image.h"
+
+UI::UI_Image::UI_Image(uint32_t pTextureID, const glm::vec2& pSize) : 
+	mTextureID{ pTextureID }, mSize(pSize)
 {
 }
 

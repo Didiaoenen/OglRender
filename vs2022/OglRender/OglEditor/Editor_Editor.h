@@ -23,30 +23,30 @@ namespace Editor
 
 		void PreUpdate();
 
-		void Update(float p_deltaTime);
+		void Update(float pDeltaTime);
 
 		void HandleGlobalShortcuts();
 
-		void UpdateCurrentEditorMode(float p_deltaTime);
+		void UpdateCurrentEditorMode(float pDeltaTime);
 
-		void UpdatePlayMode(float p_deltaTime);
+		void UpdatePlayMode(float pDeltaTime);
 
-		void UpdateEditMode(float p_deltaTime);
+		void UpdateEditMode(float pDeltaTime);
 
-		void UpdateEditorPanels(float p_deltaTime);
+		void UpdateEditorPanels(float pDeltaTime);
 
-		void PrepareRendering(float p_deltaTime);
+		void PrepareRendering(float pDeltaTime);
 
-		void RenderViews(float p_deltaTime);
+		void RenderViews(float pDeltaTime);
 
-		void RenderEditorUI(float p_deltaTime);
+		void RenderEditorUI(float pDeltaTime);
 
 		void PostUpdate();
 
 	private:
-		uint64_t m_elapsedFrames = 0;
+		uint64_t mElapsedFrames = 0;
 		UI::UI_Canvas			m_canvas;
-		Editor_Context& m_context;
+		Editor_Context&			mContext;
 		Editor_EditorRenderer	m_editorRenderer;
 		Editor_PanelsManager	m_panelsManager;
 		Editor_EditorActions	m_editorActions;

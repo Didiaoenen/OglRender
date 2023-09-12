@@ -24,7 +24,7 @@ namespace Editor
 
 		void InitMaterials();
 
-		void PreparePickingMaterial(Core::Core_Actor& p_actor, Core::Core_Material& p_material);
+		void PreparePickingMaterial(Core::Core_Actor& p_actor, Core::Core_Material& pMaterial);
 
 		glm::mat4 CalculateCameraModelMatrix(Core::Core_Actor& p_actor);
 
@@ -38,17 +38,17 @@ namespace Editor
 
 		void RenderLights();
 
-		void RenderGizmo(const glm::vec3& p_position, const glm::quat& p_rotation, EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis = -1);
+		void RenderGizmo(const glm::vec3& p_position, const glm::quat& pRotation, EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis = -1);
 
-		void RenderModelToStencil(const glm::mat4& p_worldMatrix, Render::Render_Model& p_model);
+		void RenderModelToStencil(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel);
 
-		void RenderModelOutline(const glm::mat4& p_worldMatrix, Render::Render_Model& p_model, float p_width);
+		void RenderModelOutline(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel, float p_width);
 
 		void RenderActorOutlinePass(Core::Core_Actor& p_actor, bool p_toStencil, bool p_isSelected = false);
 
-		void RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& p_size, Core::Core_CCamera& p_camera);
+		void RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& p_camera);
 		
-		void RenderCameraOrthographicFrustum(std::pair<uint16_t, uint16_t>& p_size, Core::Core_CCamera& p_camera);
+		void RenderCameraOrthographicFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& p_camera);
 
 		void RenderCameraFrustum(Core::Core_CCamera& p_camera);
 
@@ -62,20 +62,20 @@ namespace Editor
 
 		void RenderBoundingSpheres(Core::Core_CModelRenderer& p_modelRenderer);
 
-		void RenderModelAsset(Render::Render_Model& p_model);
+		void RenderModelAsset(Render::Render_Model& pModel);
 
 		void RenderTextureAsset(Render::Render_Texture& p_texture);
 
-		void RenderMaterialAsset(Core::Core_Material& p_material);
+		void RenderMaterialAsset(Core::Core_Material& pMaterial);
 
-		void RenderGrid(const glm::vec3& p_viewPos, const glm::vec3& p_color);
+		void RenderGrid(const glm::vec3& p_viewPos, const glm::vec3& pColor);
 
 		void UpdateLights(Core::Core_Scene& p_scene);
 
 		void UpdateLightsInFrustum(Core::Core_Scene& p_scene, const Render::Render_Frustum& p_frustum);
 
 	private:
-		Editor_Context& m_context;
+		Editor_Context& mContext;
 
 		Core::Core_Material m_gridMaterial;
 		Core::Core_Material m_stencilFillMaterial;

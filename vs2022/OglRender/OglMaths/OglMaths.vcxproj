@@ -129,10 +129,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Maths_FQuaternionExt.h" />
     <ClInclude Include="Maths_TransformNotifier.h" />
     <ClInclude Include="Maths_FTransform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Maths_FQuaternionExt.cpp" />
     <ClCompile Include="Maths_TransformNotifier.cpp" />
     <ClCompile Include="Maths_FTransform.cpp" />
   </ItemGroup>

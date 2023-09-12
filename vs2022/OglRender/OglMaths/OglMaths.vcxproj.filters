@@ -27,6 +27,9 @@
     <ClCompile Include="Maths_TransformNotifier.cpp">
       <Filter>源文件\Internal</Filter>
     </ClCompile>
+    <ClCompile Include="Maths_FQuaternionExt.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Maths_FTransform.h">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="Maths_TransformNotifier.h">
       <Filter>头文件\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="Maths_FQuaternionExt.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -872,7 +872,7 @@ public:
     /**
     	Make a copy of this node, but not its children.
     	You may pass in a Document pointer that will be
-    	the owner of the new Node. If the 'document' is
+    	the mOwner of the new Node. If the 'document' is
     	null, then the node returned will be allocated
     	from the current Document. (this->GetDocument())
 

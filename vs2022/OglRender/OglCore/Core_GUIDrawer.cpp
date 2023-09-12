@@ -8,9 +8,9 @@
 #include <OglUI/UI_InputText.h>
 #include <OglUI/UI_ColorEdit.h>
 #include <OglUI/UI_Group.h>
+#include <OglUI/UI_Button.h>
 #include <OglUI/UI_Columns.h>
 #include <OglUI/UI_CheckBox.h>
-#include <OglUI/UI_Button.h>
 #include <OglUI/UI_ButtonSmall.h>
 #include <OglUI/UI_DDTarget.h>
 
@@ -86,12 +86,12 @@ void Core::Core_GUIDrawer::DrawString(UI::UI_WidgetContainer& pRoot, const std::
 	dispatcher.RegisterReference(pData);
 }
 
-void Core::Core_GUIDrawer::DrawColor(UI::UI_WidgetContainer& pRoot, const std::string& pName, UI::Color& p_color, bool p_hasAlpha)
+void Core::Core_GUIDrawer::DrawColor(UI::UI_WidgetContainer& pRoot, const std::string& pName, UI::Color& pColor, bool p_hasAlpha)
 {
 	CreateTitle(pRoot, pName);
 	auto& widget = pRoot.CreateWidget<UI::UI_ColorEdit>(p_hasAlpha);
 	auto& dispatcher = widget.AddPlugin<UI::UI_DataDispatcher<UI::Color>>();
-	dispatcher.RegisterReference(p_color);
+	dispatcher.RegisterReference(pColor);
 }
 
 UI::UI_Text& Core::Core_GUIDrawer::DrawMesh(UI::UI_WidgetContainer& pRoot, const std::string& pName, Render::Render_Model*& pData, Tools::Tools_Event<>* pUpdateNotifier)

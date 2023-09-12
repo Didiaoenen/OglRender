@@ -21,7 +21,7 @@ namespace Render
 		void Unbind();
 
 		template<typename T>
-		void SendBlocks(T* p_data, size_t p_size);
+		void SendBlocks(T* p_data, size_t pSize);
 
 	private:
 		uint32_t m_bufferID;

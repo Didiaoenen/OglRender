@@ -2,8 +2,8 @@
 
 #include <OglTools/Tools_Event.h>
 
-#include "UI_DataWidget.h"
 #include "UI_Color.h"
+#include "UI_DataWidget.h"
 
 namespace UI
 {

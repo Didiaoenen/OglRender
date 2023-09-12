@@ -18,36 +18,36 @@ namespace Render
 
 		void Unbind() const;
 
-		void SetUniformInt(const std::string& p_name, int pValue);
+		void SetUniformInt(const std::string& pName, int pValue);
 
-		void SetUniformFloat(const std::string& p_name, float pValue);
+		void SetUniformFloat(const std::string& pName, float pValue);
 
-		void SetUniformVec2(const std::string& p_name, const glm::vec2& p_vec2);
+		void SetUniformVec2(const std::string& pName, const glm::vec2& p_vec2);
 
-		void SetUniformVec3(const std::string& p_name, const glm::vec3& p_vec3);
+		void SetUniformVec3(const std::string& pName, const glm::vec3& p_vec3);
 
-		void SetUniformVec4(const std::string& p_name, const glm::vec4& p_vec4);
+		void SetUniformVec4(const std::string& pName, const glm::vec4& p_vec4);
 
-		void SetUniformMat4(const std::string& p_name, const glm::mat4& p_mat4);
+		void SetUniformMat4(const std::string& pName, const glm::mat4& p_mat4);
 
-		int GetUniformInt(const std::string& p_name);
+		int GetUniformInt(const std::string& pName);
 
-		float GetUniformFloat(const std::string& p_name);
+		float GetUniformFloat(const std::string& pName);
 
-		glm::vec2 GetUniformVec2(const std::string& p_name);
+		glm::vec2 GetUniformVec2(const std::string& pName);
 
-		glm::vec3 GetUniformVec3(const std::string& p_name);
+		glm::vec3 GetUniformVec3(const std::string& pName);
 
-		glm::vec4 GetUniformVec4(const std::string& p_name);
+		glm::vec4 GetUniformVec4(const std::string& pName);
 
-		glm::mat4 GetUniformMat4(const std::string& p_name);
+		glm::mat4 GetUniformMat4(const std::string& pName);
 
-		const Render_UniformInfo* GetUniformInfo(const std::string& p_name) const;
+		const Render_UniformInfo* GetUniformInfo(const std::string& pName) const;
 
 		void QueryUniforms();
 
 	private:
-		Render_Shader(const std::string pPath, uint32_t p_id);
+		Render_Shader(const std::string pPath, uint32_t pId);
 		~Render_Shader();
 
 		static bool IsEngineUBOMember(const std::string& p_uniformName);

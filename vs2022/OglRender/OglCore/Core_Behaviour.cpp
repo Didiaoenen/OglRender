@@ -3,18 +3,18 @@
 #include "Core_Actor.h"
 #include "Core_Behaviour.h"
 
-Tools::Tools_Event<Core::Core_Behaviour*> Core::Core_Behaviour::CreatedEvent;
-Tools::Tools_Event<Core::Core_Behaviour*> Core::Core_Behaviour::DestroyedEvent;
+Tools::Tools_Event<Core::Core_Behaviour*> Core::Core_Behaviour::mCreatedEvent;
+Tools::Tools_Event<Core::Core_Behaviour*> Core::Core_Behaviour::mDestroyedEvent;
 
-Core::Core_Behaviour::Core_Behaviour(Core_Actor& p_owner, const std::string& p_name) :
-	name(p_name), Core_AComponent(p_owner)
+Core::Core_Behaviour::Core_Behaviour(Core_Actor& pOwner, const std::string& pName) :
+	name(pName), Core_AComponent(pOwner)
 {
-	CreatedEvent.Invoke(this);
+	mCreatedEvent.Invoke(this);
 }
 
 Core::Core_Behaviour::~Core_Behaviour()
 {
-	DestroyedEvent.Invoke(this);
+	mDestroyedEvent.Invoke(this);
 }
 
 std::string Core::Core_Behaviour::GetName()
@@ -42,26 +42,26 @@ void Core::Core_Behaviour::OnDestroy()
 {
 }
 
-void Core::Core_Behaviour::OnUpdate(float p_deltaTime)
+void Core::Core_Behaviour::OnUpdate(float pDeltaTime)
 {
 }
 
-void Core::Core_Behaviour::OnFixedUpdate(float p_deltaTime)
+void Core::Core_Behaviour::OnFixedUpdate(float pDeltaTime)
 {
 }
 
-void Core::Core_Behaviour::OnLateUpdate(float p_deltaTime)
+void Core::Core_Behaviour::OnLateUpdate(float pDeltaTime)
 {
 }
 
-void Core::Core_Behaviour::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_Behaviour::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
 }
 
-void Core::Core_Behaviour::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_Behaviour::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
 }
 
-void Core::Core_Behaviour::OnInspector(UI::UI_WidgetContainer& p_root)
+void Core::Core_Behaviour::OnInspector(UI::UI_WidgetContainer& pRoot)
 {
 }

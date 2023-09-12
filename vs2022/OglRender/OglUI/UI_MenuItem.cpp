@@ -1,7 +1,7 @@
 #include "UI_MenuItem.h"
 
-UI::UI_MenuItem::UI_MenuItem(const std::string& pName, const std::string& pShortcut, bool pCheckable, bool pChecked)
-	: UI_DataWidget(mSelected), mName(pName), mShortcut(pShortcut), mCheckable(pCheckable), mChecked(pChecked)
+UI::UI_MenuItem::UI_MenuItem(const std::string& pName, const std::string& pShortcut, bool pCheckable, bool pChecked) : 
+	UI_DataWidget(mSelected), mName(pName), mShortcut(pShortcut), mCheckable(pCheckable), mChecked(pChecked)
 {
 }
 

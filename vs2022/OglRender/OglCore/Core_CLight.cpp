@@ -1,15 +1,15 @@
 #include <OglUI/UI_Text.h>
+#include <OglUI/UI_Group.h>
+#include <OglUI/UI_Button.h>
 #include <OglUI/UI_DragFloat.h>
 #include <OglUI/UI_ColorEdit.h>
-#include <OglUI/UI_Bullet.h>
-#include <OglUI/UI_Group.h>
 
 #include "Core_Actor.h"
 #include "Core_CLight.h"
 
-Core::Core_CLight::Core_CLight(Core_Actor& p_owner) : 
-	Core_AComponent(p_owner), 
-	mData(p_owner.transform.GetFTransform(), {})
+Core::Core_CLight::Core_CLight(Core_Actor& pOwner) : 
+	Core_AComponent(pOwner), 
+	mData(pOwner.transform.GetFTransform(), {})
 {
 }
 
@@ -28,30 +28,30 @@ float Core::Core_CLight::GetIntensity() const
 	return mData.intensity;
 }
 
-void Core::Core_CLight::SetColor(const glm::vec3& p_color)
+void Core::Core_CLight::SetColor(const glm::vec3& pColor)
 {
-	mData.color = p_color;
+	mData.color = pColor;
 }
 
-void Core::Core_CLight::SetIntensity(float p_intensity)
+void Core::Core_CLight::SetIntensity(float pIntensity)
 {
-	mData.intensity = p_intensity;
+	mData.intensity = pIntensity;
 }
 
-void Core::Core_CLight::OnSerialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CLight::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_Serializer::SerializeVec3(p_doc, p_node, "color", mData.color);
-	Core_Serializer::SerializeFloat(p_doc, p_node, "intensity", mData.intensity);
+	Core_Serializer::SerializeVec3(pDoc, pNode, "color", mData.color);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "intensity", mData.intensity);
 }
 
-void Core::Core_CLight::OnDeserialize(tinyxml2::XMLDocument& p_doc, tinyxml2::XMLNode* p_node)
+void Core::Core_CLight::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_Serializer::DeserializeVec3(p_doc, p_node, "color", mData.color);
-	Core_Serializer::DeserializeFloat(p_doc, p_node, "intensity", mData.intensity);
+	Core_Serializer::DeserializeVec3(pDoc, pNode, "color", mData.color);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "intensity", mData.intensity);
 }
 
-void Core::Core_CLight::OnInspector(UI::UI_WidgetContainer& p_root)
+void Core::Core_CLight::OnInspector(UI::UI_WidgetContainer& pRoot)
 {
-	Core_GUIDrawer::DrawColor(p_root, "Color", reinterpret_cast<UI::Color&>(mData.color));
-	Core_GUIDrawer::DrawScalar<float>(p_root, "Intensity", mData.intensity, 0.005f, Core_GUIDrawer::_MIN_FLOAT, Core_GUIDrawer::_MAX_FLOAT);
+	Core_GUIDrawer::DrawColor(pRoot, "Color", reinterpret_cast<UI::Color&>(mData.color));
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Intensity", mData.intensity, 0.005f, Core_GUIDrawer::_MIN_FLOAT, Core_GUIDrawer::_MAX_FLOAT);
 }

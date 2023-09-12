@@ -7,7 +7,7 @@ const std::vector<Render::Render_Mesh*>& Render::Render_Model::GetMeshes() const
 
 const std::vector<std::string>& Render::Render_Model::GetMaterialNames() const
 {
-	return m_materialNames;
+	return mMaterialNames;
 }
 
 const Render::Render_BoundingSphere& Render::Render_Model::GetBoundingSphere() const

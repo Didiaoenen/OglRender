@@ -56,11 +56,11 @@ namespace Core
 
 		void DrawDrawable(const Drawable& p_toDraw);
 
-		void DrawModelWithSingleMaterial(Render::Render_Model& p_model, Core::Core_Material& p_material, glm::mat4 const* p_modelMatrix, Core::Core_Material* p_defaultMaterial = nullptr);
+		void DrawModelWithSingleMaterial(Render::Render_Model& pModel, Core::Core_Material& pMaterial, glm::mat4 const* p_modelMatrix, Core::Core_Material* p_defaultMaterial = nullptr);
 
-		void DrawModelWithMaterials(Render::Render_Model& p_model, std::vector<Core::Core_Material*> p_materials, glm::mat4 const* p_modelMatrix, Core::Core_Material* p_defaultMaterial = nullptr);
+		void DrawModelWithMaterials(Render::Render_Model& pModel, std::vector<Core::Core_Material*> p_materials, glm::mat4 const* p_modelMatrix, Core::Core_Material* p_defaultMaterial = nullptr);
 
-		void DrawMesh(Render::Render_Mesh& p_mesh, Core::Core_Material& p_material, glm::mat4 const* p_modelMatrix);
+		void DrawMesh(Render::Render_Mesh& p_mesh, Core::Core_Material& pMaterial, glm::mat4 const* p_modelMatrix);
 
 		void RegisterModelMatrixSender(std::function<void(glm::mat4)> p_modelMatrixSender);
 
@@ -69,7 +69,7 @@ namespace Core
 	private:
 		std::function<void(glm::mat4)> m_modelMatrixSender;
 		std::function<void(glm::mat4)> m_userMatrixSender;
-		Render::Render_Texture* m_emptyTexture = nullptr;
+		Render::Render_Texture* m_emptyTexture{ nullptr };
 	};
 }
 

@@ -6,18 +6,18 @@
 #include "Editor_EditorActions.h"
 #include "Editor_CameraController.h"
 
-Editor::Editor_CameraController::Editor_CameraController(Editor_AView& p_view, Render::Render_Camera& p_camera, glm::vec3& p_position, glm::quat& p_rotation, bool p_enableFocusInputs) :
+Editor::Editor_CameraController::Editor_CameraController(Editor_AView& p_view, Render::Render_Camera& p_camera, glm::vec3& p_position, glm::quat& pRotation, bool p_enableFocusInputs) :
 	m_inputManager(*EDITOR_CONTEXT(inputManager)),
 	m_window(*EDITOR_CONTEXT(window)),
 	m_view(p_view),
-	m_camera(p_camera),
+	mCamera(p_camera),
 	m_cameraPosition(p_position),
-	m_cameraRotation(p_rotation),
+	m_cameraRotation(pRotation),
 	m_enableFocusInputs(p_enableFocusInputs)
 {
 }
 
-void Editor::Editor_CameraController::HandleInputs(float p_deltaTime)
+void Editor::Editor_CameraController::HandleInputs(float pDeltaTime)
 {
 }
 
@@ -38,7 +38,7 @@ void Editor::Editor_CameraController::SetPosition(const glm::vec3& p_position)
 {
 }
 
-void Editor::Editor_CameraController::SetRotation(const glm::quat& p_rotation)
+void Editor::Editor_CameraController::SetRotation(const glm::quat& pRotation)
 {
 }
 
@@ -73,7 +73,7 @@ void Editor::Editor_CameraController::HandleCameraZoom()
 {
 }
 
-void Editor::Editor_CameraController::HandleCameraFPSKeyboard(float p_deltaTime)
+void Editor::Editor_CameraController::HandleCameraFPSKeyboard(float pDeltaTime)
 {
 }
 

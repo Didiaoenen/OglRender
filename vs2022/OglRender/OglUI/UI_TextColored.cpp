@@ -1,8 +1,8 @@
-#include "UI_TextColored.h"
 #include "UI_Converter.h"
+#include "UI_TextColored.h"
 
-UI::UI_TextColored::UI_TextColored(const std::string& pContent, const Color& pColor)
-	: UI_Text(pContent), mColor(pColor)
+UI::UI_TextColored::UI_TextColored(const std::string& pContent, const Color& pColor) : 
+	UI_Text(pContent), mColor(pColor)
 {
 }
 
