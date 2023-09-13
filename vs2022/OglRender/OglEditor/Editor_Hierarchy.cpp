@@ -96,15 +96,15 @@ Editor::Editor_Hierarchy::Editor_Hierarchy(const std::string& p_title, bool p_op
 	UI::UI_PanelWindow(p_title, p_opened, p_windowSettings)
 {
 	auto& searchBar = CreateWidget<UI::UI_InputText>();
-	searchBar.mContentChangedEvent += [this](const std::string& p_content)
+	searchBar.mContentChangedEvent += [this](const std::string& pContent)
 		{
 			founds.clear();
-			auto content = p_content;
+			auto content = pContent;
 			std::transform(content.begin(), content.end(), content.begin(), ::tolower);
 
 			for (auto& [actor, item] : m_widgetActorLink)
 			{
-				if (!p_content.empty())
+				if (!pContent.empty())
 				{
 					auto itemName = item->mName;
 					std::transform(itemName.begin(), itemName.end(), itemName.begin(), ::tolower);
@@ -132,7 +132,7 @@ Editor::Editor_Hierarchy::Editor_Hierarchy(const std::string& p_title, bool p_op
 				}
 			}
 
-			if (p_content.empty())
+			if (pContent.empty())
 			{
 				for (auto node : nodesToCollapse)
 				{

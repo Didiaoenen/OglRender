@@ -43,9 +43,9 @@ public:
 		auto& pathField = CreateWidget<UI::UI_InputText>("");
 		mGoButton = &CreateWidget<UI::UI_Button>("GO");
 
-		pathField.mContentChangedEvent += [this, &pathField](std::string p_content)
+		pathField.mContentChangedEvent += [this, &pathField](std::string pContent)
 			{
-				pathField.mContent = Tools::Tools_PathParser::MakeWindowsStyle(p_content);
+				pathField.mContent = Tools::Tools_PathParser::MakeWindowsStyle(pContent);
 
 				if (pathField.mContent != "" && pathField.mContent.back() != '\\')
 				{
