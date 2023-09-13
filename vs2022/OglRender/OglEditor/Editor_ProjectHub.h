@@ -23,18 +23,18 @@ namespace Editor
 		void RegisterProject(const std::string& pPath);
 
 	private:
-		std::unique_ptr<Window::Window_Device>		m_device;
-		std::unique_ptr<Window::Window_Window>		m_window;
-		std::unique_ptr<Render::Render_Driver>		m_driver;
-		std::unique_ptr<Render::Render_Renderer>	m_renderer;
-		std::unique_ptr<UI::UI_UIManager>			m_uiManager;
+		std::unique_ptr<Window::Window_Device>		mDevice;
+		std::unique_ptr<Window::Window_Window>		mWindow;
+		std::unique_ptr<Render::Render_Driver>		mDriver;
+		std::unique_ptr<Render::Render_Renderer>	mRenderer;
+		std::unique_ptr<UI::UI_UIManager>			mUIManager;
 
 		UI::UI_Canvas m_canvas;
-		std::unique_ptr<UI::UI_PanelWindow>			m_mainPanel;
+		std::unique_ptr<UI::UI_PanelWindow>			mMainPanel;
 
-		std::string m_projectPath = "";
-		std::string m_projectName = "";
-		bool m_readyToGo = false;
+		std::string mProjectPath = "";
+		std::string mProjectName = "";
+		bool mReadyToGo = false;
 	};
 }
 

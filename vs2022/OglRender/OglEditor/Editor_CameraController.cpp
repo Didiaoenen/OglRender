@@ -8,7 +8,7 @@
 
 Editor::Editor_CameraController::Editor_CameraController(Editor_AView& p_view, Render::Render_Camera& p_camera, glm::vec3& p_position, glm::quat& pRotation, bool p_enableFocusInputs) :
 	m_inputManager(*EDITOR_CONTEXT(inputManager)),
-	m_window(*EDITOR_CONTEXT(window)),
+	mWindow(*EDITOR_CONTEXT(window)),
 	m_view(p_view),
 	mCamera(p_camera),
 	m_cameraPosition(p_position),

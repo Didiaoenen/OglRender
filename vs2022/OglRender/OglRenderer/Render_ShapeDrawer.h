@@ -22,7 +22,7 @@ namespace Render
 		Render_Shader* m_lineShader = nullptr;
 		Render_Shader* m_gridShader = nullptr;
 		Render_Mesh* m_lineMesh = nullptr;
-		Render_Renderer& m_renderer;
+		Render_Renderer& mRenderer;
 	};
 }
 

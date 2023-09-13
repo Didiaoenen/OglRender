@@ -1,7 +1,7 @@
 #include "Render_ShapeDrawer.h"
 
 Render::Render_ShapeDrawer::Render_ShapeDrawer(Render_Renderer& p_renderer) :
-	m_renderer(p_renderer)
+	mRenderer(p_renderer)
 {
 }
 

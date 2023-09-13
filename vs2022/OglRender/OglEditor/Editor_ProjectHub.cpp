@@ -25,9 +25,9 @@ class Editor_ProjectHubPanel : public UI::UI_PanelWindow
 public:
 	Editor_ProjectHubPanel(bool& p_readyToGo, std::string& p_path, std::string& p_projectName) :
 		UI::UI_PanelWindow("Overload - Project Hub", true),
-		m_readyToGo(p_readyToGo),
+		mReadyToGo(p_readyToGo),
 		m_path(p_path),
-		m_projectName(p_projectName)
+		mProjectName(p_projectName)
 	{
 		mResizable = false;
 		mMovable = false;
@@ -216,15 +216,15 @@ public:
 
 	void OpenProject(const std::string& p_path)
 	{
-		m_readyToGo = std::filesystem::exists(p_path);
-		if (!m_readyToGo)
+		mReadyToGo = std::filesystem::exists(p_path);
+		if (!mReadyToGo)
 		{
 			Window::Window_MessageBox errorMessage("Project not found", "The selected project does not exists", Window::Window_MessageBox::EMessageType::ERROR, Window::Window_MessageBox::EButtonLayout::OK);
 		}
 		else
 		{
 			m_path = p_path;
-			m_projectName = Tools::Tools_PathParser::GetElementName(m_path);
+			mProjectName = Tools::Tools_PathParser::GetElementName(m_path);
 			Close();
 		}
 	}
@@ -240,39 +240,39 @@ public:
 	}
 
 private:
-	bool& m_readyToGo;
+	bool& mReadyToGo;
 	std::string& m_path;
-	std::string& m_projectName;
+	std::string& mProjectName;
 	UI::UI_Button* m_goButton = nullptr;
 };
 
 Editor::Editor_ProjectHub::Editor_ProjectHub()
 {
 	SetupContext();
-	m_mainPanel = std::make_unique<Editor_ProjectHubPanel>(m_readyToGo, m_projectPath, m_projectName);
+	mMainPanel = std::make_unique<Editor_ProjectHubPanel>(mReadyToGo, mProjectPath, mProjectName);
 
-	m_uiManager->SetCanvas(m_canvas);
-	m_canvas.AddPanel(*m_mainPanel);
+	mUIManager->SetCanvas(m_canvas);
+	m_canvas.AddPanel(*mMainPanel);
 }
 
 std::tuple<bool, std::string, std::string> Editor::Editor_ProjectHub::Run()
 {
-	m_renderer->SetClearColor(0.f, 0.f, 0.f, 1.f);
+	mRenderer->SetClearColor(0.f, 0.f, 0.f, 1.f);
 
-	while (!m_window->ShouldClose())
+	while (!mWindow->ShouldClose())
 	{
-		m_renderer->Clear();
-		m_device->PollEvents();
-		m_uiManager->Render();
-		m_window->SwapBuffers();
+		mRenderer->Clear();
+		mDevice->PollEvents();
+		mUIManager->Render();
+		mWindow->SwapBuffers();
 
-		if (!m_mainPanel->IsOpened())
+		if (!mMainPanel->IsOpened())
 		{
-			m_window->SetShouldClose(true);
+			mWindow->SetShouldClose(true);
 		}
 	}
 
-	return { m_readyToGo, m_projectPath, m_projectName };
+	return { mReadyToGo, mProjectPath, mProjectName };
 }
 
 void Editor::Editor_ProjectHub::SetupContext()
@@ -286,26 +286,26 @@ void Editor::Editor_ProjectHub::SetupContext()
 	windowSettings.resizable = false;
 	windowSettings.decorated = true;
 
-	m_device = std::make_unique<Window::Window_Device>(deviceSettings);
-	m_window = std::make_unique<Window::Window_Window>(*m_device, windowSettings);
-	m_window->MakeCurrentContext();
+	mDevice = std::make_unique<Window::Window_Device>(deviceSettings);
+	mWindow = std::make_unique<Window::Window_Window>(*mDevice, windowSettings);
+	mWindow->MakeCurrentContext();
 
-	auto [monWidth, monHeight] = m_device->GetMonitorSize();
-	auto [winWidth, winHeight] = m_window->GetSize();
-	m_window->SetPosition(monWidth / 2 - winWidth / 2, monHeight / 2 - winHeight / 2);
+	auto [monWidth, monHeight] = mDevice->GetMonitorSize();
+	auto [winWidth, winHeight] = mWindow->GetSize();
+	mWindow->SetPosition(monWidth / 2 - winWidth / 2, monHeight / 2 - winHeight / 2);
 
-	m_driver = std::make_unique<Render::Render_Driver>(Render::Render_DriverSettings{ false });
-	m_renderer = std::make_unique<Render::Render_Renderer>(*m_driver);
-	m_renderer->SetCapability(Render::ERenderingCapability::MULTISAMPLE, true);
+	mDriver = std::make_unique<Render::Render_Driver>(Render::Render_DriverSettings{ false });
+	mRenderer = std::make_unique<Render::Render_Renderer>(*mDriver);
+	mRenderer->SetCapability(Render::ERenderingCapability::MULTISAMPLE, true);
 
-	m_uiManager = std::make_unique<UI::UI_UIManager>(m_window->GetGlfwWindow(),UI::EStyle::ALTERNATIVE_DARK);
-	m_uiManager->LoadFont("Ruda_Big", "Data\\Editor\\Fonts\\Ruda-Bold.ttf", 18);
-	m_uiManager->UseFont("Ruda_Big");
-	m_uiManager->EnableEditorLayoutSave(false);
-	m_uiManager->EnableDocking(false);
+	mUIManager = std::make_unique<UI::UI_UIManager>(mWindow->GetGlfwWindow(), UI::EStyle::ALTERNATIVE_DARK);
+	mUIManager->LoadFont("Ruda_Big", "Data\\Editor\\Fonts\\Ruda-Bold.ttf", 18);
+	mUIManager->UseFont("Ruda_Big");
+	mUIManager->EnableEditorLayoutSave(false);
+	mUIManager->EnableDocking(false);
 }
 
 void Editor::Editor_ProjectHub::RegisterProject(const std::string& pPath)
 {
-	static_cast<Editor_ProjectHubPanel*>(m_mainPanel.get())->RegisterProject(pPath);
+	static_cast<Editor_ProjectHubPanel*>(mMainPanel.get())->RegisterProject(pPath);
 }

@@ -198,6 +198,9 @@
     <ClInclude Include="Render_Framebuffer.h">
       <Filter>头文件\Buffers</Filter>
     </ClInclude>
+    <ClInclude Include="Render_Defines.h">
+      <Filter>头文件\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Render_ModelLoader.cpp">

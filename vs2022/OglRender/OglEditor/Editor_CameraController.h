@@ -52,7 +52,7 @@ namespace Editor
 
 	private:
 		Window::Window_InputManager& m_inputManager;
-		Window::Window_Window& m_window;
+		Window::Window_Window& mWindow;
 		Editor_AView& m_view;
 		Render::Render_Camera& mCamera;
 		glm::vec3& m_cameraPosition;

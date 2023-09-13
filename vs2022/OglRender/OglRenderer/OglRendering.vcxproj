@@ -133,6 +133,7 @@
     <ClInclude Include="Render_AssimpParser.h" />
     <ClInclude Include="Render_BoundingSphere.h" />
     <ClInclude Include="Render_Camera.h" />
+    <ClInclude Include="Render_Defines.h" />
     <ClInclude Include="Render_Driver.h" />
     <ClInclude Include="Render_DriverSettings.h" />
     <ClInclude Include="Render_EAccessSpecifier.h" />

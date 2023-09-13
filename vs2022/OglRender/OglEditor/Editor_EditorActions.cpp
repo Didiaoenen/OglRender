@@ -25,7 +25,7 @@
 
 Editor::Editor_EditorActions::Editor_EditorActions(Editor_Context& p_context, Editor_EditorRenderer& p_editorRenderer, Editor_PanelsManager& p_panelsManager) :
 	mContext(p_context),
-	m_renderer(p_editorRenderer),
+	mRenderer(p_editorRenderer),
 	m_panelsManager(p_panelsManager)
 {
 	Core::Core_ServiceLocator::Provide<Editor_EditorActions>(*this);
@@ -44,7 +44,7 @@ Editor::Editor_Context& Editor::Editor_EditorActions::GetContext()
 
 Editor::Editor_EditorRenderer& Editor::Editor_EditorActions::GetRenderer()
 {
-	return m_renderer;
+	return mRenderer;
 }
 
 Editor::Editor_PanelsManager& Editor::Editor_EditorActions::GetPanelsManager()

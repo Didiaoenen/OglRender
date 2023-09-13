@@ -162,7 +162,7 @@ namespace Editor
 	private:
 		Editor_Context& mContext;
 		Editor_PanelsManager& m_panelsManager;
-		Editor_EditorRenderer& m_renderer;
+		Editor_EditorRenderer& mRenderer;
 
 		EActorSpawnMode m_actorSpawnMode = EActorSpawnMode::ORIGIN;
 		EEditorMode m_editorMode = EEditorMode::EDIT;

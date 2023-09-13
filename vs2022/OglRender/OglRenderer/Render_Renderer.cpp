@@ -3,7 +3,7 @@
 #include "Render_Renderer.h"
 
 Render::Render_Renderer::Render_Renderer(Render_Driver& p_driver) :
-	m_driver(p_driver), m_state(0)
+	mDriver(p_driver), m_state(0)
 {
 }
 

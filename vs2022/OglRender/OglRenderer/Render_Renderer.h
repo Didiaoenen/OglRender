@@ -113,7 +113,7 @@ namespace Render
 		const FrameInfo& GetFrameInfo() const;
 
 	private:
-		Render_Driver&	m_driver;
+		Render_Driver&	mDriver;
 		FrameInfo		m_frameInfo;
 		uint8_t			m_state;
 	};

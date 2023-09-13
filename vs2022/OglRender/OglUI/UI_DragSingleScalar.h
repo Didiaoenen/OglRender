@@ -44,7 +44,7 @@ namespace UI
 
 			if (ImGui::DragScalar((mLabel + this->mWidgetID).c_str(), mDataType, &mValue, mSpeed, &mMin, &mMax, mFormat.c_str()))
 			{
-				mValueChangeEvent.Invoke(mValue);
+				mValueChangedEvent.Invoke(mValue);
 				this->NotifyChange();
 			}
 		}
@@ -56,7 +56,7 @@ namespace UI
 		float mSpeed;
 		std::string mLabel;
 		std::string mFormat;
-		Tools::Tools_Event<T> mValueChangeEvent; 
+		Tools::Tools_Event<T> mValueChangedEvent; 
 
 	private:
 		ImGuiDataType mDataType;

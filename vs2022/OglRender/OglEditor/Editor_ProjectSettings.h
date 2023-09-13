@@ -20,13 +20,13 @@ namespace Editor
 		template <typename T>
 		std::function<T()> GenerateGatherer(const std::string& p_keyName)
 		{
-			return std::bind(&OvTools::Filesystem::IniFile::Get<T>, &m_projectFile, p_keyName);
+			return std::bind(&Tools::Tools_IniFile::Get<T>, &m_projectFile, p_keyName);
 		}
 
 		template <typename T>
 		std::function<void(T)> GenerateProvider(const std::string& p_keyName)
 		{
-			return std::bind(&OvTools::Filesystem::IniFile::Set<T>, &m_projectFile, p_keyName, std::placeholders::_1);
+			return std::bind(&Tools::Tools_IniFile::Set<T>, &m_projectFile, p_keyName, std::placeholders::_1);
 		}
 
 	private:
