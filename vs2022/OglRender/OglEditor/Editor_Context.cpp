@@ -5,10 +5,10 @@
 
 #include "Editor_Context.h"
 
-Editor::Editor_Context::Editor_Context(const std::string& p_projectPath, const std::string& p_projectName) :
+Editor::Editor_Context::Editor_Context(const std::string& p_projectPath, const std::string& pProjectName) :
 	mProjectPath(p_projectPath),
-	mProjectName(p_projectName),
-	mProjectFilePath(p_projectPath + p_projectName + ".ovproject"),
+	mProjectName(pProjectName),
+	mProjectFilePath(p_projectPath + pProjectName + ".ovproject"),
 	mEngineAssetsPath(std::filesystem::canonical("Data\\Engine").string() + "\\"),
 	mProjectAssetsPath(p_projectPath + "Assets\\"),
 	mProjectScriptsPath(p_projectPath + "Scripts\\"),

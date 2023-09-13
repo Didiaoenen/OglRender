@@ -15,7 +15,6 @@ void UI::UI_WidgetContainer::RemoveWidget(UI_AWidget& pWidget)
 		if (found->second == UI_EMemoryMode::INTERNAL_MANAGMENT)
 		{
 			delete found->first;
-			found->first = nullptr;
 		}
 
 		mWidgets.erase(found);
@@ -64,7 +63,6 @@ void UI::UI_WidgetContainer::CollectGarbages()
 			if (toDestroy && pItem.second == UI_EMemoryMode::INTERNAL_MANAGMENT)
 			{
 				delete pItem.first;
-				pItem.first = nullptr;
 			}
 
 			return toDestroy;

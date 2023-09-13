@@ -74,9 +74,9 @@ public:
 
 	}
 
-	void SetPath(const std::string& p_path)
+	void SetPath(const std::string& pPath)
 	{
-		texture = Core::Core_ServiceLocator::Get<Core::Core_TextureManager>()[p_path];
+		texture = Core::Core_ServiceLocator::Get<Core::Core_TextureManager>()[pPath];
 	}
 
 	virtual void Execute() override
@@ -530,14 +530,14 @@ class Editor_ScriptFolderContextualMenu : public Editor_FolderContextualMenu
 public:
 	Editor_ScriptFolderContextualMenu(const std::string& p_filePath, bool p_protected = false) : Editor_FolderContextualMenu(p_filePath, p_protected) {}
 
-	void CreateScript(const std::string& p_name, const std::string& p_path)
+	void CreateScript(const std::string& p_name, const std::string& pPath)
 	{
 		std::string fileContent = "local " + p_name + " =\n{\n}\n\nfunction " + p_name + ":OnStart()\nend\n\nfunction " + p_name + ":OnUpdate(deltaTime)\nend\n\nreturn " + p_name;
 
-		std::ofstream outfile(p_path);
+		std::ofstream outfile(pPath);
 		outfile << fileContent << std::endl;
 
-		ItemAddedEvent.Invoke(p_path);
+		ItemAddedEvent.Invoke(pPath);
 		Close();
 	}
 
@@ -1186,10 +1186,10 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 					}
 				};
 
-			contextMenu.ItemAddedEvent += [this, &treeNode, p_isEngineItem](std::string p_path)
+			contextMenu.ItemAddedEvent += [this, &treeNode, p_isEngineItem](std::string pPath)
 				{
 					treeNode.RemoveAllWidgets();
-					ParseFolder(treeNode, std::filesystem::directory_entry(Tools::Tools_PathParser::GetContainingFolder(p_path)), p_isEngineItem);
+					ParseFolder(treeNode, std::filesystem::directory_entry(Tools::Tools_PathParser::GetContainingFolder(pPath)), p_isEngineItem);
 				};
 
 		}

@@ -18,7 +18,7 @@
 Editor::Editor_Editor::Editor_Editor(Editor_Context& p_context) :
 	mContext(p_context),
 	m_editorRenderer(p_context),
-	m_panelsManager(m_canvas),
+	m_panelsManager(mCanvas),
 	m_editorActions(mContext, m_editorRenderer, m_panelsManager)
 {
 	SetupUI();
@@ -53,8 +53,8 @@ void Editor::Editor_Editor::SetupUI()
 	m_panelsManager.CreatePanel<Editor_ProjectSettings>("Project Settings", false, settings);
 	m_panelsManager.CreatePanel<Editor_AssetProperties>("Asset Properties", false, settings);
 
-	m_canvas.MakeDockspace(true);
-	mContext.uiManager->SetCanvas(m_canvas);
+	mCanvas.MakeDockspace(true);
+	mContext.uiManager->SetCanvas(mCanvas);
 }
 
 void Editor::Editor_Editor::PreUpdate()

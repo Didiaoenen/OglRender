@@ -29,7 +29,7 @@ namespace Editor
 				m_panels.emplace(pId, std::make_unique<T>(std::forward<Args>(pArgs)...));
 			}
 
-			m_canvas.AddPanel(*m_panels.at(pId));
+			mCanvas.AddPanel(*m_panels.at(pId));
 		}
 
 		template<typename T>
@@ -40,7 +40,7 @@ namespace Editor
 
 	private:
 		std::unordered_map<std::string, std::unique_ptr<UI::UI_APanel>> m_panels;
-		UI::UI_Canvas& m_canvas;
+		UI::UI_Canvas& mCanvas;
 	};
 }
 

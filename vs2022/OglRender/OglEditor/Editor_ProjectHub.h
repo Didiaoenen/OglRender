@@ -29,7 +29,7 @@ namespace Editor
 		std::unique_ptr<Render::Render_Renderer>	mRenderer;
 		std::unique_ptr<UI::UI_UIManager>			mUIManager;
 
-		UI::UI_Canvas m_canvas;
+		UI::UI_Canvas mCanvas;
 		std::unique_ptr<UI::UI_PanelWindow>			mMainPanel;
 
 		std::string mProjectPath = "";

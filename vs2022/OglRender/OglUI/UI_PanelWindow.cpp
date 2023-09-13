@@ -131,10 +131,14 @@ void UI::UI_PanelWindow::_Draw_Impl()
 		ImVec2 maxSizeConstraint = UI_Converter::ToImVec2(mMaxSize);
 
 		if (minSizeConstraint.x <= 0.f || minSizeConstraint.y <= 0.f)
+		{
 			minSizeConstraint = { 0.0f, 0.0f };
+		}
 
 		if (maxSizeConstraint.x <= 0.f || maxSizeConstraint.y <= 0.f)
+		{
 			maxSizeConstraint = { 10000.f, 10000.f };
+		}
 
 		ImGui::SetNextWindowSizeConstraints(minSizeConstraint, maxSizeConstraint);
 

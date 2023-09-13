@@ -5,9 +5,9 @@
 
 #include "Core_TextureManager.h"
 
-std::tuple<Render::ETextureFilteringMode, Render::ETextureFilteringMode, bool> GetAssetMetadata(const std::string& p_path)
+std::tuple<Render::ETextureFilteringMode, Render::ETextureFilteringMode, bool> GetAssetMetadata(const std::string& pPath)
 {
-	auto metaFile = Tools::Tools_IniFile(p_path + ".meta");
+	auto metaFile = Tools::Tools_IniFile(pPath + ".meta");
 
 	auto min = metaFile.GetOrDefault("MIN_FILTER", static_cast<int>(Render::ETextureFilteringMode::LINEAR_MIPMAP_LINEAR));
 	auto mag = metaFile.GetOrDefault("MAG_FILTER", static_cast<int>(Render::ETextureFilteringMode::LINEAR));

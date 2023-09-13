@@ -23,13 +23,13 @@
 class Editor_ProjectHubPanel : public UI::UI_PanelWindow
 {
 public:
-	Editor_ProjectHubPanel(bool& p_readyToGo, std::string& p_path, std::string& p_projectName) :
+	Editor_ProjectHubPanel(bool& pReadyToGo, std::string& pPath, std::string& pProjectName) :
 		UI::UI_PanelWindow("Overload - Project Hub", true),
-		mReadyToGo(p_readyToGo),
-		m_path(p_path),
-		mProjectName(p_projectName)
+		mReadyToGo(pReadyToGo),
+		mPath(pPath),
+		mProjectName(pProjectName)
 	{
-		mResizable = false;
+		mResizable = false; 
 		mMovable = false;
 		mTitleBar = false;
 
@@ -41,7 +41,7 @@ public:
 		auto& openProjectButton = CreateWidget<UI::UI_Button>("Open Project");
 		auto& newProjectButton = CreateWidget<UI::UI_Button>("New Project");
 		auto& pathField = CreateWidget<UI::UI_InputText>("");
-		m_goButton = &CreateWidget<UI::UI_Button>("GO");
+		mGoButton = &CreateWidget<UI::UI_Button>("GO");
 
 		pathField.mContentChangedEvent += [this, &pathField](std::string p_content)
 			{
@@ -90,7 +90,7 @@ public:
 				}
 			};
 
-		m_goButton->mClickedEvent += [this, &pathField]
+		mGoButton->mClickedEvent += [this, &pathField]
 			{
 				CreateProject(pathField.mContent);
 				RegisterProject(pathField.mContent);
@@ -102,12 +102,16 @@ public:
 		pathField.mLineBreak = false;
 
 		for (uint8_t i = 0; i < 4; ++i)
+		{
 			CreateWidget<UI::UI_Spacing>();
+		}
 
 		CreateWidget<UI::UI_Separator>();
 
 		for (uint8_t i = 0; i < 4; ++i)
+		{
 			CreateWidget<UI::UI_Spacing>();
+		}
 
 		auto& columns = CreateWidget<UI::UI_Columns<2>>();
 
@@ -152,7 +156,6 @@ public:
 								}
 							}
 
-
 							temp.close();
 							fin.close();
 
@@ -168,25 +171,25 @@ public:
 		}
 	}
 
-	void UpdateGoButton(const std::string& p_path)
+	void UpdateGoButton(const std::string& pPath)
 	{
-		bool validPath = p_path != "";
-		m_goButton->mIdleBackgroundColor = validPath ? UI::Color{ 0.f, 0.5f, 0.0f, 1.f } : UI::Color{ 0.1f, 0.1f, 0.1f, 1.f };
-		m_goButton->mDisabled = !validPath;
+		bool validPath = pPath != "";
+		mGoButton->mIdleBackgroundColor = validPath ? UI::Color{ 0.f, 0.5f, 0.0f, 1.f } : UI::Color{ 0.1f, 0.1f, 0.1f, 1.f };
+		mGoButton->mDisabled = !validPath;
 	}
 
-	void CreateProject(const std::string& p_path)
+	void CreateProject(const std::string& pPath)
 	{
-		if (!std::filesystem::exists(p_path))
+		if (!std::filesystem::exists(pPath))
 		{
-			std::filesystem::create_directory(p_path);
-			std::filesystem::create_directory(p_path + "Assets\\");
-			std::filesystem::create_directory(p_path + "Scripts\\");
-			std::ofstream projectFile(p_path + '\\' + Tools::Tools_PathParser::GetElementName(std::string(p_path.data(), p_path.data() + p_path.size() - 1)) + ".ovproject");
+			std::filesystem::create_directory(pPath);
+			std::filesystem::create_directory(pPath + "Assets\\");
+			std::filesystem::create_directory(pPath + "Scripts\\");
+			std::ofstream projectFile(pPath + '\\' + Tools::Tools_PathParser::GetElementName(std::string(pPath.data(), pPath.data() + pPath.size() - 1)) + ".ovproject");
 		}
 	}
 
-	void RegisterProject(const std::string& p_path)
+	void RegisterProject(const std::string& pPath)
 	{
 		bool pathAlreadyRegistered = false;
 
@@ -197,7 +200,7 @@ public:
 			{
 				while (getline(myfile, line))
 				{
-					if (line == p_path)
+					if (line == pPath)
 					{
 						pathAlreadyRegistered = true;
 						break;
@@ -210,21 +213,21 @@ public:
 		if (!pathAlreadyRegistered)
 		{
 			std::ofstream projectsFile(PROJECTS_FILE, std::ios::app);
-			projectsFile << p_path << std::endl;
+			projectsFile << pPath << std::endl;
 		}
 	}
 
-	void OpenProject(const std::string& p_path)
+	void OpenProject(const std::string& pPath)
 	{
-		mReadyToGo = std::filesystem::exists(p_path);
+		mReadyToGo = std::filesystem::exists(pPath);
 		if (!mReadyToGo)
 		{
 			Window::Window_MessageBox errorMessage("Project not found", "The selected project does not exists", Window::Window_MessageBox::EMessageType::ERROR, Window::Window_MessageBox::EButtonLayout::OK);
 		}
 		else
 		{
-			m_path = p_path;
-			mProjectName = Tools::Tools_PathParser::GetElementName(m_path);
+			mPath = pPath;
+			mProjectName = Tools::Tools_PathParser::GetElementName(mPath);
 			Close();
 		}
 	}
@@ -241,9 +244,9 @@ public:
 
 private:
 	bool& mReadyToGo;
-	std::string& m_path;
+	std::string& mPath;
 	std::string& mProjectName;
-	UI::UI_Button* m_goButton = nullptr;
+	UI::UI_Button* mGoButton{ nullptr };
 };
 
 Editor::Editor_ProjectHub::Editor_ProjectHub()
@@ -251,8 +254,8 @@ Editor::Editor_ProjectHub::Editor_ProjectHub()
 	SetupContext();
 	mMainPanel = std::make_unique<Editor_ProjectHubPanel>(mReadyToGo, mProjectPath, mProjectName);
 
-	mUIManager->SetCanvas(m_canvas);
-	m_canvas.AddPanel(*mMainPanel);
+	mUIManager->SetCanvas(mCanvas);
+	mCanvas.AddPanel(*mMainPanel);
 }
 
 std::tuple<bool, std::string, std::string> Editor::Editor_ProjectHub::Run()

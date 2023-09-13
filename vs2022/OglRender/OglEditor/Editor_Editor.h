@@ -45,7 +45,7 @@ namespace Editor
 
 	private:
 		uint64_t mElapsedFrames = 0;
-		UI::UI_Canvas			m_canvas;
+		UI::UI_Canvas			mCanvas;
 		Editor_Context&			mContext;
 		Editor_EditorRenderer	m_editorRenderer;
 		Editor_PanelsManager	m_panelsManager;
