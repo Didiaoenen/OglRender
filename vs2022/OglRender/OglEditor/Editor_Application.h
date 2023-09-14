@@ -17,9 +17,8 @@ namespace Editor
 		bool IsRunning() const;
 
 	private:
-		Editor_Editor mEditor;
 		Editor_Context mContext;
-
+		Editor_Editor mEditor;
 	};
 }
 

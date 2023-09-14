@@ -996,7 +996,9 @@ void Editor::Editor_EditorActions::ExecuteDelayedActions()
 			--p_element.first;
 
 			if (p_element.first == 0)
+			{
 				p_element.second();
+			}
 		});
 
 	m_delayedActions.erase(std::remove_if(m_delayedActions.begin(), m_delayedActions.end(), [](std::pair<uint32_t, std::function<void()>>& p_element)

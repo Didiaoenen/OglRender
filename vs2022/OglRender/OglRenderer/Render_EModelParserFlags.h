@@ -35,7 +35,7 @@ namespace Render
 		EMBED_TEXTURES = 0x10000000,
 		FORCE_GEN_NORMALS = 0x20000000,
 		DROP_NORMALS = 0x40000000,
-		GEN_BOUNDING_BOXES = 0x80000000
+		GEN_BOUNDING_BOXES = 0x80000000,
 	};
 
 	inline EModelParserFlags operator~ (EModelParserFlags a) { return (EModelParserFlags)~(int)a; }

@@ -29,15 +29,13 @@ Editor::Editor_EditorResources::Editor_EditorResources(const std::string& p_edit
 	modelParserFlags |= Render::EModelParserFlags::IMPROVE_CACHE_LOCALITY;
 	modelParserFlags |= Render::EModelParserFlags::GEN_UV_COORDS;
 	modelParserFlags |= Render::EModelParserFlags::PRE_TRANSFORM_VERTICES;
-	modelParserFlags |= Render::EModelParserFlags::GLOBAL_SCALE;
+	//modelParserFlags |= Render::EModelParserFlags::GLOBAL_SCALE;
 
 	Render::ETextureFilteringMode firstFilterEditor = Render::ETextureFilteringMode::LINEAR;
 	Render::ETextureFilteringMode secondFilterEditor = Render::ETextureFilteringMode::LINEAR;
 
 	Render::ETextureFilteringMode firstFilterBillboard = Render::ETextureFilteringMode::NEAREST;
 	Render::ETextureFilteringMode secondFilterBillboard = Render::ETextureFilteringMode::NEAREST;
-
-	/* Buttons */
 
 	{
 		std::vector<uint64_t> raw = BUTTON_PLAY;
@@ -64,7 +62,6 @@ Editor::Editor_EditorResources::Editor_EditorResources(const std::string& p_edit
 		m_textures["Button_Refresh"] = Render::Render_TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);
 	}
 
-	/* Icons */
 	{
 		std::vector<uint64_t> raw = ICON_FILE;
 		m_textures["Icon_Unknown"] = Render::Render_TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 16, 16, firstFilterEditor, secondFilterEditor, false);
@@ -140,7 +137,6 @@ Editor::Editor_EditorResources::Editor_EditorResources(const std::string& p_edit
 		m_textures["Bill_Ambient_Sphere_Light"] = Render::Render_TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 128, 128, firstFilterBillboard, secondFilterBillboard, false);
 	}
 
-	/* Models */
 	m_models["Cube"] = Render::Render_ModelLoader::Create(modelsFolder + "Cube.fbx", modelParserFlags);
 	m_models["Cylinder"] = Render::Render_ModelLoader::Create(modelsFolder + "Cylinder.fbx", modelParserFlags);
 	m_models["Plane"] = Render::Render_ModelLoader::Create(modelsFolder + "Plane.fbx", modelParserFlags);
@@ -153,7 +149,6 @@ Editor::Editor_EditorResources::Editor_EditorResources(const std::string& p_edit
 	m_models["Arrow_Picking"] = Render::Render_ModelLoader::Create(modelsFolder + "Arrow_Picking.fbx", modelParserFlags);
 	m_models["Camera"] = Render::Render_ModelLoader::Create(modelsFolder + "Camera.fbx", modelParserFlags);
 
-	/* Shaders */
 	auto gridSource = Editor_RawShaders::GetGrid();
 	auto gizmoSource = Editor_RawShaders::GetGizmo();
 	auto billboardSource = Editor_RawShaders::GetBillboard();
@@ -161,7 +156,6 @@ Editor::Editor_EditorResources::Editor_EditorResources(const std::string& p_edit
 	m_shaders["Gizmo"] = Render::Render_ShaderLoader::CreateFromSource(gizmoSource.first, gizmoSource.second);
 	m_shaders["Billboard"] = Render::Render_ShaderLoader::CreateFromSource(billboardSource.first, billboardSource.second);
 
-	/* From memory */
 	{
 		std::vector<uint64_t> raw = EMPTY_TEXTURE;
 		m_textures["Empty_Texture"] = Render::Render_TextureLoader::CreateFromMemory(reinterpret_cast<uint8_t*>(raw.data()), 64, 64, firstFilterEditor, secondFilterEditor, false);

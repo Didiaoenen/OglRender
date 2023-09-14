@@ -86,8 +86,14 @@ std::pair<std::string, std::string> Render::Render_ShaderLoader::ParseShader(con
 	{
 		if (line.find("#shader") != std::string::npos)
 		{
-			if (line.find("vertex") != std::string::npos)			type = ShaderType::VERTEX;
-			else if (line.find("fragment") != std::string::npos)	type = ShaderType::FRAGMENT;
+			if (line.find("vertex") != std::string::npos)
+			{
+				type = ShaderType::VERTEX;
+			}
+			else if (line.find("fragment") != std::string::npos)
+			{
+				type = ShaderType::FRAGMENT;
+			}
 		}
 		else if (type != ShaderType::NONE)
 		{
