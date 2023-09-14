@@ -21,7 +21,7 @@ namespace Editor
 	class Editor_EditorActions
 	{
 	public:
-		Editor_EditorActions(Editor_Context& p_context, Editor_EditorRenderer& p_editorRenderer, Editor_PanelsManager& p_panelsManager);
+		Editor_EditorActions(Editor_Context& pContext, Editor_EditorRenderer& p_editorRenderer, Editor_PanelsManager& p_panelsManager);
 
 #pragma region TOOLS
 		Editor_Context& GetContext();
@@ -161,7 +161,7 @@ namespace Editor
 
 	private:
 		Editor_Context& mContext;
-		Editor_PanelsManager& m_panelsManager;
+		Editor_PanelsManager& mPanelsManager;
 		Editor_EditorRenderer& mRenderer;
 
 		EActorSpawnMode m_actorSpawnMode = EActorSpawnMode::ORIGIN;

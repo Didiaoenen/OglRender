@@ -108,7 +108,7 @@ namespace Render
 
 		void ApplyStateMask(uint8_t p_mask);
 
-		void SetState(uint8_t p_state);
+		void SetState(uint8_t pState);
 
 		const FrameInfo& GetFrameInfo() const;
 

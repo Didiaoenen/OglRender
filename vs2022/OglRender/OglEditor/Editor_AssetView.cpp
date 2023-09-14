@@ -57,21 +57,21 @@ void Editor::Editor_AssetView::_Render_Impl()
 	uint8_t glState = baseRenderer.FetchGLState();
 	baseRenderer.ApplyStateMask(glState);
 
-	m_editorRenderer.RenderGrid(m_cameraPosition, m_gridColor);
+	mEditorRenderer.RenderGrid(m_cameraPosition, m_gridColor);
 
 	if (auto pval = std::get_if<Render::Render_Model*>(&m_resource); pval && *pval)
 	{
-		m_editorRenderer.RenderModelAsset(**pval);
+		mEditorRenderer.RenderModelAsset(**pval);
 	}
 
 	if (auto pval = std::get_if<Render::Render_Texture*>(&m_resource); pval && *pval)
 	{
-		m_editorRenderer.RenderTextureAsset(**pval);
+		mEditorRenderer.RenderTextureAsset(**pval);
 	}
 
 	if (auto pval = std::get_if<Core::Core_Material*>(&m_resource); pval && *pval)
 	{
-		m_editorRenderer.RenderMaterialAsset(**pval);
+		mEditorRenderer.RenderMaterialAsset(**pval);
 	}
 
 	baseRenderer.ApplyStateMask(glState);

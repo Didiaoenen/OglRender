@@ -30,7 +30,8 @@
 #include "Editor_EditorActions.h"
 #include "Editor_Inspector.h"
 
-Editor::Editor_Inspector::Editor_Inspector(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings)
+Editor::Editor_Inspector::Editor_Inspector(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) : 
+	UI::UI_PanelWindow(p_title, p_opened, p_windowSettings)
 {
 	m_inspectorHeader = &CreateWidget<UI::UI_Group>();
 	m_inspectorHeader->mEnabled = false;
@@ -55,17 +56,12 @@ Editor::Editor_Inspector::Editor_Inspector(const std::string& p_title, bool p_op
 		componentSelectorWidget.mLineBreak = false;
 		componentSelectorWidget.mChoices.emplace(0, "Model Renderer");
 		componentSelectorWidget.mChoices.emplace(1, "Camera");
-		componentSelectorWidget.mChoices.emplace(2, "Physical Box");
-		componentSelectorWidget.mChoices.emplace(3, "Physical Sphere");
-		componentSelectorWidget.mChoices.emplace(4, "Physical Capsule");
 		componentSelectorWidget.mChoices.emplace(5, "Point Light");
 		componentSelectorWidget.mChoices.emplace(6, "Directional Light");
 		componentSelectorWidget.mChoices.emplace(7, "Spot Light");
 		componentSelectorWidget.mChoices.emplace(8, "Ambient Box Light");
 		componentSelectorWidget.mChoices.emplace(9, "Ambient Sphere Light");
 		componentSelectorWidget.mChoices.emplace(10, "Material Renderer");
-		componentSelectorWidget.mChoices.emplace(11, "Audio Source");
-		componentSelectorWidget.mChoices.emplace(12, "Audio Listener");
 
 		auto& addComponentButton = m_inspectorHeader->CreateWidget<UI::UI_Button>("Add Component", glm::vec2{ 100.f, 0 });
 		addComponentButton.mIdleBackgroundColor = UI::Color{ 0.7f, 0.5f, 0.f, 1.f };
@@ -74,14 +70,14 @@ Editor::Editor_Inspector::Editor_Inspector(const std::string& p_title, bool p_op
 			{
 				switch (componentSelectorWidget.mCurrentChoice)
 				{
-				case 0: GetTargetActor()->AddComponent<Core::Core_CModelRenderer>(); GetTargetActor()->AddComponent<Core::Core_CMaterialRenderer>(); break;
-				case 1: GetTargetActor()->AddComponent<Core::Core_CCamera>();				break;
-				case 5: GetTargetActor()->AddComponent<Core::Core_CPointLight>();			break;
-				case 6: GetTargetActor()->AddComponent<Core::Core_CDirectionalLight>();	break;
-				case 7: GetTargetActor()->AddComponent<Core::Core_CSpotLight>();			break;
-				case 8: GetTargetActor()->AddComponent<Core::Core_CAmbientBoxLight>();		break;
-				case 9: GetTargetActor()->AddComponent<Core::Core_CAmbientSphereLight>();	break;
-				case 10: GetTargetActor()->AddComponent<Core::Core_CMaterialRenderer>();	break;
+					case 0: GetTargetActor()->AddComponent<Core::Core_CModelRenderer>(); GetTargetActor()->AddComponent<Core::Core_CMaterialRenderer>(); break;
+					case 1: GetTargetActor()->AddComponent<Core::Core_CCamera>();				break;
+					case 5: GetTargetActor()->AddComponent<Core::Core_CPointLight>();			break;
+					case 6: GetTargetActor()->AddComponent<Core::Core_CDirectionalLight>();		break;
+					case 7: GetTargetActor()->AddComponent<Core::Core_CSpotLight>();			break;
+					case 8: GetTargetActor()->AddComponent<Core::Core_CAmbientBoxLight>();		break;
+					case 9: GetTargetActor()->AddComponent<Core::Core_CAmbientSphereLight>();	break;
+					case 10: GetTargetActor()->AddComponent<Core::Core_CMaterialRenderer>();	break;
 				}
 
 				componentSelectorWidget.mValueChangedEvent.Invoke(componentSelectorWidget.mCurrentChoice);
@@ -97,14 +93,14 @@ Editor::Editor_Inspector::Editor_Inspector(const std::string& p_title, bool p_op
 
 				switch (p_value)
 				{
-				case 0: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CModelRenderer>());		return;
-				case 1: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CCamera>());				return;
-				case 5: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CPointLight>());			return;
-				case 6: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CDirectionalLight>());	return;
-				case 7: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CSpotLight>());			return;
-				case 8: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CAmbientBoxLight>());	return;
-				case 9: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CAmbientSphereLight>());	return;
-				case 10: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CMaterialRenderer>());	return;
+					case 0: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CModelRenderer>());		return;
+					case 1: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CCamera>());				return;
+					case 5: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CPointLight>());			return;
+					case 6: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CDirectionalLight>());	return;
+					case 7: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CSpotLight>());			return;
+					case 8: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CAmbientBoxLight>());		return;
+					case 9: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CAmbientSphereLight>());	return;
+					case 10: defineButtonsStates(GetTargetActor()->GetComponent<Core::Core_CMaterialRenderer>());	return;
 				}
 			};
 
@@ -170,7 +166,9 @@ Editor::Editor_Inspector::~Editor_Inspector()
 void Editor::Editor_Inspector::FocusActor(Core::Core_Actor& p_target)
 {
 	if (m_targetActor)
+	{
 		UnFocus();
+	}
 
 	m_actorInfo->RemoveAllWidgets();
 

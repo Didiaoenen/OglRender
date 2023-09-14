@@ -62,7 +62,9 @@ Editor::Editor_Context::Editor_Context(const std::string& p_projectPath, const s
 	uiManager->EnableDocking(true);
 
 	if (!std::filesystem::exists(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\layout.ini"))
+	{
 		uiManager->ResetLayout("Config\\layout.ini");
+	}
 
 	editorResources = std::make_unique<Editor::Editor_EditorResources>(mEditorAssetsPath);
 

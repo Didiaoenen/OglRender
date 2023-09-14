@@ -158,7 +158,7 @@ void Render::Render_Renderer::ApplyStateMask(uint8_t p_mask)
 {
 }
 
-void Render::Render_Renderer::SetState(uint8_t p_state)
+void Render::Render_Renderer::SetState(uint8_t pState)
 {
 }
 

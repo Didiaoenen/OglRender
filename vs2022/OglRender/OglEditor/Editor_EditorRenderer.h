@@ -20,7 +20,7 @@ namespace Editor
 	class Editor_EditorRenderer
 	{
 	public:
-		Editor_EditorRenderer(Editor_Context& p_context);
+		Editor_EditorRenderer(Editor_Context& pContext);
 
 		void InitMaterials();
 

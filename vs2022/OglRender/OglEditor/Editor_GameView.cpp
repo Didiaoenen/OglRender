@@ -51,14 +51,14 @@ void Editor::Editor_GameView::_Render_Impl()
 	{
 		if (mCamera.HasFrustumLightCulling())
 		{
-			m_editorRenderer.UpdateLightsInFrustum(currentScene, mCamera.GetFrustum());
+			mEditorRenderer.UpdateLightsInFrustum(currentScene, mCamera.GetFrustum());
 		}
 		else
 		{
-			m_editorRenderer.UpdateLights(currentScene);
+			mEditorRenderer.UpdateLights(currentScene);
 		}
 
-		m_editorRenderer.RenderScene(m_cameraPosition, mCamera);
+		mEditorRenderer.RenderScene(m_cameraPosition, mCamera);
 	}
 
 	baseRenderer.ApplyStateMask(glState);

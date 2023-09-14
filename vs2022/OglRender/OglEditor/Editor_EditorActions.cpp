@@ -23,10 +23,10 @@
 
 #include "Editor_EditorActions.h"
 
-Editor::Editor_EditorActions::Editor_EditorActions(Editor_Context& p_context, Editor_EditorRenderer& p_editorRenderer, Editor_PanelsManager& p_panelsManager) :
-	mContext(p_context),
+Editor::Editor_EditorActions::Editor_EditorActions(Editor_Context& pContext, Editor_EditorRenderer& p_editorRenderer, Editor_PanelsManager& p_panelsManager) :
+	mContext(pContext),
 	mRenderer(p_editorRenderer),
-	m_panelsManager(p_panelsManager)
+	mPanelsManager(p_panelsManager)
 {
 	Core::Core_ServiceLocator::Provide<Editor_EditorActions>(*this);
 
@@ -49,7 +49,7 @@ Editor::Editor_EditorRenderer& Editor::Editor_EditorActions::GetRenderer()
 
 Editor::Editor_PanelsManager& Editor::Editor_EditorActions::GetPanelsManager()
 {
-	return m_panelsManager;
+	return mPanelsManager;
 }
 
 void Editor::Editor_EditorActions::SetActorSpawnAtOrigin(bool pValue)
@@ -129,7 +129,7 @@ void Editor::Editor_EditorActions::StartPlaying()
 		//	tinyxml2::XMLNode* node = m_sceneBackup.NewElement("root");
 		//	m_sceneBackup.InsertFirstChild(node);
 		//	mContext.sceneManager.GetCurrentScene()->OnSerialize(m_sceneBackup, node);
-		//	m_panelsManager.GetPanelAs<Editor_GameView>("Game View").Focus();
+		//	mPanelsManager.GetPanelAs<Editor_GameView>("Game View").Focus();
 		//	mContext.sceneManager.GetCurrentScene()->Play();
 		//	SetEditorMode(EEditorMode::PLAY);
 		//}
@@ -160,7 +160,9 @@ void Editor::Editor_EditorActions::StopPlaying()
 		int64_t focusedActorID = -1;
 
 		if (auto targetActor = EDITOR_PANEL(Editor_Inspector, "Inspector").GetTargetActor())
+		{
 			focusedActorID = targetActor->GetID();
+		}
 
 		mContext.sceneManager.LoadSceneFromMemory(m_sceneBackup);
 		if (loadedFromDisk)
@@ -184,7 +186,7 @@ void Editor::Editor_EditorActions::NextFrame()
 
 glm::vec3 Editor::Editor_EditorActions::CalculateActorSpawnPoint(float p_distanceToCamera)
 {
-	auto& sceneView = m_panelsManager.GetPanelAs<Editor_SceneView>("Scene View");
+	auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View");
 	return sceneView.GetCameraPosition() + sceneView.GetCameraRotation() * glm::vec3(0.f, 0.f, 1.f) * p_distanceToCamera;
 }
 
@@ -727,7 +729,7 @@ void Editor::Editor_EditorActions::LoadSceneFromDisk(const std::string& pPath, b
 
 	mContext.sceneManager.LoadScene(pPath, p_absolute);
 	//OVLOG_INFO("Scene loaded from disk: " + mContext.sceneManager.GetCurrentSceneSourcePath());
-	m_panelsManager.GetPanelAs<Editor_SceneView>("Scene View").Focus();
+	mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View").Focus();
 }
 
 bool Editor::Editor_EditorActions::IsCurrentSceneLoadedFromDisk() const
@@ -775,7 +777,7 @@ void Editor::Editor_EditorActions::SaveAs()
 void Editor::Editor_EditorActions::RefreshScripts()
 {
 	//mContext.scriptInterpreter->RefreshAll();
-	//m_panelsManager.GetPanelAs<Editor_Inspector>("Inspector").Refresh();
+	//mPanelsManager.GetPanelAs<Editor_Inspector>("Inspector").Refresh();
 	//if (mContext.scriptInterpreter->IsOk())
 	//{
 	//	OVLOG_INFO("Scripts interpretation succeeded!");

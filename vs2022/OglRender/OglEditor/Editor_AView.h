@@ -52,7 +52,7 @@ namespace Editor
 		void PrepareCamera();
 
 	protected:
-		Editor_EditorRenderer& m_editorRenderer;
+		Editor_EditorRenderer& mEditorRenderer;
 		Render::Render_Camera mCamera;
 		glm::vec3 m_cameraPosition;
 		glm::quat m_cameraRotation;

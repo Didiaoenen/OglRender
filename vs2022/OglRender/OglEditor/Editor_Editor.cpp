@@ -15,11 +15,11 @@
 
 #include "Editor_Editor.h"
 
-Editor::Editor_Editor::Editor_Editor(Editor_Context& p_context) :
-	mContext(p_context),
-	m_editorRenderer(p_context),
-	m_panelsManager(mCanvas),
-	m_editorActions(mContext, m_editorRenderer, m_panelsManager)
+Editor::Editor_Editor::Editor_Editor(Editor_Context& pContext) :
+	mContext(pContext),
+	mEditorRenderer(pContext),
+	mPanelsManager(mCanvas),
+	mEditorActions(mContext, mEditorRenderer, mPanelsManager)
 {
 	SetupUI();
 
@@ -38,20 +38,20 @@ void Editor::Editor_Editor::SetupUI()
 	settings.collapsable = true;
 	settings.dockable = true;
 
-	m_panelsManager.CreatePanel<Editor_MenuBar>("Menu Bar");
-	m_panelsManager.CreatePanel<Editor_AssetBrowser>("Asset Browser", true, settings, mContext.mEngineAssetsPath, mContext.mProjectAssetsPath, mContext.mProjectScriptsPath);
-	m_panelsManager.CreatePanel<Editor_HardwareInfo>("Hardware Info", false, settings, 0.2f, 50);
-	m_panelsManager.CreatePanel<Editor_Profiler>("Profiler", true, settings, 0.25f);
-	m_panelsManager.CreatePanel<Editor_Console>("Console", true, settings);
-	m_panelsManager.CreatePanel<Editor_Hierarchy>("Hierarchy", true, settings);
-	m_panelsManager.CreatePanel<Editor_Inspector>("Inspector", true, settings);
-	m_panelsManager.CreatePanel<Editor_SceneView>("Scene View", true, settings);
-	m_panelsManager.CreatePanel<Editor_GameView>("Game View", true, settings);
-	m_panelsManager.CreatePanel<Editor_AssetView>("Asset View", false, settings);
-	m_panelsManager.CreatePanel<Editor_Toolbar>("Toolbar", true, settings);
-	m_panelsManager.CreatePanel<Editor_MaterialEditor>("Material Editor", false, settings);
-	m_panelsManager.CreatePanel<Editor_ProjectSettings>("Project Settings", false, settings);
-	m_panelsManager.CreatePanel<Editor_AssetProperties>("Asset Properties", false, settings);
+	mPanelsManager.CreatePanel<Editor_MenuBar>("Menu Bar");
+	//mPanelsManager.CreatePanel<Editor_AssetBrowser>("Asset Browser", true, settings, mContext.mEngineAssetsPath, mContext.mProjectAssetsPath, mContext.mProjectScriptsPath);
+	//mPanelsManager.CreatePanel<Editor_HardwareInfo>("Hardware Info", false, settings, 0.2f, 50);
+	//mPanelsManager.CreatePanel<Editor_Profiler>("Profiler", true, settings, 0.25f);
+	//mPanelsManager.CreatePanel<Editor_Console>("Console", true, settings);
+	//mPanelsManager.CreatePanel<Editor_Hierarchy>("Hierarchy", true, settings);
+	//mPanelsManager.CreatePanel<Editor_Inspector>("Inspector", true, settings);
+	//mPanelsManager.CreatePanel<Editor_SceneView>("Scene View", true, settings);
+	//mPanelsManager.CreatePanel<Editor_GameView>("Game View", true, settings);
+	//mPanelsManager.CreatePanel<Editor_AssetView>("Asset View", false, settings);
+	//mPanelsManager.CreatePanel<Editor_Toolbar>("Toolbar", true, settings);
+	//mPanelsManager.CreatePanel<Editor_MaterialEditor>("Material Editor", false, settings);
+	//mPanelsManager.CreatePanel<Editor_ProjectSettings>("Project Settings", false, settings);
+	//mPanelsManager.CreatePanel<Editor_AssetProperties>("Asset Properties", false, settings);
 
 	mCanvas.MakeDockspace(true);
 	mContext.uiManager->SetCanvas(mCanvas);
@@ -74,7 +74,7 @@ void Editor::Editor_Editor::Update(float pDeltaTime)
 	UpdateEditorPanels(pDeltaTime);
 	RenderViews(pDeltaTime);
 	RenderEditorUI(pDeltaTime);
-	m_editorActions.ExecuteDelayedActions();
+	mEditorActions.ExecuteDelayedActions();
 }
 
 void Editor::Editor_Editor::HandleGlobalShortcuts()
@@ -87,7 +87,7 @@ void Editor::Editor_Editor::HandleGlobalShortcuts()
 
 void Editor::Editor_Editor::UpdateCurrentEditorMode(float pDeltaTime)
 {
-	if (auto editorMode = m_editorActions.GetCurrentEditorMode(); editorMode == Editor_EditorActions::EEditorMode::PLAY || editorMode == Editor_EditorActions::EEditorMode::FRAME_BY_FRAME)
+	if (auto editorMode = mEditorActions.GetCurrentEditorMode(); editorMode == Editor_EditorActions::EEditorMode::PLAY || editorMode == Editor_EditorActions::EEditorMode::FRAME_BY_FRAME)
 	{
 		UpdatePlayMode(pDeltaTime);
 	}
@@ -136,14 +136,14 @@ void Editor::Editor_Editor::UpdatePlayMode(float pDeltaTime)
 
 	ImGui::GetIO().DisableMouseUpdate = mContext.window->GetCursorMode() == Window::ECursorMode::DISABLED;
 
-	if (m_editorActions.GetCurrentEditorMode() == Editor_EditorActions::EEditorMode::FRAME_BY_FRAME)
+	if (mEditorActions.GetCurrentEditorMode() == Editor_EditorActions::EEditorMode::FRAME_BY_FRAME)
 	{
-		m_editorActions.PauseGame();
+		mEditorActions.PauseGame();
 	}
 
 	if (mContext.inputManager->IsKeyPressed(Window::EKey::KEY_ESCAPE))
 	{
-		m_editorActions.StopPlaying();
+		mEditorActions.StopPlaying();
 	}
 }
 
@@ -151,35 +151,35 @@ void Editor::Editor_Editor::UpdateEditMode(float pDeltaTime)
 {
 	if (mContext.inputManager->IsKeyPressed(Window::EKey::KEY_F5))
 	{
-		m_editorActions.StartPlaying();
+		mEditorActions.StartPlaying();
 	}
 }
 
 void Editor::Editor_Editor::UpdateEditorPanels(float pDeltaTime)
 {
-	auto& menuBar = m_panelsManager.GetPanelAs<Editor_MenuBar>("Menu Bar");
-	auto& profiler = m_panelsManager.GetPanelAs<Editor_Profiler>("Profiler");
-	auto& hardwareInfo = m_panelsManager.GetPanelAs<Editor_HardwareInfo>("Hardware Info");
-	auto& sceneView = m_panelsManager.GetPanelAs<Editor_SceneView>("Scene View");
+	auto& menuBar = mPanelsManager.GetPanelAs<Editor_MenuBar>("Menu Bar");
+	//auto& profiler = mPanelsManager.GetPanelAs<Editor_Profiler>("Profiler");
+	//auto& hardwareInfo = mPanelsManager.GetPanelAs<Editor_HardwareInfo>("Hardware Info");
+	//auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View");
 
 	menuBar.HandleShortcuts(pDeltaTime);
 
 	if (mElapsedFrames == 1)
 	{
-		sceneView.Focus();
+		//sceneView.Focus();
 	}
 
-	if (profiler.IsOpened())
-	{
-		//PROFILER_SPY("Profiler Update");
-		//profiler.Update(p_deltaTime);
-	}
+	//if (profiler.IsOpened())
+	//{
+	//	//PROFILER_SPY("Profiler Update");
+	//	//profiler.Update(p_deltaTime);
+	//}
 
-	if (hardwareInfo.IsOpened())
-	{
-		//PROFILER_SPY("Hardware Info Update");
-		hardwareInfo.Update(pDeltaTime);
-	}
+	//if (hardwareInfo.IsOpened())
+	//{
+	//	//PROFILER_SPY("Hardware Info Update");
+	//	hardwareInfo.Update(pDeltaTime);
+	//}
 }
 
 void Editor::Editor_Editor::PrepareRendering(float pDeltaTime)
@@ -190,42 +190,42 @@ void Editor::Editor_Editor::PrepareRendering(float pDeltaTime)
 
 void Editor::Editor_Editor::RenderViews(float pDeltaTime)
 {
-	auto& assetView = m_panelsManager.GetPanelAs<Editor_AssetView>("Asset View");
-	auto& sceneView = m_panelsManager.GetPanelAs<Editor_SceneView>("Scene View");
-	auto& gameView = m_panelsManager.GetPanelAs<Editor_GameView>("Game View");
+	//auto& assetView = mPanelsManager.GetPanelAs<Editor_AssetView>("Asset View");
+	//auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View");
+	//auto& gameView = mPanelsManager.GetPanelAs<Editor_GameView>("Game View");
 
 	{
 		//PROFILER_SPY("Editor Views Update");
 
-		assetView.Update(pDeltaTime);
-		gameView.Update(pDeltaTime);
-		sceneView.Update(pDeltaTime);
+		//assetView.Update(pDeltaTime);
+		//gameView.Update(pDeltaTime);
+		//sceneView.Update(pDeltaTime);
 	}
 
-	if (assetView.IsOpened())
-	{
-		//PROFILER_SPY("Asset View Rendering");
+	//if (assetView.IsOpened())
+	//{
+	//	//PROFILER_SPY("Asset View Rendering");
 
-		mContext.simulatedLightSSBO->Bind(0);
-		assetView.Render();
-		mContext.simulatedLightSSBO->Unbind();
-	}
+	//	mContext.simulatedLightSSBO->Bind(0);
+	//	assetView.Render();
+	//	mContext.simulatedLightSSBO->Unbind();
+	//}
 
 	mContext.lightSSBO->Bind(0);
 
-	if (gameView.IsOpened())
-	{
-		//PROFILER_SPY("Game View Rendering");
+	//if (gameView.IsOpened())
+	//{
+	//	//PROFILER_SPY("Game View Rendering");
 
-		gameView.Render();
-	}
+	//	gameView.Render();
+	//}
 
-	if (sceneView.IsOpened())
-	{
-		//PROFILER_SPY("Scene View Rendering");
+	//if (sceneView.IsOpened())
+	//{
+	//	//PROFILER_SPY("Scene View Rendering");
 
-		sceneView.Render();
-	}
+	//	sceneView.Render();
+	//}
 
 	mContext.lightSSBO->Unbind();
 }
@@ -234,7 +234,7 @@ void Editor::Editor_Editor::RenderEditorUI(float pDeltaTime)
 {
 	//PROFILER_SPY("Editor UI Rendering");
 
-	m_editorActions.GetRenderer().RenderUI();
+	mEditorActions.GetRenderer().RenderUI();
 }
 
 void Editor::Editor_Editor::PostUpdate()

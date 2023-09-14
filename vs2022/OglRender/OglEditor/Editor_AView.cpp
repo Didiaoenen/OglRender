@@ -4,7 +4,7 @@
 #include "Editor_EditorActions.h"
 
 Editor::Editor_AView::Editor_AView(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
-	UI_PanelWindow(p_title, p_opened, p_windowSettings), m_editorRenderer(EDITOR_RENDERER())
+	UI_PanelWindow(p_title, p_opened, p_windowSettings), mEditorRenderer(EDITOR_RENDERER())
 {
 	m_cameraPosition = { -10.0f, 3.0f, 10.0f };
 	m_cameraRotation = glm::quat({ 0.0f, 135.0f, 0.0f });

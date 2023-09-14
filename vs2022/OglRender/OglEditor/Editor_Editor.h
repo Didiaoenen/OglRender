@@ -15,7 +15,7 @@ namespace Editor
 	class Editor_Editor
 	{
 	public:
-		Editor_Editor(Editor_Context& p_context);
+		Editor_Editor(Editor_Context& pContext);
 
 		~Editor_Editor();
 
@@ -47,9 +47,9 @@ namespace Editor
 		uint64_t mElapsedFrames = 0;
 		UI::UI_Canvas			mCanvas;
 		Editor_Context&			mContext;
-		Editor_EditorRenderer	m_editorRenderer;
-		Editor_PanelsManager	m_panelsManager;
-		Editor_EditorActions	m_editorActions;
+		Editor_EditorRenderer	mEditorRenderer;
+		Editor_PanelsManager	mPanelsManager;
+		Editor_EditorActions	mEditorActions;
 	};
 }
 

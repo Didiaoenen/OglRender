@@ -39,24 +39,30 @@ void Editor::Editor_MenuBar::HandleShortcuts(float pDeltaTime)
 	if (inputManager.GetKeyState(Window::EKey::KEY_LEFT_CONTROL) == Window::EKeyState::KEY_DOWN)
 	{
 		if (inputManager.IsKeyPressed(Window::EKey::KEY_N))
+		{
 			EDITOR_EXEC(LoadEmptyScene());
+		}
 
 		if (inputManager.IsKeyPressed(Window::EKey::KEY_S))
 		{
 			if (inputManager.GetKeyState(Window::EKey::KEY_LEFT_SHIFT) == Window::EKeyState::KEY_UP)
+			{
 				EDITOR_EXEC(SaveSceneChanges());
+			}
 			else
+			{
 				EDITOR_EXEC(SaveAs());
+			}
 		}
 	}
 }
 
-void Editor::Editor_MenuBar::RegisterPanel(const std::string& pName, UI::UI_PanelWindow& p_panel)
+void Editor::Editor_MenuBar::RegisterPanel(const std::string& pName, UI::UI_PanelWindow& pPanel)
 {
 	auto& menuItem = m_windowMenu->CreateWidget<UI::UI_MenuItem>(pName, "", true, true);
-	menuItem.mValueChangedEvent += std::bind(&UI::UI_PanelWindow::SetOpened, &p_panel, std::placeholders::_1);
+	menuItem.mValueChangedEvent += std::bind(&UI::UI_PanelWindow::SetOpened, &pPanel, std::placeholders::_1);
 
-	m_panels.emplace(pName, std::make_pair(std::ref(p_panel), std::ref(menuItem)));
+	m_panels.emplace(pName, std::make_pair(std::ref(pPanel), std::ref(menuItem)));
 }
 
 void Editor::Editor_MenuBar::CreateFileMenu()
@@ -201,11 +207,15 @@ void Editor::Editor_MenuBar::CreateHelpMenu()
 void Editor::Editor_MenuBar::UpdateToggleableItems()
 {
 	for (auto& [name, panel] : m_panels)
+	{
 		panel.second.get().mChecked = panel.first.get().IsOpened();
+	}
 }
 
-void Editor::Editor_MenuBar::OpenEveryWindows(bool p_state)
+void Editor::Editor_MenuBar::OpenEveryWindows(bool pState)
 {
 	for (auto& [name, panel] : m_panels)
-		panel.first.get().SetOpened(p_state);
+	{
+		panel.first.get().SetOpened(pState);
+	}
 }

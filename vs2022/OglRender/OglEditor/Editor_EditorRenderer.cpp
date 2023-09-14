@@ -20,8 +20,8 @@ const glm::vec3 LIGHT_VOLUME_COLOR = { 1.0f, 1.0f, 0.0f };
 const glm::vec3 COLLIDER_COLOR = { 0.0f, 1.0f, 0.0f };
 const glm::vec3 FRUSTUM_COLOR = { 1.0f, 1.0f, 1.0f };
 
-Editor::Editor_EditorRenderer::Editor_EditorRenderer(Editor_Context& p_context) :
-	mContext(p_context)
+Editor::Editor_EditorRenderer::Editor_EditorRenderer(Editor_Context& pContext) :
+	mContext(pContext)
 {
 	mContext.renderer->SetCapability(Render::ERenderingCapability::STENCIL_TEST, true);
 	mContext.renderer->SetStencilOperations(Render::EOperation::KEEP, Render::EOperation::KEEP, Render::EOperation::REPLACE);

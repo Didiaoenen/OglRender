@@ -70,11 +70,11 @@ void Editor::Editor_SceneView::RenderScene(uint8_t p_defaultRenderState)
 
 	if (auto gameViewFrustum = gameView.GetActiveFrustum(); gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumLightCulling() && Editor::Editor_EditorSettings::ShowLightFrustumCullingInSceneView)
 	{
-		m_editorRenderer.UpdateLightsInFrustum(currentScene, gameViewFrustum.value());
+		mEditorRenderer.UpdateLightsInFrustum(currentScene, gameViewFrustum.value());
 	}
 	else
 	{
-		m_editorRenderer.UpdateLights(currentScene);
+		mEditorRenderer.UpdateLights(currentScene);
 	}
 
 	m_fbo.Bind();
@@ -83,21 +83,21 @@ void Editor::Editor_SceneView::RenderScene(uint8_t p_defaultRenderState)
 	baseRenderer.Clear(mCamera);
 	baseRenderer.SetStencilMask(0x00);
 
-	m_editorRenderer.RenderGrid(m_cameraPosition, m_gridColor);
-	m_editorRenderer.RenderCameras();
+	mEditorRenderer.RenderGrid(m_cameraPosition, m_gridColor);
+	mEditorRenderer.RenderCameras();
 
 	if (auto gameViewFrustum = gameView.GetActiveFrustum(); gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumGeometryCulling() && Editor::Editor_EditorSettings::ShowGeometryFrustumCullingInSceneView)
 	{
 		mCamera.SetFrustumGeometryCulling(gameView.HasCamera() ? gameView.GetCamera().HasFrustumGeometryCulling() : false);
-		m_editorRenderer.RenderScene(m_cameraPosition, mCamera, &gameViewFrustum.value());
+		mEditorRenderer.RenderScene(m_cameraPosition, mCamera, &gameViewFrustum.value());
 		mCamera.SetFrustumGeometryCulling(false);
 	}
 	else
 	{
-		m_editorRenderer.RenderScene(m_cameraPosition, mCamera);
+		mEditorRenderer.RenderScene(m_cameraPosition, mCamera);
 	}
 
-	m_editorRenderer.RenderLights();
+	mEditorRenderer.RenderLights();
 
 	if (EDITOR_EXEC(IsAnyActorSelected()))
 	{
@@ -105,9 +105,9 @@ void Editor::Editor_SceneView::RenderScene(uint8_t p_defaultRenderState)
 
 		if (selectedActor.IsActive())
 		{
-			m_editorRenderer.RenderActorOutlinePass(selectedActor, true, true);
+			mEditorRenderer.RenderActorOutlinePass(selectedActor, true, true);
 			baseRenderer.ApplyStateMask(p_defaultRenderState);
-			m_editorRenderer.RenderActorOutlinePass(selectedActor, false, true);
+			mEditorRenderer.RenderActorOutlinePass(selectedActor, false, true);
 		}
 
 		baseRenderer.ApplyStateMask(p_defaultRenderState);
@@ -120,14 +120,14 @@ void Editor::Editor_SceneView::RenderScene(uint8_t p_defaultRenderState)
 			highlightedAxis = static_cast<int>(m_highlightedGizmoDirection.value());
 		}
 
-		m_editorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), m_currentOperation, false, highlightedAxis);
+		mEditorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), m_currentOperation, false, highlightedAxis);
 	}
 
 	if (m_highlightedActor.has_value())
 	{
-		m_editorRenderer.RenderActorOutlinePass(m_highlightedActor.value().get(), true, false);
+		mEditorRenderer.RenderActorOutlinePass(m_highlightedActor.value().get(), true, false);
 		baseRenderer.ApplyStateMask(p_defaultRenderState);
-		m_editorRenderer.RenderActorOutlinePass(m_highlightedActor.value().get(), false, false);
+		mEditorRenderer.RenderActorOutlinePass(m_highlightedActor.value().get(), false, false);
 	}
 
 	m_fbo.Unbind();
@@ -143,13 +143,13 @@ void Editor::Editor_SceneView::RenderSceneForActorPicking()
 	m_actorPickingFramebuffer.Bind();
 	baseRenderer.SetClearColor(1.0f, 1.0f, 1.0f);
 	baseRenderer.Clear();
-	m_editorRenderer.RenderSceneForActorPicking();
+	mEditorRenderer.RenderSceneForActorPicking();
 
 	if (EDITOR_EXEC(IsAnyActorSelected()))
 	{
 		auto& selectedActor = EDITOR_EXEC(GetSelectedActor());
 		baseRenderer.Clear(false, true, false);
-		m_editorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), m_currentOperation, true);
+		mEditorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), m_currentOperation, true);
 	}
 
 	m_actorPickingFramebuffer.Unbind();

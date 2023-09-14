@@ -15,7 +15,7 @@ namespace Editor
 
 		void HandleShortcuts(float pDeltaTime);
 
-		void RegisterPanel(const std::string& pName, UI::UI_PanelWindow& p_panel);
+		void RegisterPanel(const std::string& pName, UI::UI_PanelWindow& pPanel);
 
 	private:
 		void CreateFileMenu();
@@ -28,7 +28,7 @@ namespace Editor
 		void CreateHelpMenu();
 
 		void UpdateToggleableItems();
-		void OpenEveryWindows(bool p_state);
+		void OpenEveryWindows(bool pState);
 
 	private:
 		PanelMap m_panels;
