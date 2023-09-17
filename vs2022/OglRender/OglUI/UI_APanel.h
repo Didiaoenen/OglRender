@@ -4,6 +4,7 @@
 #include <unordered_map>
 
 #include "UI_WidgetContainer.h"
+#include "IconsMaterialDesignIcons.h"
 
 namespace UI
 {

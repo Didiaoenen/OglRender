@@ -44,6 +44,11 @@ void UI::UI_PanelWindow::Focus()
 	ImGui::SetWindowFocus((mName + mPanelID).c_str());
 }
 
+void UI::UI_PanelWindow::SetIcon(const char* pIcon)
+{
+	mIcon = pIcon;
+}
+
 void UI::UI_PanelWindow::SetOpened(bool pValue)
 {
 	if (pValue != mOpened)
@@ -142,7 +147,7 @@ void UI::UI_PanelWindow::_Draw_Impl()
 
 		ImGui::SetNextWindowSizeConstraints(minSizeConstraint, maxSizeConstraint);
 
-		if (ImGui::Begin((mName + mPanelID).c_str(), mClosable ? &mOpened : nullptr, windowFlags))
+		if (ImGui::Begin((mIcon + mName + mPanelID).c_str(), mClosable ? &mOpened : nullptr, windowFlags))
 		{
 			mHovered = ImGui::IsWindowHovered();
 			mFocused = ImGui::IsWindowFocused();

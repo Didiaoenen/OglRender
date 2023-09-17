@@ -9,5 +9,5 @@ UI::UI_PlotHistogram::UI_PlotHistogram(const std::vector<float>& pData, float pM
 
 void UI::UI_PlotHistogram::_Draw_Impl()
 {
-	ImGui::PlotHistogram((mLabel + mWidgetID).c_str(), mData.data(), static_cast<int>(mData.size()), 0, mOverlay.c_str(), mMinScale, mMaxScale, UI_Converter::ToImVec2(mSize), sizeof(float), mForceHover);
+	ImGui::PlotHistogram((mLabel + mWidgetID).c_str(), mData.data(), static_cast<int>(mData.size()), 0, mOverlay.c_str(), mMinScale, mMaxScale, UI_Converter::ToImVec2(mSize), sizeof(float));
 }

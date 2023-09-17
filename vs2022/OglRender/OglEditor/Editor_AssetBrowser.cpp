@@ -931,6 +931,8 @@ Editor::Editor_AssetBrowser::Editor_AssetBrowser(const std::string& p_title, boo
 	m_projectAssetFolder(p_projectAssetFolder),
 	m_projectScriptFolder(p_projectScriptFolder)
 {
+	SetIcon(ICON_MDI_FOLDER_STAR " ");
+
 	if (!std::filesystem::exists(m_projectAssetFolder))
 	{
 		std::filesystem::create_directories(m_projectAssetFolder);

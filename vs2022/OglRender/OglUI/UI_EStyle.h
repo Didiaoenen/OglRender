@@ -8,6 +8,7 @@ namespace UI
 		IM_DARK_STYLE,
 		IM_LIGHT_STYLE,
 		DUNE_DARK,
+		UUNITY_DARK,
 		ALTERNATIVE_DARK
 	};
 }

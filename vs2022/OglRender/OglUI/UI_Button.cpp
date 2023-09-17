@@ -29,7 +29,7 @@ void UI::UI_Button::_Draw_Impl()
 	style.Colors[ImGuiCol_ButtonActive] = UI_Converter::ToImVec4(mClickedBackgroundColor);
 	style.Colors[ImGuiCol_Text] = UI_Converter::ToImVec4(mTextColor);
 
-	if (ImGui::ButtonEx((mLabel + mWidgetID).c_str(), UI::UI_Converter::ToImVec2(mSize), mDisabled ? ImGuiButtonFlags_Disabled : 0))
+	if (ImGui::ButtonEx((mLabel + mWidgetID).c_str(), UI::UI_Converter::ToImVec2(mSize), mDisabled ? ImGuiItemFlags_Disabled : 0))
 	{
 		mClickedEvent.Invoke();
 	}

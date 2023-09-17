@@ -10,6 +10,8 @@
 Editor::Editor_SceneView::Editor_SceneView(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
 	Editor_AViewControllable(p_title, p_opened, p_windowSettings, true), m_sceneManager(EDITOR_CONTEXT(sceneManager))
 {
+	SetIcon(ICON_MDI_GAMEPAD_VARIANT " ");
+
 	mCamera.SetClearColor({ 0.098f, 0.098f, 0.098f });
 	mCamera.SetFar(5000.0f);
 
@@ -19,8 +21,8 @@ Editor::Editor_SceneView::Editor_SceneView(const std::string& p_title, bool p_op
 
 			switch (Tools::Tools_PathParser::GetFileType(path))
 			{
-			case Tools::Tools_PathParser::EFileType::SCENE:	EDITOR_EXEC(LoadSceneFromDisk(path));			break;
-			case Tools::Tools_PathParser::EFileType::MODEL:	EDITOR_EXEC(CreateActorWithModel(path, true));	break;
+				case Tools::Tools_PathParser::EFileType::SCENE:	EDITOR_EXEC(LoadSceneFromDisk(path));			break;
+				case Tools::Tools_PathParser::EFileType::MODEL:	EDITOR_EXEC(CreateActorWithModel(path, true));	break;
 			}
 		};
 }

@@ -26,6 +26,8 @@ namespace UI
 
 		void Focus();
 
+		void SetIcon(const char* pIcon);
+
 		void SetOpened(bool pValue);
 
 		bool IsOpened() const;
@@ -49,6 +51,7 @@ namespace UI
 
 	public:
 		std::string mName;
+		const char* mIcon{ "" };
 
 		glm::vec2 mMinSize { 0.f, 0.f };
 		glm::vec2 mMaxSize { 0.f, 0.f };

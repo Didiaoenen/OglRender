@@ -51,10 +51,10 @@ Editor::Editor_Context::Editor_Context(const std::string& p_projectPath, const s
 
 	std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\");
 
-	uiManager = std::make_unique<UI::UI_UIManager>(window->GetGlfwWindow(), UI::EStyle::ALTERNATIVE_DARK);
-	uiManager->LoadFont("Ruda_Big", mEditorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 16);
-	uiManager->LoadFont("Ruda_Small", mEditorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 12);
-	uiManager->LoadFont("Ruda_Medium", mEditorAssetsPath + "\\Fonts\\Ruda-Bold.ttf", 14);
+	uiManager = std::make_unique<UI::UI_UIManager>(window->GetGlfwWindow(), UI::EStyle::UUNITY_DARK);
+	uiManager->LoadFont("Ruda_Big", mEditorAssetsPath + "\\Fonts\\jetbrains-mono\\JetBrainsMono-Bold.ttf", 16);
+	uiManager->LoadFont("Ruda_Small", mEditorAssetsPath + "\\Fonts\\jetbrains-mono\\JetBrainsMono-Bold.ttf", 12);
+	uiManager->LoadFont("Ruda_Medium", mEditorAssetsPath + "\\Fonts\\jetbrains-mono\\JetBrainsMono-Bold.ttf", 14);
 	uiManager->UseFont("Ruda_Medium");
 	uiManager->SetEditorLayoutSaveFilename(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\layout.ini");
 	uiManager->SetEditorLayoutAutosaveFrequency(60.0f);

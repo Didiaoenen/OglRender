@@ -95,6 +95,8 @@ void ExpandTreeNodeAndEnable(UI::UI_TreeNode& p_toExpand, const UI::UI_TreeNode*
 Editor::Editor_Hierarchy::Editor_Hierarchy(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
 	UI::UI_PanelWindow(p_title, p_opened, p_windowSettings)
 {
+	SetIcon(ICON_MDI_INFORMATION " ");
+
 	auto& searchBar = CreateWidget<UI::UI_InputText>();
 	searchBar.mContentChangedEvent += [this](const std::string& pContent)
 		{

@@ -29,12 +29,12 @@ void UI::UI_TreeNode::_Draw_Impl()
 
 	if (mShouldOpen)
 	{
-		ImGui::SetNextTreeNodeOpen(true);
+		ImGui::SetNextItemOpen(true);
 		mShouldOpen = false;
 	}
 	else if (mShouldOpen)
 	{
-		ImGui::SetNextTreeNodeOpen(false);
+		ImGui::SetNextItemOpen(false);
 		mShouldClose = false;
 	}
 

@@ -8,6 +8,7 @@
 Editor::Editor_GameView::Editor_GameView(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
 	Editor_AView(p_title, p_opened, p_windowSettings), m_sceneManager(EDITOR_CONTEXT(sceneManager))
 {
+	SetIcon(ICON_MDI_GAMEPAD_VARIANT " ");
 }
 
 void Editor::Editor_GameView::Update(float pDeltaTime)

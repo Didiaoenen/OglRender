@@ -33,6 +33,8 @@
 Editor::Editor_Inspector::Editor_Inspector(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) : 
 	UI::UI_PanelWindow(p_title, p_opened, p_windowSettings)
 {
+	SetIcon(ICON_MDI_INFORMATION " ");
+
 	m_inspectorHeader = &CreateWidget<UI::UI_Group>();
 	m_inspectorHeader->mEnabled = false;
 	m_actorInfo = &CreateWidget<UI::UI_Group>();

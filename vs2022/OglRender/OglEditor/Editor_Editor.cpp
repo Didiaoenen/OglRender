@@ -13,6 +13,9 @@
 #include "Editor_ProjectSettings.h"
 #include "Editor_AssetProperties.h"
 
+#include <OglUI/imgui.h>
+#include <OglUI/imgui_internal.h>
+
 #include "Editor_Editor.h"
 
 Editor::Editor_Editor::Editor_Editor(Editor_Context& pContext) :
@@ -35,23 +38,23 @@ void Editor::Editor_Editor::SetupUI()
 {
 	UI::UI_PanelWindowSettings settings;
 	settings.closable = true;
-	settings.collapsable = true;
+	settings.collapsable = false;
 	settings.dockable = true;
 
 	mPanelsManager.CreatePanel<Editor_MenuBar>("Menu Bar");
-	//mPanelsManager.CreatePanel<Editor_AssetBrowser>("Asset Browser", true, settings, mContext.mEngineAssetsPath, mContext.mProjectAssetsPath, mContext.mProjectScriptsPath);
-	//mPanelsManager.CreatePanel<Editor_HardwareInfo>("Hardware Info", false, settings, 0.2f, 50);
-	//mPanelsManager.CreatePanel<Editor_Profiler>("Profiler", true, settings, 0.25f);
-	//mPanelsManager.CreatePanel<Editor_Console>("Console", true, settings);
-	//mPanelsManager.CreatePanel<Editor_Hierarchy>("Hierarchy", true, settings);
-	//mPanelsManager.CreatePanel<Editor_Inspector>("Inspector", true, settings);
-	//mPanelsManager.CreatePanel<Editor_SceneView>("Scene View", true, settings);
-	//mPanelsManager.CreatePanel<Editor_GameView>("Game View", true, settings);
-	//mPanelsManager.CreatePanel<Editor_AssetView>("Asset View", false, settings);
-	//mPanelsManager.CreatePanel<Editor_Toolbar>("Toolbar", true, settings);
-	//mPanelsManager.CreatePanel<Editor_MaterialEditor>("Material Editor", false, settings);
-	//mPanelsManager.CreatePanel<Editor_ProjectSettings>("Project Settings", false, settings);
-	//mPanelsManager.CreatePanel<Editor_AssetProperties>("Asset Properties", false, settings);
+	mPanelsManager.CreatePanel<Editor_AssetBrowser>("Assets", true, settings, mContext.mEngineAssetsPath, mContext.mProjectAssetsPath, mContext.mProjectScriptsPath);
+	mPanelsManager.CreatePanel<Editor_HardwareInfo>("Hardware Info", false, settings, 0.2f, 50);
+	mPanelsManager.CreatePanel<Editor_Profiler>("Profiler", true, settings, 0.25f);
+	mPanelsManager.CreatePanel<Editor_Console>("Console", true, settings);
+	mPanelsManager.CreatePanel<Editor_Hierarchy>("Hierarchy", true, settings);
+	mPanelsManager.CreatePanel<Editor_Inspector>("Inspector", true, settings);
+	mPanelsManager.CreatePanel<Editor_SceneView>("Scene", true, settings);
+	mPanelsManager.CreatePanel<Editor_GameView>("Game", true, settings);
+	mPanelsManager.CreatePanel<Editor_AssetView>("Asset", false, settings);
+	mPanelsManager.CreatePanel<Editor_Toolbar>("Toolbar", true, settings);
+	mPanelsManager.CreatePanel<Editor_MaterialEditor>("Material Editor", false, settings);
+	mPanelsManager.CreatePanel<Editor_ProjectSettings>("Project Settings", false, settings);
+	mPanelsManager.CreatePanel<Editor_AssetProperties>("Asset Properties", false, settings);
 
 	mCanvas.MakeDockspace(true);
 	mContext.uiManager->SetCanvas(mCanvas);

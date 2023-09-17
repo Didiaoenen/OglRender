@@ -48,7 +48,7 @@ namespace UI
 				}
 			}
 
-			if (ImGui::DragScalarN((mLabel + this->mWidgetID).c_str(), mDataType, mValues.data(), _Size, mSpeed, &mMin, &mMax, mFormat.c_str()))
+			if (ImGui::DragScalarN((mLabel + this->mWidgetID).c_str(), mDataType, mValues.data(), _Size, mSpeed, &mMin, &mMax, mFormat.c_str(), ImGuiSliderFlags_AlwaysClamp))
 			{
 				mValueChangedEvent.Invoke(mValues);
 				this->NotifyChange();

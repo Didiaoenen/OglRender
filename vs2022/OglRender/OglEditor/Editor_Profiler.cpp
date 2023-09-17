@@ -6,6 +6,7 @@
 Editor::Editor_Profiler::Editor_Profiler(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings, float p_frequency) :
 	UI::UI_PanelWindow(p_title, p_opened, p_windowSettings), m_frequency(p_frequency)
 {
+	SetIcon(ICON_MDI_GAUGE " ");
 }
 
 void Editor::Editor_Profiler::Update(float pDeltaTime)

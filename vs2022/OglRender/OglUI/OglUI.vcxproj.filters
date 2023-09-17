@@ -408,6 +408,12 @@
     <ClInclude Include="UI_DDTarget.h">
       <Filter>头文件\Plugins</Filter>
     </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3_loader.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="IconsMaterialDesignIcons.h">
+      <Filter>头文件\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI_AWidget.cpp">
@@ -590,5 +596,13 @@
     <ClCompile Include="UI_Dummy.cpp">
       <Filter>源文件\Widgets\Layout</Filter>
     </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>源文件\ImGui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MaterialDesign.inl">
+      <Filter>头文件\ImGui</Filter>
+    </None>
   </ItemGroup>
 </Project>

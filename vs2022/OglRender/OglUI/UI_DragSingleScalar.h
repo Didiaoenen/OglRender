@@ -14,7 +14,7 @@ namespace UI
 	public:
 		UI_DragSingleScalar
 		(
-			ImGuiDataType pDataType,
+			ImGuiDataType_ pDataType,
 			T pMin,
 			T pMax,
 			T pValue,
@@ -42,7 +42,7 @@ namespace UI
 				mValue = mMax;
 			}
 
-			if (ImGui::DragScalar((mLabel + this->mWidgetID).c_str(), mDataType, &mValue, mSpeed, &mMin, &mMax, mFormat.c_str()))
+			if (ImGui::DragScalar((mLabel + this->mWidgetID).c_str(), mDataType, &mValue, mSpeed, &mMin, &mMax, mFormat.c_str(), ImGuiSliderFlags_AlwaysClamp))
 			{
 				mValueChangedEvent.Invoke(mValue);
 				this->NotifyChange();
@@ -59,7 +59,7 @@ namespace UI
 		Tools::Tools_Event<T> mValueChangedEvent; 
 
 	private:
-		ImGuiDataType mDataType;
+		ImGuiDataType_ mDataType;
 	};
 }
 
