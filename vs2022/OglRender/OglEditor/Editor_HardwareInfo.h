@@ -13,9 +13,9 @@ namespace Editor
 	public:
 		Editor_HardwareInfo
 		(
-			const std::string& p_title,
-			bool p_opened,
-			const UI::UI_PanelWindowSettings& p_windowSettings,
+			const std::string& pTitle,
+			bool pOpened,
+			const UI::UI_PanelWindowSettings& pWindowSettings,
 			float p_logFrequency,
 			size_t p_maxElements
 		);

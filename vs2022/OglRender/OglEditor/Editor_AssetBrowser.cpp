@@ -925,8 +925,8 @@ public:
 	}
 };
 
-Editor::Editor_AssetBrowser::Editor_AssetBrowser(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings, const std::string& p_engineAssetFolder, const std::string& p_projectAssetFolder, const std::string& p_projectScriptFolder) :
-	UI::UI_PanelWindow(p_title, p_opened, p_windowSettings),
+Editor::Editor_AssetBrowser::Editor_AssetBrowser(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings, const std::string& p_engineAssetFolder, const std::string& p_projectAssetFolder, const std::string& p_projectScriptFolder) :
+	UI::UI_PanelWindow(pTitle, pOpened, pWindowSettings),
 	m_engineAssetFolder(p_engineAssetFolder),
 	m_projectAssetFolder(p_projectAssetFolder),
 	m_projectScriptFolder(p_projectScriptFolder)

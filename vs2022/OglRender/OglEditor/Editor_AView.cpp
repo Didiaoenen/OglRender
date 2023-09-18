@@ -3,13 +3,13 @@
 #include "Editor_AView.h"
 #include "Editor_EditorActions.h"
 
-Editor::Editor_AView::Editor_AView(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
-	UI_PanelWindow(p_title, p_opened, p_windowSettings), mEditorRenderer(EDITOR_RENDERER())
+Editor::Editor_AView::Editor_AView(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
+	UI_PanelWindow(pTitle, pOpened, pWindowSettings), mEditorRenderer(EDITOR_RENDERER())
 {
-	m_cameraPosition = { -10.0f, 3.0f, 10.0f };
-	m_cameraRotation = glm::quat({ 0.0f, 135.0f, 0.0f });
+	mCameraPosition = { -10.0f, 3.0f, 10.0f };
+	mCameraRotation = glm::quat({ 0.0f, 135.0f, 0.0f });
 
-	m_image = &CreateWidget<UI::UI_Image>(m_fbo.GetTextureID(), glm::vec2{ 0.f, 0.f });
+	mImage = &CreateWidget<UI::UI_Image>(mFbo.GetTextureID(), glm::vec2{ 0.f, 0.f });
 
 	mScrollable = false;
 }
@@ -18,9 +18,9 @@ void Editor::Editor_AView::Update(float pDeltaTime)
 {
 	auto [winWidth, winHeight] = GetSafeSize();
 
-	m_image->mSize = glm::vec2(static_cast<float>(winWidth), static_cast<float>(winHeight));
+	mImage->mSize = glm::vec2(static_cast<float>(winWidth), static_cast<float>(winHeight));
 
-	m_fbo.Resize(winWidth, winHeight);
+	mFbo.Resize(winWidth, winHeight);
 }
 
 void Editor::Editor_AView::_Draw_Impl()
@@ -45,24 +45,24 @@ void Editor::Editor_AView::Render()
 	_Render_Impl();
 }
 
-void Editor::Editor_AView::SetCameraPosition(const glm::vec3& p_position)
+void Editor::Editor_AView::SetCameraPosition(const glm::vec3& pPosition)
 {
-	m_cameraPosition = p_position;
+	mCameraPosition = pPosition;
 }
 
 void Editor::Editor_AView::SetCameraRotation(const glm::quat& pRotation)
 {
-	m_cameraRotation = pRotation;
+	mCameraRotation = pRotation;
 }
 
 const glm::vec3& Editor::Editor_AView::GetCameraPosition() const
 {
-	return m_cameraPosition;
+	return mCameraPosition;
 }
 
 const glm::quat& Editor::Editor_AView::GetCameraRotation() const
 {
-	return m_cameraRotation;
+	return mCameraRotation;
 }
 
 Render::Render_Camera& Editor::Editor_AView::GetCamera()
@@ -78,12 +78,12 @@ std::pair<uint16_t, uint16_t> Editor::Editor_AView::GetSafeSize() const
 
 const glm::vec3& Editor::Editor_AView::GetGridColor() const
 {
-	return m_gridColor;
+	return mGridColor;
 }
 
 void Editor::Editor_AView::SetGridColor(const glm::vec3& pColor)
 {
-	m_gridColor = pColor;
+	mGridColor = pColor;
 }
 
 void Editor::Editor_AView::FillEngineUBO()
@@ -95,11 +95,11 @@ void Editor::Editor_AView::FillEngineUBO()
 	size_t offset = sizeof(glm::mat4);
 	engineUBO.SetSubData(glm::transpose(mCamera.GetViewMatrix()), std::ref(offset));
 	engineUBO.SetSubData(glm::transpose(mCamera.GetProjectionMatrix()), std::ref(offset));
-	engineUBO.SetSubData(m_cameraPosition, std::ref(offset));
+	engineUBO.SetSubData(mCameraPosition, std::ref(offset));
 }
 
 void Editor::Editor_AView::PrepareCamera()
 {
 	auto [winWidth, winHeight] = GetSafeSize();
-	mCamera.CacheMatrices(winWidth, winHeight, m_cameraPosition, m_cameraRotation);
+	mCamera.CacheMatrices(winWidth, winHeight, mCameraPosition, mCameraRotation);
 }

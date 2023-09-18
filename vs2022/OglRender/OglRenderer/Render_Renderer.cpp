@@ -2,8 +2,8 @@
 
 #include "Render_Renderer.h"
 
-Render::Render_Renderer::Render_Renderer(Render_Driver& p_driver) :
-	mDriver(p_driver), m_state(0)
+Render::Render_Renderer::Render_Renderer(Render_Driver& pDriver) :
+	mDriver(pDriver), m_state(0)
 {
 }
 
@@ -15,7 +15,7 @@ void Render::Render_Renderer::Clear(bool p_colorBuffer, bool p_depthBuffer, bool
 {
 }
 
-void Render::Render_Renderer::Clear(Render_Camera& p_camera, bool p_colorBuffer, bool p_depthBuffer, bool p_stencilBuffer)
+void Render::Render_Renderer::Clear(Render_Camera& pCamera, bool p_colorBuffer, bool p_depthBuffer, bool p_stencilBuffer)
 {
 }
 
@@ -140,11 +140,11 @@ void Render::Render_Renderer::ClearFrameInfo()
 {
 }
 
-void Render::Render_Renderer::Draw(Render_IMesh& p_mesh, EPrimitiveMode p_primitiveMode, uint32_t p_instances)
+void Render::Render_Renderer::Draw(Render_IMesh& pMesh, EPrimitiveMode p_primitiveMode, uint32_t p_instances)
 {
 }
 
-std::vector<std::reference_wrapper<Render::Render_Mesh>> Render::Render_Renderer::GetMeshesInFrustum(const Render_Model& pModel, const Render_BoundingSphere& p_modelBoundingSphere, const Maths::Maths_FTransform& p_modelTransform, const Render_Frustum& p_frustum, ECullingOptions p_cullingOptions)
+std::vector<std::reference_wrapper<Render::Render_Mesh>> Render::Render_Renderer::GetMeshesInFrustum(const Render_Model& pModel, const Render_BoundingSphere& p_modelBoundingSphere, const Maths::Maths_FTransform& p_modelTransform, const Render_Frustum& pFrustum, ECullingOptions p_cullingOptions)
 {
 	return std::vector<std::reference_wrapper<Render_Mesh>>();
 }

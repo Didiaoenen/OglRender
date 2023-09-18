@@ -29,9 +29,9 @@ Editor::Editor_EditorRenderer::Editor_EditorRenderer(Editor_Context& pContext) :
 
 	InitMaterials();
 
-	mContext.renderer->RegisterModelMatrixSender([this](const glm::mat4& p_modelMatrix)
+	mContext.renderer->RegisterModelMatrixSender([this](const glm::mat4& pModelMatrix)
 		{
-			mContext.engineUBO->SetSubData(glm::transpose(p_modelMatrix), 0);
+			mContext.engineUBO->SetSubData(glm::transpose(pModelMatrix), 0);
 		});
 
 	mContext.renderer->RegisterUserMatrixSender([this](const glm::mat4& p_userMatrix)
@@ -130,10 +130,10 @@ glm::mat4 Editor::Editor_EditorRenderer::CalculateCameraModelMatrix(Core::Core_A
 	return translation * rotation;
 }
 
-void Editor::Editor_EditorRenderer::RenderScene(const glm::vec3& p_cameraPosition, const Render::Render_Camera& p_camera, const Render::Render_Frustum* p_customFrustum)
+void Editor::Editor_EditorRenderer::RenderScene(const glm::vec3& pCameraPosition, const Render::Render_Camera& pCamera, const Render::Render_Frustum* pCustomFrustum)
 {
 	mContext.lightSSBO->Bind(0);
-	mContext.renderer->RenderScene(*mContext.sceneManager.GetCurrentScene(), p_cameraPosition, p_camera, p_customFrustum, &m_emptyMaterial);
+	mContext.renderer->RenderScene(*mContext.sceneManager.GetCurrentScene(), pCameraPosition, pCamera, pCustomFrustum, &m_emptyMaterial);
 	mContext.lightSSBO->Unbind();
 }
 
@@ -274,9 +274,9 @@ void Editor::Editor_EditorRenderer::RenderLights()
 	}
 }
 
-void Editor::Editor_EditorRenderer::RenderGizmo(const glm::vec3& p_position, const glm::quat& pRotation, EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis)
+void Editor::Editor_EditorRenderer::RenderGizmo(const glm::vec3& pPosition, const glm::quat& pRotation, EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis)
 {
-	glm::mat4 model = glm::translate(glm::identity<glm::mat4>(), p_position) * glm::mat4(glm::normalize(pRotation));
+	glm::mat4 model = glm::translate(glm::identity<glm::mat4>(), pPosition) * glm::mat4(glm::normalize(pRotation));
 
 	Render::Render_Model* arrowModel = nullptr;
 
@@ -430,17 +430,17 @@ void DrawFrustumLines(Render::Render_ShapeDrawer& p_drawer,
 	draw(d + forward * near, h + forward * far, 0);
 }
 
-void Editor::Editor_EditorRenderer::RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& p_camera)
+void Editor::Editor_EditorRenderer::RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& pCamera)
 {
 
 }
 
-void Editor::Editor_EditorRenderer::RenderCameraOrthographicFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& p_camera)
+void Editor::Editor_EditorRenderer::RenderCameraOrthographicFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& pCamera)
 {
 
 }
 
-void Editor::Editor_EditorRenderer::RenderCameraFrustum(Core::Core_CCamera& p_camera)
+void Editor::Editor_EditorRenderer::RenderCameraFrustum(Core::Core_CCamera& pCamera)
 {
 	auto& gameView = EDITOR_PANEL(Editor_GameView, "Game View");
 	auto gameViewSize = gameView.GetSafeSize();
@@ -450,14 +450,14 @@ void Editor::Editor_EditorRenderer::RenderCameraFrustum(Core::Core_CCamera& p_ca
 		gameViewSize = { 16, 9 };
 	}
 
-	switch (p_camera.GetProjectionMode())
+	switch (pCamera.GetProjectionMode())
 	{
 	case Render::EProjectionMode::ORTHOGRAPHIC:
-		RenderCameraOrthographicFrustum(gameViewSize, p_camera);
+		RenderCameraOrthographicFrustum(gameViewSize, pCamera);
 		break;
 
 	case Render::EProjectionMode::PERSPECTIVE:
-		RenderCameraPerspectiveFrustum(gameViewSize, p_camera);
+		RenderCameraPerspectiveFrustum(gameViewSize, pCamera);
 		break;
 	}
 }
@@ -638,16 +638,16 @@ void Editor::Editor_EditorRenderer::RenderGrid(const glm::vec3& p_viewPos, const
 	mContext.shapeDrawer->DrawLine(glm::vec3(0.0f, 0.0f, -gridSize + p_viewPos.z), glm::vec3(0.0f, 0.0f, gridSize + p_viewPos.z), glm::vec3(0.0f, 0.0f, 1.0f), 1.0f);
 }
 
-void Editor::Editor_EditorRenderer::UpdateLights(Core::Core_Scene& p_scene)
+void Editor::Editor_EditorRenderer::UpdateLights(Core::Core_Scene& pScene)
 {
 	//PROFILER_SPY("Light SSBO Update");
-	auto lightMatrices = mContext.renderer->FindLightMatrices(p_scene);
+	auto lightMatrices = mContext.renderer->FindLightMatrices(pScene);
 	mContext.lightSSBO->SendBlocks<glm::mat4>(lightMatrices.data(), lightMatrices.size() * sizeof(glm::mat4));
 }
 
-void Editor::Editor_EditorRenderer::UpdateLightsInFrustum(Core::Core_Scene& p_scene, const Render::Render_Frustum& p_frustum)
+void Editor::Editor_EditorRenderer::UpdateLightsInFrustum(Core::Core_Scene& pScene, const Render::Render_Frustum& pFrustum)
 {
 	//PROFILER_SPY("Light SSBO Update (Frustum culled)");
-	auto lightMatrices = mContext.renderer->FindLightMatricesInFrustum(p_scene, p_frustum);
+	auto lightMatrices = mContext.renderer->FindLightMatricesInFrustum(pScene, pFrustum);
 	mContext.lightSSBO->SendBlocks<glm::mat4>(lightMatrices.data(), lightMatrices.size() * sizeof(glm::mat4));
 }

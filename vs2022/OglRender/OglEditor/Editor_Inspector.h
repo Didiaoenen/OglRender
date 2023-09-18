@@ -20,9 +20,9 @@ namespace Editor
 	public:
 		Editor_Inspector
 		(
-			const std::string& p_title,
-			bool p_opened,
-			const UI::UI_PanelWindowSettings& p_windowSettings
+			const std::string& pTitle,
+			bool pOpened,
+			const UI::UI_PanelWindowSettings& pWindowSettings
 		);
 
 		~Editor_Inspector();

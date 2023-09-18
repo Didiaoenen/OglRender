@@ -46,7 +46,7 @@ void Editor::Editor_Editor::SetupUI()
 	mPanelsManager.CreatePanel<Editor_MenuBar>("Menu Bar");
 	mPanelsManager.CreatePanel<Editor_Toolbar>("Second Bar");
 	mPanelsManager.CreatePanel<Editor_AssetBrowser>("Assets", true, settings, mContext.mEngineAssetsPath, mContext.mProjectAssetsPath, mContext.mProjectScriptsPath);
-	mPanelsManager.CreatePanel<Editor_HardwareInfo>("Hardware Info", false, settings, 0.2f, 50);
+	mPanelsManager.CreatePanel<Editor_HardwareInfo>("Hardware", false, settings, 0.2f, 50);
 	mPanelsManager.CreatePanel<Editor_Profiler>("Profiler", true, settings, 0.25f);
 	mPanelsManager.CreatePanel<Editor_Console>("Console", true, settings);
 	mPanelsManager.CreatePanel<Editor_Hierarchy>("Hierarchy", true, settings);
@@ -163,15 +163,15 @@ void Editor::Editor_Editor::UpdateEditMode(float pDeltaTime)
 void Editor::Editor_Editor::UpdateEditorPanels(float pDeltaTime)
 {
 	auto& menuBar = mPanelsManager.GetPanelAs<Editor_MenuBar>("Menu Bar");
-	//auto& profiler = mPanelsManager.GetPanelAs<Editor_Profiler>("Profiler");
-	//auto& hardwareInfo = mPanelsManager.GetPanelAs<Editor_HardwareInfo>("Hardware Info");
-	//auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View");
+	auto& profiler = mPanelsManager.GetPanelAs<Editor_Profiler>("Profiler");
+	auto& hardwareInfo = mPanelsManager.GetPanelAs<Editor_HardwareInfo>("Hardware");
+	auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene");
 
 	menuBar.HandleShortcuts(pDeltaTime);
 
 	if (mElapsedFrames == 1)
 	{
-		//sceneView.Focus();
+		sceneView.Focus();
 	}
 
 	//if (profiler.IsOpened())
@@ -195,42 +195,42 @@ void Editor::Editor_Editor::PrepareRendering(float pDeltaTime)
 
 void Editor::Editor_Editor::RenderViews(float pDeltaTime)
 {
-	//auto& assetView = mPanelsManager.GetPanelAs<Editor_AssetView>("Asset View");
-	//auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View");
-	//auto& gameView = mPanelsManager.GetPanelAs<Editor_GameView>("Game View");
+	auto& assetView = mPanelsManager.GetPanelAs<Editor_AssetView>("Asset");
+	auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene");
+	auto& gameView = mPanelsManager.GetPanelAs<Editor_GameView>("Game");
 
 	{
 		//PROFILER_SPY("Editor Views Update");
 
-		//assetView.Update(pDeltaTime);
-		//gameView.Update(pDeltaTime);
-		//sceneView.Update(pDeltaTime);
+		assetView.Update(pDeltaTime);
+		gameView.Update(pDeltaTime);
+		sceneView.Update(pDeltaTime);
 	}
 
-	//if (assetView.IsOpened())
-	//{
-	//	//PROFILER_SPY("Asset View Rendering");
+	if (assetView.IsOpened())
+	{
+		//PROFILER_SPY("Asset View Rendering");
 
-	//	mContext.simulatedLightSSBO->Bind(0);
-	//	assetView.Render();
-	//	mContext.simulatedLightSSBO->Unbind();
-	//}
+		mContext.simulatedLightSSBO->Bind(0);
+		assetView.Render();
+		mContext.simulatedLightSSBO->Unbind();
+	}
 
 	mContext.lightSSBO->Bind(0);
 
-	//if (gameView.IsOpened())
-	//{
-	//	//PROFILER_SPY("Game View Rendering");
+	if (gameView.IsOpened())
+	{
+		//PROFILER_SPY("Game View Rendering");
 
-	//	gameView.Render();
-	//}
+		gameView.Render();
+	}
 
-	//if (sceneView.IsOpened())
-	//{
-	//	//PROFILER_SPY("Scene View Rendering");
+	if (sceneView.IsOpened())
+	{
+		//PROFILER_SPY("Scene View Rendering");
 
-	//	sceneView.Render();
-	//}
+		sceneView.Render();
+	}
 
 	mContext.lightSSBO->Unbind();
 }

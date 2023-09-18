@@ -28,7 +28,7 @@ namespace Editor
 
 		glm::mat4 CalculateCameraModelMatrix(Core::Core_Actor& p_actor);
 
-		void RenderScene(const glm::vec3& p_cameraPosition, const Render::Render_Camera& p_camera, const Render::Render_Frustum* p_customFrustum = nullptr);
+		void RenderScene(const glm::vec3& pCameraPosition, const Render::Render_Camera& pCamera, const Render::Render_Frustum* pCustomFrustum = nullptr);
 
 		void RenderSceneForActorPicking();
 
@@ -38,7 +38,7 @@ namespace Editor
 
 		void RenderLights();
 
-		void RenderGizmo(const glm::vec3& p_position, const glm::quat& pRotation, EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis = -1);
+		void RenderGizmo(const glm::vec3& pPosition, const glm::quat& pRotation, EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis = -1);
 
 		void RenderModelToStencil(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel);
 
@@ -46,11 +46,11 @@ namespace Editor
 
 		void RenderActorOutlinePass(Core::Core_Actor& p_actor, bool p_toStencil, bool p_isSelected = false);
 
-		void RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& p_camera);
+		void RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& pCamera);
 		
-		void RenderCameraOrthographicFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& p_camera);
+		void RenderCameraOrthographicFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& pCamera);
 
-		void RenderCameraFrustum(Core::Core_CCamera& p_camera);
+		void RenderCameraFrustum(Core::Core_CCamera& pCamera);
 
 		void RenderActorCollider(Core::Core_Actor& p_actor);
 
@@ -70,9 +70,9 @@ namespace Editor
 
 		void RenderGrid(const glm::vec3& p_viewPos, const glm::vec3& pColor);
 
-		void UpdateLights(Core::Core_Scene& p_scene);
+		void UpdateLights(Core::Core_Scene& pScene);
 
-		void UpdateLightsInFrustum(Core::Core_Scene& p_scene, const Render::Render_Frustum& p_frustum);
+		void UpdateLightsInFrustum(Core::Core_Scene& pScene, const Render::Render_Frustum& pFrustum);
 
 	private:
 		Editor_Context& mContext;

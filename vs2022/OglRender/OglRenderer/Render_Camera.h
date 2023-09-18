@@ -16,11 +16,11 @@ namespace Render
 	public:
 		Render_Camera();
 
-		void CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const glm::vec3& p_position, const glm::quat& pRotation);
+		void CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const glm::vec3& pPosition, const glm::quat& pRotation);
 
 		void CacheProjectionMatrix(uint16_t p_windowWidth, uint16_t p_windowHeight);
 
-		void CacheViewMatrix(const glm::vec3& p_position, const glm::quat& pRotation);
+		void CacheViewMatrix(const glm::vec3& pPosition, const glm::quat& pRotation);
 
 		void CacheFrustum(const glm::mat4& p_view, const glm::mat4& p_projection);
 
@@ -64,7 +64,7 @@ namespace Render
 
 	private:
 		glm::mat4 CalculateProjectionMatrix(uint16_t p_windowWidth, uint16_t p_windowHeight) const;
-		glm::mat4 CalculateViewMatrix(const glm::vec3& p_position, const glm::quat& pRotation) const;
+		glm::mat4 CalculateViewMatrix(const glm::vec3& pPosition, const glm::quat& pRotation) const;
 
 	private:
 		Render_Frustum m_frustum;

@@ -17,8 +17,8 @@ namespace Editor
 		Editor_CameraController
 		(
 			Editor_AView& p_view,
-			Render::Render_Camera& p_camera,
-			glm::vec3& p_position,
+			Render::Render_Camera& pCamera,
+			glm::vec3& pPosition,
 			glm::quat& pRotation,
 			bool p_enableFocusInputs = false
 		);
@@ -31,7 +31,7 @@ namespace Editor
 
 		float GetSpeed() const;
 
-		void SetPosition(const glm::vec3& p_position);
+		void SetPosition(const glm::vec3& pPosition);
 
 		void SetRotation(const glm::quat& pRotation);
 
@@ -55,8 +55,8 @@ namespace Editor
 		Window::Window_Window& mWindow;
 		Editor_AView& m_view;
 		Render::Render_Camera& mCamera;
-		glm::vec3& m_cameraPosition;
-		glm::quat& m_cameraRotation;
+		glm::vec3& mCameraPosition;
+		glm::quat& mCameraRotation;
 
 		std::queue<std::tuple<glm::vec3, glm::quat>> m_cameraDestinations;
 

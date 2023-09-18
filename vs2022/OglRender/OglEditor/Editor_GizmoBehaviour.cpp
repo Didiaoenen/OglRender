@@ -14,13 +14,13 @@ bool Editor::Editor_GizmoBehaviour::IsSnappedBehaviourEnabled() const
     return inputManager->GetKeyState(Window::EKey::KEY_LEFT_CONTROL) == Window::EKeyState::KEY_DOWN || inputManager->GetKeyState(Window::EKey::KEY_RIGHT_CONTROL) == Window::EKeyState::KEY_DOWN;
 }
 
-void Editor::Editor_GizmoBehaviour::StartPicking(Core::Core_Actor& p_target, const glm::vec3& p_cameraPosition, EGizmoOperation p_operation, EDirection p_direction)
+void Editor::Editor_GizmoBehaviour::StartPicking(Core::Core_Actor& p_target, const glm::vec3& pCameraPosition, EGizmoOperation p_operation, EDirection p_direction)
 {
     m_target = &p_target;
     m_firstMouse = true;
     m_originalTransform = p_target.transform.GetFTransform();
-    m_distanceToActor = glm::distance(p_cameraPosition, m_target->transform.GetWorldPosition());
-    m_currentOperation = p_operation;
+    m_distanceToActor = glm::distance(pCameraPosition, m_target->transform.GetWorldPosition());
+    mCurrentOperation = p_operation;
     m_direction = p_direction;
 }
 
@@ -31,7 +31,7 @@ void Editor::Editor_GizmoBehaviour::StopPicking()
 
 void Editor::Editor_GizmoBehaviour::ApplyOperation(const glm::mat4& p_viewMatrix, const glm::mat4& p_projectionMatrix, const glm::vec2& p_viewSize)
 {
-    switch (m_currentOperation)
+    switch (mCurrentOperation)
     {
     case EGizmoOperation::TRANSLATE:
         ApplyTranslation(p_viewMatrix, p_projectionMatrix, p_viewSize);

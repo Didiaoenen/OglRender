@@ -6,13 +6,13 @@
 #include "Editor_EditorActions.h"
 #include "Editor_CameraController.h"
 
-Editor::Editor_CameraController::Editor_CameraController(Editor_AView& p_view, Render::Render_Camera& p_camera, glm::vec3& p_position, glm::quat& pRotation, bool p_enableFocusInputs) :
+Editor::Editor_CameraController::Editor_CameraController(Editor_AView& p_view, Render::Render_Camera& pCamera, glm::vec3& pPosition, glm::quat& pRotation, bool p_enableFocusInputs) :
 	m_inputManager(*EDITOR_CONTEXT(inputManager)),
 	mWindow(*EDITOR_CONTEXT(window)),
 	m_view(p_view),
-	mCamera(p_camera),
-	m_cameraPosition(p_position),
-	m_cameraRotation(pRotation),
+	mCamera(pCamera),
+	mCameraPosition(pPosition),
+	mCameraRotation(pRotation),
 	m_enableFocusInputs(p_enableFocusInputs)
 {
 }
@@ -34,7 +34,7 @@ float Editor::Editor_CameraController::GetSpeed() const
 	return 0.0f;
 }
 
-void Editor::Editor_CameraController::SetPosition(const glm::vec3& p_position)
+void Editor::Editor_CameraController::SetPosition(const glm::vec3& pPosition)
 {
 }
 
@@ -44,12 +44,12 @@ void Editor::Editor_CameraController::SetRotation(const glm::quat& pRotation)
 
 const glm::vec3& Editor::Editor_CameraController::GetPosition() const
 {
-	return m_cameraPosition;
+	return mCameraPosition;
 }
 
 const glm::quat& Editor::Editor_CameraController::GetRotation() const
 {
-	return m_cameraRotation;
+	return mCameraRotation;
 }
 
 bool Editor::Editor_CameraController::IsRightMousePressed() const

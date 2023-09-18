@@ -17,9 +17,9 @@ namespace Editor
 	public:
 		Editor_AView
 		(
-			const std::string& p_title,
-			bool p_opened,
-			const UI::UI_PanelWindowSettings& p_windowSettings
+			const std::string& pTitle,
+			bool pOpened,
+			const UI::UI_PanelWindowSettings& pWindowSettings
 		);
 
 		virtual void Update(float pDeltaTime);
@@ -30,7 +30,7 @@ namespace Editor
 
 		void Render();
 
-		void SetCameraPosition(const glm::vec3& p_position);
+		void SetCameraPosition(const glm::vec3& pPosition);
 
 		void SetCameraRotation(const glm::quat& pRotation);
 
@@ -54,13 +54,13 @@ namespace Editor
 	protected:
 		Editor_EditorRenderer& mEditorRenderer;
 		Render::Render_Camera mCamera;
-		glm::vec3 m_cameraPosition;
-		glm::quat m_cameraRotation;
-		UI::UI_Image* m_image;
+		glm::vec3 mCameraPosition;
+		glm::quat mCameraRotation;
+		UI::UI_Image* mImage;
 
-		glm::vec3 m_gridColor = glm::vec3{ 0.176f, 0.176f, 0.176f };
+		glm::vec3 mGridColor = glm::vec3{ 0.176f, 0.176f, 0.176f };
 
-		Render::Render_Framebuffer m_fbo;
+		Render::Render_Framebuffer mFbo;
 	};
 }
 

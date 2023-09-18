@@ -10,29 +10,29 @@ namespace Editor
 	public:
 		Editor_SceneView
 		(
-			const std::string& p_title,
-			bool p_opened,
-			const UI::UI_PanelWindowSettings& p_windowSettings
+			const std::string& pTitle,
+			bool pOpened,
+			const UI::UI_PanelWindowSettings& pWindowSettings
 		);
 
 		virtual void Update(float pDeltaTime) override;
 
 		virtual void _Render_Impl() override;
 
-		void RenderScene(uint8_t p_defaultRenderState);
+		void RenderScene(uint8_t pDefaultRenderState);
 
 		void RenderSceneForActorPicking();
 
 		void HandleActorPicking();
 
 	private:
-		Core::Core_SceneManager& m_sceneManager;
-		Render::Render_Framebuffer m_actorPickingFramebuffer;
-		Editor_GizmoBehaviour m_gizmoOperations;
-		EGizmoOperation m_currentOperation = EGizmoOperation::TRANSLATE;
+		Core::Core_SceneManager& mSceneManager;
+		Render::Render_Framebuffer mActorPickingFramebuffer;
+		Editor_GizmoBehaviour mGizmoOperations;
+		EGizmoOperation mCurrentOperation = EGizmoOperation::TRANSLATE;
 
-		std::optional<std::reference_wrapper<Core::Core_Actor>> m_highlightedActor;
-		std::optional<Editor_GizmoBehaviour::EDirection> m_highlightedGizmoDirection;
+		std::optional<std::reference_wrapper<Core::Core_Actor>> mHighlightedActor;
+		std::optional<Editor_GizmoBehaviour::EDirection> mHighlightedGizmoDirection;
 	};
 }
 

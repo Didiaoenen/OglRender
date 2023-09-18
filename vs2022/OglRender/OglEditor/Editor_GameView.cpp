@@ -5,8 +5,8 @@
 #include "Editor_EditorRenderer.h"
 #include "Editor_GameView.h"
 
-Editor::Editor_GameView::Editor_GameView(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
-	Editor_AView(p_title, p_opened, p_windowSettings), m_sceneManager(EDITOR_CONTEXT(sceneManager))
+Editor::Editor_GameView::Editor_GameView(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
+	Editor_AView(pTitle, pOpened, pWindowSettings), mSceneManager(EDITOR_CONTEXT(sceneManager))
 {
 	SetIcon(ICON_MDI_GAMEPAD_VARIANT " ");
 }
@@ -23,15 +23,15 @@ void Editor::Editor_GameView::Update(float pDeltaTime)
 		if (cameraComponent)
 		{
 			mCamera = cameraComponent->GetCamera();
-			m_cameraPosition = cameraComponent->mOwner.transform.GetWorldPosition();
-			m_cameraRotation = cameraComponent->mOwner.transform.GetWorldRotation();
-			m_hasCamera = true;
+			mCameraPosition = cameraComponent->mOwner.transform.GetWorldPosition();
+			mCameraRotation = cameraComponent->mOwner.transform.GetWorldRotation();
+			mHasCamera = true;
 			PrepareCamera();
 		}
 		else
 		{
 			mCamera.SetClearColor({ 0.f, 0.f, 0.f });
-			m_hasCamera = false;
+			mHasCamera = false;
 		}
 	}
 }
@@ -39,16 +39,16 @@ void Editor::Editor_GameView::Update(float pDeltaTime)
 void Editor::Editor_GameView::_Render_Impl()
 {
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
-	auto& currentScene = *m_sceneManager.GetCurrentScene();
+	auto& currentScene = *mSceneManager.GetCurrentScene();
 
-	m_fbo.Bind();
+	mFbo.Bind();
 
 	baseRenderer.Clear(mCamera);
 
 	uint8_t glState = baseRenderer.FetchGLState();
 	baseRenderer.ApplyStateMask(glState);
 
-	if (m_hasCamera)
+	if (mHasCamera)
 	{
 		if (mCamera.HasFrustumLightCulling())
 		{
@@ -59,20 +59,20 @@ void Editor::Editor_GameView::_Render_Impl()
 			mEditorRenderer.UpdateLights(currentScene);
 		}
 
-		mEditorRenderer.RenderScene(m_cameraPosition, mCamera);
+		mEditorRenderer.RenderScene(mCameraPosition, mCamera);
 	}
 
 	baseRenderer.ApplyStateMask(glState);
 
-	m_fbo.Unbind();
+	mFbo.Unbind();
 }
 
 bool Editor::Editor_GameView::HasCamera() const
 {
-	return m_hasCamera;
+	return mHasCamera;
 }
 
 std::optional<Render::Render_Frustum> Editor::Editor_GameView::GetActiveFrustum() const
 {
-	return m_hasCamera ? mCamera.GetFrustum() : std::optional<Render::Render_Frustum>{};
+	return mHasCamera ? mCamera.GetFrustum() : std::optional<Render::Render_Frustum>{};
 }

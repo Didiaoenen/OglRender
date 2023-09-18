@@ -7,17 +7,17 @@
 #include "Editor_GameView.h"
 #include "Editor_SceneView.h"
 
-Editor::Editor_SceneView::Editor_SceneView(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
-	Editor_AViewControllable(p_title, p_opened, p_windowSettings, true), m_sceneManager(EDITOR_CONTEXT(sceneManager))
+Editor::Editor_SceneView::Editor_SceneView(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
+	Editor_AViewControllable(pTitle, pOpened, pWindowSettings, true), mSceneManager(EDITOR_CONTEXT(sceneManager))
 {
 	SetIcon(ICON_MDI_GAMEPAD_VARIANT " ");
 
 	mCamera.SetClearColor({ 0.098f, 0.098f, 0.098f });
 	mCamera.SetFar(5000.0f);
 
-	m_image->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this](auto p_data)
+	mImage->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this](auto pData)
 		{
-			std::string path = p_data.first;
+			std::string path = pData.first;
 
 			switch (Tools::Tools_PathParser::GetFileType(path))
 			{
@@ -31,21 +31,21 @@ void Editor::Editor_SceneView::Update(float pDeltaTime)
 {
 	Editor_AViewControllable::Update(pDeltaTime);
 
-	if (IsFocused() && !m_cameraController.IsRightMousePressed())
+	if (IsFocused() && !mCameraController.IsRightMousePressed())
 	{
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(Window::EKey::KEY_W))
 		{
-			m_currentOperation = Editor::EGizmoOperation::TRANSLATE;
+			mCurrentOperation = Editor::EGizmoOperation::TRANSLATE;
 		}
 
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(Window::EKey::KEY_E))
 		{
-			m_currentOperation = Editor::EGizmoOperation::ROTATE;
+			mCurrentOperation = Editor::EGizmoOperation::ROTATE;
 		}
 
 		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(Window::EKey::KEY_R))
 		{
-			m_currentOperation = Editor::EGizmoOperation::SCALE;
+			mCurrentOperation = Editor::EGizmoOperation::SCALE;
 		}
 	}
 }
@@ -64,13 +64,14 @@ void Editor::Editor_SceneView::_Render_Impl()
 	baseRenderer.ApplyStateMask(glState);
 }
 
-void Editor::Editor_SceneView::RenderScene(uint8_t p_defaultRenderState)
+void Editor::Editor_SceneView::RenderScene(uint8_t pDefaultRenderState)
 {
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
-	auto& currentScene = *m_sceneManager.GetCurrentScene();
-	auto& gameView = EDITOR_PANEL(Editor::Editor_GameView, "Game View");
+	auto& currentScene = *mSceneManager.GetCurrentScene();
+	auto& gameView = EDITOR_PANEL(Editor::Editor_GameView, "Game");
 
-	if (auto gameViewFrustum = gameView.GetActiveFrustum(); gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumLightCulling() && Editor::Editor_EditorSettings::ShowLightFrustumCullingInSceneView)
+	auto gameViewFrustum = gameView.GetActiveFrustum();
+	if (gameViewFrustum && gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumLightCulling() && Editor::Editor_EditorSettings::ShowLightFrustumCullingInSceneView)
 	{
 		mEditorRenderer.UpdateLightsInFrustum(currentScene, gameViewFrustum.value());
 	}
@@ -79,24 +80,24 @@ void Editor::Editor_SceneView::RenderScene(uint8_t p_defaultRenderState)
 		mEditorRenderer.UpdateLights(currentScene);
 	}
 
-	m_fbo.Bind();
+	mFbo.Bind();
 
 	baseRenderer.SetStencilMask(0xFF);
 	baseRenderer.Clear(mCamera);
 	baseRenderer.SetStencilMask(0x00);
 
-	mEditorRenderer.RenderGrid(m_cameraPosition, m_gridColor);
+	mEditorRenderer.RenderGrid(mCameraPosition, mGridColor);
 	mEditorRenderer.RenderCameras();
 
-	if (auto gameViewFrustum = gameView.GetActiveFrustum(); gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumGeometryCulling() && Editor::Editor_EditorSettings::ShowGeometryFrustumCullingInSceneView)
+	if (gameViewFrustum && gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumGeometryCulling() && Editor::Editor_EditorSettings::ShowGeometryFrustumCullingInSceneView)
 	{
 		mCamera.SetFrustumGeometryCulling(gameView.HasCamera() ? gameView.GetCamera().HasFrustumGeometryCulling() : false);
-		mEditorRenderer.RenderScene(m_cameraPosition, mCamera, &gameViewFrustum.value());
+		mEditorRenderer.RenderScene(mCameraPosition, mCamera, &gameViewFrustum.value());
 		mCamera.SetFrustumGeometryCulling(false);
 	}
 	else
 	{
-		mEditorRenderer.RenderScene(m_cameraPosition, mCamera);
+		mEditorRenderer.RenderScene(mCameraPosition, mCamera);
 	}
 
 	mEditorRenderer.RenderLights();
@@ -108,31 +109,31 @@ void Editor::Editor_SceneView::RenderScene(uint8_t p_defaultRenderState)
 		if (selectedActor.IsActive())
 		{
 			mEditorRenderer.RenderActorOutlinePass(selectedActor, true, true);
-			baseRenderer.ApplyStateMask(p_defaultRenderState);
+			baseRenderer.ApplyStateMask(pDefaultRenderState);
 			mEditorRenderer.RenderActorOutlinePass(selectedActor, false, true);
 		}
 
-		baseRenderer.ApplyStateMask(p_defaultRenderState);
+		baseRenderer.ApplyStateMask(pDefaultRenderState);
 		baseRenderer.Clear(false, true, false);
 
 		int highlightedAxis = -1;
 
-		if (m_highlightedGizmoDirection.has_value())
+		if (mHighlightedGizmoDirection.has_value())
 		{
-			highlightedAxis = static_cast<int>(m_highlightedGizmoDirection.value());
+			highlightedAxis = static_cast<int>(mHighlightedGizmoDirection.value());
 		}
 
-		mEditorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), m_currentOperation, false, highlightedAxis);
+		mEditorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), mCurrentOperation, false, highlightedAxis);
 	}
 
-	if (m_highlightedActor.has_value())
+	if (mHighlightedActor.has_value())
 	{
-		mEditorRenderer.RenderActorOutlinePass(m_highlightedActor.value().get(), true, false);
-		baseRenderer.ApplyStateMask(p_defaultRenderState);
-		mEditorRenderer.RenderActorOutlinePass(m_highlightedActor.value().get(), false, false);
+		mEditorRenderer.RenderActorOutlinePass(mHighlightedActor.value().get(), true, false);
+		baseRenderer.ApplyStateMask(pDefaultRenderState);
+		mEditorRenderer.RenderActorOutlinePass(mHighlightedActor.value().get(), false, false);
 	}
 
-	m_fbo.Unbind();
+	mFbo.Unbind();
 }
 
 void Editor::Editor_SceneView::RenderSceneForActorPicking()
@@ -141,8 +142,8 @@ void Editor::Editor_SceneView::RenderSceneForActorPicking()
 
 	auto [winWidth, winHeight] = GetSafeSize();
 
-	m_actorPickingFramebuffer.Resize(winWidth, winHeight);
-	m_actorPickingFramebuffer.Bind();
+	mActorPickingFramebuffer.Resize(winWidth, winHeight);
+	mActorPickingFramebuffer.Bind();
 	baseRenderer.SetClearColor(1.0f, 1.0f, 1.0f);
 	baseRenderer.Clear();
 	mEditorRenderer.RenderSceneForActorPicking();
@@ -151,10 +152,10 @@ void Editor::Editor_SceneView::RenderSceneForActorPicking()
 	{
 		auto& selectedActor = EDITOR_EXEC(GetSelectedActor());
 		baseRenderer.Clear(false, true, false);
-		mEditorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), m_currentOperation, true);
+		mEditorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), mCurrentOperation, true);
 	}
 
-	m_actorPickingFramebuffer.Unbind();
+	mActorPickingFramebuffer.Unbind();
 }
 
 bool IsResizing()
@@ -175,7 +176,7 @@ void Editor::Editor_SceneView::HandleActorPicking()
 
 	if (inputManager.IsMouseButtonReleased(Window::EMouseButton::MOUSE_BUTTON_LEFT))
 	{
-		m_gizmoOperations.StopPicking();
+		mGizmoOperations.StopPicking();
 	}
 
 	if (IsHovered() && !IsResizing())
@@ -187,40 +188,39 @@ void Editor::Editor_SceneView::HandleActorPicking()
 		mouseY -= mPosition.y;
 		mouseY = GetSafeSize().second - mouseY + 25;
 
-		m_actorPickingFramebuffer.Bind();
+		mActorPickingFramebuffer.Bind();
 		uint8_t pixel[3];
 		EDITOR_CONTEXT(renderer)->ReadPixels(static_cast<int>(mouseX), static_cast<int>(mouseY), 1, 1, Render::EPixelDataFormat::RGB, Render::EPixelDataType::UNSIGNED_BYTE, pixel);
-		m_actorPickingFramebuffer.Unbind();
+		mActorPickingFramebuffer.Unbind();
 
 		uint32_t actorID = (0 << 24) | (pixel[2] << 16) | (pixel[1] << 8) | (pixel[0] << 0);
 		auto actorUnderMouse = EDITOR_CONTEXT(sceneManager).GetCurrentScene()->FindActorByID(actorID);
-		auto direction = m_gizmoOperations.IsPicking() ? m_gizmoOperations.GetDirection() : EDITOR_EXEC(IsAnyActorSelected()) && pixel[0] == 255 && pixel[1] == 255 && pixel[2] >= 252 && pixel[2] <= 254 ? static_cast<Editor_GizmoBehaviour::EDirection>(pixel[2] - 252) : std::optional<Editor_GizmoBehaviour::EDirection>{};
+		auto direction = mGizmoOperations.IsPicking() ? mGizmoOperations.GetDirection() : EDITOR_EXEC(IsAnyActorSelected()) && pixel[0] == 255 && pixel[1] == 255 && pixel[2] >= 252 && pixel[2] <= 254 ? static_cast<Editor_GizmoBehaviour::EDirection>(pixel[2] - 252) : std::optional<Editor_GizmoBehaviour::EDirection>{};
 
-		m_highlightedActor = {};
-		m_highlightedGizmoDirection = {};
+		mHighlightedActor = {};
+		mHighlightedGizmoDirection = {};
 
-		if (!m_cameraController.IsRightMousePressed())
+		if (!mCameraController.IsRightMousePressed())
 		{
 			if (direction.has_value())
 			{
-				m_highlightedGizmoDirection = direction;
+				mHighlightedGizmoDirection = direction;
 
 			}
 			else if (actorUnderMouse != nullptr)
 			{
-				m_highlightedActor = std::ref(*actorUnderMouse);
+				mHighlightedActor = std::ref(*actorUnderMouse);
 			}
 		}
 
-		if (inputManager.IsMouseButtonPressed(Window::EMouseButton::MOUSE_BUTTON_LEFT) && !m_cameraController.IsRightMousePressed())
+		if (inputManager.IsMouseButtonPressed(Window::EMouseButton::MOUSE_BUTTON_LEFT) && !mCameraController.IsRightMousePressed())
 		{
 			if (direction.has_value())
 			{
-				m_gizmoOperations.StartPicking(EDITOR_EXEC(GetSelectedActor()), m_cameraPosition, m_currentOperation, direction.value());
+				mGizmoOperations.StartPicking(EDITOR_EXEC(GetSelectedActor()), mCameraPosition, mCurrentOperation, direction.value());
 			}
 			else
 			{
-
 				if (actorUnderMouse)
 				{
 					EDITOR_EXEC(SelectActor(*actorUnderMouse));
@@ -233,13 +233,13 @@ void Editor::Editor_SceneView::HandleActorPicking()
 		}
 	}
 
-	if (m_gizmoOperations.IsPicking())
+	if (mGizmoOperations.IsPicking())
 	{
 		auto mousePosition = EDITOR_CONTEXT(inputManager)->GetMousePosition();
 
 		auto [winWidth, winHeight] = GetSafeSize();
 
-		m_gizmoOperations.SetCurrentMouse({ static_cast<float>(mousePosition.first), static_cast<float>(mousePosition.second) });
-		m_gizmoOperations.ApplyOperation(mCamera.GetViewMatrix(), mCamera.GetProjectionMatrix(), { static_cast<float>(winWidth), static_cast<float>(winHeight) });
+		mGizmoOperations.SetCurrentMouse({ static_cast<float>(mousePosition.first), static_cast<float>(mousePosition.second) });
+		mGizmoOperations.ApplyOperation(mCamera.GetViewMatrix(), mCamera.GetProjectionMatrix(), { static_cast<float>(winWidth), static_cast<float>(winHeight) });
 	}
 }

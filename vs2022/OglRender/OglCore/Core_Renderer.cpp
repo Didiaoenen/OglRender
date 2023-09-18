@@ -6,9 +6,9 @@
 #include "Core_CModelRenderer.h"
 #include "Core_Renderer.h"
 
-Core::Core_Renderer::Core_Renderer(Render::Render_Driver& p_driver) :
-	Render_Renderer(p_driver),
-	m_emptyTexture(Render::Render_TextureLoader::CreateColor
+Core::Core_Renderer::Core_Renderer(Render::Render_Driver& pDriver) :
+	Render_Renderer(pDriver),
+	mEmptyTexture(Render::Render_TextureLoader::CreateColor
 	(
 		(255 << 24) | (255 << 16) | (255 << 8) | 255,
 		Render::ETextureFilteringMode::NEAREST,
@@ -20,12 +20,12 @@ Core::Core_Renderer::Core_Renderer(Render::Render_Driver& p_driver) :
 
 Core::Core_Renderer::~Core_Renderer()
 {
-	Render::Render_TextureLoader::Destroy(m_emptyTexture);
+	Render::Render_TextureLoader::Destroy(mEmptyTexture);
 }
 
-Core::Core_CCamera* Core::Core_Renderer::FindMainCamera(const Core::Core_Scene& p_scene)
+Core::Core_CCamera* Core::Core_Renderer::FindMainCamera(const Core::Core_Scene& pScene)
 {
-	for (Core_CCamera* camera : p_scene.GetFastAccessComponents().cameras)
+	for (Core_CCamera* camera : pScene.GetFastAccessComponents().cameras)
 	{
 		if (camera->mOwner.IsActive())
 		{
@@ -35,11 +35,11 @@ Core::Core_CCamera* Core::Core_Renderer::FindMainCamera(const Core::Core_Scene& 
 	return nullptr;
 }
 
-std::vector<glm::mat4> Core::Core_Renderer::FindLightMatrices(const Core::Core_Scene& p_scene)
+std::vector<glm::mat4> Core::Core_Renderer::FindLightMatrices(const Core::Core_Scene& pScene)
 {
 	std::vector<glm::mat4> result;
 
-	const auto& facs = p_scene.GetFastAccessComponents();
+	const auto& facs = pScene.GetFastAccessComponents();
 
 	for (auto light : facs.lights)
 	{
@@ -52,11 +52,11 @@ std::vector<glm::mat4> Core::Core_Renderer::FindLightMatrices(const Core::Core_S
 	return result;
 }
 
-std::vector<glm::mat4> Core::Core_Renderer::FindLightMatricesInFrustum(const Core::Core_Scene& p_scene, const Render::Render_Frustum& p_frustum)
+std::vector<glm::mat4> Core::Core_Renderer::FindLightMatricesInFrustum(const Core::Core_Scene& pScene, const Render::Render_Frustum& pFrustum)
 {
 	std::vector<glm::mat4> result;
 
-	const auto& facs = p_scene.GetFastAccessComponents();
+	const auto& facs = pScene.GetFastAccessComponents();
 
 	for (auto light : facs.lights)
 	{
@@ -66,7 +66,7 @@ std::vector<glm::mat4> Core::Core_Renderer::FindLightMatricesInFrustum(const Cor
 			const auto& position = lightData.GetTransform().GetWorldPosition();
 			auto effectRange = lightData.GetEffectRange();
 
-			if (std::isinf(effectRange) || p_frustum.SphereInFrustum(position.x, position.y, position.z, lightData.GetEffectRange()))
+			if (std::isinf(effectRange) || pFrustum.SphereInFrustum(position.x, position.y, position.z, lightData.GetEffectRange()))
 			{
 				result.push_back(lightData.GenerateMatrix());
 			}
@@ -76,19 +76,19 @@ std::vector<glm::mat4> Core::Core_Renderer::FindLightMatricesInFrustum(const Cor
 	return result;
 }
 
-void Core::Core_Renderer::RenderScene(Core::Core_Scene& p_scene, const glm::vec3& p_cameraPosition, const Render::Render_Camera& p_camera, const Render::Render_Frustum* p_customFrustum, Core::Core_Material* p_defaultMaterial)
+void Core::Core_Renderer::RenderScene(Core::Core_Scene& pScene, const glm::vec3& pCameraPosition, const Render::Render_Camera& pCamera, const Render::Render_Frustum* pCustomFrustum, Core::Core_Material* pDefaultMaterial)
 {
 	OpaqueDrawables	opaqueMeshes;
 	TransparentDrawables transparentMeshes;
 
-	if (p_camera.HasFrustumGeometryCulling())
+	if (pCamera.HasFrustumGeometryCulling())
 	{
-		const auto& frustum = p_customFrustum ? *p_customFrustum : p_camera.GetFrustum();
-		std::tie(opaqueMeshes, transparentMeshes) = FindAndSortFrustumCulledDrawables(p_scene, p_cameraPosition, frustum, p_defaultMaterial);
+		const auto& frustum = pCustomFrustum ? *pCustomFrustum : pCamera.GetFrustum();
+		std::tie(opaqueMeshes, transparentMeshes) = FindAndSortFrustumCulledDrawables(pScene, pCameraPosition, frustum, pDefaultMaterial);
 	}
 	else
 	{
-		std::tie(opaqueMeshes, transparentMeshes) = FindAndSortDrawables(p_scene, p_cameraPosition, p_defaultMaterial);
+		std::tie(opaqueMeshes, transparentMeshes) = FindAndSortDrawables(pScene, pCameraPosition, pDefaultMaterial);
 	}
 
 	for (const auto& [distance, drawable] : opaqueMeshes)
@@ -102,12 +102,12 @@ void Core::Core_Renderer::RenderScene(Core::Core_Scene& p_scene, const glm::vec3
 	}
 }
 
-std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::TransparentDrawables> Core::Core_Renderer::FindAndSortFrustumCulledDrawables(const Core::Core_Scene& p_scene, const glm::vec3& p_cameraPosition, const Render::Render_Frustum& p_frustum, Core::Core_Material* p_defaultMaterial)
+std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::TransparentDrawables> Core::Core_Renderer::FindAndSortFrustumCulledDrawables(const Core::Core_Scene& pScene, const glm::vec3& pCameraPosition, const Render::Render_Frustum& pFrustum, Core::Core_Material* pDefaultMaterial)
 {
 	OpaqueDrawables opaqueDrawables;
 	TransparentDrawables transparentDrawables;
 
-	for (Core_CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
+	for (Core_CModelRenderer* modelRenderer : pScene.GetFastAccessComponents().modelRenderers)
 	{
 		auto& mOwner = modelRenderer->mOwner;
 
@@ -137,12 +137,12 @@ std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::Transparent
 
 					{
 						//PROFILER_SPY("Frustum Culling");
-						meshes = GetMeshesInFrustum(*model, modelBoundingSphere, transform, p_frustum, cullingOptions);
+						meshes = GetMeshesInFrustum(*model, modelBoundingSphere, transform, pFrustum, cullingOptions);
 					}
 
 					if (!meshes.empty())
 					{
-						float distanceToActor = glm::distance(transform.GetWorldPosition(), p_cameraPosition);
+						float distanceToActor = glm::distance(transform.GetWorldPosition(), pCameraPosition);
 						const Core_CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
 
 						for (const auto& mesh : meshes)
@@ -153,7 +153,7 @@ std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::Transparent
 							{
 								material = materials.at(mesh.get().GetMaterialIndex());
 								if (!material || !material->GetShader())
-									material = p_defaultMaterial;
+									material = pDefaultMaterial;
 							}
 
 							if (material)
@@ -179,18 +179,18 @@ std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::Transparent
 	return { opaqueDrawables, transparentDrawables };
 }
 
-std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::TransparentDrawables> Core::Core_Renderer::FindAndSortDrawables(const Core::Core_Scene& p_scene, const glm::vec3& p_cameraPosition, Core::Core_Material* p_defaultMaterial)
+std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::TransparentDrawables> Core::Core_Renderer::FindAndSortDrawables(const Core::Core_Scene& pScene, const glm::vec3& pCameraPosition, Core::Core_Material* pDefaultMaterial)
 {
 	OpaqueDrawables opaqueDrawables;
 	TransparentDrawables transparentDrawables;
 
-	for (Core_CModelRenderer* modelRenderer : p_scene.GetFastAccessComponents().modelRenderers)
+	for (Core_CModelRenderer* modelRenderer : pScene.GetFastAccessComponents().modelRenderers)
 	{
 		if (modelRenderer->mOwner.IsActive())
 		{
 			if (auto model = modelRenderer->GetModel())
 			{
-				float distanceToActor = glm::distance(modelRenderer->mOwner.transform.GetWorldPosition(), p_cameraPosition);
+				float distanceToActor = glm::distance(modelRenderer->mOwner.transform.GetWorldPosition(), pCameraPosition);
 
 				if (auto materialRenderer = modelRenderer->mOwner.GetComponent<Core_CMaterialRenderer>())
 				{
@@ -206,7 +206,7 @@ std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::Transparent
 						{
 							material = materials.at(mesh->GetMaterialIndex());
 							if (!material || !material->GetShader())
-								material = p_defaultMaterial;
+								material = pDefaultMaterial;
 						}
 
 						if (material)
@@ -231,22 +231,22 @@ std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::Transparent
 	return { opaqueDrawables, transparentDrawables };
 }
 
-void Core::Core_Renderer::DrawDrawable(const Drawable& p_toDraw)
+void Core::Core_Renderer::DrawDrawable(const Drawable& pToDraw)
 {
-	m_userMatrixSender(std::get<3>(p_toDraw));
-	DrawMesh(*std::get<1>(p_toDraw), *std::get<2>(p_toDraw), &std::get<0>(p_toDraw));
+	mUserMatrixSender(std::get<3>(pToDraw));
+	DrawMesh(*std::get<1>(pToDraw), *std::get<2>(pToDraw), &std::get<0>(pToDraw));
 }
 
-void Core::Core_Renderer::DrawModelWithSingleMaterial(Render::Render_Model& pModel, Core::Core_Material& pMaterial, glm::mat4 const* p_modelMatrix, Core::Core_Material* p_defaultMaterial)
+void Core::Core_Renderer::DrawModelWithSingleMaterial(Render::Render_Model& pModel, Core::Core_Material& pMaterial, glm::mat4 const* pModelMatrix, Core::Core_Material* pDefaultMaterial)
 {
-	if (p_modelMatrix)
+	if (pModelMatrix)
 	{
-		m_modelMatrixSender(*p_modelMatrix);
+		mModelMatrixSender(*pModelMatrix);
 	}
 
 	for (auto mesh : pModel.GetMeshes())
 	{
-		Core_Material* material = pMaterial.GetShader() ? &pMaterial : p_defaultMaterial;
+		Core_Material* material = pMaterial.GetShader() ? &pMaterial : pDefaultMaterial;
 
 		if (material)
 		{
@@ -255,16 +255,16 @@ void Core::Core_Renderer::DrawModelWithSingleMaterial(Render::Render_Model& pMod
 	}
 }
 
-void Core::Core_Renderer::DrawModelWithMaterials(Render::Render_Model& pModel, std::vector<Core::Core_Material*> p_materials, glm::mat4 const* p_modelMatrix, Core::Core_Material* p_defaultMaterial)
+void Core::Core_Renderer::DrawModelWithMaterials(Render::Render_Model& pModel, std::vector<Core::Core_Material*> pMaterials, glm::mat4 const* pModelMatrix, Core::Core_Material* pDefaultMaterial)
 {
-	if (p_modelMatrix)
+	if (pModelMatrix)
 	{
-		m_modelMatrixSender(*p_modelMatrix);
+		mModelMatrixSender(*pModelMatrix);
 	}
 
 	for (auto mesh : pModel.GetMeshes())
 	{
-		Core_Material* material = p_materials.size() > mesh->GetMaterialIndex() ? p_materials[mesh->GetMaterialIndex()] : p_defaultMaterial;
+		Core_Material* material = pMaterials.size() > mesh->GetMaterialIndex() ? pMaterials[mesh->GetMaterialIndex()] : pDefaultMaterial;
 		if (material)
 		{
 			DrawMesh(*mesh, *material, nullptr);
@@ -272,30 +272,30 @@ void Core::Core_Renderer::DrawModelWithMaterials(Render::Render_Model& pModel, s
 	}
 }
 
-void Core::Core_Renderer::DrawMesh(Render::Render_Mesh& p_mesh, Core::Core_Material& pMaterial, glm::mat4 const* p_modelMatrix)
+void Core::Core_Renderer::DrawMesh(Render::Render_Mesh& pMesh, Core::Core_Material& pMaterial, glm::mat4 const* pModelMatrix)
 {
 	if (pMaterial.HasShader() && pMaterial.GetGPUInstances() > 0)
 	{
-		if (p_modelMatrix)
+		if (pModelMatrix)
 		{
-			m_modelMatrixSender(*p_modelMatrix);
+			mModelMatrixSender(*pModelMatrix);
 		}
 
 		uint8_t stateMask = pMaterial.GenerateStateMask();
 		ApplyStateMask(stateMask);
 
-		pMaterial.Bind(m_emptyTexture);
-		Draw(p_mesh, Render::EPrimitiveMode::TRIANGLES, pMaterial.GetGPUInstances());
+		pMaterial.Bind(mEmptyTexture);
+		Draw(pMesh, Render::EPrimitiveMode::TRIANGLES, pMaterial.GetGPUInstances());
 		pMaterial.UnBind();
 	}
 }
 
-void Core::Core_Renderer::RegisterModelMatrixSender(std::function<void(glm::mat4)> p_modelMatrixSender)
+void Core::Core_Renderer::RegisterModelMatrixSender(std::function<void(glm::mat4)> pModelMatrixSender)
 {
-	m_modelMatrixSender = p_modelMatrixSender;
+	mModelMatrixSender = pModelMatrixSender;
 }
 
-void Core::Core_Renderer::RegisterUserMatrixSender(std::function<void(glm::mat4)> p_userMatrixSender)
+void Core::Core_Renderer::RegisterUserMatrixSender(std::function<void(glm::mat4)> pUserMatrixSender)
 {
-	m_userMatrixSender = p_userMatrixSender;
+	mUserMatrixSender = pUserMatrixSender;
 }

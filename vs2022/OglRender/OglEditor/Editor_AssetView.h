@@ -15,9 +15,9 @@ namespace Editor
 
 		Editor_AssetView
 		(
-			const std::string& p_title,
-			bool p_opened,
-			const UI::UI_PanelWindowSettings& p_windowSettings
+			const std::string& pTitle,
+			bool pOpened,
+			const UI::UI_PanelWindowSettings& pWindowSettings
 		);
 
 		virtual void _Render_Impl() override;

@@ -25,7 +25,7 @@ namespace Editor
 
 		bool IsSnappedBehaviourEnabled() const;
 
-		void StartPicking(Core::Core_Actor& p_target, const glm::vec3& p_cameraPosition, EGizmoOperation p_operation, EDirection p_direction);
+		void StartPicking(Core::Core_Actor& p_target, const glm::vec3& pCameraPosition, EGizmoOperation p_operation, EDirection p_direction);
 
 		void StopPicking();
 
@@ -54,7 +54,7 @@ namespace Editor
 		bool m_firstMouse = true;
 		float m_distanceToActor = 0.0f;
 		Core::Core_Actor* m_target = nullptr;
-		EGizmoOperation m_currentOperation;
+		EGizmoOperation mCurrentOperation;
 		EDirection m_direction;
 		Maths::Maths_FTransform m_originalTransform;
 		glm::vec2 m_originMouse;

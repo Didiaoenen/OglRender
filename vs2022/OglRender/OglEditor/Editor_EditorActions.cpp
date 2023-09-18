@@ -245,10 +245,10 @@ bool Editor::Editor_EditorActions::DestroyActor(Core::Core_Actor& p_actor)
 	return true;
 }
 
-std::string FindDuplicatedActorUniqueName(Core::Core_Actor& p_duplicated, Core::Core_Actor& p_newActor, Core::Core_Scene& p_scene)
+std::string FindDuplicatedActorUniqueName(Core::Core_Actor& p_duplicated, Core::Core_Actor& p_newActor, Core::Core_Scene& pScene)
 {
 	const auto parent = p_newActor.GetParent();
-	const auto adjacentActors = parent ? parent->GetChildren() : p_scene.GetActors();
+	const auto adjacentActors = parent ? parent->GetChildren() : pScene.GetActors();
 
 	auto availabilityChecker = [&parent, &adjacentActors](std::string target) -> bool
 		{

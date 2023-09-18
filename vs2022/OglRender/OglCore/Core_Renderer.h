@@ -20,56 +20,56 @@ namespace Core
 		using OpaqueDrawables = std::multimap<float, Drawable, std::less<float>>;
 		using TransparentDrawables = std::multimap<float, Drawable, std::greater<float>>;
 
-		Core_Renderer(Render::Render_Driver& p_driver);
+		Core_Renderer(Render::Render_Driver& pDriver);
 
 		~Core_Renderer();
 
-		Core::Core_CCamera* FindMainCamera(const Core::Core_Scene& p_scene);
+		Core::Core_CCamera* FindMainCamera(const Core::Core_Scene& pScene);
 
-		std::vector<glm::mat4> FindLightMatrices(const Core::Core_Scene& p_scene);
+		std::vector<glm::mat4> FindLightMatrices(const Core::Core_Scene& pScene);
 
-		std::vector<glm::mat4> FindLightMatricesInFrustum(const Core::Core_Scene& p_scene, const Render::Render_Frustum& p_frustum);
+		std::vector<glm::mat4> FindLightMatricesInFrustum(const Core::Core_Scene& pScene, const Render::Render_Frustum& pFrustum);
 
 		void RenderScene
 		(
-			Core::Core_Scene& p_scene,
-			const glm::vec3& p_cameraPosition,
-			const Render::Render_Camera& p_camera,
-			const Render::Render_Frustum* p_customFrustum = nullptr,
-			Core::Core_Material* p_defaultMaterial = nullptr
+			Core::Core_Scene& pScene,
+			const glm::vec3& pCameraPosition,
+			const Render::Render_Camera& pCamera,
+			const Render::Render_Frustum* pCustomFrustum = nullptr,
+			Core::Core_Material* pDefaultMaterial = nullptr
 		);
 
 		std::pair<OpaqueDrawables, TransparentDrawables> FindAndSortFrustumCulledDrawables
 		(
-			const Core::Core_Scene& p_scene,
-			const glm::vec3& p_cameraPosition,
-			const Render::Render_Frustum& p_frustum,
-			Core::Core_Material* p_defaultMaterial
+			const Core::Core_Scene& pScene,
+			const glm::vec3& pCameraPosition,
+			const Render::Render_Frustum& pFrustum,
+			Core::Core_Material* pDefaultMaterial
 		);
 
 		std::pair<OpaqueDrawables, TransparentDrawables> FindAndSortDrawables
 		(
-			const Core::Core_Scene& p_scene,
-			const glm::vec3& p_cameraPosition,
-			Core::Core_Material* p_defaultMaterial
+			const Core::Core_Scene& pScene,
+			const glm::vec3& pCameraPosition,
+			Core::Core_Material* pDefaultMaterial
 		);
 
-		void DrawDrawable(const Drawable& p_toDraw);
+		void DrawDrawable(const Drawable& pToDraw);
 
-		void DrawModelWithSingleMaterial(Render::Render_Model& pModel, Core::Core_Material& pMaterial, glm::mat4 const* p_modelMatrix, Core::Core_Material* p_defaultMaterial = nullptr);
+		void DrawModelWithSingleMaterial(Render::Render_Model& pModel, Core::Core_Material& pMaterial, glm::mat4 const* pModelMatrix, Core::Core_Material* pDefaultMaterial = nullptr);
 
-		void DrawModelWithMaterials(Render::Render_Model& pModel, std::vector<Core::Core_Material*> p_materials, glm::mat4 const* p_modelMatrix, Core::Core_Material* p_defaultMaterial = nullptr);
+		void DrawModelWithMaterials(Render::Render_Model& pModel, std::vector<Core::Core_Material*> pMaterials, glm::mat4 const* pModelMatrix, Core::Core_Material* pDefaultMaterial = nullptr);
 
-		void DrawMesh(Render::Render_Mesh& p_mesh, Core::Core_Material& pMaterial, glm::mat4 const* p_modelMatrix);
+		void DrawMesh(Render::Render_Mesh& pMesh, Core::Core_Material& pMaterial, glm::mat4 const* pModelMatrix);
 
-		void RegisterModelMatrixSender(std::function<void(glm::mat4)> p_modelMatrixSender);
+		void RegisterModelMatrixSender(std::function<void(glm::mat4)> pModelMatrixSender);
 
-		void RegisterUserMatrixSender(std::function<void(glm::mat4)> p_userMatrixSender);
+		void RegisterUserMatrixSender(std::function<void(glm::mat4)> pUserMatrixSender);
 
 	private:
-		std::function<void(glm::mat4)> m_modelMatrixSender;
-		std::function<void(glm::mat4)> m_userMatrixSender;
-		Render::Render_Texture* m_emptyTexture{ nullptr };
+		std::function<void(glm::mat4)> mModelMatrixSender;
+		std::function<void(glm::mat4)> mUserMatrixSender;
+		Render::Render_Texture* mEmptyTexture{ nullptr };
 	};
 }
 

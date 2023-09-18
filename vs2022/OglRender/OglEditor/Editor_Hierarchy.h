@@ -16,9 +16,9 @@ namespace Editor
 	public:
 		Editor_Hierarchy
 		(
-			const std::string& p_title,
-			bool p_opened,
-			const UI::UI_PanelWindowSettings& p_windowSettings
+			const std::string& pTitle,
+			bool pOpened,
+			const UI::UI_PanelWindowSettings& pWindowSettings
 		);
 
 		void Clear();

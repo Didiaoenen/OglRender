@@ -56,20 +56,20 @@ bool Maths::Maths_FTransform::HasParent() const
 	return m_parent != nullptr;
 }
 
-void Maths::Maths_FTransform::GenerateMatricesWorld(glm::vec3 p_position, glm::quat pRotation, glm::vec3 pScale)
+void Maths::Maths_FTransform::GenerateMatricesWorld(glm::vec3 pPosition, glm::quat pRotation, glm::vec3 pScale)
 {
-	m_localMatrix = glm::translate(glm::identity<glm::mat4>(), p_position) * glm::mat4(glm::normalize(pRotation)) * glm::scale(glm::identity<glm::mat4>(), pScale);
-	m_localPosition = p_position;
+	m_localMatrix = glm::translate(glm::identity<glm::mat4>(), pPosition) * glm::mat4(glm::normalize(pRotation)) * glm::scale(glm::identity<glm::mat4>(), pScale);
+	m_localPosition = pPosition;
 	m_localRotation = pRotation;
 	m_localScale = pScale;
 
 	UpdateWorldMatrix();
 }
 
-void Maths::Maths_FTransform::GenerateMatricesLocal(glm::vec3 p_position, glm::quat pRotation, glm::vec3 pScale)
+void Maths::Maths_FTransform::GenerateMatricesLocal(glm::vec3 pPosition, glm::quat pRotation, glm::vec3 pScale)
 {
-	m_worldMatrix = glm::translate(glm::identity<glm::mat4>(), p_position) * glm::mat4(glm::normalize(pRotation)) * glm::scale(glm::identity<glm::mat4>(), pScale);
-	m_worldPosition = p_position;
+	m_worldMatrix = glm::translate(glm::identity<glm::mat4>(), pPosition) * glm::mat4(glm::normalize(pRotation)) * glm::scale(glm::identity<glm::mat4>(), pScale);
+	m_worldPosition = pPosition;
 	m_worldRotation = pRotation;
 	m_worldScale = pScale;
 

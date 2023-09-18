@@ -23,9 +23,9 @@ namespace Maths
 
 		bool HasParent() const;
 
-		void GenerateMatricesWorld(glm::vec3 p_position, glm::quat pRotation, glm::vec3 pScale);
+		void GenerateMatricesWorld(glm::vec3 pPosition, glm::quat pRotation, glm::vec3 pScale);
 
-		void GenerateMatricesLocal(glm::vec3 p_position, glm::quat pRotation, glm::vec3 pScale);
+		void GenerateMatricesLocal(glm::vec3 pPosition, glm::quat pRotation, glm::vec3 pScale);
 
 		void UpdateWorldMatrix();
 

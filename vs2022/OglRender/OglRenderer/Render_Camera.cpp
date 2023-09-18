@@ -12,10 +12,10 @@ Render::Render_Camera::Render_Camera() :
 {
 }
 
-void Render::Render_Camera::CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const glm::vec3& p_position, const glm::quat& pRotation)
+void Render::Render_Camera::CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const glm::vec3& pPosition, const glm::quat& pRotation)
 {
 	CacheProjectionMatrix(p_windowWidth, p_windowHeight);
-	CacheViewMatrix(p_position, pRotation);
+	CacheViewMatrix(pPosition, pRotation);
 	CacheFrustum(m_viewMatrix, m_projectionMatrix);
 }
 
@@ -24,9 +24,9 @@ void Render::Render_Camera::CacheProjectionMatrix(uint16_t p_windowWidth, uint16
 	m_projectionMatrix = CalculateProjectionMatrix(p_windowWidth, p_windowHeight);
 }
 
-void Render::Render_Camera::CacheViewMatrix(const glm::vec3& p_position, const glm::quat& pRotation)
+void Render::Render_Camera::CacheViewMatrix(const glm::vec3& pPosition, const glm::quat& pRotation)
 {
-	m_viewMatrix = CalculateViewMatrix(p_position, pRotation);
+	m_viewMatrix = CalculateViewMatrix(pPosition, pRotation);
 }
 
 void Render::Render_Camera::CacheFrustum(const glm::mat4& p_view, const glm::mat4& p_projection)
@@ -146,10 +146,10 @@ glm::mat4 Render::Render_Camera::CalculateProjectionMatrix(uint16_t p_windowWidt
 	}
 }
 
-glm::mat4 Render::Render_Camera::CalculateViewMatrix(const glm::vec3& p_position, const glm::quat& pRotation) const
+glm::mat4 Render::Render_Camera::CalculateViewMatrix(const glm::vec3& pPosition, const glm::quat& pRotation) const
 {
 	const auto& up = pRotation * glm::vec3(0.f, 1.f, 0.f);
 	const auto& forward = pRotation * glm::vec3(0.f, 0.f, -1.f);
-	return glm::lookAt(p_position, p_position + forward, up);
+	return glm::lookAt(pPosition, pPosition + forward, up);
 }
 

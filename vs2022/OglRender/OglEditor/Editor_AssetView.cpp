@@ -6,14 +6,14 @@
 #include "Editor_EditorActions.h"
 #include "Editor_AssetView.h"
 
-Editor::Editor_AssetView::Editor_AssetView(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
-	Editor_AViewControllable(p_title, p_opened, p_windowSettings)
+Editor::Editor_AssetView::Editor_AssetView(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
+	Editor_AViewControllable(pTitle, pOpened, pWindowSettings)
 {
 	mCamera.SetClearColor({ 0.098f, 0.098f, 0.098f });
 	mCamera.SetFar(5000.0f);
 
 	m_resource = static_cast<Render::Render_Model*>(nullptr);
-	m_image->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this](auto p_data)
+	mImage->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this](auto p_data)
 		{
 			std::string path = p_data.first;
 
@@ -48,7 +48,7 @@ void Editor::Editor_AssetView::_Render_Impl()
 
 	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
 
-	m_fbo.Bind();
+	mFbo.Bind();
 
 	baseRenderer.SetStencilMask(0xFF);
 	baseRenderer.Clear(mCamera);
@@ -57,7 +57,7 @@ void Editor::Editor_AssetView::_Render_Impl()
 	uint8_t glState = baseRenderer.FetchGLState();
 	baseRenderer.ApplyStateMask(glState);
 
-	mEditorRenderer.RenderGrid(m_cameraPosition, m_gridColor);
+	mEditorRenderer.RenderGrid(mCameraPosition, mGridColor);
 
 	if (auto pval = std::get_if<Render::Render_Model*>(&m_resource); pval && *pval)
 	{
@@ -76,7 +76,7 @@ void Editor::Editor_AssetView::_Render_Impl()
 
 	baseRenderer.ApplyStateMask(glState);
 
-	m_fbo.Unbind();
+	mFbo.Unbind();
 }
 
 void Editor::Editor_AssetView::SetResource(ViewableResource p_resource)

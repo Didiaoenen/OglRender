@@ -29,7 +29,7 @@ namespace Render
 			uint64_t polyCount = 0;
 		};
 
-		Render_Renderer(Render_Driver& p_driver);
+		Render_Renderer(Render_Driver& pDriver);
 
 		~Render_Renderer() = default;
 
@@ -37,7 +37,7 @@ namespace Render
 
 		void Clear(bool p_colorBuffer = true, bool p_depthBuffer = true, bool p_stencilBuffer = true);
 
-		void Clear(Render_Camera& p_camera, bool p_colorBuffer = true, bool p_depthBuffer = true, bool p_stencilBuffer = true);
+		void Clear(Render_Camera& pCamera, bool p_colorBuffer = true, bool p_depthBuffer = true, bool p_stencilBuffer = true);
 
 		void SetRasterizationLinesWidth(float p_width);
 
@@ -93,14 +93,14 @@ namespace Render
 
 		void ClearFrameInfo();
 
-		void Draw(Render_IMesh& p_mesh, EPrimitiveMode p_primitiveMode = EPrimitiveMode::TRIANGLES, uint32_t p_instances = 1);
+		void Draw(Render_IMesh& pMesh, EPrimitiveMode p_primitiveMode = EPrimitiveMode::TRIANGLES, uint32_t p_instances = 1);
 
 		std::vector<std::reference_wrapper<Render_Mesh>> GetMeshesInFrustum
 		(
 			const Render_Model& pModel,
 			const Render_BoundingSphere& p_modelBoundingSphere,
 			const Maths::Maths_FTransform& p_modelTransform,
-			const Render_Frustum& p_frustum,
+			const Render_Frustum& pFrustum,
 			ECullingOptions p_cullingOptions
 		);
 

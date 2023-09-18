@@ -9,8 +9,8 @@
 
 #include "Editor_Console.h"
 
-Editor::Editor_Console::Editor_Console(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
-	UI::UI_PanelWindow(p_title, p_opened, p_windowSettings)
+Editor::Editor_Console::Editor_Console(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
+	UI::UI_PanelWindow(pTitle, pOpened, pWindowSettings)
 {
 	SetIcon(ICON_MDI_VIEW_LIST " ");
 

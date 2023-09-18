@@ -13,9 +13,9 @@ namespace Editor
 	public:
 		Editor_GameView
 		(
-			const std::string& p_title,
-			bool p_opened,
-			const UI::UI_PanelWindowSettings& p_windowSettings
+			const std::string& pTitle,
+			bool pOpened,
+			const UI::UI_PanelWindowSettings& pWindowSettings
 		);
 
 		virtual void Update(float pDeltaTime) override;
@@ -27,8 +27,8 @@ namespace Editor
 		std::optional<Render::Render_Frustum> GetActiveFrustum() const;
 
 	private:
-		Core::Core_SceneManager& m_sceneManager;
-		bool m_hasCamera = false;
+		Core::Core_SceneManager& mSceneManager;
+		bool mHasCamera = false;
 	};
 }
 

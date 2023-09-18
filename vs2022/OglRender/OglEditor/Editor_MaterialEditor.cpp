@@ -89,8 +89,8 @@ void DrawHybridVec4(UI::UI_WidgetContainer& p_root, const std::string& p_name, g
 }
 
 
-Editor::Editor_MaterialEditor::Editor_MaterialEditor(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
-	UI::UI_PanelWindow(p_title, p_opened, p_windowSettings)
+Editor::Editor_MaterialEditor::Editor_MaterialEditor(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
+	UI::UI_PanelWindow(pTitle, pOpened, pWindowSettings)
 {
 	CreateHeaderButtons();
 	CreateWidget<UI::UI_Separator>();

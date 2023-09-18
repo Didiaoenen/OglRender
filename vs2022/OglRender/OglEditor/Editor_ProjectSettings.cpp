@@ -10,8 +10,8 @@
 #include "Editor_EditorActions.h"
 #include "Editor_ProjectSettings.h"
 
-Editor::Editor_ProjectSettings::Editor_ProjectSettings(const std::string& p_title, bool p_opened, const UI::UI_PanelWindowSettings& p_windowSettings) :
-	UI_PanelWindow(p_title, p_opened, p_windowSettings), m_projectFile(EDITOR_CONTEXT(projectSettings))
+Editor::Editor_ProjectSettings::Editor_ProjectSettings(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
+	UI_PanelWindow(pTitle, pOpened, pWindowSettings), m_projectFile(EDITOR_CONTEXT(projectSettings))
 {
 	auto& saveButton = CreateWidget<UI::UI_Button>("Apply");
 	saveButton.mIdleBackgroundColor = { 0.0f, 0.5f, 0.0f, 1.f };

@@ -37,17 +37,18 @@ void UI::UI_UIManager::ApplyStyle(EStyle pStyle)
 
     if (pStyle == EStyle::DUNE_DARK)
     {
-        style->WindowPadding = ImVec2(15, 15);
+        style->WindowPadding = ImVec2(5, 5);
         style->WindowRounding = 5.0f;
         style->FramePadding = ImVec2(5, 5);
         style->FrameRounding = 4.0f;
-        style->ItemSpacing = ImVec2(12, 8);
+        style->ItemSpacing = ImVec2(8, 8);
         style->ItemInnerSpacing = ImVec2(8, 6);
         style->IndentSpacing = 25.0f;
         style->ScrollbarSize = 15.0f;
         style->ScrollbarRounding = 9.0f;
         style->GrabMinSize = 5.0f;
         style->GrabRounding = 3.0f;
+        style->PopupRounding = 5.0f;
 
         style->WindowMenuButtonPosition = ImGuiDir_None;
 
@@ -97,7 +98,7 @@ void UI::UI_UIManager::ApplyStyle(EStyle pStyle)
     {
         ImGui::StyleColorsDark();
 
-        style->WindowPadding = ImVec2(15, 15);
+        style->WindowPadding = ImVec2(5, 5);
         style->WindowRounding = 5.0f;
         style->FramePadding = ImVec2(5, 5);
         style->FrameRounding = 4.0f;
@@ -109,6 +110,7 @@ void UI::UI_UIManager::ApplyStyle(EStyle pStyle)
         style->GrabMinSize = 5.0f;
         style->GrabRounding = 3.0f;
         style->TabRounding = 5.0f;
+        style->PopupRounding = 5.0f;
 
         style->WindowMenuButtonPosition = ImGuiDir_None;
 
@@ -169,8 +171,8 @@ void UI::UI_UIManager::ApplyStyle(EStyle pStyle)
     }
     else if (pStyle == EStyle::ALTERNATIVE_DARK)
     {
-        style->WindowPadding = ImVec2(15, 15);
-        style->WindowRounding = 0.0f;
+        style->WindowPadding = ImVec2(5, 5);
+        style->WindowRounding = 5.0f;
         style->FramePadding = ImVec2(5, 5);
         style->FrameRounding = 0.0f;
         style->ItemSpacing = ImVec2(12, 8);
@@ -182,7 +184,7 @@ void UI::UI_UIManager::ApplyStyle(EStyle pStyle)
         style->GrabRounding = 0.0f;
         style->TabRounding = 0.0f;
         style->ChildRounding = 0.0f;
-        style->PopupRounding = 0.0f;
+        style->PopupRounding = 5.0f;
 
         style->WindowBorderSize = 1.0f;
         style->FrameBorderSize = 0.0f;
