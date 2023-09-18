@@ -16,6 +16,8 @@
 #include <OglUI/imgui.h>
 #include <OglUI/imgui_internal.h>
 
+#include <OglUI/UI_PanelSideBar.h>
+
 #include "Editor_Editor.h"
 
 Editor::Editor_Editor::Editor_Editor(Editor_Context& pContext) :
@@ -42,6 +44,7 @@ void Editor::Editor_Editor::SetupUI()
 	settings.dockable = true;
 
 	mPanelsManager.CreatePanel<Editor_MenuBar>("Menu Bar");
+	mPanelsManager.CreatePanel<Editor_Toolbar>("Second Bar");
 	mPanelsManager.CreatePanel<Editor_AssetBrowser>("Assets", true, settings, mContext.mEngineAssetsPath, mContext.mProjectAssetsPath, mContext.mProjectScriptsPath);
 	mPanelsManager.CreatePanel<Editor_HardwareInfo>("Hardware Info", false, settings, 0.2f, 50);
 	mPanelsManager.CreatePanel<Editor_Profiler>("Profiler", true, settings, 0.25f);
@@ -51,7 +54,6 @@ void Editor::Editor_Editor::SetupUI()
 	mPanelsManager.CreatePanel<Editor_SceneView>("Scene", true, settings);
 	mPanelsManager.CreatePanel<Editor_GameView>("Game", true, settings);
 	mPanelsManager.CreatePanel<Editor_AssetView>("Asset", false, settings);
-	mPanelsManager.CreatePanel<Editor_Toolbar>("Toolbar", true, settings);
 	mPanelsManager.CreatePanel<Editor_MaterialEditor>("Material Editor", false, settings);
 	mPanelsManager.CreatePanel<Editor_ProjectSettings>("Project Settings", false, settings);
 	mPanelsManager.CreatePanel<Editor_AssetProperties>("Asset Properties", false, settings);

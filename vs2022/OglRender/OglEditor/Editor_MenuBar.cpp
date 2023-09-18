@@ -7,6 +7,7 @@
 #include <OglCore/Core_CDirectionalLight.h>
 #include <OglCore/Core_CAmbientSphereLight.h>
 
+#include <OglUI/UI_Button.h>
 #include <OglUI/UI_Separator.h>
 #include <OglUI/UI_SliderInt.h>
 #include <OglUI/UI_DragFloat.h>

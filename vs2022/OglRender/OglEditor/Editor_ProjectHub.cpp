@@ -301,7 +301,7 @@ void Editor::Editor_ProjectHub::SetupContext()
 	mRenderer = std::make_unique<Render::Render_Renderer>(*mDriver);
 	mRenderer->SetCapability(Render::ERenderingCapability::MULTISAMPLE, true);
 
-	mUIManager = std::make_unique<UI::UI_UIManager>(mWindow->GetGlfwWindow(), UI::EStyle::UUNITY_DARK);
+	mUIManager = std::make_unique<UI::UI_UIManager>(mWindow->GetGlfwWindow(), UI::EStyle::UNITY_DARK);
 	mUIManager->LoadFont("Ruda_Big", "Data\\Editor\\Fonts\\Ruda-Bold.ttf", 18);
 	mUIManager->UseFont("Ruda_Big");
 	mUIManager->EnableEditorLayoutSave(false);

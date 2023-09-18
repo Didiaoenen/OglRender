@@ -190,6 +190,7 @@
     <ClInclude Include="UI_InputSingleScalar.h" />
     <ClInclude Include="UI_InputText.h" />
     <ClInclude Include="UI_IPlugin.h" />
+    <ClInclude Include="UI_PanelSideBar.h" />
     <ClInclude Include="UI_UIManager.h" />
     <ClInclude Include="UI_MenuItem.h" />
     <ClInclude Include="UI_MenuList.h" />
@@ -266,6 +267,7 @@
     <ClCompile Include="UI_MenuList.cpp" />
     <ClCompile Include="UI_NewLine.cpp" />
     <ClCompile Include="UI_PanelMenuBar.cpp" />
+    <ClCompile Include="UI_PanelSideBar.cpp" />
     <ClCompile Include="UI_PanelUndecorated.cpp" />
     <ClCompile Include="UI_PanelWindow.cpp" />
     <ClCompile Include="UI_PlotHistogram.cpp" />

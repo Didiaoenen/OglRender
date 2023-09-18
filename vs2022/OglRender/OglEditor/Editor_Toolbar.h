@@ -1,27 +1,21 @@
 #pragma once
 
+#include <OglUI/UI_Button.h>
 #include <OglUI/UI_ButtonImage.h>
-#include <OglUI/UI_PanelWindow.h>
+#include <OglUI/UI_PanelSideBar.h>
 
 namespace Editor
 {
-	class Editor_Toolbar : public UI::UI_PanelWindow
+	class Editor_Toolbar : public UI::UI_PanelSideBar
 	{
 	public:
-		Editor_Toolbar
-		(
-			const std::string& p_title,
-			bool p_opened,
-			const UI::UI_PanelWindowSettings& p_windowSettings
-		);
-
-		void _Draw_Impl() override;
+		Editor_Toolbar();
 
 	private:
-		UI::UI_ButtonImage* m_playButton;
-		UI::UI_ButtonImage* m_pauseButton;
-		UI::UI_ButtonImage* m_stopButton;
-		UI::UI_ButtonImage* m_nextButton;
+		UI::UI_Button* m_playButton;
+		UI::UI_Button* m_pauseButton;
+		UI::UI_Button* m_stopButton;
+		UI::UI_Button* m_nextButton;
 	};
 }
 

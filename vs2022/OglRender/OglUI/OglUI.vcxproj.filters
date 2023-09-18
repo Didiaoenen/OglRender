@@ -414,6 +414,9 @@
     <ClInclude Include="IconsMaterialDesignIcons.h">
       <Filter>头文件\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="UI_PanelSideBar.h">
+      <Filter>头文件\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI_AWidget.cpp">
@@ -598,6 +601,9 @@
     </ClCompile>
     <ClCompile Include="imgui_tables.cpp">
       <Filter>源文件\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_PanelSideBar.cpp">
+      <Filter>源文件\Panels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
