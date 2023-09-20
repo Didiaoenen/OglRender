@@ -2,8 +2,12 @@
 
 using namespace OGL;
 
+#include "tracy/tracy/Tracy.hpp"
+
 void OGL_Bone::Tick(float dt)
 {
+	 ZoneScoped;
+
 	glm::mat4 translation = InterpolatePosition(dt);
 	glm::mat4 rotation = InterpolateRotation(dt);
 	glm::mat4 scale = InterpolateScaling(dt);
@@ -24,6 +28,8 @@ int OGL_Bone::GetPositionIndex(float animationTime)
 
 glm::mat4 OGL_Bone::InterpolatePosition(float animationTime)
 {
+	//ZoneScoped;
+
 	if (1 == mNumPositions)
 	{
 		return glm::translate(glm::mat4(1.0f), mPositions[0].position);
@@ -49,6 +55,8 @@ int OGL_Bone::GetRotationIndex(float animationTime)
 
 glm::mat4 OGL::OGL_Bone::InterpolateRotation(float animationTime)
 {
+	//ZoneScoped;
+
 	if (1 == mNumRotations)
 	{
 		auto rotation = glm::normalize(mRotations[0].orientation);
@@ -76,6 +84,8 @@ int OGL_Bone::GetScaleIndex(float animationTime)
 
 glm::mat4 OGL_Bone::InterpolateScaling(float animationTime)
 {
+	//ZoneScoped;
+
 	if (1 == mNumScalings)
 	{
 		return glm::scale(glm::mat4(1.0f), mScales[0].scale);

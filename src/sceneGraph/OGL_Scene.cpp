@@ -4,6 +4,8 @@
 #include "sceneGraph/OGL_Component.h"
 #include "OGL_Scene.h"
 
+#include "tracy/tracy/Tracy.hpp"
+
 using namespace OGL;
 
 Ref<OGL_Entity> OGL_Scene::CreateEntity(const std::string& name)
@@ -27,6 +29,8 @@ Ref<OGL_Entity> OGL_Scene::GetEntity(const std::string& name)
 
 void OGL_Scene::Tick(double dt)
 {
+    ZoneScoped;
+
     auto view = mRegistry.view<OGL_Animator>();
     for (auto& entity : view)
     {

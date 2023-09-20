@@ -16,6 +16,9 @@
 #include "platform/windows/OGL_Application.h"
 #include "OGL_GraphicsManager.h"
 
+#include "tracy/tracy/Tracy.hpp"
+#include "tracy/tracy/TracyOpenGL.hpp"
+
 using namespace OGL;
 
 OGL_GraphicsManager::OGL_GraphicsManager() 
@@ -52,6 +55,10 @@ void OGL_GraphicsManager::Finalize()
 
 void OGL_GraphicsManager::Tick(double dt)
 {
+    ZoneScoped;
+
+    TracyGpuZone("OGL_GraphicsManager::Tick");
+
     auto app = static_cast<OGL_BaseApplication*>(mApp);
     auto sceneManager = app->GetModule<OGL_SceneManager>();
 
@@ -82,6 +89,10 @@ void OGL_GraphicsManager::Tick(double dt)
 
 void OGL_GraphicsManager::Draw()
 {
+    ZoneScoped;
+
+    TracyGpuZone("OGL_GraphicsManager::Draw");
+
     auto& frame = mFrames[mFrameIndex];
 
     for (auto& pDispatchPass : mDispatchPasses) 
@@ -327,6 +338,10 @@ void OGL_GraphicsManager::CalculateLights()
 
 void OGL_GraphicsManager::UpdateConstants(double dt)
 {
+    ZoneScoped;
+
+    TracyGpuZone("OGL_GraphicsManager::UpdateConstants");
+
     auto& frame = mFrames[mFrameIndex];
 
     for (auto& dbc : frame.batchContexts) 

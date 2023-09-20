@@ -4,6 +4,8 @@
 #include "interface/OGL_IApplication.h"
 #include "OGL_OpenGLGraphicsManager.h"
 
+#include "tracy/tracy/Tracy.hpp"
+
 using namespace OGL;
 
 bool OGL_OpenGLGraphicsManager::Initialize()
@@ -45,6 +47,8 @@ void OGL_OpenGLGraphicsManager::CreateTextureView(Texture2D& textureView, const 
 
 void OGL_OpenGLGraphicsManager::BeginPass(Frame& frame)
 {
+    // ZoneScoped;
+
     if (frame.renderToTexture && false)
     {
         GLuint framebuffer;
@@ -96,6 +100,8 @@ void OGL_OpenGLGraphicsManager::BeginPass(Frame& frame)
 
 void OGL::OGL_OpenGLGraphicsManager::EndPass(Frame& frame)
 {
+    // ZoneScoped;
+
     if (frame.renderToTexture)
     {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

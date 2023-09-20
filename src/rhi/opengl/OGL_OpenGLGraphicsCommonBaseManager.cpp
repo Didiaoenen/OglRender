@@ -13,15 +13,26 @@
 #include "rhi/opengl/OGL_OpenGLPipelineStateManager.h"
 #include "OGL_OpenGLGraphicsCommonBaseManager.h"
 
+#include "tracy/tracy/Tracy.hpp"
+#include "tracy/tracy/TracyOpenGL.hpp"
+
 using namespace OGL;
 
 void OGL_OpenGLGraphicsCommonBaseManager::Present()
 {
-	glFlush();
+	ZoneScoped;
+
+	TracyGpuZone("OGL_OpenGLGraphicsCommonBaseManager::Present");
+
+	//glFlush();
 }
 
 void OGL_OpenGLGraphicsCommonBaseManager::SetPipelineState(const Ref<OGL_PipelineState>& pipelineState, const Frame& frame)
 {
+	 ZoneScoped;
+
+	 TracyGpuZone("OGL_OpenGLGraphicsCommonBaseManager::SetPipelineState");
+
 	auto pPipelineState = dynamic_pointer_cast<const OGL_OpenGLPipelineState>(pipelineState);
 	mCurrentShader = pPipelineState->shaderProgram;
 	glUseProgram(mCurrentShader);
@@ -119,6 +130,10 @@ void OGL_OpenGLGraphicsCommonBaseManager::SetPipelineState(const Ref<OGL_Pipelin
 
 void OGL_OpenGLGraphicsCommonBaseManager::DrawBatch(const Frame& frame)
 {
+	 ZoneScoped;
+
+	 TracyGpuZone("OGL_OpenGLGraphicsCommonBaseManager::DrawBatch");
+
 	for (auto& pDbc : frame.batchContexts)
 	{
 		SetPerBatchConstants(*pDbc);
@@ -147,6 +162,8 @@ void OGL_OpenGLGraphicsCommonBaseManager::DrawBatch(const Frame& frame)
 
 void OGL_OpenGLGraphicsCommonBaseManager::GenerateTexture(Texture2D& texture)
 {
+	 //ZoneScoped;
+
 	GLenum format, internalFormat, type;
 	GetOpenGLTextureFormat(texture.pixelFormat, format, internalFormat, type);
 
@@ -225,6 +242,8 @@ void OGL_OpenGLGraphicsCommonBaseManager::MSAAResolve(std::optional<std::referen
 
 void OGL_OpenGLGraphicsCommonBaseManager::EndScene()
 {
+	 //ZoneScoped;
+
 	for (int i = 0; i < mFrames.size(); i++) 
 	{
 		auto& batchContexts = mFrames[i].batchContexts;
@@ -278,6 +297,10 @@ void OGL_OpenGLGraphicsCommonBaseManager::EndScene()
 
 void OGL_OpenGLGraphicsCommonBaseManager::BeginFrame(Frame& frame)
 {
+	ZoneScoped;
+
+	TracyGpuZone("OGL_OpenGLGraphicsCommonBaseManager::BeginFrame");
+
 	OGL_GraphicsManager::BeginFrame(frame);
 
 	SetPerFrameConstants(frame.frameContext);
@@ -286,6 +309,10 @@ void OGL_OpenGLGraphicsCommonBaseManager::BeginFrame(Frame& frame)
 
 void OGL_OpenGLGraphicsCommonBaseManager::EndFrame(Frame& frame)
 {
+	ZoneScoped;
+
+	TracyGpuZone("OGL_OpenGLGraphicsCommonBaseManager::EndFrame");
+
 	mFrameIndex = (mFrameIndex + 1) % OGL_GfxConfiguration::kMaxInFlightFrameCount;
 	
 	OGL_GraphicsManager::EndFrame(frame);
@@ -293,6 +320,8 @@ void OGL_OpenGLGraphicsCommonBaseManager::EndFrame(Frame& frame)
 
 void OGL_OpenGLGraphicsCommonBaseManager::InitializeGeometries(const OGL_Scene& scene)
 {
+	// ZoneScoped;
+
 	uint32_t batchIndex = 0;
 
 	for (const auto& [_, oglEntity] : scene.mEntitys)
@@ -489,6 +518,8 @@ void OGL_OpenGLGraphicsCommonBaseManager::SetPerFrameConstants(const DrawFrameCo
 
 void OGL_OpenGLGraphicsCommonBaseManager::SetPerBatchConstants(const DrawBatchContext& context)
 {
+	// ZoneScoped;
+
 	if (!mUBODrawBatchConstant[mFrameIndex]) 
 	{
 		glGenBuffers(1, &mUBODrawBatchConstant[mFrameIndex]);
@@ -505,6 +536,8 @@ void OGL_OpenGLGraphicsCommonBaseManager::SetPerBatchConstants(const DrawBatchCo
 
 void OGL_OpenGLGraphicsCommonBaseManager::SetLightInfo(const LightInfo& lightInfo)
 {
+	// ZoneScoped;
+
 	if (!mUBOLightInfo[mFrameIndex]) 
 	{
 		glGenBuffers(1, &mUBOLightInfo[mFrameIndex]);

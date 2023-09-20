@@ -6,6 +6,9 @@
 #include "sceneGraph/OGL_MeshRenderer.h"
 #include "OGL_Animator.h"
 
+#include "tracy/tracy/Tracy.hpp"
+#include "tracy/tracy/TracyOpenGL.hpp"
+
 using namespace OGL;
 
 OGL_Animator::OGL_Animator()
@@ -37,6 +40,8 @@ bool OGL_Animator::Init()
 
 void OGL_Animator::Tick(double dt)
 {
+	//ZoneScoped;
+
 	mDeltaTime = dt;
 	if (mCurrentAnimation)
 	{
@@ -56,6 +61,8 @@ void OGL_Animator::PlayAnimation(Ref<OGL_Animation> animation)
 
 void OGL_Animator::CalculateBoneTransform(const BoneNode& node, glm::mat4 parentTransform)
 {
+	 ZoneScoped;
+
 	std::string nodeName = node.name;
 	glm::mat4 nodeTransform = node.transformation;
 

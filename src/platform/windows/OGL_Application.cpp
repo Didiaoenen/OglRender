@@ -9,6 +9,9 @@
 #include "sceneGraph/OGL_EditorCamera.h"
 #include "OGL_Application.h"
 
+#include "tracy/tracy/Tracy.hpp"
+#include "tracy/tracy/TracyOpenGL.hpp"
+
 using namespace OGL;
 
 OGL_Application* OGL_Application::mApp = nullptr;
@@ -107,6 +110,8 @@ OGL_Application::OGL_Application()
 		return;
 	}
 
+	TracyGpuContext;
+
 	mGraphicManager = new OGL_OpenGLGraphicsManager();
 	mPipelineStateManager = new OGL_OpenGLPipelineStateManager();
 
@@ -143,6 +148,8 @@ void OGL_Application::Setup()
 {
 	mApp = this;
 
+	glfwSwapInterval(0);
+
 	//
 	const auto& [path, animations] = modelMap["PC103"];
 	for (const auto& [path, name] : animations)
@@ -154,7 +161,13 @@ void OGL_Application::Setup()
 
 void OGL_Application::Update(double dt)
 {
+	ZoneScoped;
+
+	TracyGpuZone("OGL_Application::Update");
+
 	OGL_BaseApplication::Tick(dt);
+
+	FrameMark;
 }
 
 void OGL_Application::Input()
@@ -173,12 +186,16 @@ void OGL_Application::Run()
 		mDT = time - mLastTime;
 		mLastTime = time;
 
+		//std::cout << mDT << std::endl;
+
 		ProcessInput(mWindow);
 
 		Update(mDT);
 
 		glfwSwapBuffers(mWindow);
 		glfwPollEvents();
+
+		TracyGpuCollect;
 
 		running = !glfwWindowShouldClose(mWindow);
 	} while (running);
@@ -224,6 +241,8 @@ void* OGL_Application::GetMainWindowHandler()
 
 void OGL_Application::ProcessInput(GLFWwindow* window)
 {
+	ZoneScoped;
+
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		//glfwSetWindowShouldClose(window, true);

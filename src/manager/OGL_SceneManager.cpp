@@ -23,6 +23,8 @@
 #include "sceneGraph/OGL_MeshRenderer.h"
 #include "OGL_SceneManager.h"
 
+#include "tracy/tracy/Tracy.hpp"
+
 using namespace OGL;
 
 bool OGL_SceneManager::Initialize()
@@ -36,6 +38,8 @@ void OGL_SceneManager::Finalize()
 
 void OGL_SceneManager::Tick(double dt)
 {
+	ZoneScoped;
+
 	const auto& scene = mScenes.top();
 	if (scene)
 	{
