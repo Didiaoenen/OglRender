@@ -28,13 +28,13 @@ namespace Render
 		void ComputeBoundingSphere();
 
 	public:
-		const std::string path;
+		const std::string mPath;
 
 	private:
-		std::vector<Render_Mesh*> m_meshes;
+		std::vector<Render_Mesh*> mMeshes;
 		std::vector<std::string> mMaterialNames;
 
-		Render_BoundingSphere m_boundingSphere;
+		Render_BoundingSphere mBoundingSphere;
 	};
 }
 

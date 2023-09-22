@@ -6,7 +6,7 @@
 #include "Editor_GameView.h"
 
 Editor::Editor_GameView::Editor_GameView(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
-	Editor_AView(pTitle, pOpened, pWindowSettings), mSceneManager(EDITOR_CONTEXT(sceneManager))
+	Editor_AView(pTitle, pOpened, pWindowSettings), mSceneManager(EDITOR_CONTEXT(mSceneManager))
 {
 	SetIcon(ICON_MDI_GAMEPAD_VARIANT " ");
 }
@@ -15,11 +15,11 @@ void Editor::Editor_GameView::Update(float pDeltaTime)
 {
 	Editor_AView::Update(pDeltaTime);
 
-	auto currentScene = EDITOR_CONTEXT(sceneManager).GetCurrentScene();
+	auto currentScene = EDITOR_CONTEXT(mSceneManager).GetCurrentScene();
 
 	if (currentScene)
 	{
-		auto cameraComponent = EDITOR_CONTEXT(renderer)->FindMainCamera(*currentScene);
+		auto cameraComponent = EDITOR_CONTEXT(mRenderer)->FindMainCamera(*currentScene);
 		if (cameraComponent)
 		{
 			mCamera = cameraComponent->GetCamera();
@@ -38,7 +38,7 @@ void Editor::Editor_GameView::Update(float pDeltaTime)
 
 void Editor::Editor_GameView::_Render_Impl()
 {
-	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
+	auto& baseRenderer = *EDITOR_CONTEXT(mRenderer).get();
 	auto& currentScene = *mSceneManager.GetCurrentScene();
 
 	mFbo.Bind();

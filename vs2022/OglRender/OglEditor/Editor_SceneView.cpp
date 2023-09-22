@@ -8,7 +8,7 @@
 #include "Editor_SceneView.h"
 
 Editor::Editor_SceneView::Editor_SceneView(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
-	Editor_AViewControllable(pTitle, pOpened, pWindowSettings, true), mSceneManager(EDITOR_CONTEXT(sceneManager))
+	Editor_AViewControllable(pTitle, pOpened, pWindowSettings, true), mSceneManager(EDITOR_CONTEXT(mSceneManager))
 {
 	SetIcon(ICON_MDI_GAMEPAD_VARIANT " ");
 
@@ -33,17 +33,17 @@ void Editor::Editor_SceneView::Update(float pDeltaTime)
 
 	if (IsFocused() && !mCameraController.IsRightMousePressed())
 	{
-		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(Window::EKey::KEY_W))
+		if (EDITOR_CONTEXT(mInputManager)->IsKeyPressed(Window::EKey::KEY_W))
 		{
 			mCurrentOperation = Editor::EGizmoOperation::TRANSLATE;
 		}
 
-		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(Window::EKey::KEY_E))
+		if (EDITOR_CONTEXT(mInputManager)->IsKeyPressed(Window::EKey::KEY_E))
 		{
 			mCurrentOperation = Editor::EGizmoOperation::ROTATE;
 		}
 
-		if (EDITOR_CONTEXT(inputManager)->IsKeyPressed(Window::EKey::KEY_R))
+		if (EDITOR_CONTEXT(mInputManager)->IsKeyPressed(Window::EKey::KEY_R))
 		{
 			mCurrentOperation = Editor::EGizmoOperation::SCALE;
 		}
@@ -54,7 +54,7 @@ void Editor::Editor_SceneView::_Render_Impl()
 {
 	PrepareCamera();
 
-	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
+	auto& baseRenderer = *EDITOR_CONTEXT(mRenderer).get();
 
 	uint8_t glState = baseRenderer.FetchGLState();
 	baseRenderer.ApplyStateMask(glState);
@@ -66,7 +66,7 @@ void Editor::Editor_SceneView::_Render_Impl()
 
 void Editor::Editor_SceneView::RenderScene(uint8_t pDefaultRenderState)
 {
-	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
+	auto& baseRenderer = *EDITOR_CONTEXT(mRenderer).get();
 	auto& currentScene = *mSceneManager.GetCurrentScene();
 	auto& gameView = EDITOR_PANEL(Editor::Editor_GameView, "Game");
 
@@ -138,7 +138,7 @@ void Editor::Editor_SceneView::RenderScene(uint8_t pDefaultRenderState)
 
 void Editor::Editor_SceneView::RenderSceneForActorPicking()
 {
-	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
+	auto& baseRenderer = *EDITOR_CONTEXT(mRenderer).get();
 
 	auto [winWidth, winHeight] = GetSafeSize();
 
@@ -172,9 +172,9 @@ bool IsResizing()
 
 void Editor::Editor_SceneView::HandleActorPicking()
 {
-	auto& inputManager = *EDITOR_CONTEXT(inputManager);
+	auto& mInputManager = *EDITOR_CONTEXT(mInputManager);
 
-	if (inputManager.IsMouseButtonReleased(Window::EMouseButton::MOUSE_BUTTON_LEFT))
+	if (mInputManager.IsMouseButtonReleased(Window::EMouseButton::MOUSE_BUTTON_LEFT))
 	{
 		mGizmoOperations.StopPicking();
 	}
@@ -183,19 +183,20 @@ void Editor::Editor_SceneView::HandleActorPicking()
 	{
 		RenderSceneForActorPicking();
 
-		auto [mouseX, mouseY] = inputManager.GetMousePosition();
+		auto [mouseX, mouseY] = mInputManager.GetMousePosition();
 		mouseX -= mPosition.x;
 		mouseY -= mPosition.y;
 		mouseY = GetSafeSize().second - mouseY + 25;
 
 		mActorPickingFramebuffer.Bind();
 		uint8_t pixel[3];
-		EDITOR_CONTEXT(renderer)->ReadPixels(static_cast<int>(mouseX), static_cast<int>(mouseY), 1, 1, Render::EPixelDataFormat::RGB, Render::EPixelDataType::UNSIGNED_BYTE, pixel);
+		EDITOR_CONTEXT(mRenderer)->ReadPixels(static_cast<int>(mouseX), static_cast<int>(mouseY), 1, 1, Render::EPixelDataFormat::RGB, Render::EPixelDataType::UNSIGNED_BYTE, pixel);
 		mActorPickingFramebuffer.Unbind();
 
 		uint32_t actorID = (0 << 24) | (pixel[2] << 16) | (pixel[1] << 8) | (pixel[0] << 0);
-		auto actorUnderMouse = EDITOR_CONTEXT(sceneManager).GetCurrentScene()->FindActorByID(actorID);
-		auto direction = mGizmoOperations.IsPicking() ? mGizmoOperations.GetDirection() : EDITOR_EXEC(IsAnyActorSelected()) && pixel[0] == 255 && pixel[1] == 255 && pixel[2] >= 252 && pixel[2] <= 254 ? static_cast<Editor_GizmoBehaviour::EDirection>(pixel[2] - 252) : std::optional<Editor_GizmoBehaviour::EDirection>{};
+		auto actorUnderMouse = EDITOR_CONTEXT(mSceneManager).GetCurrentScene()->FindActorByID(actorID);
+		auto direction = mGizmoOperations.IsPicking() ? 
+			mGizmoOperations.GetDirection() : EDITOR_EXEC(IsAnyActorSelected()) && pixel[0] == 255 && pixel[1] == 255 && pixel[2] >= 252 && pixel[2] <= 254 ? static_cast<Editor_GizmoBehaviour::EDirection>(pixel[2] - 252) : std::optional<Editor_GizmoBehaviour::EDirection>{};
 
 		mHighlightedActor = {};
 		mHighlightedGizmoDirection = {};
@@ -213,7 +214,7 @@ void Editor::Editor_SceneView::HandleActorPicking()
 			}
 		}
 
-		if (inputManager.IsMouseButtonPressed(Window::EMouseButton::MOUSE_BUTTON_LEFT) && !mCameraController.IsRightMousePressed())
+		if (mInputManager.IsMouseButtonPressed(Window::EMouseButton::MOUSE_BUTTON_LEFT) && !mCameraController.IsRightMousePressed())
 		{
 			if (direction.has_value())
 			{
@@ -235,7 +236,7 @@ void Editor::Editor_SceneView::HandleActorPicking()
 
 	if (mGizmoOperations.IsPicking())
 	{
-		auto mousePosition = EDITOR_CONTEXT(inputManager)->GetMousePosition();
+		auto mousePosition = EDITOR_CONTEXT(mInputManager)->GetMousePosition();
 
 		auto [winWidth, winHeight] = GetSafeSize();
 

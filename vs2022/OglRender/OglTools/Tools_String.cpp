@@ -1,26 +1,26 @@
 #include "Tools_String.h"
 
-bool Tools::Tools_String::Replace(std::string& p_target, const std::string& pFrom, const std::string& pTo)
+bool Tools::Tools_String::Replace(std::string& pTarget, const std::string& pFrom, const std::string& pTo)
 {
-	size_t start_pos = p_target.find(pFrom);
+	size_t start_pos = pTarget.find(pFrom);
 
 	if (start_pos != std::string::npos)
 	{
-		p_target.replace(start_pos, pFrom.length(), pTo);
+		pTarget.replace(start_pos, pFrom.length(), pTo);
 		return true;
 	}
 
 	return false;
 }
 
-void Tools::Tools_String::ReplaceAll(std::string& p_target, const std::string& pFrom, const std::string& pTo)
+void Tools::Tools_String::ReplaceAll(std::string& pTarget, const std::string& pFrom, const std::string& pTo)
 {
 	if (pFrom.empty()) return;
 
 	size_t start_pos = 0;
-	while ((start_pos = p_target.find(pFrom, start_pos)) != std::string::npos)
+	while ((start_pos = pTarget.find(pFrom, start_pos)) != std::string::npos)
 	{
-		p_target.replace(start_pos, pFrom.length(), pTo);
+		pTarget.replace(start_pos, pFrom.length(), pTo);
 		start_pos += pTo.length();
 	}
 }

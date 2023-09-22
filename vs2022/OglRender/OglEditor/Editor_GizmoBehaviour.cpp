@@ -10,15 +10,15 @@ float SnapValue(float p_value, float p_step)
 
 bool Editor::Editor_GizmoBehaviour::IsSnappedBehaviourEnabled() const
 {
-    const auto& inputManager = EDITOR_CONTEXT(inputManager);
+    const auto& inputManager = EDITOR_CONTEXT(mInputManager);
     return inputManager->GetKeyState(Window::EKey::KEY_LEFT_CONTROL) == Window::EKeyState::KEY_DOWN || inputManager->GetKeyState(Window::EKey::KEY_RIGHT_CONTROL) == Window::EKeyState::KEY_DOWN;
 }
 
-void Editor::Editor_GizmoBehaviour::StartPicking(Core::Core_Actor& p_target, const glm::vec3& pCameraPosition, EGizmoOperation p_operation, EDirection p_direction)
+void Editor::Editor_GizmoBehaviour::StartPicking(Core::Core_Actor& pTarget, const glm::vec3& pCameraPosition, EGizmoOperation p_operation, EDirection p_direction)
 {
-    m_target = &p_target;
-    m_firstMouse = true;
-    m_originalTransform = p_target.transform.GetFTransform();
+    m_target = &pTarget;
+    mFirstMouse = true;
+    m_originalTransform = pTarget.transform.GetFTransform();
     m_distanceToActor = glm::distance(pCameraPosition, m_target->transform.GetWorldPosition());
     mCurrentOperation = p_operation;
     m_direction = p_direction;
@@ -49,10 +49,10 @@ void Editor::Editor_GizmoBehaviour::ApplyOperation(const glm::mat4& p_viewMatrix
 
 void Editor::Editor_GizmoBehaviour::SetCurrentMouse(const glm::vec2& p_mousePosition)
 {
-    if (m_firstMouse)
+    if (mFirstMouse)
     {
         m_currentMouse = m_originMouse = p_mousePosition;
-        m_firstMouse = false;
+        mFirstMouse = false;
     }
     else
     {

@@ -24,7 +24,7 @@ namespace Render
 		~Render_VertexArray();
 
 		template <class T>
-		void BindAttribute(uint32_t p_attribute, Render_VertexBuffer<T>& p_vertexBuffer, EType p_type, uint64_t p_count, uint64_t p_stride, intptr_t p_offset);
+		void BindAttribute(uint32_t pAttribute, Render_VertexBuffer<T>& pVertexBuffer, EType pType, uint64_t pCount, uint64_t pStride, intptr_t pOffset);
 
 		void Bind();
 
@@ -33,7 +33,7 @@ namespace Render
 		GLint GetID();
 
 	private:
-		GLuint m_bufferID;
+		GLuint mBufferID{ 0 };
 	};
 }
 

@@ -7,28 +7,29 @@
 namespace Render
 {
 	template <class T>
-	inline Render_VertexBuffer<T>::Render_VertexBuffer(T* p_data, size_t p_elements)
+	inline Render_VertexBuffer<T>::Render_VertexBuffer(T* pData, size_t pElements)
 	{
-		glGenBuffers(1, &m_bufferID);
-		glBindBuffer(GL_ARRAY_BUFFER, m_bufferID);
-		glBufferData(GL_ARRAY_BUFFER, p_elements * sizeof(T), p_data, GL_STATIC_DRAW);
+		glGenBuffers(1, &mBufferID);
+		glBindBuffer(GL_ARRAY_BUFFER, mBufferID);
+		glBufferData(GL_ARRAY_BUFFER, pElements * sizeof(T), pData, GL_STATIC_DRAW);
 	}
 
 	template<class T>
-	inline Render_VertexBuffer<T>::Render_VertexBuffer(std::vector<T>& p_data) : Render_VertexBuffer(p_data.data(), p_data.size())
+	inline Render_VertexBuffer<T>::Render_VertexBuffer(std::vector<T>& pData) : 
+		Render_VertexBuffer(pData.data(), pData.size())
 	{
 	}
 
 	template<class T>
 	inline Render_VertexBuffer<T>::~Render_VertexBuffer()
 	{
-		glDeleteBuffers(1, &m_bufferID);
+		glDeleteBuffers(1, &mBufferID);
 	}
 
 	template <class T>
 	inline void Render_VertexBuffer<T>::Bind()
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, m_bufferID);
+		glBindBuffer(GL_ARRAY_BUFFER, mBufferID);
 	}
 
 	template <class T>
@@ -40,6 +41,6 @@ namespace Render
 	template <class T>
 	inline uint32_t Render_VertexBuffer<T>::GetID()
 	{
-		return m_bufferID;
+		return mBufferID;
 	}
 }

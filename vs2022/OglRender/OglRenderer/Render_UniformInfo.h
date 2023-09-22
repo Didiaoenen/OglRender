@@ -9,7 +9,7 @@ namespace Render
 {
 	struct Render_UniformInfo
 	{
-		UniformType		type;
+		EUniformType		type;
 		std::string		name;
 		uint32_t		location;
 		std::any		defaultValue;

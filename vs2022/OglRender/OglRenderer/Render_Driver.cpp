@@ -2,13 +2,13 @@
 
 #include "Render_Driver.h"
 
-Render::Render_Driver::Render_Driver(const Render_DriverSettings& p_driverSettings)
+Render::Render_Driver::Render_Driver(const Render_DriverSettings& pDriverSettings)
 {
 	InitGlew();
 
-	m_isActive = true;
+	mIsActive = true;
 
-	if (p_driverSettings.debugMode)
+	if (pDriverSettings.debugMode)
 	{
 		GLint flags;
 		glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
@@ -27,7 +27,7 @@ Render::Render_Driver::Render_Driver(const Render_DriverSettings& p_driverSettin
 
 bool Render::Render_Driver::IsActive() const
 {
-	return m_isActive;
+	return mIsActive;
 }
 
 void Render::Render_Driver::InitGlew()
@@ -41,43 +41,43 @@ void Render::Render_Driver::InitGlew()
 	}
 }
 
-void Render::Render_Driver::GLDebugMessageCallback(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int32_t length, const char* message, const void* userParam)
+void Render::Render_Driver::GLDebugMessageCallback(uint32_t pSource, uint32_t pType, uint32_t pId, uint32_t pSeverity, int32_t pLength, const char* pMessage, const void* pUserParam)
 {
-	if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
+	if (pId == 131169 || pId == 131185 || pId == 131218 || pId == 131204) return;
 
 	std::string output;
 
 	output += "OpenGL Debug Message:\n";
-	output += "Debug message (" + std::to_string(id) + "): " + message + "\n";
+	output += "Debug message (" + std::to_string(pId) + "): " + pMessage + "\n";
 
-	switch (source)
+	switch (pSource)
 	{
-	case GL_DEBUG_SOURCE_API:				output += "Source: API";				break;
-	case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		output += "Source: Window System";		break;
-	case GL_DEBUG_SOURCE_SHADER_COMPILER:	output += "Source: Shader Compiler";	break;
-	case GL_DEBUG_SOURCE_THIRD_PARTY:		output += "Source: Third Party";		break;
-	case GL_DEBUG_SOURCE_APPLICATION:		output += "Source: Application";		break;
-	case GL_DEBUG_SOURCE_OTHER:				output += "Source: Other";				break;
+		case GL_DEBUG_SOURCE_API:				output += "Source: API";				break;
+		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		output += "Source: Window System";		break;
+		case GL_DEBUG_SOURCE_SHADER_COMPILER:	output += "Source: Shader Compiler";	break;
+		case GL_DEBUG_SOURCE_THIRD_PARTY:		output += "Source: Third Party";		break;
+		case GL_DEBUG_SOURCE_APPLICATION:		output += "Source: Application";		break;
+		case GL_DEBUG_SOURCE_OTHER:				output += "Source: Other";				break;
 	}
 
 	output += "\n";
 
-	switch (type)
+	switch (pType)
 	{
-	case GL_DEBUG_TYPE_ERROR:               output += "Type: Error";				break;
-	case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: output += "Type: Deprecated Behaviour"; break;
-	case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  output += "Type: Undefined Behaviour";	break;
-	case GL_DEBUG_TYPE_PORTABILITY:         output += "Type: Portability";			break;
-	case GL_DEBUG_TYPE_PERFORMANCE:         output += "Type: Performance";			break;
-	case GL_DEBUG_TYPE_MARKER:              output += "Type: Marker";				break;
-	case GL_DEBUG_TYPE_PUSH_GROUP:          output += "Type: Push Group";			break;
-	case GL_DEBUG_TYPE_POP_GROUP:           output += "Type: Pop Group";			break;
-	case GL_DEBUG_TYPE_OTHER:               output += "Type: Other";				break;
+		case GL_DEBUG_TYPE_ERROR:               output += "Type: Error";				break;
+		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: output += "Type: Deprecated Behavior"; break;
+		case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  output += "Type: Undefined Behavior";	break;
+		case GL_DEBUG_TYPE_PORTABILITY:         output += "Type: Portability";			break;
+		case GL_DEBUG_TYPE_PERFORMANCE:         output += "Type: Performance";			break;
+		case GL_DEBUG_TYPE_MARKER:              output += "Type: Marker";				break;
+		case GL_DEBUG_TYPE_PUSH_GROUP:          output += "Type: Push Group";			break;
+		case GL_DEBUG_TYPE_POP_GROUP:           output += "Type: Pop Group";			break;
+		case GL_DEBUG_TYPE_OTHER:               output += "Type: Other";				break;
 	}
 
 	output += "\n";
 
-	switch (severity)
+	switch (pSeverity)
 	{
 	case GL_DEBUG_SEVERITY_HIGH:			output += "Severity: High";				break;
 	case GL_DEBUG_SEVERITY_MEDIUM:			output += "Severity: Medium";			break;
@@ -87,9 +87,9 @@ void Render::Render_Driver::GLDebugMessageCallback(uint32_t source, uint32_t typ
 
 	//switch (severity)
 	{
-	//case GL_DEBUG_SEVERITY_HIGH:			OVLOG_ERROR(output);	break;
-	//case GL_DEBUG_SEVERITY_MEDIUM:			OVLOG_WARNING(output);	break;
-	//case GL_DEBUG_SEVERITY_LOW:				OVLOG_INFO(output);		break;
-	//case GL_DEBUG_SEVERITY_NOTIFICATION:	OVLOG_INFO(output);			break;
+		//case GL_DEBUG_SEVERITY_HIGH:			OVLOG_ERROR(output);	break;
+		//case GL_DEBUG_SEVERITY_MEDIUM:			OVLOG_WARNING(output);	break;
+		//case GL_DEBUG_SEVERITY_LOW:				OVLOG_INFO(output);		break;
+		//case GL_DEBUG_SEVERITY_NOTIFICATION:	OVLOG_INFO(output);			break;
 	}
 }

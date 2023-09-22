@@ -13,7 +13,7 @@ namespace Editor
 			const std::string& pTitle,
 			bool pOpened,
 			const UI::UI_PanelWindowSettings& pWindowSettings,
-			bool p_enableFocusInputs = false
+			bool pEnableFocusInputs = false
 		);
 
 		virtual void Update(float pDeltaTime) override;

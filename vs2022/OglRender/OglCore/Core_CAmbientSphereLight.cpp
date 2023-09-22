@@ -9,10 +9,10 @@
 Core::Core_CAmbientSphereLight::Core_CAmbientSphereLight(Core_Actor& pOwner) :
 	Core_CLight(pOwner)
 {
-	mData.intensity = 0.1f;
-	mData.constant = 1.0f;
+	mData.mIntensity = 0.1f;
+	mData.mConstant = 1.0f;
 
-	mData.type = static_cast<float>(Render::Render_Light::Type::AMBIENT_SPHERE);
+	mData.mType = static_cast<float>(Render::Render_Light::ELightType::AMBIENT_SPHERE);
 }
 
 std::string Core::Core_CAmbientSphereLight::GetName()
@@ -22,31 +22,31 @@ std::string Core::Core_CAmbientSphereLight::GetName()
 
 float Core::Core_CAmbientSphereLight::GetRadius() const
 {
-	return mData.quadratic;
+	return mData.mQuadratic;
 }
 
 void Core::Core_CAmbientSphereLight::SetRadius(float pRadius)
 {
-	mData.constant = pRadius;
+	mData.mConstant = pRadius;
 }
 
 void Core::Core_CAmbientSphereLight::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
 	Core_CLight::OnSerialize(pDoc, pNode);
 
-	Core_Serializer::SerializeFloat(pDoc, pNode, "radius", mData.constant);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "radius", mData.mConstant);
 }
 
 void Core::Core_CAmbientSphereLight::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
 	Core_CLight::OnDeserialize(pDoc, pNode);
 
-	Core_Serializer::DeserializeFloat(pDoc, pNode, "radius", mData.constant);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "radius", mData.mConstant);
 }
 
 void Core::Core_CAmbientSphereLight::OnInspector(UI::UI_WidgetContainer& pRoot)
 {
 	Core_CLight::OnInspector(pRoot);
 
-	Core_GUIDrawer::DrawScalar<float>(pRoot, "Radius", mData.constant, 0.1f, 0.f);
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Radius", mData.mConstant, 0.1f, 0.f);
 }

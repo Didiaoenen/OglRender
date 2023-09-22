@@ -13,7 +13,7 @@ namespace Render
 	class Render_UniformBuffer
 	{
 	public:
-		Render_UniformBuffer(size_t pSize, uint32_t p_bindingPoint = 0, uint32_t p_offset = 0, EAccessSpecifier p_accessSpecifier = EAccessSpecifier::DYNAMIC_DRAW);
+		Render_UniformBuffer(size_t pSize, uint32_t pBindingPoint = 0, uint32_t pOffset = 0, EAccessSpecifier pAccessSpecifier = EAccessSpecifier::DYNAMIC_DRAW);
 
 		~Render_UniformBuffer();
 
@@ -22,21 +22,21 @@ namespace Render
 		void Unbind();
 
 		template<typename T>
-		void SetSubData(const T& p_data, size_t p_offset);
+		void SetSubData(const T& pData, size_t pOffset);
 
 		template<typename T>
-		void SetSubData(const T& p_data, std::reference_wrapper<size_t> p_offsetInOut);
+		void SetSubData(const T& pData, std::reference_wrapper<size_t> pOffsetInOut);
 
 		uint32_t GetID() const;
 
-		static void BindBlockToShader(Render_Shader& p_shader, uint32_t p_uniformBlockLocation, uint32_t p_bindingPoint = 0);
+		static void BindBlockToShader(Render_Shader& pShader, uint32_t pUniformBlockLocation, uint32_t pBindingPoint = 0);
 
-		static void BindBlockToShader(Render_Shader& p_shader, const std::string& pName, uint32_t p_bindingPoint = 0);
+		static void BindBlockToShader(Render_Shader& pShader, const std::string& pName, uint32_t pBindingPoint = 0);
 
-		static uint32_t GetBlockLocation(Render_Shader& p_shader, const std::string& pName);
+		static uint32_t GetBlockLocation(Render_Shader& pShader, const std::string& pName);
 
 	private:
-		uint32_t m_bufferID;
+		uint32_t mBufferID{ 0 };
 	};
 }
 

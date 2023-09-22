@@ -42,7 +42,7 @@ namespace Editor
 
 		void RenderModelToStencil(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel);
 
-		void RenderModelOutline(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel, float p_width);
+		void RenderModelOutline(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel, float pWidth);
 
 		void RenderActorOutlinePass(Core::Core_Actor& p_actor, bool p_toStencil, bool p_isSelected = false);
 

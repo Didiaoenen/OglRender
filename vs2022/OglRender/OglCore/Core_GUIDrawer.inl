@@ -28,14 +28,14 @@ namespace Core
 	}
 
 	template<typename T>
-	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& pRoot, const std::string& pName, T& p_data, float p_step, T p_min, T p_max)
+	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& pRoot, const std::string& pName, T& pData, float p_step, T p_min, T p_max)
 	{
 		static_assert(std::is_scalar<T>::value, "T must be a scalar");
 
 		CreateTitle(pRoot, pName);
-		auto& widget = pRoot.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), p_min, p_max, p_data, p_step, "", GetFormat<T>());
+		auto& widget = pRoot.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), p_min, p_max, pData, p_step, "", GetFormat<T>());
 		auto& dispatcher = widget.AddPlugin<UI::UI_DataDispatcher<T>>();
-		dispatcher.RegisterReference(p_data);
+		dispatcher.RegisterReference(pData);
 	}
 
 	template<typename T>

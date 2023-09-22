@@ -154,17 +154,17 @@ void Core::Core_Serializer::SerializeColor(tinyxml2::XMLDocument& pDoc, tinyxml2
 
 void Core::Core_Serializer::SerializeModel(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Render::Render_Model* pValue)
 {
-	SerializeString(pDoc, pNode, pName.c_str(), pValue ? pValue->path : "?");
+	SerializeString(pDoc, pNode, pName.c_str(), pValue ? pValue->mPath : "?");
 }
 
 void Core::Core_Serializer::SerializeShader(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Render::Render_Shader* pValue)
 {
-	SerializeString(pDoc, pNode, pName.c_str(), pValue ? pValue->path : "?");
+	SerializeString(pDoc, pNode, pName.c_str(), pValue ? pValue->mPath : "?");
 }
 
 void Core::Core_Serializer::SerializeTexture(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Render::Render_Texture* pValue)
 {
-	SerializeString(pDoc, pNode, pName.c_str(), pValue ? pValue->path : "?");
+	SerializeString(pDoc, pNode, pName.c_str(), pValue ? pValue->mPath : "?");
 }
 
 void Core::Core_Serializer::SerializeMaterial(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Core_Material* pValue)

@@ -12,20 +12,20 @@ namespace Render
 	class Render_ShaderStorageBuffer
 	{
 	public:
-		Render_ShaderStorageBuffer(EAccessSpecifier p_accessSpecifier);
+		Render_ShaderStorageBuffer(EAccessSpecifier pAccessSpecifier);
 
 		~Render_ShaderStorageBuffer();
 
-		void Bind(uint32_t p_bindingPoint);
+		void Bind(uint32_t pBindingPoint);
 
 		void Unbind();
 
 		template<typename T>
-		void SendBlocks(T* p_data, size_t pSize);
+		void SendBlocks(T* pData, size_t pSize);
 
 	private:
-		uint32_t m_bufferID;
-		uint32_t m_bindingPoint = 0;
+		uint32_t mBufferID{ 0 };
+		uint32_t mBindingPoint{ 0 };
 	};
 }
 

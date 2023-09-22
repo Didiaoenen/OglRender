@@ -13,7 +13,7 @@ namespace Core
 	class Core_Material : public Core_ISerializable
 	{
 	public:
-		void SetShader(Render::Render_Shader* p_shader);
+		void SetShader(Render::Render_Shader* pShader);
 
 		void FillUniform();
 
@@ -41,7 +41,7 @@ namespace Core
 
 		void SetColorWriting(bool p_colorWriting);
 
-		void SetGPUInstances(int p_instances);
+		void SetGPUInstances(int pInstances);
 
 		bool IsBlendable() const;
 

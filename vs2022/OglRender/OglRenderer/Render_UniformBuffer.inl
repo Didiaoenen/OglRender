@@ -7,20 +7,20 @@
 namespace Render
 {
 	template<typename T>
-	inline void Render_UniformBuffer::SetSubData(const T& p_data, size_t p_offsetInOut)
+	inline void Render_UniformBuffer::SetSubData(const T& pData, size_t pOffsetInOut)
 	{
 		Bind();
-		glBufferSubData(GL_UNIFORM_BUFFER, p_offsetInOut, sizeof(T), std::addressof(p_data));
+		glBufferSubData(GL_UNIFORM_BUFFER, pOffsetInOut, sizeof(T), std::addressof(pData));
 		Unbind();
 	}
 
 	template<typename T>
-	inline void Render_UniformBuffer::SetSubData(const T& p_data, std::reference_wrapper<size_t> p_offsetInOut)
+	inline void Render_UniformBuffer::SetSubData(const T& pData, std::reference_wrapper<size_t> pOffsetInOut)
 	{
 		Bind();
 		size_t dataSize = sizeof(T);
-		glBufferSubData(GL_UNIFORM_BUFFER, p_offsetInOut.get(), dataSize, std::addressof(p_data));
-		p_offsetInOut.get() += dataSize;
+		glBufferSubData(GL_UNIFORM_BUFFER, pOffsetInOut.get(), dataSize, std::addressof(pData));
+		pOffsetInOut.get() += dataSize;
 		Unbind();
 	}
 }

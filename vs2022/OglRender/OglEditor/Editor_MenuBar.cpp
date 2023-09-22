@@ -35,7 +35,7 @@ Editor::Editor_MenuBar::Editor_MenuBar()
 
 void Editor::Editor_MenuBar::HandleShortcuts(float pDeltaTime)
 {
-	auto& inputManager = *EDITOR_CONTEXT(inputManager);
+	auto& inputManager = *EDITOR_CONTEXT(mInputManager);
 
 	if (inputManager.GetKeyState(Window::EKey::KEY_LEFT_CONTROL) == Window::EKeyState::KEY_DOWN)
 	{
@@ -72,7 +72,7 @@ void Editor::Editor_MenuBar::CreateFileMenu()
 	fileMenu.CreateWidget<UI::UI_MenuItem>("New Scene", "CTRL + N").mClickedEvent += EDITOR_BIND(LoadEmptyScene);
 	fileMenu.CreateWidget<UI::UI_MenuItem>("Save Scene", "CTRL + S").mClickedEvent += EDITOR_BIND(SaveSceneChanges);
 	fileMenu.CreateWidget<UI::UI_MenuItem>("Save Scene As...", "CTRL + SHIFT + S").mClickedEvent += EDITOR_BIND(SaveAs);
-	fileMenu.CreateWidget<UI::UI_MenuItem>("Exit", "ALT + F4").mClickedEvent += [] { EDITOR_CONTEXT(window)->SetShouldClose(true); };
+	fileMenu.CreateWidget<UI::UI_MenuItem>("Exit", "ALT + F4").mClickedEvent += [] { EDITOR_CONTEXT(mWindow)->SetShouldClose(true); };
 }
 
 void Editor::Editor_MenuBar::CreateBuildMenu()
@@ -111,7 +111,7 @@ void Editor::Editor_MenuBar::CreateSettingsMenu()
 {
 	auto& settingsMenu = CreateWidget<UI::UI_MenuList>("Settings");
 	settingsMenu.CreateWidget<UI::UI_MenuItem>("Spawn actors at origin", "", true, true).mValueChangedEvent += EDITOR_BIND(SetActorSpawnAtOrigin, std::placeholders::_1);
-	settingsMenu.CreateWidget<UI::UI_MenuItem>("Vertical Synchronization", "", true, true).mValueChangedEvent += [this](bool p_value) { EDITOR_CONTEXT(device)->SetVsync(p_value); };
+	settingsMenu.CreateWidget<UI::UI_MenuItem>("Vertical Synchronization", "", true, true).mValueChangedEvent += [this](bool p_value) { EDITOR_CONTEXT(mDevice)->SetVsync(p_value); };
 	auto& cameraSpeedMenu = settingsMenu.CreateWidget<UI::UI_MenuList>("Camera Speed");
 	cameraSpeedMenu.CreateWidget<UI::UI_SliderInt>(1, 50, 15, UI::ESliderOrientation::HORIZONTAL, "Scene View").mValueChangedEvent += EDITOR_BIND(SetSceneViewCameraSpeed, std::placeholders::_1);
 	cameraSpeedMenu.CreateWidget<UI::UI_SliderInt>(1, 50, 15, UI::ESliderOrientation::HORIZONTAL, "Asset View").mValueChangedEvent += EDITOR_BIND(SetAssetViewCameraSpeed, std::placeholders::_1);

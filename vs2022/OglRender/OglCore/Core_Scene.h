@@ -37,7 +37,7 @@ namespace Core
 
 		Core_Actor& CreateActor(const std::string& pName, const std::string& pTag = "");
 
-		bool DestroyActor(Core_Actor& p_target);
+		bool DestroyActor(Core_Actor& pTarget);
 
 		void CollectGarbages();
 

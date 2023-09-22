@@ -12,13 +12,13 @@ namespace Render
 	public:
 		Render_TextureLoader() = delete;
 
-		static Render_Texture* Create(const std::string& p_filepath, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static Render_Texture* Create(const std::string& p_filepath, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap);
 
-		static Render_Texture* CreateColor(uint32_t p_data, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static Render_Texture* CreateColor(uint32_t pData, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap);
 
-		static Render_Texture* CreateFromMemory(uint8_t* p_data, uint32_t p_width, uint32_t p_height, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static Render_Texture* CreateFromMemory(uint8_t* pData, uint32_t pWidth, uint32_t pHeight, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap);
 
-		static void Reload(Render_Texture& p_texture, const std::string& pFilePath, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		static void Reload(Render_Texture& p_texture, const std::string& pFilePath, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap);
 
 		static bool Destroy(Render_Texture*& p_textureInstance);
 	};

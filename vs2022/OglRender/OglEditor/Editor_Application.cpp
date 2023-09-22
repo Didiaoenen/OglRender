@@ -28,5 +28,5 @@ void Editor::Editor_Application::Run()
 
 bool Editor::Editor_Application::IsRunning() const
 {
-	return !mContext.window->ShouldClose();
+	return !mContext.mWindow->ShouldClose();
 }

@@ -31,7 +31,7 @@ Render::Render_Shader* Render::Render_ShaderLoader::CreateFromSource(const std::
 	return nullptr;
 }
 
-void Render::Render_ShaderLoader::Recompile(Render_Shader& p_shader, const std::string& pFilePath)
+void Render::Render_ShaderLoader::Recompile(Render_Shader& pShader, const std::string& pFilePath)
 {
 	__FILE_TRACE = pFilePath;
 
@@ -41,28 +41,28 @@ void Render::Render_ShaderLoader::Recompile(Render_Shader& p_shader, const std::
 
 	if (newProgram)
 	{
-		std::uint32_t* shaderID = reinterpret_cast<uint32_t*>(&p_shader) + offsetof(Render_Shader, id);
+		std::uint32_t* shaderID = reinterpret_cast<uint32_t*>(&pShader) + offsetof(Render_Shader, mId);
 
 		glDeleteProgram(*shaderID);
 
 		*shaderID = newProgram;
 
-		p_shader.QueryUniforms();
+		pShader.QueryUniforms();
 
 		//OVLOG_INFO("[COMPILE] \"" + __FILE_TRACE + "\": Success!");
 	}
 	else
 	{
-		//OVLOG_ERROR("[COMPILE] \"" + __FILE_TRACE + "\": Failed! Previous shader version keept");
+		//OVLOG_ERROR("[COMPILE] \"" + __FILE_TRACE + "\": Failed! Previous shader version kept");
 	}
 }
 
-bool Render::Render_ShaderLoader::Destroy(Render_Shader*& p_shader)
+bool Render::Render_ShaderLoader::Destroy(Render_Shader*& pShader)
 {
-	if (p_shader)
+	if (pShader)
 	{
-		delete p_shader;
-		p_shader = nullptr;
+		delete pShader;
+		pShader = nullptr;
 
 		return true;
 	}
@@ -147,9 +147,9 @@ uint32_t Render::Render_ShaderLoader::CreateProgram(const std::string& p_vertexS
 	return program;
 }
 
-uint32_t Render::Render_ShaderLoader::CompileShader(uint32_t p_type, const std::string& pSource)
+uint32_t Render::Render_ShaderLoader::CompileShader(uint32_t pType, const std::string& pSource)
 {
-	const uint32_t id = glCreateShader(p_type);
+	const uint32_t id = glCreateShader(pType);
 
 	const char* src = pSource.c_str();
 
@@ -168,7 +168,7 @@ uint32_t Render::Render_ShaderLoader::CompileShader(uint32_t p_type, const std::
 		std::string errorLog(maxLength, ' ');
 		glGetShaderInfoLog(id, maxLength, &maxLength, errorLog.data());
 
-		std::string shaderTypeString = p_type == GL_VERTEX_SHADER ? "VERTEX SHADER" : "FRAGMENT SHADER";
+		std::string shaderTypeString = pType == GL_VERTEX_SHADER ? "VERTEX SHADER" : "FRAGMENT SHADER";
 		std::string errorHeader = "[" + shaderTypeString + "] \"";
 		//OVLOG_ERROR(errorHeader + __FILE_TRACE + "\":\n" + errorLog);
 

@@ -13,9 +13,9 @@ Editor::Editor_AssetView::Editor_AssetView(const std::string& pTitle, bool pOpen
 	mCamera.SetFar(5000.0f);
 
 	m_resource = static_cast<Render::Render_Model*>(nullptr);
-	mImage->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this](auto p_data)
+	mImage->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this](auto pData)
 		{
-			std::string path = p_data.first;
+			std::string path = pData.first;
 
 			switch (Tools::Tools_PathParser::GetFileType(path))
 			{
@@ -46,7 +46,7 @@ void Editor::Editor_AssetView::_Render_Impl()
 {
 	PrepareCamera();
 
-	auto& baseRenderer = *EDITOR_CONTEXT(renderer).get();
+	auto& baseRenderer = *EDITOR_CONTEXT(mRenderer).get();
 
 	mFbo.Bind();
 

@@ -9,7 +9,7 @@ namespace Render
 	class Render_Framebuffer
 	{
 	public:
-		Render_Framebuffer(uint16_t p_width = 0, uint16_t p_height = 0);
+		Render_Framebuffer(uint16_t pWidth = 0, uint16_t pHeight = 0);
 
 		~Render_Framebuffer();
 
@@ -17,7 +17,7 @@ namespace Render
 
 		void Unbind();
 
-		void Resize(uint16_t p_width, uint16_t p_height);
+		void Resize(uint16_t pWidth, uint16_t pHeight);
 
 		uint32_t GetID();
 
@@ -26,9 +26,9 @@ namespace Render
 		uint32_t GetRenderBufferID();
 
 	private:
-		uint32_t m_bufferID = 0;
-		uint32_t m_renderTexture = 0;
-		uint32_t m_depthStencilBuffer = 0;
+		uint32_t mBufferID = 0;
+		uint32_t mRenderTexture = 0;
+		uint32_t mDepthStencilBuffer = 0;
 	};
 }
 

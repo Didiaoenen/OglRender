@@ -14,7 +14,7 @@
 #include "Editor_EditorActions.h"
 #include "Editor_MaterialEditor.h"
 
-void DrawHybridVec3(UI::UI_WidgetContainer& p_root, const std::string& p_name, glm::vec3& p_data, float p_step, float p_min, float p_max)
+void DrawHybridVec3(UI::UI_WidgetContainer& p_root, const std::string& p_name, glm::vec3& pData, float p_step, float p_min, float p_max)
 {
 	Core::Core_GUIDrawer::CreateTitle(p_root, p_name);
 
@@ -22,12 +22,12 @@ void DrawHybridVec3(UI::UI_WidgetContainer& p_root, const std::string& p_name, g
 
 	auto& xyzWidget = rightSide.CreateWidget<UI::UI_DragMultipleScalars<float, 3>>(Core::Core_GUIDrawer::GetDataType<float>(), p_min, p_max, 0.f, p_step, "", Core::Core_GUIDrawer::GetFormat<float>());
 	auto& xyzDispatcher = xyzWidget.AddPlugin<UI::UI_DataDispatcher<std::array<float, 3>>>();
-	xyzDispatcher.RegisterReference(reinterpret_cast<std::array<float, 3>&>(p_data));
+	xyzDispatcher.RegisterReference(reinterpret_cast<std::array<float, 3>&>(pData));
 	xyzWidget.mLineBreak = false;
 
-	auto& rgbWidget = rightSide.CreateWidget<UI::UI_ColorEdit>(false, UI::Color{ p_data.x, p_data.y, p_data.z, 1.f });
+	auto& rgbWidget = rightSide.CreateWidget<UI::UI_ColorEdit>(false, UI::Color{ pData.x, pData.y, pData.z, 1.f });
 	auto& rgbDispatcher = rgbWidget.AddPlugin<UI::UI_DataDispatcher<UI::Color>>();
-	rgbDispatcher.RegisterReference(reinterpret_cast<UI::Color&>(p_data));
+	rgbDispatcher.RegisterReference(reinterpret_cast<UI::Color&>(pData));
 	rgbWidget.mEnabled = false;
 	rgbWidget.mLineBreak = false;
 
@@ -51,7 +51,7 @@ void DrawHybridVec3(UI::UI_WidgetContainer& p_root, const std::string& p_name, g
 		};
 }
 
-void DrawHybridVec4(UI::UI_WidgetContainer& p_root, const std::string& p_name, glm::vec4& p_data, float p_step, float p_min, float p_max)
+void DrawHybridVec4(UI::UI_WidgetContainer& p_root, const std::string& p_name, glm::vec4& pData, float p_step, float p_min, float p_max)
 {
 	Core::Core_GUIDrawer::CreateTitle(p_root, p_name);
 
@@ -59,12 +59,12 @@ void DrawHybridVec4(UI::UI_WidgetContainer& p_root, const std::string& p_name, g
 
 	auto& xyzWidget = rightSide.CreateWidget<UI::UI_DragMultipleScalars<float, 4>>(Core::Core_GUIDrawer::GetDataType<float>(), p_min, p_max, 0.f, p_step, "", Core::Core_GUIDrawer::GetFormat<float>());
 	auto& xyzDispatcher = xyzWidget.AddPlugin<UI::UI_DataDispatcher<std::array<float, 4>>>();
-	xyzDispatcher.RegisterReference(reinterpret_cast<std::array<float, 4>&>(p_data));
+	xyzDispatcher.RegisterReference(reinterpret_cast<std::array<float, 4>&>(pData));
 	xyzWidget.mLineBreak = false;
 
-	auto& rgbaWidget = rightSide.CreateWidget<UI::UI_ColorEdit>(true, UI::Color{ p_data.x, p_data.y, p_data.z, p_data.w });
+	auto& rgbaWidget = rightSide.CreateWidget<UI::UI_ColorEdit>(true, UI::Color{ pData.x, pData.y, pData.z, pData.w });
 	auto& rgbaDispatcher = rgbaWidget.AddPlugin<UI::UI_DataDispatcher<UI::Color>>();
-	rgbaDispatcher.RegisterReference(reinterpret_cast<UI::Color&>(p_data));
+	rgbaDispatcher.RegisterReference(reinterpret_cast<UI::Color&>(pData));
 	rgbaWidget.mEnabled = false;
 	rgbaWidget.mLineBreak = false;
 
@@ -110,7 +110,9 @@ Editor::Editor_MaterialEditor::Editor_MaterialEditor(const std::string& pTitle, 
 void Editor::Editor_MaterialEditor::Refresh()
 {
 	if (m_target)
+	{
 		SetTarget(*m_target);
+	}
 }
 
 void Editor::Editor_MaterialEditor::SetTarget(Core::Core_Material& p_newTarget)
@@ -158,7 +160,7 @@ void Editor::Editor_MaterialEditor::OnMaterialDropped()
 	if (m_settings->mEnabled)
 	{
 		GenerateMaterialSettingsContent();
-		m_shaderText->mContent = m_target->GetShader() ? m_target->GetShader()->path : "Empty";
+		m_shaderText->mContent = m_target->GetShader() ? m_target->GetShader()->mPath : "Empty";
 		m_shader = m_target->GetShader();
 	}
 	else
@@ -315,13 +317,13 @@ void Editor::Editor_MaterialEditor::GenerateShaderSettingsContent()
 		{
 			switch (uniformData->type)
 			{
-				case Render::UniformType::UNIFORM_SAMPLER_2D:	orderID = 0; break;
-				case Render::UniformType::UNIFORM_FLOAT_VEC4:	orderID = 1; break;
-				case Render::UniformType::UNIFORM_FLOAT_VEC3:	orderID = 2; break;
-				case Render::UniformType::UNIFORM_FLOAT_VEC2:	orderID = 3; break;
-				case Render::UniformType::UNIFORM_FLOAT:		orderID = 4; break;
-				case Render::UniformType::UNIFORM_INT:			orderID = 5; break;
-				case Render::UniformType::UNIFORM_BOOL:			orderID = 6; break;
+				case Render::EUniformType::UNIFORM_SAMPLER_2D:	orderID = 0; break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC4:	orderID = 1; break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC3:	orderID = 2; break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC2:	orderID = 3; break;
+				case Render::EUniformType::UNIFORM_FLOAT:		orderID = 4; break;
+				case Render::EUniformType::UNIFORM_INT:			orderID = 5; break;
+				case Render::EUniformType::UNIFORM_BOOL:			orderID = 6; break;
 			}
 
 			sortedUniformsData.emplace(orderID, std::pair<std::string, std::any*>{ name, & value });
@@ -336,13 +338,13 @@ void Editor::Editor_MaterialEditor::GenerateShaderSettingsContent()
 		{
 			switch (uniformData->type)
 			{
-				case Render::UniformType::UNIFORM_BOOL:			Core::Core_GUIDrawer::DrawBoolean(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<bool&>(*info.second));																	break;
-				case Render::UniformType::UNIFORM_INT:			Core::Core_GUIDrawer::DrawScalar<int>(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<int&>(*info.second));																break;
-				case Render::UniformType::UNIFORM_FLOAT:		Core::Core_GUIDrawer::DrawScalar<float>(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<float&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);		break;
-				case Render::UniformType::UNIFORM_FLOAT_VEC2:	Core::Core_GUIDrawer::DrawVec2(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec2&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);	break;
-				case Render::UniformType::UNIFORM_FLOAT_VEC3:	DrawHybridVec3(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec3&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);			break;
-				case Render::UniformType::UNIFORM_FLOAT_VEC4:	DrawHybridVec4(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec4&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);			break;
-				case Render::UniformType::UNIFORM_SAMPLER_2D:	Core::Core_GUIDrawer::DrawTexture(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<Render::Render_Texture*&>(*info.second));																break;
+				case Render::EUniformType::UNIFORM_BOOL:			Core::Core_GUIDrawer::DrawBoolean(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<bool&>(*info.second));																	break;
+				case Render::EUniformType::UNIFORM_INT:			Core::Core_GUIDrawer::DrawScalar<int>(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<int&>(*info.second));																break;
+				case Render::EUniformType::UNIFORM_FLOAT:		Core::Core_GUIDrawer::DrawScalar<float>(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<float&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);		break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC2:	Core::Core_GUIDrawer::DrawVec2(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec2&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);	break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC3:	DrawHybridVec3(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec3&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);			break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC4:	DrawHybridVec4(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec4&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);			break;
+				case Render::EUniformType::UNIFORM_SAMPLER_2D:	Core::Core_GUIDrawer::DrawTexture(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<Render::Render_Texture*&>(*info.second));																break;
 			}
 		}
 	}

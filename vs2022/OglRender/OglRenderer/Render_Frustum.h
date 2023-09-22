@@ -27,7 +27,7 @@ namespace Render
 		std::array<float, 4> GetFarPlane() const;
 
 	private:
-		float m_frustum[6][4];
+		float mFrustum[6][4];
 	};
 }
 

@@ -7,7 +7,7 @@
 
 #include "Core_SceneManager.h"
 
-Core::Core_SceneManager::Core_SceneManager(const std::string& p_sceneRootFolder)
+Core::Core_SceneManager::Core_SceneManager(const std::string& pSceneRootFolder)
 {
 	LoadEmptyScene();
 }
@@ -19,19 +19,19 @@ Core::Core_SceneManager::~Core_SceneManager()
 
 void Core::Core_SceneManager::Update()
 {
-	if (m_delayedLoadCall)
+	if (mDelayedLoadCall)
 	{
-		m_delayedLoadCall();
-		m_delayedLoadCall = 0;
+		mDelayedLoadCall();
+		mDelayedLoadCall = 0;
 	}
 }
 
-void Core::Core_SceneManager::LoadAndPlayDelayed(const std::string& pPath, bool p_absolute)
+void Core::Core_SceneManager::LoadAndPlayDelayed(const std::string& pPath, bool pAbsolute)
 {
-	m_delayedLoadCall = [this, pPath, p_absolute]
+	mDelayedLoadCall = [this, pPath, pAbsolute]
 		{
 			std::string previousSourcePath = GetCurrentSceneSourcePath();
-			LoadScene(pPath, p_absolute);
+			LoadScene(pPath, pAbsolute);
 			StoreCurrentSceneSourcePath(previousSourcePath);
 			GetCurrentScene()->Play();
 		};
@@ -41,36 +41,36 @@ void Core::Core_SceneManager::LoadEmptyScene()
 {
 	UnloadCurrentScene();
 
-	m_currentScene = new Core_Scene();
+	mCurrentScene = new Core_Scene();
 
-	SceneLoadEvent.Invoke();
+	mSceneLoadEvent.Invoke();
 }
 
 void Core::Core_SceneManager::LoadEmptyLightedScene()
 {
 	UnloadCurrentScene();
 
-	m_currentScene = new Core_Scene();
+	mCurrentScene = new Core_Scene();
 
-	SceneLoadEvent.Invoke();
+	mSceneLoadEvent.Invoke();
 
-	auto& directionalLight = m_currentScene->CreateActor("Directional Light");
+	auto& directionalLight = mCurrentScene->CreateActor("Directional Light");
 	directionalLight.AddComponent<Core_CDirectionalLight>().SetIntensity(0.75f);
 	directionalLight.transform.SetLocalPosition({ 0.0f, 10.0f, 0.0f });
 	directionalLight.transform.SetLocalRotation(glm::quat({ 120.0f, -40.0f, 0.0f }));
 
-	auto& ambientLight = m_currentScene->CreateActor("Ambient Light");
+	auto& ambientLight = mCurrentScene->CreateActor("Ambient Light");
 	ambientLight.AddComponent<Core_CAmbientSphereLight>().SetRadius(10000.0f);
 
-	auto& camera = m_currentScene->CreateActor("Main Camera");
+	auto& camera = mCurrentScene->CreateActor("Main Camera");
 	camera.AddComponent<Core_CCamera>();
 	camera.transform.SetLocalPosition({ 0.0f, 3.0f, 8.0f });
 	camera.transform.SetLocalRotation(glm::quat({ 20.0f, 180.0f, 0.0f }));
 }
 
-bool Core::Core_SceneManager::LoadScene(const std::string & pPath, bool p_absolute)
+bool Core::Core_SceneManager::LoadScene(const std::string & pPath, bool pAbsolute)
 {
-	std::string completePath = (p_absolute ? "" : m_sceneRootFolder) + pPath;
+	std::string completePath = (pAbsolute ? "" : mSceneRootFolder) + pPath;
 
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(completePath.c_str());
@@ -95,7 +95,7 @@ bool Core::Core_SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& pDoc)
 			if (sceneNode)
 			{
 				LoadEmptyScene();
-				m_currentScene->OnDeserialize(pDoc, sceneNode);
+				mCurrentScene->OnDeserialize(pDoc, sceneNode);
 				return true;
 			}
 		}
@@ -107,11 +107,11 @@ bool Core::Core_SceneManager::LoadSceneFromMemory(tinyxml2::XMLDocument& pDoc)
 
 void Core::Core_SceneManager::UnloadCurrentScene()
 {
-	if (m_currentScene)
+	if (mCurrentScene)
 	{
-		delete m_currentScene;
-		m_currentScene = nullptr;
-		SceneUnloadEvent.Invoke();
+		delete mCurrentScene;
+		mCurrentScene = nullptr;
+		mSceneUnloadEvent.Invoke();
 	}
 
 	ForgetCurrentSceneSourcePath();
@@ -119,34 +119,34 @@ void Core::Core_SceneManager::UnloadCurrentScene()
 
 bool Core::Core_SceneManager::HasCurrentScene() const
 {
-	return m_currentScene;
+	return mCurrentScene;
 }
 
 Core::Core_Scene* Core::Core_SceneManager::GetCurrentScene()
 {
-	return m_currentScene;
+	return mCurrentScene;
 }
 
 std::string Core::Core_SceneManager::GetCurrentSceneSourcePath() const
 {
-	return m_currentSceneSourcePath;
+	return mCurrentSceneSourcePath;
 }
 
 bool Core::Core_SceneManager::IsCurrentSceneLoadedFromDisk() const
 {
-	return m_currentSceneLoadedFromPath;
+	return mCurrentSceneLoadedFromPath;
 }
 
 void Core::Core_SceneManager::StoreCurrentSceneSourcePath(const std::string& pPath)
 {
-	m_currentSceneSourcePath = pPath;
-	m_currentSceneLoadedFromPath = true;
-	CurrentSceneSourcePathChangedEvent.Invoke(m_currentSceneSourcePath);
+	mCurrentSceneSourcePath = pPath;
+	mCurrentSceneLoadedFromPath = true;
+	mCurrentSceneSourcePathChangedEvent.Invoke(mCurrentSceneSourcePath);
 }
 
 void Core::Core_SceneManager::ForgetCurrentSceneSourcePath()
 {
-	m_currentSceneSourcePath = "";
-	m_currentSceneLoadedFromPath = false;
-	CurrentSceneSourcePathChangedEvent.Invoke(m_currentSceneSourcePath);
+	mCurrentSceneSourcePath = "";
+	mCurrentSceneLoadedFromPath = false;
+	mCurrentSceneSourcePathChangedEvent.Invoke(mCurrentSceneSourcePath);
 }

@@ -40,11 +40,11 @@ namespace Editor
 
 		void ResetLayout();
 
-		void SetSceneViewCameraSpeed(int p_speed);
+		void SetSceneViewCameraSpeed(int pSpeed);
 
 		int GetSceneViewCameraSpeed();
 
-		void SetAssetViewCameraSpeed(int p_speed);
+		void SetAssetViewCameraSpeed(int pSpeed);
 
 		int GetAssetViewCameraSpeed();
 
@@ -84,7 +84,7 @@ namespace Editor
 #pragma endregion
 
 #pragma region ACTOR_MANIPULATION
-		void SelectActor(Core::Core_Actor& p_target);
+		void SelectActor(Core::Core_Actor& pTarget);
 
 		void UnselectActor();
 
@@ -92,7 +92,7 @@ namespace Editor
 
 		Core::Core_Actor& GetSelectedActor() const;
 
-		void MoveToTarget(Core::Core_Actor& p_target);
+		void MoveToTarget(Core::Core_Actor& pTarget);
 #pragma endregion
 
 #pragma region RESOURCE_MANAGEMENT
@@ -126,7 +126,7 @@ namespace Editor
 
 		void SaveCurrentSceneTo(const std::string& pPath);
 
-		void LoadSceneFromDisk(const std::string& pPath, bool p_absolute = false);
+		void LoadSceneFromDisk(const std::string& pPath, bool pAbsolute = false);
 
 		bool IsCurrentSceneLoadedFromDisk() const;
 

@@ -28,12 +28,12 @@ Editor::Editor_Editor::Editor_Editor(Editor_Context& pContext) :
 {
 	SetupUI();
 
-	mContext.sceneManager.LoadEmptyLightedScene();
+	mContext.mSceneManager.LoadEmptyLightedScene();
 }
 
 Editor::Editor_Editor::~Editor_Editor()
 {
-	mContext.sceneManager.UnloadCurrentScene();
+	mContext.mSceneManager.UnloadCurrentScene();
 }
 
 void Editor::Editor_Editor::SetupUI()
@@ -59,16 +59,16 @@ void Editor::Editor_Editor::SetupUI()
 	mPanelsManager.CreatePanel<Editor_AssetProperties>("Asset Properties", false, settings);
 
 	mCanvas.MakeDockspace(true);
-	mContext.uiManager->SetCanvas(mCanvas);
+	mContext.mUIManager->SetCanvas(mCanvas);
 }
 
 void Editor::Editor_Editor::PreUpdate()
 {
 	//PROFILER_SPY("Editor Pre-Update");
 
-	mContext.device->PollEvents();
-	mContext.renderer->SetClearColor(0.f, 0.f, 0.f);
-	mContext.renderer->Clear();
+	mContext.mDevice->PollEvents();
+	mContext.mRenderer->SetClearColor(0.f, 0.f, 0.f);
+	mContext.mRenderer->Clear();
 }
 
 void Editor::Editor_Editor::Update(float pDeltaTime)
@@ -84,7 +84,8 @@ void Editor::Editor_Editor::Update(float pDeltaTime)
 
 void Editor::Editor_Editor::HandleGlobalShortcuts()
 {
-	if (mContext.inputManager->IsKeyPressed(Window::EKey::KEY_DELETE) && EDITOR_EXEC(IsAnyActorSelected()) && (EDITOR_PANEL(Editor_SceneView, "Scene View").IsFocused() || EDITOR_PANEL(Editor_Hierarchy, "Hierarchy").IsFocused()))
+	if (mContext.mInputManager->IsKeyPressed(Window::EKey::KEY_DELETE) && EDITOR_EXEC(IsAnyActorSelected()) && 
+		(EDITOR_PANEL(Editor_SceneView, "Scene View").IsFocused() || EDITOR_PANEL(Editor_Hierarchy, "Hierarchy").IsFocused()))
 	{
 		EDITOR_EXEC(DestroyActor(EDITOR_EXEC(GetSelectedActor())));
 	}
@@ -103,14 +104,14 @@ void Editor::Editor_Editor::UpdateCurrentEditorMode(float pDeltaTime)
 
 	{
 		//PROFILER_SPY("Scene garbage collection");
-		mContext.sceneManager.GetCurrentScene()->CollectGarbages();
-		mContext.sceneManager.Update();
+		mContext.mSceneManager.GetCurrentScene()->CollectGarbages();
+		mContext.mSceneManager.Update();
 	}
 }
 
 void Editor::Editor_Editor::UpdatePlayMode(float pDeltaTime)
 {
-	auto currentScene = mContext.sceneManager.GetCurrentScene();
+	auto currentScene = mContext.mSceneManager.GetCurrentScene();
 	bool simulationApplied = false;
 
 	{
@@ -139,14 +140,14 @@ void Editor::Editor_Editor::UpdatePlayMode(float pDeltaTime)
 		//m_context.audioEngine->Update();
 	}
 
-	ImGui::GetIO().DisableMouseUpdate = mContext.window->GetCursorMode() == Window::ECursorMode::DISABLED;
+	ImGui::GetIO().DisableMouseUpdate = mContext.mWindow->GetCursorMode() == Window::ECursorMode::DISABLED;
 
 	if (mEditorActions.GetCurrentEditorMode() == Editor_EditorActions::EEditorMode::FRAME_BY_FRAME)
 	{
 		mEditorActions.PauseGame();
 	}
 
-	if (mContext.inputManager->IsKeyPressed(Window::EKey::KEY_ESCAPE))
+	if (mContext.mInputManager->IsKeyPressed(Window::EKey::KEY_ESCAPE))
 	{
 		mEditorActions.StopPlaying();
 	}
@@ -154,7 +155,7 @@ void Editor::Editor_Editor::UpdatePlayMode(float pDeltaTime)
 
 void Editor::Editor_Editor::UpdateEditMode(float pDeltaTime)
 {
-	if (mContext.inputManager->IsKeyPressed(Window::EKey::KEY_F5))
+	if (mContext.mInputManager->IsKeyPressed(Window::EKey::KEY_F5))
 	{
 		mEditorActions.StartPlaying();
 	}
@@ -190,7 +191,7 @@ void Editor::Editor_Editor::UpdateEditorPanels(float pDeltaTime)
 void Editor::Editor_Editor::PrepareRendering(float pDeltaTime)
 {
 	//PROFILER_SPY("Engine UBO Update");
-	mContext.engineUBO->SetSubData(mContext.device->GetElapsedTime(), 3 * sizeof(glm::mat4) + sizeof(glm::vec3));
+	mContext.mEngineUBO->SetSubData(mContext.mDevice->GetElapsedTime(), 3 * sizeof(glm::mat4) + sizeof(glm::vec3));
 }
 
 void Editor::Editor_Editor::RenderViews(float pDeltaTime)
@@ -211,12 +212,12 @@ void Editor::Editor_Editor::RenderViews(float pDeltaTime)
 	{
 		//PROFILER_SPY("Asset View Rendering");
 
-		mContext.simulatedLightSSBO->Bind(0);
+		mContext.mSimulatedLightSSBO->Bind(0);
 		assetView.Render();
-		mContext.simulatedLightSSBO->Unbind();
+		mContext.mSimulatedLightSSBO->Unbind();
 	}
 
-	mContext.lightSSBO->Bind(0);
+	mContext.mLightSSBO->Bind(0);
 
 	if (gameView.IsOpened())
 	{
@@ -232,7 +233,7 @@ void Editor::Editor_Editor::RenderViews(float pDeltaTime)
 		sceneView.Render();
 	}
 
-	mContext.lightSSBO->Unbind();
+	mContext.mLightSSBO->Unbind();
 }
 
 void Editor::Editor_Editor::RenderEditorUI(float pDeltaTime)
@@ -246,7 +247,7 @@ void Editor::Editor_Editor::PostUpdate()
 {
 	//PROFILER_SPY("Editor Post-Update");
 
-	mContext.window->SwapBuffers();
-	mContext.inputManager->ClearEvents();
+	mContext.mWindow->SwapBuffers();
+	mContext.mInputManager->ClearEvents();
 	++mElapsedFrames;
 }

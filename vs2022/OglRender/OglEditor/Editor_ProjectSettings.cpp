@@ -11,7 +11,7 @@
 #include "Editor_ProjectSettings.h"
 
 Editor::Editor_ProjectSettings::Editor_ProjectSettings(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
-	UI_PanelWindow(pTitle, pOpened, pWindowSettings), m_projectFile(EDITOR_CONTEXT(projectSettings))
+	UI_PanelWindow(pTitle, pOpened, pWindowSettings), m_projectFile(EDITOR_CONTEXT(mProjectSettings))
 {
 	auto& saveButton = CreateWidget<UI::UI_Button>("Apply");
 	saveButton.mIdleBackgroundColor = { 0.0f, 0.5f, 0.0f, 1.f };

@@ -8,9 +8,16 @@ namespace Render
 {
 	struct Render_Light
 	{
-		enum class Type { POINT, DIRECTIONAL, SPOT, AMBIENT_BOX, AMBIENT_SPHERE };
+		enum class ELightType 
+		{ 
+			POINT, 
+			DIRECTIONAL, 
+			SPOT, 
+			AMBIENT_BOX, 
+			AMBIENT_SPHERE,
+		};
 
-		Render_Light(Maths::Maths_FTransform& p_tranform, Type p_type);
+		Render_Light(Maths::Maths_FTransform& pTranform, ELightType pType);
 
 		glm::mat4 GenerateMatrix() const;
 
@@ -18,14 +25,14 @@ namespace Render
 
 		const Maths::Maths_FTransform& GetTransform() const;
 
-		glm::vec3	color = { 1.f, 1.f, 1.f };
-		float				intensity = 1.f;
-		float				constant = 0.0f;
-		float				linear = 0.0f;
-		float				quadratic = 1.0f;
-		float				cutoff = 12.f;
-		float				outerCutoff = 15.f;
-		float				type = 0.0f;
+		glm::vec3	mColor = { 1.f, 1.f, 1.f };
+		float		mIntensity = 1.f;
+		float		mConstant = 0.0f;
+		float		mLinear = 0.0f;
+		float		mQuadratic = 1.0f;
+		float		mCutoff = 12.f;
+		float		mOuterCutoff = 15.f;
+		float		mType = 0.0f;
 
 	protected:
 		Maths::Maths_FTransform& mTransform;

@@ -30,10 +30,10 @@ Editor::Editor_EditorActions::Editor_EditorActions(Editor_Context& pContext, Edi
 {
 	Core::Core_ServiceLocator::Provide<Editor_EditorActions>(*this);
 
-	mContext.sceneManager.CurrentSceneSourcePathChangedEvent += [this](const std::string& p_newPath)
+	mContext.mSceneManager.mCurrentSceneSourcePathChangedEvent += [this](const std::string& p_newPath)
 		{
 			std::string titleExtra = " - " + (p_newPath.empty() ? "Untitled Scene" : GetResourcePath(p_newPath));
-			mContext.window->SetTitle(mContext.windowSettings.title + titleExtra);
+			mContext.mWindow->SetTitle(mContext.mWindowSettings.title + titleExtra);
 		};
 }
 
@@ -71,12 +71,12 @@ void Editor::Editor_EditorActions::SetActorSpawnMode(EActorSpawnMode pValue)
 
 void Editor::Editor_EditorActions::ResetLayout()
 {
-	DelayAction([this]() {mContext.uiManager->ResetLayout("Config\\layout.ini"); });
+	DelayAction([this]() {mContext.mUIManager->ResetLayout("Config\\layout.ini"); });
 }
 
-void Editor::Editor_EditorActions::SetSceneViewCameraSpeed(int p_speed)
+void Editor::Editor_EditorActions::SetSceneViewCameraSpeed(int pSpeed)
 {
-	EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().SetSpeed((float)p_speed);
+	EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().SetSpeed((float)pSpeed);
 }
 
 int Editor::Editor_EditorActions::GetSceneViewCameraSpeed()
@@ -84,9 +84,9 @@ int Editor::Editor_EditorActions::GetSceneViewCameraSpeed()
 	return (int)EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().GetSpeed();
 }
 
-void Editor::Editor_EditorActions::SetAssetViewCameraSpeed(int p_speed)
+void Editor::Editor_EditorActions::SetAssetViewCameraSpeed(int pSpeed)
 {
-	EDITOR_PANEL(Editor_AssetView, "Asset View").GetCameraController().SetSpeed((float)p_speed);
+	EDITOR_PANEL(Editor_AssetView, "Asset View").GetCameraController().SetSpeed((float)pSpeed);
 }
 
 int Editor::Editor_EditorActions::GetAssetViewCameraSpeed()
@@ -152,10 +152,10 @@ void Editor::Editor_EditorActions::StopPlaying()
 	if (m_editorMode != EEditorMode::EDIT)
 	{
 		ImGui::GetIO().DisableMouseUpdate = false;
-		mContext.window->SetCursorMode(Window::ECursorMode::NORMAL);
+		mContext.mWindow->SetCursorMode(Window::ECursorMode::NORMAL);
 		SetEditorMode(EEditorMode::EDIT);
-		bool loadedFromDisk = mContext.sceneManager.IsCurrentSceneLoadedFromDisk();
-		std::string sceneSourcePath = mContext.sceneManager.GetCurrentSceneSourcePath();
+		bool loadedFromDisk = mContext.mSceneManager.IsCurrentSceneLoadedFromDisk();
+		std::string sceneSourcePath = mContext.mSceneManager.GetCurrentSceneSourcePath();
 
 		int64_t focusedActorID = -1;
 
@@ -164,12 +164,12 @@ void Editor::Editor_EditorActions::StopPlaying()
 			focusedActorID = targetActor->GetID();
 		}
 
-		mContext.sceneManager.LoadSceneFromMemory(m_sceneBackup);
+		mContext.mSceneManager.LoadSceneFromMemory(m_sceneBackup);
 		if (loadedFromDisk)
-			mContext.sceneManager.StoreCurrentSceneSourcePath(sceneSourcePath);
+			mContext.mSceneManager.StoreCurrentSceneSourcePath(sceneSourcePath);
 		m_sceneBackup.Clear();
 		EDITOR_PANEL(Editor_SceneView, "Scene View").Focus();
-		if (auto actorInstance = mContext.sceneManager.GetCurrentScene()->FindActorByID(focusedActorID))
+		if (auto actorInstance = mContext.mSceneManager.GetCurrentScene()->FindActorByID(focusedActorID))
 		{
 			EDITOR_PANEL(Editor_Inspector, "Inspector").FocusActor(*actorInstance);
 		}
@@ -192,7 +192,7 @@ glm::vec3 Editor::Editor_EditorActions::CalculateActorSpawnPoint(float p_distanc
 
 Core::Core_Actor& Editor::Editor_EditorActions::CreateEmptyActor(bool p_focusOnCreation, Core::Core_Actor* pParent, const std::string& pName)
 {
-	const auto currentScene = mContext.sceneManager.GetCurrentScene();
+	const auto currentScene = mContext.mSceneManager.GetCurrentScene();
 	auto& instance = pName.empty() ? currentScene->CreateActor() : currentScene->CreateActor(pName);
 
 	if (pParent)
@@ -221,14 +221,14 @@ Core::Core_Actor& Editor::Editor_EditorActions::CreateActorWithModel(const std::
 
 	auto& modelRenderer = instance.AddComponent<Core::Core_CModelRenderer>();
 
-	const auto model = mContext.modelManager[pPath];
+	const auto model = mContext.mModelManager[pPath];
 	if (model)
 	{
 		modelRenderer.SetModel(model);
 	}
 
 	auto& materialRenderer = instance.AddComponent<Core::Core_CMaterialRenderer>();
-	const auto material = mContext.materialManager[":Materials\\Default.ovmat"];
+	const auto material = mContext.mMaterialManager[":Materials\\Default.ovmat"];
 	if (material)
 		materialRenderer.FillWithMaterial(*material);
 
@@ -275,7 +275,7 @@ void Editor::Editor_EditorActions::DuplicateActor(Core::Core_Actor& p_toDuplicat
 		newActor.SetParent(*p_forcedParent);
 	else
 	{
-		auto currentScene = mContext.sceneManager.GetCurrentScene();
+		auto currentScene = mContext.mSceneManager.GetCurrentScene();
 
 		if (newActor.GetParentID() > 0)
 		{
@@ -300,9 +300,9 @@ void Editor::Editor_EditorActions::DuplicateActor(Core::Core_Actor& p_toDuplicat
 	}
 }
 
-void Editor::Editor_EditorActions::SelectActor(Core::Core_Actor& p_target)
+void Editor::Editor_EditorActions::SelectActor(Core::Core_Actor& pTarget)
 {
-	EDITOR_PANEL(Editor_Inspector, "Inspector").FocusActor(p_target);
+	EDITOR_PANEL(Editor_Inspector, "Inspector").FocusActor(pTarget);
 }
 
 void Editor::Editor_EditorActions::UnselectActor()
@@ -320,22 +320,22 @@ Core::Core_Actor& Editor::Editor_EditorActions::GetSelectedActor() const
 	return *EDITOR_PANEL(Editor_Inspector, "Inspector").GetTargetActor();
 }
 
-void Editor::Editor_EditorActions::MoveToTarget(Core::Core_Actor& p_target)
+void Editor::Editor_EditorActions::MoveToTarget(Core::Core_Actor& pTarget)
 {
-	EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().MoveToTarget(p_target);
+	EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().MoveToTarget(pTarget);
 }
 
 void Editor::Editor_EditorActions::CompileShaders()
 {
-	for (auto shader : mContext.shaderManager.GetResources())
+	for (auto shader : mContext.mShaderManager.GetResources())
 	{
-		Render::Render_ShaderLoader::Recompile(*shader.second, GetRealPath(shader.second->path));
+		Render::Render_ShaderLoader::Recompile(*shader.second, GetRealPath(shader.second->mPath));
 	}
 }
 
 void Editor::Editor_EditorActions::SaveMaterials()
 {
-	for (auto& [id, material] : mContext.materialManager.GetResources())
+	for (auto& [id, material] : mContext.mMaterialManager.GetResources())
 	{
 		Core::Core_MaterialLoader::Save(*material, GetRealPath(material->path));
 	}
@@ -497,7 +497,7 @@ void Editor::Editor_EditorActions::PropagateScriptRename(std::string p_previousN
 	p_previousName = GetScriptPath(p_previousName);
 	p_newName = GetScriptPath(p_newName);
 
-	if (auto currentScene = mContext.sceneManager.GetCurrentScene())
+	if (auto currentScene = mContext.mSceneManager.GetCurrentScene())
 	{
 		for (auto actor : currentScene->GetActors())
 		{
@@ -523,19 +523,19 @@ void Editor::Editor_EditorActions::PropagateFileRename(std::string p_previousNam
 		if (Core::Core_ServiceLocator::Get<Core::Core_ModelManager>().MoveResource(p_previousName, p_newName))
 		{
 			Render::Render_Model* resource = Core::Core_ServiceLocator::Get<Core::Core_ModelManager>()[p_newName];
-			*reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(Render::Render_Model, path)) = p_newName;
+			*reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(Render::Render_Model, mPath)) = p_newName;
 		}
 
 		if (Core::Core_ServiceLocator::Get<Core::Core_TextureManager>().MoveResource(p_previousName, p_newName))
 		{
 			Render::Render_Texture* resource = Core::Core_ServiceLocator::Get<Core::Core_TextureManager>()[p_newName];
-			*reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(Render::Render_Texture, path)) = p_newName;
+			*reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(Render::Render_Texture, mPath)) = p_newName;
 		}
 
 		if (Core::Core_ServiceLocator::Get<Core::Core_ShaderManager>().MoveResource(p_previousName, p_newName))
 		{
 			Render::Render_Shader* resource = Core::Core_ServiceLocator::Get<Core::Core_ShaderManager>()[p_newName];
-			*reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(Render::Render_Shader, path)) = p_newName;
+			*reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(Render::Render_Shader, mPath)) = p_newName;
 		}
 
 		if (Core::Core_ServiceLocator::Get<Core::Core_MaterialManager>().MoveResource(p_previousName, p_newName))
@@ -599,7 +599,7 @@ void Editor::Editor_EditorActions::PropagateFileRename(std::string p_previousNam
 				assetView.SetResource(static_cast<Render::Render_Model*>(nullptr));
 			}
 
-			if (auto currentScene = mContext.sceneManager.GetCurrentScene())
+			if (auto currentScene = mContext.mSceneManager.GetCurrentScene())
 			{
 				for (auto actor : currentScene->GetActors())
 				{
@@ -627,7 +627,7 @@ void Editor::Editor_EditorActions::PropagateFileRename(std::string p_previousNam
 				assetView.SetResource(static_cast<Core::Core_Material*>(nullptr));
 			}
 
-			if (auto currentScene = mContext.sceneManager.GetCurrentScene())
+			if (auto currentScene = mContext.mSceneManager.GetCurrentScene())
 			{
 				for (auto actor : currentScene->GetActors())
 				{
@@ -706,7 +706,7 @@ void Editor::Editor_EditorActions::LoadEmptyScene()
 		StopPlaying();
 	}
 
-	mContext.sceneManager.LoadEmptyLightedScene();
+	mContext.mSceneManager.LoadEmptyLightedScene();
 	//OVLOG_INFO("New scene created");
 }
 
@@ -715,33 +715,33 @@ void Editor::Editor_EditorActions::SaveCurrentSceneTo(const std::string& pPath)
 	tinyxml2::XMLDocument doc;
 	tinyxml2::XMLNode* node = doc.NewElement("root");
 	doc.InsertFirstChild(node);
-	mContext.sceneManager.StoreCurrentSceneSourcePath(pPath);
-	mContext.sceneManager.GetCurrentScene()->OnSerialize(doc, node);
+	mContext.mSceneManager.StoreCurrentSceneSourcePath(pPath);
+	mContext.mSceneManager.GetCurrentScene()->OnSerialize(doc, node);
 	doc.SaveFile(pPath.c_str());
 }
 
-void Editor::Editor_EditorActions::LoadSceneFromDisk(const std::string& pPath, bool p_absolute)
+void Editor::Editor_EditorActions::LoadSceneFromDisk(const std::string& pPath, bool pAbsolute)
 {
 	if (GetCurrentEditorMode() != EEditorMode::EDIT)
 	{
 		StopPlaying();
 	}
 
-	mContext.sceneManager.LoadScene(pPath, p_absolute);
+	mContext.mSceneManager.LoadScene(pPath, pAbsolute);
 	//OVLOG_INFO("Scene loaded from disk: " + mContext.sceneManager.GetCurrentSceneSourcePath());
 	mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View").Focus();
 }
 
 bool Editor::Editor_EditorActions::IsCurrentSceneLoadedFromDisk() const
 {
-	return mContext.sceneManager.IsCurrentSceneLoadedFromDisk();
+	return mContext.mSceneManager.IsCurrentSceneLoadedFromDisk();
 }
 
 void Editor::Editor_EditorActions::SaveSceneChanges()
 {
 	if (IsCurrentSceneLoadedFromDisk())
 	{
-		SaveCurrentSceneTo(mContext.sceneManager.GetCurrentSceneSourcePath());
+		SaveCurrentSceneTo(mContext.mSceneManager.GetCurrentSceneSourcePath());
 		//OVLOG_INFO("Current scene saved to: " + m_context.sceneManager.GetCurrentSceneSourcePath());
 	}
 	else
@@ -835,13 +835,13 @@ void Editor::Editor_EditorActions::Build(bool p_autoRun, bool p_tempFolder)
 		return;
 	}
 
-	BuildAtLocation(mContext.projectSettings.Get<bool>("dev_build") ? "Development" : "Shipping", destinationFolder, p_autoRun);
+	BuildAtLocation(mContext.mProjectSettings.Get<bool>("dev_build") ? "Development" : "Shipping", destinationFolder, p_autoRun);
 }
 
 void Editor::Editor_EditorActions::BuildAtLocation(const std::string& p_configuration, const std::string p_buildPath, bool p_autoRun)
 {
 	std::string buildPath(p_buildPath);
-	std::string executableName = mContext.projectSettings.Get<std::string>("executable_name") + ".exe";
+	std::string executableName = mContext.mProjectSettings.Get<std::string>("executable_name") + ".exe";
 
 	bool failed = false;
 
@@ -871,7 +871,7 @@ void Editor::Editor_EditorActions::BuildAtLocation(const std::string& p_configur
 
 					std::filesystem::copy(mContext.mProjectFilePath, buildPath + "Data\\User\\Assets\\", std::filesystem::copy_options::recursive, err);
 
-					if (!std::filesystem::exists(buildPath + "Data\\User\\Assets\\" + (mContext.projectSettings.Get<std::string>("start_scene"))))
+					if (!std::filesystem::exists(buildPath + "Data\\User\\Assets\\" + (mContext.mProjectSettings.Get<std::string>("start_scene"))))
 					{
 						//OVLOG_ERROR("Failed to find Start Scene at expected path. Verify your Project Setings.");
 						Window::Window_MessageBox message("Build Failure", "An error occured during the building of your game.\nCheck the console for more information", Window::Window_MessageBox::EMessageType::ERROR, Window::Window_MessageBox::EButtonLayout::OK, true);

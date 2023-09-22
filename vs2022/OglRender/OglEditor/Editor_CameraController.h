@@ -1,6 +1,7 @@
 #pragma once
 
 #include <queue>
+#include <glm/gtx/compatibility.hpp>
 
 #include <OglWindow/Window_InputManager.h>
 
@@ -16,18 +17,18 @@ namespace Editor
 	public:
 		Editor_CameraController
 		(
-			Editor_AView& p_view,
+			Editor_AView& pView,
 			Render::Render_Camera& pCamera,
 			glm::vec3& pPosition,
 			glm::quat& pRotation,
-			bool p_enableFocusInputs = false
+			bool pEnableFocusInputs = false
 		);
 
 		void HandleInputs(float pDeltaTime);
 
-		void MoveToTarget(Core::Core_Actor& p_target);
+		void MoveToTarget(Core::Core_Actor& pTarget);
 
-		void SetSpeed(float p_speed);
+		void SetSpeed(float pSpeed);
 
 		float GetSpeed() const;
 
@@ -42,45 +43,45 @@ namespace Editor
 		bool IsRightMousePressed() const;
 
 	private:
-		void HandleCameraPanning(const glm::vec2& p_mouseOffset, bool p_firstMouse);
-		void HandleCameraOrbit(const glm::vec2& p_mouseOffset, bool p_firstMouse);
-		void HandleCameraFPSMouse(const glm::vec2& p_mouseOffset, bool p_firstMouse);
+		void HandleCameraPanning(const glm::vec2& pMouseOffset, bool pFirstMouse);
+		void HandleCameraOrbit(const glm::vec2& pMouseOffset, bool pFirstMouse);
+		void HandleCameraFPSMouse(const glm::vec2& pMouseOffset, bool pFirstMouse);
 
 		void HandleCameraZoom();
 		void HandleCameraFPSKeyboard(float pDeltaTime);
 		void UpdateMouseState();
 
 	private:
-		Window::Window_InputManager& m_inputManager;
+		Window::Window_InputManager& mInputManager;
 		Window::Window_Window& mWindow;
-		Editor_AView& m_view;
+		Editor_AView& mView;
 		Render::Render_Camera& mCamera;
 		glm::vec3& mCameraPosition;
 		glm::quat& mCameraRotation;
 
-		std::queue<std::tuple<glm::vec3, glm::quat>> m_cameraDestinations;
+		std::queue<std::tuple<glm::vec3, glm::quat>> mCameraDestinations;
 
-		bool m_enableFocusInputs;
+		bool mEnableFocusInputs;
 
-		bool m_leftMousePressed = false;
-		bool m_middleMousePressed = false;
-		bool m_rightMousePressed = false;
+		bool mLeftMousePressed = false;
+		bool mMiddleMousePressed = false;
+		bool mRightMousePressed = false;
 
-		glm::vec3 m_targetSpeed;
-		glm::vec3 m_currentMovementSpeed;
+		glm::vec3 mTargetSpeed;
+		glm::vec3 mCurrentMovementSpeed;
 
-		Maths::Maths_FTransform* m_orbitTarget = nullptr;
-		glm::vec3 m_orbitStartOffset;
-		bool m_firstMouse = true;
-		double m_lastMousePosX = 0.0;
-		double m_lastMousePosY = 0.0;
-		glm::vec3 m_ypr;
-		float m_mouseSensitivity = 0.12f;
-		float m_cameraDragSpeed = 0.03f;
-		float m_cameraOrbitSpeed = 0.5f;
-		float m_cameraMoveSpeed = 15.0f;
-		float m_focusDistance = 15.0f;
-		float m_focusLerpCoefficient = 8.0f;
+		Maths::Maths_FTransform* mOrbitTarget = nullptr;
+		glm::vec3 mOrbitStartOffset;
+		bool mFirstMouse = true;
+		double mLastMousePosX = 0.0;
+		double mLastMousePosY = 0.0;
+		glm::vec3 mYPR;
+		float mMouseSensitivity = 0.12f;
+		float mCameraDragSpeed = 0.03f;
+		float mCameraOrbitSpeed = 0.5f;
+		float mCameraMoveSpeed = 15.0f;
+		float mFocusDistance = 15.0f;
+		float mFocusLerpCoefficient = 8.0f;
 	};
 }
 

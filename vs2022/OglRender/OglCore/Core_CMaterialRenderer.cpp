@@ -161,26 +161,26 @@ void Core::Core_CMaterialRenderer::OnDeserialize(tinyxml2::XMLDocument& pDoc, ti
 	UpdateMaterialList();
 }
 
-std::array<UI::UI_AWidget*, 3> CustomMaterialDrawer(UI::UI_WidgetContainer& pRoot, const std::string& pName, Core::Core_Material*& p_data)
+std::array<UI::UI_AWidget*, 3> CustomMaterialDrawer(UI::UI_WidgetContainer& pRoot, const std::string& pName, Core::Core_Material*& pData)
 {
 	std::array<UI::UI_AWidget*, 3> widgets;
 
 	widgets[0] = &pRoot.CreateWidget<UI::UI_TextColored>(pName, Core::Core_GUIDrawer::TitleColor);
 
-	std::string displayedText = (p_data ? p_data->path : std::string("Empty"));
+	std::string displayedText = (pData ? pData->path : std::string("Empty"));
 	auto& rightSide = pRoot.CreateWidget<UI::UI_Group>();
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);
 
 	widgets[1] = &widget;
 
-	widget.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [&widget, &p_data](auto p_receivedData)
+	widget.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [&widget, &pData](auto p_receivedData)
 		{
 			if (Tools::Tools_PathParser::GetFileType(p_receivedData.first) == Tools::Tools_PathParser::EFileType::MATERIAL)
 			{
 				if (auto resource = OVSERVICE(Core::Core_MaterialManager).GetResource(p_receivedData.first); resource)
 				{
-					p_data = resource;
+					pData = resource;
 					widget.mContent = p_receivedData.first;
 				}
 			}
@@ -190,9 +190,9 @@ std::array<UI::UI_AWidget*, 3> CustomMaterialDrawer(UI::UI_WidgetContainer& pRoo
 
 	auto& resetButton = rightSide.CreateWidget<UI::UI_ButtonSmall>("Clear");
 	resetButton.mIdleBackgroundColor = Core::Core_GUIDrawer::ClearButtonColor;
-	resetButton.mClickedEvent += [&widget, &p_data]
+	resetButton.mClickedEvent += [&widget, &pData]
 		{
-			p_data = nullptr;
+			pData = nullptr;
 			widget.mContent = "Empty";
 		};
 

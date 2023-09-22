@@ -1,145 +1,145 @@
 #include "Render_Camera.h"
 
 Render::Render_Camera::Render_Camera() :
-	m_projectionMode(EProjectionMode::PERSPECTIVE),
-	m_fov(45.0f),
-	m_size(5.0f),
-	m_near(0.1f),
-	m_far(100.f),
-	m_clearColor(0.f, 0.f, 0.f),
-	m_frustumGeometryCulling(false),
-	m_frustumLightCulling(false)
+	mProjectionMode(EProjectionMode::PERSPECTIVE),
+	mFov(45.0f),
+	mSize(5.0f),
+	mNear(0.1f),
+	mFar(100.f),
+	mClearColor(0.f, 0.f, 0.f),
+	mFrustumGeometryCulling(false),
+	mFrustumLightCulling(false)
 {
 }
 
-void Render::Render_Camera::CacheMatrices(uint16_t p_windowWidth, uint16_t p_windowHeight, const glm::vec3& pPosition, const glm::quat& pRotation)
+void Render::Render_Camera::CacheMatrices(uint16_t pWindowWidth, uint16_t pWindowHeight, const glm::vec3& pPosition, const glm::quat& pRotation)
 {
-	CacheProjectionMatrix(p_windowWidth, p_windowHeight);
+	CacheProjectionMatrix(pWindowWidth, pWindowHeight);
 	CacheViewMatrix(pPosition, pRotation);
-	CacheFrustum(m_viewMatrix, m_projectionMatrix);
+	CacheFrustum(mViewMatrix, mProjectionMatrix);
 }
 
-void Render::Render_Camera::CacheProjectionMatrix(uint16_t p_windowWidth, uint16_t p_windowHeight)
+void Render::Render_Camera::CacheProjectionMatrix(uint16_t pWindowWidth, uint16_t pWindowHeight)
 {
-	m_projectionMatrix = CalculateProjectionMatrix(p_windowWidth, p_windowHeight);
+	mProjectionMatrix = CalculateProjectionMatrix(pWindowWidth, pWindowHeight);
 }
 
 void Render::Render_Camera::CacheViewMatrix(const glm::vec3& pPosition, const glm::quat& pRotation)
 {
-	m_viewMatrix = CalculateViewMatrix(pPosition, pRotation);
+	mViewMatrix = CalculateViewMatrix(pPosition, pRotation);
 }
 
-void Render::Render_Camera::CacheFrustum(const glm::mat4& p_view, const glm::mat4& p_projection)
+void Render::Render_Camera::CacheFrustum(const glm::mat4& pView, const glm::mat4& pProjection)
 {
-	m_frustum.CalculateFrustum(p_projection * p_view);
+	mFrustum.CalculateFrustum(pProjection * pView);
 }
 
 float Render::Render_Camera::GetFov() const
 {
-	return m_fov;
+	return mFov;
 }
 
 float Render::Render_Camera::GetSize() const
 {
-	return m_size;
+	return mSize;
 }
 
 float Render::Render_Camera::GetNear() const
 {
-	return m_near;
+	return mNear;
 }
 
 float Render::Render_Camera::GetFar() const
 {
-	return m_far;
+	return mFar;
 }
 
 const glm::vec3& Render::Render_Camera::GetClearColor() const
 {
-	return m_clearColor;
+	return mClearColor;
 }
 
 const glm::mat4& Render::Render_Camera::GetProjectionMatrix() const
 {
-	return m_projectionMatrix;
+	return mProjectionMatrix;
 }
 
 const glm::mat4& Render::Render_Camera::GetViewMatrix() const
 {
-	return m_viewMatrix;
+	return mViewMatrix;
 }
 
 const Render::Render_Frustum& Render::Render_Camera::GetFrustum() const
 {
-	return m_frustum;
+	return mFrustum;
 }
 
 bool Render::Render_Camera::HasFrustumGeometryCulling() const
 {
-	return m_frustumGeometryCulling;
+	return mFrustumGeometryCulling;
 }
 
 bool Render::Render_Camera::HasFrustumLightCulling() const
 {
-	return m_frustumLightCulling;
+	return mFrustumLightCulling;
 }
 
 Render::EProjectionMode Render::Render_Camera::GetProjectionMode() const
 {
-	return m_projectionMode;
+	return mProjectionMode;
 }
 
 void Render::Render_Camera::SetFov(float pValue)
 {
-	m_fov = pValue;
+	mFov = pValue;
 }
 
 void Render::Render_Camera::SetSize(float pValue)
 {
-	m_size = pValue;
+	mSize = pValue;
 }
 
 void Render::Render_Camera::SetNear(float pValue)
 {
-	m_near = pValue;
+	mNear = pValue;
 }
 
 void Render::Render_Camera::SetFar(float pValue)
 {
-	m_far = pValue;
+	mFar = pValue;
 }
 
 void Render::Render_Camera::SetClearColor(const glm::vec3& pClearColor)
 {
-	m_clearColor = pClearColor;
+	mClearColor = pClearColor;
 }
 
 void Render::Render_Camera::SetFrustumGeometryCulling(bool pEnable)
 {
-	m_frustumGeometryCulling = pEnable;
+	mFrustumGeometryCulling = pEnable;
 }
 
 void Render::Render_Camera::SetFrustumLightCulling(bool pEnable)
 {
-	m_frustumLightCulling = pEnable;
+	mFrustumLightCulling = pEnable;
 }
 
-void Render::Render_Camera::SetProjectionMode(EProjectionMode p_projectionMode)
+void Render::Render_Camera::SetProjectionMode(EProjectionMode pProjectionMode)
 {
-	m_projectionMode = p_projectionMode;
+	mProjectionMode = pProjectionMode;
 }
 
-glm::mat4 Render::Render_Camera::CalculateProjectionMatrix(uint16_t p_windowWidth, uint16_t p_windowHeight) const
+glm::mat4 Render::Render_Camera::CalculateProjectionMatrix(uint16_t pWindowWidth, uint16_t pWindowHeight) const
 {
-	const auto ratio = p_windowWidth / static_cast<float>(p_windowHeight);
+	const auto ratio = pWindowWidth / static_cast<float>(pWindowHeight);
 
-	switch (m_projectionMode)
+	switch (mProjectionMode)
 	{
 	case EProjectionMode::ORTHOGRAPHIC:
-		return glm::ortho(m_size, ratio, m_near, m_far);
+		return glm::ortho(mSize, ratio, mNear, mFar);
 
 	case EProjectionMode::PERSPECTIVE:
-		return glm::perspective(m_fov, ratio, m_near, m_far);
+		return glm::perspective(mFov, ratio, mNear, mFar);
 
 	default:
 		return glm::identity<glm::mat4>();

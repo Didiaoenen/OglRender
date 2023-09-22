@@ -98,7 +98,7 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawMesh(UI::UI_WidgetContainer& pRoot, const
 {
 	CreateTitle(pRoot, pName);
 
-	std::string displayedText = (pData ? pData->path : std::string("Empty"));
+	std::string displayedText = (pData ? pData->mPath : std::string("Empty"));
 	auto& rightSide = pRoot.CreateWidget<UI::UI_Group>();
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);
@@ -136,10 +136,10 @@ UI::UI_Image& Core::Core_GUIDrawer::DrawTexture(UI::UI_WidgetContainer& pRoot, c
 {
 	CreateTitle(pRoot, pName);
 
-	std::string displayedText = (pData ? pData->path : std::string("Empty"));
+	std::string displayedText = (pData ? pData->mPath : std::string("Empty"));
 	auto& rightSide = pRoot.CreateWidget<UI::UI_Group>();
 
-	auto& widget = rightSide.CreateWidget<UI::UI_Image>(pData ? pData->id : (__EMPTY_TEXTURE ? __EMPTY_TEXTURE->id : 0), glm::vec2{ 75, 75 });
+	auto& widget = rightSide.CreateWidget<UI::UI_Image>(pData ? pData->mId : (__EMPTY_TEXTURE ? __EMPTY_TEXTURE->mId : 0), glm::vec2{ 75, 75 });
 
 	widget.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [&widget, &pData, pUpdateNotifier](auto p_receivedData)
 		{
@@ -148,7 +148,7 @@ UI::UI_Image& Core::Core_GUIDrawer::DrawTexture(UI::UI_WidgetContainer& pRoot, c
 				if (auto resource = OVSERVICE(Core_TextureManager).GetResource(p_receivedData.first); resource)
 				{
 					pData = resource;
-					widget.mTextureID.mId = resource->id;
+					widget.mTextureID.mId = resource->mId;
 					if (pUpdateNotifier)
 						pUpdateNotifier->Invoke();
 				}
@@ -162,7 +162,7 @@ UI::UI_Image& Core::Core_GUIDrawer::DrawTexture(UI::UI_WidgetContainer& pRoot, c
 	resetButton.mClickedEvent += [&widget, &pData, pUpdateNotifier]
 		{
 			pData = nullptr;
-			widget.mTextureID.mId = (__EMPTY_TEXTURE ? __EMPTY_TEXTURE->id : 0);
+			widget.mTextureID.mId = (__EMPTY_TEXTURE ? __EMPTY_TEXTURE->mId : 0);
 			if (pUpdateNotifier)
 				pUpdateNotifier->Invoke();
 		};
@@ -174,7 +174,7 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawShader(UI::UI_WidgetContainer& pRoot, con
 {
 	CreateTitle(pRoot, pName);
 
-	std::string displayedText = (pData ? pData->path : std::string("Empty"));
+	std::string displayedText = (pData ? pData->mPath : std::string("Empty"));
 	auto& rightSide = pRoot.CreateWidget<UI::UI_Group>();
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);

@@ -4,7 +4,7 @@
 
 namespace Render
 {
-	enum class UniformType : uint32_t
+	enum class EUniformType : uint32_t
 	{
 		UNIFORM_BOOL = 0x8B56,
 		UNIFORM_INT = 0x1404,

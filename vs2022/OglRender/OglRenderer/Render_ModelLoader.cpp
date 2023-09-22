@@ -6,7 +6,7 @@ Render::Render_Model* Render::Render_ModelLoader::Create(const std::string& p_fi
 {
 	Render_Model* result = new Render_Model(p_filepath);
 
-	if (__ASSIMP.LoadModel(p_filepath, result->m_meshes, result->mMaterialNames, p_parserFlags))
+	if (__ASSIMP.LoadModel(p_filepath, result->mMeshes, result->mMaterialNames, p_parserFlags))
 	{
 		result->ComputeBoundingSphere();
 		return result;
@@ -23,10 +23,10 @@ void Render::Render_ModelLoader::Reload(Render_Model& pModel, const std::string&
 
 	if (newModel)
 	{
-		pModel.m_meshes = newModel->m_meshes;
+		pModel.mMeshes = newModel->mMeshes;
 		pModel.mMaterialNames = newModel->mMaterialNames;
-		pModel.m_boundingSphere = newModel->m_boundingSphere;
-		newModel->m_meshes.clear();
+		pModel.mBoundingSphere = newModel->mBoundingSphere;
+		newModel->mMeshes.clear();
 		delete newModel;
 	}
 }

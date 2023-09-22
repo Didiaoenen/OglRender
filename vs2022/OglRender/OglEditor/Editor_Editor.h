@@ -44,7 +44,7 @@ namespace Editor
 		void PostUpdate();
 
 	private:
-		uint64_t mElapsedFrames = 0;
+		uint64_t mElapsedFrames{ 0 };
 		UI::UI_Canvas			mCanvas;
 		Editor_Context&			mContext;
 		Editor_EditorRenderer	mEditorRenderer;

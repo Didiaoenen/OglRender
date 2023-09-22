@@ -6,7 +6,7 @@ Render::Render_Shader* Core::Core_ShaderManager::CreateResource(const std::strin
 	Render::Render_Shader* shader = Render::Render_ShaderLoader::Create(realPath);
 	if (shader)
 	{
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(shader) + offsetof(Render::Render_Shader, path)) = pPath;
+		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(shader) + offsetof(Render::Render_Shader, mPath)) = pPath;
 	}
 
 	return shader;

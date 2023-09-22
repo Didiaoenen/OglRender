@@ -49,7 +49,7 @@ Render::Render_Model* Core::Core_ModelManager::CreateResource(const std::string&
 	auto model = Render::Render_ModelLoader::Create(realPath, GetAssetMetadata(realPath));
 	if (model)
 	{
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(model) + offsetof(Render::Render_Model, path)) = pPath;
+		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(model) + offsetof(Render::Render_Model, mPath)) = pPath;
 	}
 
 	return model;

@@ -5,9 +5,9 @@
 #include "Core_TextureManager.h"
 #include "Core_Material.h"
 
-void Core::Core_Material::SetShader(Render::Render_Shader* p_shader)
+void Core::Core_Material::SetShader(Render::Render_Shader* pShader)
 {
-	m_shader = p_shader;
+	m_shader = pShader;
 	if (m_shader)
 	{
 		Render::Render_UniformBuffer::BindBlockToShader(*m_shader, "EngineUBO");
@@ -23,8 +23,10 @@ void Core::Core_Material::FillUniform()
 {
 	m_uniformsData.clear();
 
-	for (const Render::Render_UniformInfo& element : m_shader->uniforms)
+	for (const Render::Render_UniformInfo& element : m_shader->mUniforms)
+	{
 		m_uniformsData.emplace(element.name, element.defaultValue);
+	}
 }
 
 void Core::Core_Material::Bind(Render::Render_Texture* p_emptyTexture)
@@ -43,13 +45,13 @@ void Core::Core_Material::Bind(Render::Render_Texture* p_emptyTexture)
 			{
 				switch (uniformData->type)
 				{
-					case Render::UniformType::UNIFORM_BOOL:			if (value.type() == typeid(bool))		m_shader->SetUniformInt(name, std::any_cast<bool>(value));			break;
-					case Render::UniformType::UNIFORM_INT:			if (value.type() == typeid(int))		m_shader->SetUniformInt(name, std::any_cast<int>(value));			break;
-					case Render::UniformType::UNIFORM_FLOAT:		if (value.type() == typeid(float))		m_shader->SetUniformFloat(name, std::any_cast<float>(value));		break;
-					case Render::UniformType::UNIFORM_FLOAT_VEC2:	if (value.type() == typeid(glm::vec2))	m_shader->SetUniformVec2(name, std::any_cast<glm::vec2>(value));		break;
-					case Render::UniformType::UNIFORM_FLOAT_VEC3:	if (value.type() == typeid(glm::vec3))	m_shader->SetUniformVec3(name, std::any_cast<glm::vec3>(value));		break;
-					case Render::UniformType::UNIFORM_FLOAT_VEC4:	if (value.type() == typeid(glm::vec4))	m_shader->SetUniformVec4(name, std::any_cast<glm::vec4>(value));		break;
-					case Render::UniformType::UNIFORM_SAMPLER_2D:
+					case Render::EUniformType::UNIFORM_BOOL:			if (value.type() == typeid(bool))		m_shader->SetUniformInt(name, std::any_cast<bool>(value));			break;
+					case Render::EUniformType::UNIFORM_INT:			if (value.type() == typeid(int))		m_shader->SetUniformInt(name, std::any_cast<int>(value));			break;
+					case Render::EUniformType::UNIFORM_FLOAT:		if (value.type() == typeid(float))		m_shader->SetUniformFloat(name, std::any_cast<float>(value));		break;
+					case Render::EUniformType::UNIFORM_FLOAT_VEC2:	if (value.type() == typeid(glm::vec2))	m_shader->SetUniformVec2(name, std::any_cast<glm::vec2>(value));		break;
+					case Render::EUniformType::UNIFORM_FLOAT_VEC3:	if (value.type() == typeid(glm::vec3))	m_shader->SetUniformVec3(name, std::any_cast<glm::vec3>(value));		break;
+					case Render::EUniformType::UNIFORM_FLOAT_VEC4:	if (value.type() == typeid(glm::vec4))	m_shader->SetUniformVec4(name, std::any_cast<glm::vec4>(value));		break;
+					case Render::EUniformType::UNIFORM_SAMPLER_2D:
 					{
 						if (value.type() == typeid(Render::Render_Texture*))
 						{
@@ -119,9 +121,9 @@ void Core::Core_Material::SetColorWriting(bool p_colorWriting)
 	m_colorWriting = p_colorWriting;
 }
 
-void Core::Core_Material::SetGPUInstances(int p_instances)
+void Core::Core_Material::SetGPUInstances(int pInstances)
 {
-	m_gpuInstances = p_instances;
+	m_gpuInstances = pInstances;
 }
 
 bool Core::Core_Material::IsBlendable() const
@@ -210,31 +212,31 @@ void Core::Core_Material::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XML
 		{
 			switch (uniformInfo->type)
 			{
-			case Render::UniformType::UNIFORM_BOOL:
+			case Render::EUniformType::UNIFORM_BOOL:
 				if (uniformValue.type() == typeid(bool)) Core_Serializer::SerializeInt(pDoc, uniform, "value", std::any_cast<bool>(uniformValue));
 				break;
 
-			case Render::UniformType::UNIFORM_INT:
+			case Render::EUniformType::UNIFORM_INT:
 				if (uniformValue.type() == typeid(int)) Core_Serializer::SerializeInt(pDoc, uniform, "value", std::any_cast<int>(uniformValue));
 				break;
 
-			case Render::UniformType::UNIFORM_FLOAT:
+			case Render::EUniformType::UNIFORM_FLOAT:
 				if (uniformValue.type() == typeid(float)) Core_Serializer::SerializeFloat(pDoc, uniform, "value", std::any_cast<float>(uniformValue));
 				break;
 
-			case Render::UniformType::UNIFORM_FLOAT_VEC2:
+			case Render::EUniformType::UNIFORM_FLOAT_VEC2:
 				if (uniformValue.type() == typeid(glm::vec2)) Core_Serializer::SerializeVec2(pDoc, uniform, "value", std::any_cast<glm::vec2>(uniformValue));
 				break;
 
-			case Render::UniformType::UNIFORM_FLOAT_VEC3:
+			case Render::EUniformType::UNIFORM_FLOAT_VEC3:
 				if (uniformValue.type() == typeid(glm::vec3)) Core_Serializer::SerializeVec3(pDoc, uniform, "value", std::any_cast<glm::vec3>(uniformValue));
 				break;
 
-			case Render::UniformType::UNIFORM_FLOAT_VEC4:
+			case Render::EUniformType::UNIFORM_FLOAT_VEC4:
 				if (uniformValue.type() == typeid(glm::vec4)) Core_Serializer::SerializeVec4(pDoc, uniform, "value", std::any_cast<glm::vec4>(uniformValue));
 				break;
 
-			case Render::UniformType::UNIFORM_SAMPLER_2D:
+			case Render::EUniformType::UNIFORM_SAMPLER_2D:
 				if (uniformValue.type() == typeid(Render::Render_Texture*)) Core_Serializer::SerializeTexture(pDoc, uniform, "value", std::any_cast<Render::Render_Texture*>(uniformValue));
 				break;
 			}
@@ -279,31 +281,31 @@ void Core::Core_Material::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::X
 					{
 						switch (uniformInfo->type)
 						{
-						case Render::UniformType::UNIFORM_BOOL:
+						case Render::EUniformType::UNIFORM_BOOL:
 							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeBoolean(pDoc, uniform, "value");
 							break;
 
-						case Render::UniformType::UNIFORM_INT:
+						case Render::EUniformType::UNIFORM_INT:
 							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeInt(pDoc, uniform, "value");
 							break;
 
-						case Render::UniformType::UNIFORM_FLOAT:
+						case Render::EUniformType::UNIFORM_FLOAT:
 							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeFloat(pDoc, uniform, "value");
 							break;
 
-						case Render::UniformType::UNIFORM_FLOAT_VEC2:
+						case Render::EUniformType::UNIFORM_FLOAT_VEC2:
 							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec2(pDoc, uniform, "value");
 							break;
 
-						case Render::UniformType::UNIFORM_FLOAT_VEC3:
+						case Render::EUniformType::UNIFORM_FLOAT_VEC3:
 							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec3(pDoc, uniform, "value");
 							break;
 
-						case Render::UniformType::UNIFORM_FLOAT_VEC4:
+						case Render::EUniformType::UNIFORM_FLOAT_VEC4:
 							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeVec4(pDoc, uniform, "value");
 							break;
 
-						case Render::UniformType::UNIFORM_SAMPLER_2D:
+						case Render::EUniformType::UNIFORM_SAMPLER_2D:
 							m_uniformsData[uniformInfo->name] = Core_Serializer::DeserializeTexture(pDoc, uniform, "value");
 							break;
 						}

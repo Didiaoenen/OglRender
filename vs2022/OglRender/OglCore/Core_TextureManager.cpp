@@ -24,7 +24,7 @@ Render::Render_Texture* Core::Core_TextureManager::CreateResource(const std::str
 
 	Render::Render_Texture* texture = Render::Render_TextureLoader::Create(realPath, min, mag, mipmap);
 	if (texture)
-		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(texture) + offsetof(Render::Render_Texture, path)) = pPath;
+		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(texture) + offsetof(Render::Render_Texture, mPath)) = pPath;
 
 	return texture;
 }

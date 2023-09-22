@@ -14,7 +14,7 @@ namespace Render
 	class Render_Mesh : public Render_IMesh
 	{
 	public:
-		Render_Mesh(const std::vector<Render_Vertex>& p_vertices, const std::vector<uint32_t>& p_indices, uint32_t p_materialIndex);
+		Render_Mesh(const std::vector<Render_Vertex>& pVertices, const std::vector<uint32_t>& pIndices, uint32_t pMaterialIndex);
 
 		virtual void Bind() override;
 
@@ -29,19 +29,19 @@ namespace Render
 		const Render_BoundingSphere& GetBoundingSphere() const;
 
 	private:
-		void CreateBuffers(const std::vector<Render_Vertex>& p_vertices, const std::vector<uint32_t>& p_indices);
-		void ComputeBoundingSphere(const std::vector<Render_Vertex>& p_vertices);
+		void CreateBuffers(const std::vector<Render_Vertex>& pVertices, const std::vector<uint32_t>& pIndices);
+		void ComputeBoundingSphere(const std::vector<Render_Vertex>& pVertices);
 
 	private:
-		const uint32_t m_vertexCount;
-		const uint32_t m_indicesCount;
-		const uint32_t m_materialIndex;
+		const uint32_t mVertexCount;
+		const uint32_t mIndicesCount;
+		const uint32_t mMaterialIndex;
 
-		Render_VertexArray							m_vertexArray;
-		std::unique_ptr<Render_VertexBuffer<float>>	m_vertexBuffer;
-		std::unique_ptr<Render_IndexBuffer>			m_indexBuffer;
+		Render_VertexArray							mVertexArray;
+		std::unique_ptr<Render_VertexBuffer<float>>	mVertexBuffer;
+		std::unique_ptr<Render_IndexBuffer>			mIndexBuffer;
 
-		Render_BoundingSphere m_boundingSphere;
+		Render_BoundingSphere mBoundingSphere;
 	};
 }
 

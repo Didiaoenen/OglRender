@@ -27,7 +27,7 @@ namespace Editor
 
 		~Editor_Inspector();
 
-		void FocusActor(Core::Core_Actor& p_target);
+		void FocusActor(Core::Core_Actor& pTarget);
 
 		void UnFocus();
 
@@ -35,7 +35,7 @@ namespace Editor
 
 		Core::Core_Actor* GetTargetActor() const;
 
-		void CreateActorInspector(Core::Core_Actor& p_target);
+		void CreateActorInspector(Core::Core_Actor& pTarget);
 
 		void DrawComponent(Core::Core_AComponent& p_component);
 

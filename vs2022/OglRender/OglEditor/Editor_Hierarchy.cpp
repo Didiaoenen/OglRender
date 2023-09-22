@@ -21,8 +21,8 @@
 class Editor_HierarchyContextualMenu : public UI::UI_ContextualMenu
 {
 public:
-	Editor_HierarchyContextualMenu(Core::Core_Actor* p_target, UI::UI_TreeNode& p_treeNode, bool p_panelMenu = false) :
-		m_target(p_target),
+	Editor_HierarchyContextualMenu(Core::Core_Actor* pTarget, UI::UI_TreeNode& p_treeNode, bool p_panelMenu = false) :
+		m_target(pTarget),
 		m_treeNode(p_treeNode)
 	{
 		if (m_target)
@@ -150,7 +150,9 @@ Editor::Editor_Hierarchy::Editor_Hierarchy(const std::string& pTitle, bool pOpen
 	m_sceneRoot->AddPlugin<UI::UI_DDTarget<std::pair<Core::Core_Actor*, UI::UI_TreeNode*>>>("Actor").mDataReceivedEvent += [this](std::pair<Core::Core_Actor*, UI::UI_TreeNode*> p_element)
 		{
 			if (p_element.second->HasParent())
+			{
 				p_element.second->GetParent()->UnconsiderWidget(*p_element.second);
+			}
 
 			m_sceneRoot->ConsiderWidget(*p_element.second);
 
@@ -159,7 +161,7 @@ Editor::Editor_Hierarchy::Editor_Hierarchy(const std::string& pTitle, bool pOpen
 	m_sceneRoot->AddPlugin<Editor_HierarchyContextualMenu>(nullptr, *m_sceneRoot);
 
 	EDITOR_EVENT(ActorUnselectedEvent) += std::bind(&Editor_Hierarchy::UnselectActorsWidgets, this);
-	EDITOR_CONTEXT(sceneManager).SceneUnloadEvent += std::bind(&Editor_Hierarchy::Clear, this);
+	EDITOR_CONTEXT(mSceneManager).mSceneUnloadEvent += std::bind(&Editor_Hierarchy::Clear, this);
 	Core::Core_Actor::mCreatedEvent += std::bind(&Editor_Hierarchy::AddActorByInstance, this, std::placeholders::_1);
 	Core::Core_Actor::mDestroyedEvent += std::bind(&Editor_Hierarchy::DeleteActorByInstance, this, std::placeholders::_1);
 	EDITOR_EVENT(ActorSelectedEvent) += std::bind(&Editor_Hierarchy::SelectActorByInstance, this, std::placeholders::_1);

@@ -1,8 +1,11 @@
+
+#include <algorithm>
+
 #include "Render_Model.h"
 
 const std::vector<Render::Render_Mesh*>& Render::Render_Model::GetMeshes() const
 {
-	return m_meshes;
+	return mMeshes;
 }
 
 const std::vector<std::string>& Render::Render_Model::GetMaterialNames() const
@@ -12,30 +15,34 @@ const std::vector<std::string>& Render::Render_Model::GetMaterialNames() const
 
 const Render::Render_BoundingSphere& Render::Render_Model::GetBoundingSphere() const
 {
-	return m_boundingSphere;
+	return mBoundingSphere;
 }
 
 Render::Render_Model::Render_Model(const std::string& pPath) :
-	path(pPath)
+	mPath(pPath)
 {
 }
 
 Render::Render_Model::~Render_Model()
 {
+	for (auto mesh : mMeshes)
+	{
+		delete mesh;
+	}
 }
 
 void Render::Render_Model::ComputeBoundingSphere()
 {
-	if (m_meshes.size() == 1)
+	if (mMeshes.size() == 1)
 	{
-		m_boundingSphere = m_meshes[0]->GetBoundingSphere();
+		mBoundingSphere = mMeshes[0]->GetBoundingSphere();
 	}
 	else
 	{
-		m_boundingSphere.position = glm::vec3(0.0f);
-		m_boundingSphere.radius = 0.0f;
+		mBoundingSphere.position = glm::vec3(0.0f);
+		mBoundingSphere.radius = 0.0f;
 
-		if (!m_meshes.empty())
+		if (!mMeshes.empty())
 		{
 			float minX = std::numeric_limits<float>::max();
 			float minY = std::numeric_limits<float>::max();
@@ -45,7 +52,7 @@ void Render::Render_Model::ComputeBoundingSphere()
 			float maxY = std::numeric_limits<float>::min();
 			float maxZ = std::numeric_limits<float>::min();
 
-			for (const auto& mesh : m_meshes)
+			for (const auto& mesh : mMeshes)
 			{
 				const auto& boundingSphere = mesh->GetBoundingSphere();
 				minX = std::min(minX, boundingSphere.position.x - boundingSphere.radius);
@@ -57,8 +64,8 @@ void Render::Render_Model::ComputeBoundingSphere()
 				maxZ = std::max(maxZ, boundingSphere.position.z + boundingSphere.radius);
 			}
 
-			m_boundingSphere.position = glm::vec3{ minX + maxX, minY + maxY, minZ + maxZ } / 2.0f;
-			m_boundingSphere.radius = glm::distance(m_boundingSphere.position, { minX, minY, minZ });
+			mBoundingSphere.position = glm::vec3{ minX + maxX, minY + maxY, minZ + maxZ } / 2.0f;
+			mBoundingSphere.radius = glm::distance(mBoundingSphere.position, { minX, minY, minZ });
 		}
 	}
 }

@@ -33,80 +33,80 @@ namespace Render
 
 		~Render_Renderer() = default;
 
-		void SetClearColor(float p_red, float p_green, float p_blue, float p_alpha = 1.0f);
+		void SetClearColor(float pRed, float pGreen, float pBlue, float pAlpha = 1.0f);
 
-		void Clear(bool p_colorBuffer = true, bool p_depthBuffer = true, bool p_stencilBuffer = true);
+		void Clear(bool pColorBuffer = true, bool pDepthBuffer = true, bool pStencilBuffer = true);
 
-		void Clear(Render_Camera& pCamera, bool p_colorBuffer = true, bool p_depthBuffer = true, bool p_stencilBuffer = true);
+		void Clear(Render_Camera& pCamera, bool pColorBuffer = true, bool pDepthBuffer = true, bool pStencilBuffer = true);
 
-		void SetRasterizationLinesWidth(float p_width);
+		void SetRasterizationLinesWidth(float pWidth);
 
-		void SetRasterizationMode(ERasterizationMode p_rasterizationMode);
+		void SetRasterizationMode(ERasterizationMode pRasterizationMode);
 
-		void SetCapability(ERenderingCapability p_capability, bool pValue);
+		void SetCapability(ERenderingCapability pCapability, bool pValue);
 
-		bool GetCapability(ERenderingCapability p_capability) const;
+		bool GetCapability(ERenderingCapability pCapability) const;
 
-		void SetStencilAlgorithm(EComparaisonAlgorithm p_algorithm, int32_t pReference, uint32_t p_mask);
+		void SetStencilAlgorithm(EComparaisonAlgorithm pAlgorithm, int32_t pReference, uint32_t pMask);
 
-		void SetDepthAlgorithm(EComparaisonAlgorithm p_algorithm);
+		void SetDepthAlgorithm(EComparaisonAlgorithm pAlgorithm);
 
-		void SetStencilMask(uint32_t p_mask);
+		void SetStencilMask(uint32_t pMask);
 
-		void SetStencilOperations(EOperation p_stencilFail = EOperation::KEEP, EOperation p_depthFail = EOperation::KEEP, EOperation p_bothPass = EOperation::KEEP);
+		void SetStencilOperations(EOperation pStencilFail = EOperation::KEEP, EOperation pDepthFail = EOperation::KEEP, EOperation pBothPass = EOperation::KEEP);
 
-		void SetCullFace(ECullFace p_cullFace);
+		void SetCullFace(ECullFace pCullFace);
 
 		void SetDepthWriting(bool pEnable);
 
-		void SetColorWriting(bool p_enableRed, bool p_enableGreen, bool p_enableBlue, bool p_enableAlpha);
+		void SetColorWriting(bool pEnableRed, bool pEnableGreen, bool pEnableBlue, bool pEnableAlpha);
 
 		void SetColorWriting(bool pEnable);
 
-		void SetViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
+		void SetViewPort(uint32_t pX, uint32_t pY, uint32_t pWidth, uint32_t pHeight);
 
-		void ReadPixels(uint32_t x, uint32_t y, uint32_t width, uint32_t height, EPixelDataFormat format, EPixelDataType type, void* data);
+		void ReadPixels(uint32_t pX, uint32_t pY, uint32_t pWidth, uint32_t pHeight, EPixelDataFormat pFormat, EPixelDataType pType, void* pData);
 
-		bool GetBool(GLenum p_parameter);
+		bool GetBool(GLenum pParameter);
 
-		bool GetBool(GLenum p_parameter, uint32_t pIndex);
+		bool GetBool(GLenum pParameter, uint32_t pIndex);
 
-		int GetInt(GLenum p_parameter);
+		int GetInt(GLenum pParameter);
 
-		int GetInt(GLenum p_parameter, uint32_t pIndex);
+		int GetInt(GLenum pParameter, uint32_t pIndex);
 
-		float GetFloat(GLenum p_parameter);
+		float GetFloat(GLenum pParameter);
 
-		float GetFloat(GLenum p_parameter, uint32_t pIndex);
+		float GetFloat(GLenum pParameter, uint32_t pIndex);
 
-		double GetDouble(GLenum p_parameter);
+		double GetDouble(GLenum pParameter);
 
-		double GetDouble(GLenum p_parameter, uint32_t pIndex);
+		double GetDouble(GLenum pParameter, uint32_t pIndex);
 
-		int64_t GetInt64(GLenum p_parameter);
+		int64_t GetInt64(GLenum pParameter);
 
-		int64_t GetInt64(GLenum p_parameter, uint32_t pIndex);
+		int64_t GetInt64(GLenum pParameter, uint32_t pIndex);
 
-		std::string GetString(GLenum p_parameter);
+		std::string GetString(GLenum pParameter);
 
-		std::string GetString(GLenum p_parameter, uint32_t pIndex);
+		std::string GetString(GLenum pParameter, uint32_t pIndex);
 
 		void ClearFrameInfo();
 
-		void Draw(Render_IMesh& pMesh, EPrimitiveMode p_primitiveMode = EPrimitiveMode::TRIANGLES, uint32_t p_instances = 1);
+		void Draw(Render_IMesh& pMesh, EPrimitiveMode pPrimitiveMode = EPrimitiveMode::TRIANGLES, uint32_t pInstances = 1);
 
 		std::vector<std::reference_wrapper<Render_Mesh>> GetMeshesInFrustum
 		(
 			const Render_Model& pModel,
-			const Render_BoundingSphere& p_modelBoundingSphere,
-			const Maths::Maths_FTransform& p_modelTransform,
+			const Render_BoundingSphere& pModelBoundingSphere,
+			const Maths::Maths_FTransform& pModelTransform,
 			const Render_Frustum& pFrustum,
-			ECullingOptions p_cullingOptions
+			ECullingOptions pCullingOptions
 		);
 
 		uint8_t FetchGLState();
 
-		void ApplyStateMask(uint8_t p_mask);
+		void ApplyStateMask(uint8_t pMask);
 
 		void SetState(uint8_t pState);
 
@@ -114,8 +114,8 @@ namespace Render
 
 	private:
 		Render_Driver&	mDriver;
-		FrameInfo		m_frameInfo;
-		uint8_t			m_state;
+		FrameInfo		mFrameInfo;
+		uint8_t			mState;
 	};
 }
 

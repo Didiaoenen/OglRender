@@ -7,19 +7,19 @@ namespace Core
 	class Core_SceneManager
 	{
 	public:
-		Core_SceneManager(const std::string& p_sceneRootFolder = "");
+		Core_SceneManager(const std::string& pSceneRootFolder = "");
 
 		~Core_SceneManager();
 
 		void Update();
 
-		void LoadAndPlayDelayed(const std::string& pPath, bool p_absolute = false);
+		void LoadAndPlayDelayed(const std::string& pPath, bool pAbsolute = false);
 
 		void LoadEmptyScene();
 
 		void LoadEmptyLightedScene();
 
-		bool LoadScene(const std::string& pPath, bool p_absolute = false);
+		bool LoadScene(const std::string& pPath, bool pAbsolute = false);
 
 		bool LoadSceneFromMemory(tinyxml2::XMLDocument& pDoc);
 
@@ -38,18 +38,18 @@ namespace Core
 		void ForgetCurrentSceneSourcePath();
 
 	public:
-		Tools::Tools_Event<> SceneLoadEvent;
-		Tools::Tools_Event<> SceneUnloadEvent;
-		Tools::Tools_Event<const std::string&> CurrentSceneSourcePathChangedEvent;
+		Tools::Tools_Event<> mSceneLoadEvent;
+		Tools::Tools_Event<> mSceneUnloadEvent;
+		Tools::Tools_Event<const std::string&> mCurrentSceneSourcePathChangedEvent;
 
 	private:
-		const std::string m_sceneRootFolder;
-		Core_Scene* m_currentScene{ nullptr };
+		const std::string mSceneRootFolder;
+		Core_Scene* mCurrentScene{ nullptr };
 
-		bool m_currentSceneLoadedFromPath{ false };
-		std::string m_currentSceneSourcePath{ "" };
+		bool mCurrentSceneLoadedFromPath{ false };
+		std::string mCurrentSceneSourcePath{ "" };
 
-		std::function<void()> m_delayedLoadCall;
+		std::function<void()> mDelayedLoadCall;
 	};
 }
 

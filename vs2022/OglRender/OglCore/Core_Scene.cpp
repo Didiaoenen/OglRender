@@ -75,11 +75,11 @@ Core::Core_Actor& Core::Core_Scene::CreateActor(const std::string& pName, const 
 	return instance;
 }
 
-bool Core::Core_Scene::DestroyActor(Core::Core_Actor& p_target)
+bool Core::Core_Scene::DestroyActor(Core::Core_Actor& pTarget)
 {
-	auto found = std::find_if(m_actors.begin(), m_actors.end(), [&p_target](Core_Actor* element)
+	auto found = std::find_if(m_actors.begin(), m_actors.end(), [&pTarget](Core_Actor* element)
 		{
-			return element == &p_target;
+			return element == &pTarget;
 		});
 
 	if (found != m_actors.end())

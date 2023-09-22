@@ -10,9 +10,9 @@ namespace Render
 	{
 	public:
 
-		Render_IndexBuffer(unsigned int* p_data, size_t p_elements);
+		Render_IndexBuffer(unsigned int* pData, size_t pElements);
 
-		Render_IndexBuffer(std::vector<uint32_t>& p_data);
+		Render_IndexBuffer(std::vector<uint32_t>& pData);
 
 		~Render_IndexBuffer();
 
@@ -23,7 +23,7 @@ namespace Render
 		uint32_t GetID();
 
 	private:
-		uint32_t m_bufferID;
+		uint32_t mBufferID{ 0 };
 	};
 }
 

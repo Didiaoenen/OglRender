@@ -20,38 +20,38 @@ const Render::Render_Light& Core::Core_CLight::GetData() const
 
 const glm::vec3& Core::Core_CLight::GetColor() const
 {
-	return mData.color;
+	return mData.mColor;
 }
 
 float Core::Core_CLight::GetIntensity() const
 {
-	return mData.intensity;
+	return mData.mIntensity;
 }
 
 void Core::Core_CLight::SetColor(const glm::vec3& pColor)
 {
-	mData.color = pColor;
+	mData.mColor = pColor;
 }
 
 void Core::Core_CLight::SetIntensity(float pIntensity)
 {
-	mData.intensity = pIntensity;
+	mData.mIntensity = pIntensity;
 }
 
 void Core::Core_CLight::OnSerialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_Serializer::SerializeVec3(pDoc, pNode, "color", mData.color);
-	Core_Serializer::SerializeFloat(pDoc, pNode, "intensity", mData.intensity);
+	Core_Serializer::SerializeVec3(pDoc, pNode, "mColor", mData.mColor);
+	Core_Serializer::SerializeFloat(pDoc, pNode, "mIntensity", mData.mIntensity);
 }
 
 void Core::Core_CLight::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode)
 {
-	Core_Serializer::DeserializeVec3(pDoc, pNode, "color", mData.color);
-	Core_Serializer::DeserializeFloat(pDoc, pNode, "intensity", mData.intensity);
+	Core_Serializer::DeserializeVec3(pDoc, pNode, "mColor", mData.mColor);
+	Core_Serializer::DeserializeFloat(pDoc, pNode, "mIntensity", mData.mIntensity);
 }
 
 void Core::Core_CLight::OnInspector(UI::UI_WidgetContainer& pRoot)
 {
-	Core_GUIDrawer::DrawColor(pRoot, "Color", reinterpret_cast<UI::Color&>(mData.color));
-	Core_GUIDrawer::DrawScalar<float>(pRoot, "Intensity", mData.intensity, 0.005f, Core_GUIDrawer::_MIN_FLOAT, Core_GUIDrawer::_MAX_FLOAT);
+	Core_GUIDrawer::DrawColor(pRoot, "Color", reinterpret_cast<UI::Color&>(mData.mColor));
+	Core_GUIDrawer::DrawScalar<float>(pRoot, "Intensity", mData.mIntensity, 0.005f, Core_GUIDrawer::_MIN_FLOAT, Core_GUIDrawer::_MAX_FLOAT);
 }

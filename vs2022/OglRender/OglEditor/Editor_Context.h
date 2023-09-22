@@ -45,29 +45,29 @@ namespace Editor
 		const std::string mProjectScriptsPath;
 		const std::string mEditorAssetsPath;
 
-		std::unique_ptr<Window::Window_Device>			device;
-		std::unique_ptr<Window::Window_Window>			window;
-		std::unique_ptr<Window::Window_InputManager>	inputManager;
-		std::unique_ptr<Render::Render_Driver>			driver;
-		std::unique_ptr<Core::Core_Renderer>			renderer;
-		std::unique_ptr<Render::Render_ShapeDrawer>		shapeDrawer;
-		std::unique_ptr<UI::UI_UIManager>				uiManager;
-		std::unique_ptr<Editor_EditorResources>			editorResources;
-		std::unique_ptr<Render::Render_UniformBuffer>	engineUBO;
+		std::unique_ptr<Window::Window_Device>			mDevice;
+		std::unique_ptr<Window::Window_Window>			mWindow;
+		std::unique_ptr<Window::Window_InputManager>	mInputManager;
+		std::unique_ptr<Render::Render_Driver>			mDriver;
+		std::unique_ptr<Core::Core_Renderer>			mRenderer;
+		std::unique_ptr<Render::Render_ShapeDrawer>		mShapeDrawer;
+		std::unique_ptr<UI::UI_UIManager>				mUIManager;
+		std::unique_ptr<Editor_EditorResources>			mEditorResources;
+		std::unique_ptr<Render::Render_UniformBuffer>	mEngineUBO;
 
-		std::unique_ptr<Render::Render_ShaderStorageBuffer>	lightSSBO;
-		std::unique_ptr<Render::Render_ShaderStorageBuffer>	simulatedLightSSBO;
+		std::unique_ptr<Render::Render_ShaderStorageBuffer>	mLightSSBO;
+		std::unique_ptr<Render::Render_ShaderStorageBuffer>	mSimulatedLightSSBO;
 
-		Core::Core_SceneManager sceneManager;
+		Core::Core_SceneManager mSceneManager;
 
-		Core::Core_ModelManager		modelManager;
-		Core::Core_TextureManager	textureManager;
-		Core::Core_ShaderManager	shaderManager;
-		Core::Core_MaterialManager	materialManager;
+		Core::Core_ModelManager		mModelManager;
+		Core::Core_TextureManager	mTextureManager;
+		Core::Core_ShaderManager	mShaderManager;
+		Core::Core_MaterialManager	mMaterialManager;
 
-		Window::Window_WindowSettings windowSettings;
+		Window::Window_WindowSettings mWindowSettings;
 
-		Tools::Tools_IniFile projectSettings;
+		Tools::Tools_IniFile mProjectSettings;
 	};
 }
 

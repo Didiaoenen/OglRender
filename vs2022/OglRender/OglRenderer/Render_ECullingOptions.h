@@ -16,5 +16,5 @@ namespace Render
 	inline ECullingOptions& operator|= (ECullingOptions& a, ECullingOptions b) { return (ECullingOptions&)((int&)a |= (int)b); }
 	inline ECullingOptions& operator&= (ECullingOptions& a, ECullingOptions b) { return (ECullingOptions&)((int&)a &= (int)b); }
 	inline ECullingOptions& operator^= (ECullingOptions& a, ECullingOptions b) { return (ECullingOptions&)((int&)a ^= (int)b); }
-	inline bool IsFlagSet(ECullingOptions p_flag, ECullingOptions p_mask) { return (int)p_flag & (int)p_mask; }
+	inline bool IsFlagSet(ECullingOptions p_flag, ECullingOptions pMask) { return (int)p_flag & (int)pMask; }
 }

@@ -14,23 +14,23 @@ namespace Render
 		friend class Render_TextureLoader;
 
 	public:
-		void Bind(uint32_t p_slot = 0) const;
+		void Bind(uint32_t pSlot = 0) const;
 
 		void Unbind() const;
 
 	private:
-		Render_Texture(const std::string pPath, uint32_t pId, uint32_t p_width, uint32_t p_height, uint32_t p_bpp, ETextureFilteringMode p_firstFilter, ETextureFilteringMode p_secondFilter, bool p_generateMipmap);
+		Render_Texture(const std::string pPath, uint32_t pId, uint32_t pWidth, uint32_t pHeight, uint32_t pBpp, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap);
 		~Render_Texture() = default;
 
 	public:
-		const uint32_t id;
-		const uint32_t width;
-		const uint32_t height;
-		const uint32_t bitsPerPixel;
-		const ETextureFilteringMode firstFilter;
-		const ETextureFilteringMode secondFilter;
-		const std::string path;
-		const bool isMimapped;
+		const uint32_t mId;
+		const uint32_t mWidth;
+		const uint32_t mHeight;
+		const uint32_t mBitsPerPixel;
+		const ETextureFilteringMode mFirstFilter;
+		const ETextureFilteringMode mSecondFilter;
+		const std::string mPath;
+		const bool mIsMimapped;
 	};
 }
 

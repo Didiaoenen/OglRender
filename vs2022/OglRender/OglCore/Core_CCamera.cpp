@@ -51,9 +51,9 @@ void Core::Core_CCamera::SetFrustumLightCulling(bool pEnable)
 	mCamera.SetFrustumLightCulling(pEnable);
 }
 
-void Core::Core_CCamera::SetProjectionMode(Render::EProjectionMode p_projectionMode)
+void Core::Core_CCamera::SetProjectionMode(Render::EProjectionMode pProjectionMode)
 {
-	mCamera.SetProjectionMode(p_projectionMode);
+	mCamera.SetProjectionMode(pProjectionMode);
 }
 
 float Core::Core_CCamera::GetFov() const

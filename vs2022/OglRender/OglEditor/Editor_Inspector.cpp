@@ -142,9 +142,9 @@ Editor::Editor_Inspector::Editor_Inspector(const std::string& pTitle, bool pOpen
 				}
 			};
 
-		ddTarget.mDataReceivedEvent += [updateAddScriptButton, this](std::pair<std::string, UI::UI_Group*> p_data)
+		ddTarget.mDataReceivedEvent += [updateAddScriptButton, this](std::pair<std::string, UI::UI_Group*> pData)
 			{
-				m_scriptSelectorWidget->mContent = EDITOR_EXEC(GetScriptPath(p_data.first));
+				m_scriptSelectorWidget->mContent = EDITOR_EXEC(GetScriptPath(pData.first));
 				updateAddScriptButton(m_scriptSelectorWidget->mContent);
 			};
 	}
@@ -165,7 +165,7 @@ Editor::Editor_Inspector::~Editor_Inspector()
 	UnFocus();
 }
 
-void Editor::Editor_Inspector::FocusActor(Core::Core_Actor& p_target)
+void Editor::Editor_Inspector::FocusActor(Core::Core_Actor& pTarget)
 {
 	if (m_targetActor)
 	{
@@ -174,7 +174,7 @@ void Editor::Editor_Inspector::FocusActor(Core::Core_Actor& p_target)
 
 	m_actorInfo->RemoveAllWidgets();
 
-	m_targetActor = &p_target;
+	m_targetActor = &pTarget;
 
 	m_componentAddedListener = m_targetActor->mComponentAddedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
 	m_behaviourAddedListener = m_targetActor->mBehaviourAddedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
@@ -183,7 +183,7 @@ void Editor::Editor_Inspector::FocusActor(Core::Core_Actor& p_target)
 
 	m_inspectorHeader->mEnabled = true;
 
-	CreateActorInspector(p_target);
+	CreateActorInspector(pTarget);
 
 	m_componentSelectorWidget->mValueChangedEvent.Invoke(m_componentSelectorWidget->mCurrentChoice);
 	m_scriptSelectorWidget->mContentChangedEvent.Invoke(m_scriptSelectorWidget->mContent);
@@ -220,11 +220,11 @@ Core::Core_Actor* Editor::Editor_Inspector::GetTargetActor() const
 	return m_targetActor;
 }
 
-void Editor::Editor_Inspector::CreateActorInspector(Core::Core_Actor& p_target)
+void Editor::Editor_Inspector::CreateActorInspector(Core::Core_Actor& pTarget)
 {
 	std::map<std::string, Core::Core_AComponent*> components;
 
-	for (auto component : p_target.GetComponents())
+	for (auto component : pTarget.GetComponents())
 	{
 		if (component->GetName() != "Transform")
 		{
@@ -232,7 +232,7 @@ void Editor::Editor_Inspector::CreateActorInspector(Core::Core_Actor& p_target)
 		}
 	}
 
-	auto transform = p_target.GetComponent<Core::Core_CTransform>();
+	auto transform = pTarget.GetComponent<Core::Core_CTransform>();
 	if (transform)
 	{
 		DrawComponent(*transform);
@@ -243,7 +243,7 @@ void Editor::Editor_Inspector::CreateActorInspector(Core::Core_Actor& p_target)
 		DrawComponent(*instance);
 	}
 
-	auto& behaviours = p_target.GetBehaviours();
+	auto& behaviours = pTarget.GetBehaviours();
 
 	for (auto& [name, behaviour] : behaviours)
 	{

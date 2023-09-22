@@ -85,7 +85,7 @@ public:
 		{
 			if (texture)
 			{
-				image.mTextureID.mId = texture->id;
+				image.mTextureID.mId = texture->mId;
 			}
 
 			ImGui::BeginTooltip();
@@ -370,7 +370,7 @@ public:
 
 					ItemAddedEvent.Invoke(finalPath);
 
-					if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
+					if (auto instance = EDITOR_CONTEXT(mMaterialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 					{
 						auto& materialEditor = EDITOR_PANEL(Editor::Editor_MaterialEditor, "Material Editor");
 						materialEditor.SetTarget(*instance);
@@ -400,7 +400,7 @@ public:
 
 					ItemAddedEvent.Invoke(finalPath);
 
-					if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
+					if (auto instance = EDITOR_CONTEXT(mMaterialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 					{
 						auto& materialEditor = EDITOR_PANEL(Editor::Editor_MaterialEditor, "Material Editor");
 						materialEditor.SetTarget(*instance);
@@ -430,7 +430,7 @@ public:
 
 					ItemAddedEvent.Invoke(finalPath);
 
-					if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
+					if (auto instance = EDITOR_CONTEXT(mMaterialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 					{
 						auto& materialEditor = EDITOR_PANEL(Editor::Editor_MaterialEditor, "Material Editor");
 						materialEditor.SetTarget(*instance);
@@ -461,7 +461,7 @@ public:
 
 					ItemAddedEvent.Invoke(finalPath);
 
-					if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
+					if (auto instance = EDITOR_CONTEXT(mMaterialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 					{
 						auto& materialEditor = EDITOR_PANEL(Editor::Editor_MaterialEditor, "Material Editor");
 						materialEditor.SetTarget(*instance);
@@ -491,7 +491,7 @@ public:
 
 					ItemAddedEvent.Invoke(finalPath);
 
-					if (auto instance = EDITOR_CONTEXT(materialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
+					if (auto instance = EDITOR_CONTEXT(mMaterialManager)[EDITOR_EXEC(GetResourcePath(finalPath))])
 					{
 						auto& materialEditor = EDITOR_PANEL(Editor::Editor_MaterialEditor, "Material Editor");
 						materialEditor.SetTarget(*instance);
@@ -1034,7 +1034,7 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 
 	auto& itemGroup = pRoot ? pRoot->CreateWidget<UI::UI_Group>() : m_assetList->CreateWidget<UI::UI_Group>();
 
-	uint32_t iconTextureID = isDirectory ? EDITOR_CONTEXT(editorResources)->GetTexture("Icon_Folder")->id : EDITOR_CONTEXT(editorResources)->GetFileIcon(itemname)->id;
+	uint32_t iconTextureID = isDirectory ? EDITOR_CONTEXT(mEditorResources)->GetTexture("Icon_Folder")->mId : EDITOR_CONTEXT(mEditorResources)->GetFileIcon(itemname)->mId;
 
 	itemGroup.CreateWidget<UI::UI_Image>(iconTextureID, glm::vec2{ 16, 16 }).mLineBreak = false;
 
@@ -1068,11 +1068,11 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 		{
 			if (!p_isEngineItem)
 			{
-				treeNode.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("Folder").mDataReceivedEvent += [this, &treeNode, path, p_isEngineItem](std::pair<std::string, UI::UI_Group*> p_data)
+				treeNode.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("Folder").mDataReceivedEvent += [this, &treeNode, path, p_isEngineItem](std::pair<std::string, UI::UI_Group*> pData)
 					{
-						if (!p_data.first.empty())
+						if (!pData.first.empty())
 						{
-							std::string folderReceivedPath = EDITOR_EXEC(GetRealPath(p_data.first));
+							std::string folderReceivedPath = EDITOR_EXEC(GetRealPath(pData.first));
 
 							std::string folderName = Tools::Tools_PathParser::GetElementName(folderReceivedPath) + '\\';
 							std::string prevPath = folderReceivedPath;
@@ -1083,7 +1083,7 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 							{
 								if (!std::filesystem::exists(newPath))
 								{
-									bool isEngineFolder = p_data.first.at(0) == ':';
+									bool isEngineFolder = pData.first.at(0) == ':';
 
 									if (isEngineFolder)
 									{
@@ -1100,7 +1100,7 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 									ParseFolder(treeNode, std::filesystem::directory_entry(correctPath), p_isEngineItem);
 
 									if (!isEngineFolder)
-										p_data.second->Destroy();
+										pData.second->Destroy();
 								}
 								else if (prevPath == newPath)
 								{
@@ -1118,11 +1118,11 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 						}
 					};
 
-				treeNode.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this, &treeNode, path, p_isEngineItem](std::pair<std::string, UI::UI_Group*> p_data)
+				treeNode.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this, &treeNode, path, p_isEngineItem](std::pair<std::string, UI::UI_Group*> pData)
 					{
-						if (!p_data.first.empty())
+						if (!pData.first.empty())
 						{
-							std::string fileReceivedPath = EDITOR_EXEC(GetRealPath(p_data.first));
+							std::string fileReceivedPath = EDITOR_EXEC(GetRealPath(pData.first));
 
 							std::string fileName = Tools::Tools_PathParser::GetElementName(fileReceivedPath);
 							std::string prevPath = fileReceivedPath;
@@ -1131,7 +1131,7 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 
 							if (!std::filesystem::exists(newPath))
 							{
-								bool isEngineFile = p_data.first.at(0) == ':';
+								bool isEngineFile = pData.first.at(0) == ':';
 
 								if (isEngineFile)
 								{
@@ -1148,7 +1148,7 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 								ParseFolder(treeNode, std::filesystem::directory_entry(correctPath), p_isEngineItem);
 
 								if (!isEngineFile)
-									p_data.second->Destroy();
+									pData.second->Destroy();
 							}
 							else if (prevPath == newPath)
 							{
@@ -1232,9 +1232,9 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 			{
 				itemGroup.Destroy();
 
-				if (EDITOR_CONTEXT(sceneManager).GetCurrentSceneSourcePath() == p_deletedPath)
+				if (EDITOR_CONTEXT(mSceneManager).GetCurrentSceneSourcePath() == p_deletedPath)
 				{
-					EDITOR_CONTEXT(sceneManager).ForgetCurrentSceneSourcePath();
+					EDITOR_CONTEXT(mSceneManager).ForgetCurrentSceneSourcePath();
 				}
 			};
 
@@ -1258,9 +1258,9 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 						if (!p_scriptFolder)
 						{
 							EDITOR_EXEC(PropagateFileRename(p_prev, p_newPath));
-							if (EDITOR_CONTEXT(sceneManager).GetCurrentSceneSourcePath() == p_prev)
+							if (EDITOR_CONTEXT(mSceneManager).GetCurrentSceneSourcePath() == p_prev)
 							{
-								EDITOR_CONTEXT(sceneManager).StoreCurrentSceneSourcePath(p_newPath);
+								EDITOR_CONTEXT(mSceneManager).StoreCurrentSceneSourcePath(p_newPath);
 							}
 						}
 						else

@@ -38,9 +38,9 @@ void Editor::Editor_AView::Render()
 
 	auto [winWidth, winHeight] = GetSafeSize();
 
-	EDITOR_CONTEXT(shapeDrawer)->SetViewProjection(mCamera.GetProjectionMatrix() * mCamera.GetViewMatrix());
+	EDITOR_CONTEXT(mShapeDrawer)->SetViewProjection(mCamera.GetProjectionMatrix() * mCamera.GetViewMatrix());
 
-	EDITOR_CONTEXT(renderer)->SetViewPort(0, 0, winWidth, winHeight);
+	EDITOR_CONTEXT(mRenderer)->SetViewPort(0, 0, winWidth, winHeight);
 
 	_Render_Impl();
 }
@@ -88,7 +88,7 @@ void Editor::Editor_AView::SetGridColor(const glm::vec3& pColor)
 
 void Editor::Editor_AView::FillEngineUBO()
 {
-	auto& engineUBO = *EDITOR_CONTEXT(engineUBO);
+	auto& engineUBO = *EDITOR_CONTEXT(mEngineUBO);
 
 	auto [winWidth, winHeight] = GetSafeSize();
 

@@ -31,7 +31,7 @@ namespace Core
 
 		void SetFrustumLightCulling(bool pEnable);
 
-		void SetProjectionMode(Render::EProjectionMode p_projectionMode);
+		void SetProjectionMode(Render::EProjectionMode pProjectionMode);
 
 		float GetFov() const;
 
