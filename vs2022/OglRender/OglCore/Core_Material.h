@@ -17,7 +17,7 @@ namespace Core
 
 		void FillUniform();
 
-		void Bind(Render::Render_Texture* p_emptyTexture);
+		void Bind(Render::Render_Texture* pEmptyTexture);
 
 		void UnBind();
 
@@ -29,17 +29,17 @@ namespace Core
 
 		bool HasShader() const;
 
-		void SetBlendable(bool p_blendable);
+		void SetBlendable(bool pBlendable);
 
-		void SetBackfaceCulling(bool p_backfaceCulling);
+		void SetBackfaceCulling(bool pBackfaceCulling);
 
-		void SetFrontfaceCulling(bool p_frontfaceCulling);
+		void SetFrontfaceCulling(bool pFrontfaceCulling);
 
-		void SetDepthTest(bool p_depthTest);
+		void SetDepthTest(bool pDepthTest);
 
-		void SetDepthWriting(bool p_depthWriting);
+		void SetDepthWriting(bool pDepthWriting);
 
-		void SetColorWriting(bool p_colorWriting);
+		void SetColorWriting(bool pColorWriting);
 
 		void SetGPUInstances(int pInstances);
 
@@ -65,19 +65,19 @@ namespace Core
 
 		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode) override;
 
-		const std::string path;
+		const std::string mPath{ "" };
 
 	private:
-		Render::Render_Shader* m_shader = nullptr;
-		std::map<std::string, std::any> m_uniformsData;
+		Render::Render_Shader* mShader{ nullptr };
+		std::map<std::string, std::any> mUniformsData;
 
-		bool m_blendable = false;
-		bool m_backfaceCulling = true;
-		bool m_frontfaceCulling = false;
-		bool m_depthTest = true;
-		bool m_depthWriting = true;
-		bool m_colorWriting = true;
-		int m_gpuInstances = 1;
+		bool mBlendable{ false };
+		bool mBackfaceCulling{ true };
+		bool mFrontfaceCulling{ false };
+		bool mDepthTest{ true };
+		bool mDepthWriting{ true };
+		bool mColorWriting{ true };
+		int mGpuInstances{ 1 };
 	};
 }
 

@@ -20,234 +20,237 @@
 
 #define PROJECTS_FILE std::string(std::string(getenv("APPDATA")) + "")
 
-class Editor_ProjectHubPanel : public UI::UI_PanelWindow
+namespace Editor
 {
-public:
-	Editor_ProjectHubPanel(bool& pReadyToGo, std::string& pPath, std::string& pProjectName) :
-		UI::UI_PanelWindow("Overload - Project Hub", true),
-		mReadyToGo(pReadyToGo),
-		mPath(pPath),
-		mProjectName(pProjectName)
+	class Editor_ProjectHubPanel : public UI::UI_PanelWindow
 	{
-		mResizable = false; 
-		mMovable = false;
-		mTitleBar = false;
+	public:
+		Editor_ProjectHubPanel(bool& pReadyToGo, std::string& pPath, std::string& pProjectName) :
+			UI::UI_PanelWindow("Overload - Project Hub", true),
+			mReadyToGo(pReadyToGo),
+			mPath(pPath),
+			mProjectName(pProjectName)
+		{
+			mResizable = false; 
+			mMovable = false;
+			mTitleBar = false;
 
-		std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\");
+			std::filesystem::create_directories(std::string(getenv("APPDATA")) + "\\OverloadTech\\OvEditor\\");
 
-		SetSize({ 1000, 580 });
-		SetPosition({ 0.f, 0.f });
+			SetSize({ 1000, 580 });
+			SetPosition({ 0.f, 0.f });
 
-		auto& openProjectButton = CreateWidget<UI::UI_Button>("Open Project");
-		auto& newProjectButton = CreateWidget<UI::UI_Button>("New Project");
-		auto& pathField = CreateWidget<UI::UI_InputText>("");
-		mGoButton = &CreateWidget<UI::UI_Button>("GO");
+			auto& openProjectButton = CreateWidget<UI::UI_Button>("Open Project");
+			auto& newProjectButton = CreateWidget<UI::UI_Button>("New Project");
+			auto& pathField = CreateWidget<UI::UI_InputText>("");
+			mGoButton = &CreateWidget<UI::UI_Button>("GO");
 
-		pathField.mContentChangedEvent += [this, &pathField](std::string pContent)
-			{
-				pathField.mContent = Tools::Tools_PathParser::MakeWindowsStyle(pContent);
-
-				if (pathField.mContent != "" && pathField.mContent.back() != '\\')
+			pathField.mContentChangedEvent += [this, &pathField](std::string pContent)
 				{
-					pathField.mContent += '\\';
-				}
+					pathField.mContent = Tools::Tools_PathParser::MakeWindowsStyle(pContent);
 
-				UpdateGoButton(pathField.mContent);
-			};
+					if (pathField.mContent != "" && pathField.mContent.back() != '\\')
+					{
+						pathField.mContent += '\\';
+					}
 
-		UpdateGoButton("");
-
-		openProjectButton.mIdleBackgroundColor = { 0.7f, 0.5f, 0.f, 1.f };
-		newProjectButton.mIdleBackgroundColor = { 0.f, 0.5f, 0.0f, 1.f };
-
-		openProjectButton.mClickedEvent += [this]
-			{
-				Window::Window_OpenFileDialog dialog("Open project");
-				dialog.AddFileType("Overload Project", "*.ovproject");
-				dialog.Show();
-
-				std::string ovProjectPath = dialog.GetSelectedFilePath();
-				std::string rootFolderPath = Tools::Tools_PathParser::GetContainingFolder(ovProjectPath);
-
-				if (dialog.HasSucceeded())
-				{
-					RegisterProject(rootFolderPath);
-					OpenProject(rootFolderPath);
-				}
-			};
-
-		newProjectButton.mClickedEvent += [this, &pathField]
-			{
-				Window::Window_SaveFileDialog dialog("New project location");
-				dialog.DefineExtension("Overload Project", "..");
-				dialog.Show();
-				if (dialog.HasSucceeded())
-				{
-					std::string result = dialog.GetSelectedFilePath();
-					pathField.mContent = std::string(result.data(), result.data() + result.size() - std::string("..").size());
-					pathField.mContent += "\\";
 					UpdateGoButton(pathField.mContent);
-				}
-			};
+				};
 
-		mGoButton->mClickedEvent += [this, &pathField]
-			{
-				CreateProject(pathField.mContent);
-				RegisterProject(pathField.mContent);
-				OpenProject(pathField.mContent);
-			};
+			UpdateGoButton("");
 
-		openProjectButton.mLineBreak = false;
-		newProjectButton.mLineBreak = false;
-		pathField.mLineBreak = false;
+			openProjectButton.mIdleBackgroundColor = { 0.7f, 0.5f, 0.f, 1.f };
+			newProjectButton.mIdleBackgroundColor = { 0.f, 0.5f, 0.0f, 1.f };
 
-		for (uint8_t i = 0; i < 4; ++i)
-		{
-			CreateWidget<UI::UI_Spacing>();
-		}
-
-		CreateWidget<UI::UI_Separator>();
-
-		for (uint8_t i = 0; i < 4; ++i)
-		{
-			CreateWidget<UI::UI_Spacing>();
-		}
-
-		auto& columns = CreateWidget<UI::UI_Columns<2>>();
-
-		columns.mWidths = { 750, 500 };
-
-		std::string line;
-		std::ifstream myfile(PROJECTS_FILE);
-		if (myfile.is_open())
-		{
-			while (getline(myfile, line))
-			{
-				if (std::filesystem::exists(line))
+			openProjectButton.mClickedEvent += [this]
 				{
-					auto& text = columns.CreateWidget<UI::UI_Text>(line);
-					auto& actions = columns.CreateWidget<UI::UI_Group>();
-					auto& openButton = actions.CreateWidget<UI::UI_Button>("Open");
-					auto& deleteButton = actions.CreateWidget<UI::UI_Button>("Delete");
+					Window::Window_OpenFileDialog dialog("Open project");
+					dialog.AddFileType("Overload Project", "*.ovproject");
+					dialog.Show();
 
-					openButton.mIdleBackgroundColor = { 0.7f, 0.5f, 0.f, 1.f };
-					deleteButton.mIdleBackgroundColor = { 0.5f, 0.f, 0.f, 1.f };
+					std::string ovProjectPath = dialog.GetSelectedFilePath();
+					std::string rootFolderPath = Tools::Tools_PathParser::GetContainingFolder(ovProjectPath);
 
-					openButton.mClickedEvent += [this, line]
-						{
-							OpenProject(line);
-						};
+					if (dialog.HasSucceeded())
+					{
+						RegisterProject(rootFolderPath);
+						OpenProject(rootFolderPath);
+					}
+				};
 
-					std::string toErase = line;
-					deleteButton.mClickedEvent += [this, &text, &actions, toErase]
-						{
-							text.Destroy();
-							actions.Destroy();
+			newProjectButton.mClickedEvent += [this, &pathField]
+				{
+					Window::Window_SaveFileDialog dialog("New project location");
+					dialog.DefineExtension("Overload Project", "..");
+					dialog.Show();
+					if (dialog.HasSucceeded())
+					{
+						std::string result = dialog.GetSelectedFilePath();
+						pathField.mContent = std::string(result.data(), result.data() + result.size() - std::string("..").size());
+						pathField.mContent += "\\";
+						UpdateGoButton(pathField.mContent);
+					}
+				};
 
-							std::string line;
-							std::ifstream fin(PROJECTS_FILE);
-							std::ofstream temp("temp");
+			mGoButton->mClickedEvent += [this, &pathField]
+				{
+					CreateProject(pathField.mContent);
+					RegisterProject(pathField.mContent);
+					OpenProject(pathField.mContent);
+				};
 
-							while (getline(fin, line))
-							{
-								if (line != toErase)
-								{
-									temp << line << std::endl;
-								}
-							}
+			openProjectButton.mLineBreak = false;
+			newProjectButton.mLineBreak = false;
+			pathField.mLineBreak = false;
 
-							temp.close();
-							fin.close();
-
-							std::filesystem::remove(PROJECTS_FILE);
-							std::filesystem::rename("temp", PROJECTS_FILE);
-						};
-
-					openButton.mLineBreak = false;
-					deleteButton.mLineBreak;
-				}
+			for (uint8_t i = 0; i < 4; ++i)
+			{
+				CreateWidget<UI::UI_Spacing>();
 			}
-			myfile.close();
-		}
-	}
 
-	void UpdateGoButton(const std::string& pPath)
-	{
-		bool validPath = pPath != "";
-		mGoButton->mIdleBackgroundColor = validPath ? UI::Color{ 0.f, 0.5f, 0.0f, 1.f } : UI::Color{ 0.1f, 0.1f, 0.1f, 1.f };
-		mGoButton->mDisabled = !validPath;
-	}
+			CreateWidget<UI::UI_Separator>();
 
-	void CreateProject(const std::string& pPath)
-	{
-		if (!std::filesystem::exists(pPath))
-		{
-			std::filesystem::create_directory(pPath);
-			std::filesystem::create_directory(pPath + "Assets\\");
-			std::filesystem::create_directory(pPath + "Scripts\\");
-			std::ofstream projectFile(pPath + '\\' + Tools::Tools_PathParser::GetElementName(std::string(pPath.data(), pPath.data() + pPath.size() - 1)) + ".ovproject");
-		}
-	}
+			for (uint8_t i = 0; i < 4; ++i)
+			{
+				CreateWidget<UI::UI_Spacing>();
+			}
 
-	void RegisterProject(const std::string& pPath)
-	{
-		bool pathAlreadyRegistered = false;
+			auto& columns = CreateWidget<UI::UI_Columns<2>>();
 
-		{
+			columns.mWidths = { 750, 500 };
+
 			std::string line;
 			std::ifstream myfile(PROJECTS_FILE);
 			if (myfile.is_open())
 			{
 				while (getline(myfile, line))
 				{
-					if (line == pPath)
+					if (std::filesystem::exists(line))
 					{
-						pathAlreadyRegistered = true;
-						break;
+						auto& text = columns.CreateWidget<UI::UI_Text>(line);
+						auto& actions = columns.CreateWidget<UI::UI_Group>();
+						auto& openButton = actions.CreateWidget<UI::UI_Button>("Open");
+						auto& deleteButton = actions.CreateWidget<UI::UI_Button>("Delete");
+
+						openButton.mIdleBackgroundColor = { 0.7f, 0.5f, 0.f, 1.f };
+						deleteButton.mIdleBackgroundColor = { 0.5f, 0.f, 0.f, 1.f };
+
+						openButton.mClickedEvent += [this, line]
+							{
+								OpenProject(line);
+							};
+
+						std::string toErase = line;
+						deleteButton.mClickedEvent += [this, &text, &actions, toErase]
+							{
+								text.Destroy();
+								actions.Destroy();
+
+								std::string line;
+								std::ifstream fin(PROJECTS_FILE);
+								std::ofstream temp("temp");
+
+								while (getline(fin, line))
+								{
+									if (line != toErase)
+									{
+										temp << line << std::endl;
+									}
+								}
+
+								temp.close();
+								fin.close();
+
+								std::filesystem::remove(PROJECTS_FILE);
+								std::filesystem::rename("temp", PROJECTS_FILE);
+							};
+
+						openButton.mLineBreak = false;
+						deleteButton.mLineBreak;
 					}
 				}
 				myfile.close();
 			}
 		}
 
-		if (!pathAlreadyRegistered)
+		void UpdateGoButton(const std::string& pPath)
 		{
-			std::ofstream projectsFile(PROJECTS_FILE, std::ios::app);
-			projectsFile << pPath << std::endl;
+			bool validPath = pPath != "";
+			mGoButton->mIdleBackgroundColor = validPath ? UI::Color{ 0.f, 0.5f, 0.0f, 1.f } : UI::Color{ 0.1f, 0.1f, 0.1f, 1.f };
+			mGoButton->mDisabled = !validPath;
 		}
-	}
 
-	void OpenProject(const std::string& pPath)
-	{
-		mReadyToGo = std::filesystem::exists(pPath);
-		if (!mReadyToGo)
+		void CreateProject(const std::string& pPath)
 		{
-			Window::Window_MessageBox errorMessage("Project not found", "The selected project does not exists", Window::Window_MessageBox::EMessageType::ERROR, Window::Window_MessageBox::EButtonLayout::OK);
+			if (!std::filesystem::exists(pPath))
+			{
+				std::filesystem::create_directory(pPath);
+				std::filesystem::create_directory(pPath + "Assets\\");
+				std::filesystem::create_directory(pPath + "Scripts\\");
+				std::ofstream projectFile(pPath + '\\' + Tools::Tools_PathParser::GetElementName(std::string(pPath.data(), pPath.data() + pPath.size() - 1)) + ".ovproject");
+			}
 		}
-		else
+
+		void RegisterProject(const std::string& pPath)
 		{
-			mPath = pPath;
-			mProjectName = Tools::Tools_PathParser::GetElementName(mPath);
-			Close();
+			bool pathAlreadyRegistered = false;
+
+			{
+				std::string line;
+				std::ifstream myfile(PROJECTS_FILE);
+				if (myfile.is_open())
+				{
+					while (getline(myfile, line))
+					{
+						if (line == pPath)
+						{
+							pathAlreadyRegistered = true;
+							break;
+						}
+					}
+					myfile.close();
+				}
+			}
+
+			if (!pathAlreadyRegistered)
+			{
+				std::ofstream projectsFile(PROJECTS_FILE, std::ios::app);
+				projectsFile << pPath << std::endl;
+			}
 		}
-	}
 
-	void Draw() override
-	{
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 50.f, 50.f });
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.f);
+		void OpenProject(const std::string& pPath)
+		{
+			mReadyToGo = std::filesystem::exists(pPath);
+			if (!mReadyToGo)
+			{
+				Window::Window_MessageBox errorMessage("Project not found", "The selected project does not exists", Window::Window_MessageBox::EMessageType::ERROR, Window::Window_MessageBox::EButtonLayout::OK);
+			}
+			else
+			{
+				mPath = pPath;
+				mProjectName = Tools::Tools_PathParser::GetElementName(mPath);
+				Close();
+			}
+		}
 
-		UI::UI_PanelWindow::Draw();
+		void Draw() override
+		{
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 50.f, 50.f });
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.f);
 
-		ImGui::PopStyleVar(2);
-	}
+			UI::UI_PanelWindow::Draw();
 
-private:
-	bool& mReadyToGo;
-	std::string& mPath;
-	std::string& mProjectName;
-	UI::UI_Button* mGoButton{ nullptr };
-};
+			ImGui::PopStyleVar(2);
+		}
+
+	private:
+		bool& mReadyToGo;
+		std::string& mPath;
+		std::string& mProjectName;
+		UI::UI_Button* mGoButton{ nullptr };
+	};
+}
 
 Editor::Editor_ProjectHub::Editor_ProjectHub()
 {

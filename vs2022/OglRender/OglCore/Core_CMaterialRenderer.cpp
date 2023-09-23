@@ -19,7 +19,9 @@ Core::Core_CMaterialRenderer::Core_CMaterialRenderer(Core_Actor& pOwner) :
 	mMaterials.fill(nullptr);
 
 	for (uint8_t i = 0; i < MAX_MATERIAL_COUNT; ++i)
+	{
 		mMaterialFields[i].fill(nullptr);
+	}
 
 	UpdateMaterialList();
 }
@@ -32,7 +34,9 @@ std::string Core::Core_CMaterialRenderer::GetName()
 void Core::Core_CMaterialRenderer::FillWithMaterial(Core_Material& pMaterial)
 {
 	for (uint8_t i = 0; i < mMaterials.size(); ++i)
+	{
 		mMaterials[i] = &pMaterial;
+	}
 }
 
 void Core::Core_CMaterialRenderer::SetMaterialAtIndex(uint8_t pIndex, Core_Material& pMaterial)
@@ -56,14 +60,20 @@ void Core::Core_CMaterialRenderer::RemoveMaterialAtIndex(uint8_t pIndex)
 void Core::Core_CMaterialRenderer::RemoveMaterialByInstance(Core_Material& pInstance)
 {
 	for (uint8_t i = 0; i < mMaterials.size(); ++i)
+	{
 		if (mMaterials[i] == &pInstance)
+		{
 			mMaterials[i] = nullptr;
+		}
+	}
 }
 
 void Core::Core_CMaterialRenderer::RemoveAllMaterials()
 {
 	for (uint8_t i = 0; i < mMaterials.size(); ++i)
+	{
 		mMaterials[i] = nullptr;
+	}
 }
 
 void Core::Core_CMaterialRenderer::UpdateMaterialList()
@@ -78,7 +88,9 @@ void Core::Core_CMaterialRenderer::UpdateMaterialList()
 		}
 
 		for (uint8_t i = materialIndex; i < MAX_MATERIAL_COUNT; ++i)
+		{
 			mMaterialNames[i] = "";
+		}
 	}
 
 	for (uint8_t i = 0; i < mMaterialFields.size(); ++i)
@@ -167,7 +179,7 @@ std::array<UI::UI_AWidget*, 3> CustomMaterialDrawer(UI::UI_WidgetContainer& pRoo
 
 	widgets[0] = &pRoot.CreateWidget<UI::UI_TextColored>(pName, Core::Core_GUIDrawer::TitleColor);
 
-	std::string displayedText = (pData ? pData->path : std::string("Empty"));
+	std::string displayedText = (pData ? pData->mPath : std::string("Empty"));
 	auto& rightSide = pRoot.CreateWidget<UI::UI_Group>();
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);

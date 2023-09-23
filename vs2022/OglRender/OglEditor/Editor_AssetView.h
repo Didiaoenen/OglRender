@@ -22,7 +22,7 @@ namespace Editor
 
 		virtual void _Render_Impl() override;
 
-		void SetResource(ViewableResource p_resource);
+		void SetResource(ViewableResource pResource);
 
 		ViewableResource GetResource() const;
 

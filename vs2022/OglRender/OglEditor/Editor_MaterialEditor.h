@@ -51,7 +51,7 @@ namespace Editor
 
 	private:
 		Core::Core_Material* m_target = nullptr;
-		Render::Render_Shader* m_shader = nullptr;
+		Render::Render_Shader* mShader = nullptr;
 
 		UI::UI_Text* m_targetMaterialText = nullptr;
 		UI::UI_Text* m_shaderText = nullptr;

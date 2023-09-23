@@ -22,31 +22,40 @@ namespace Core
 	template<typename T>
 	inline std::string Core_GUIDrawer::GetFormat()
 	{
-		if constexpr (std::is_same<T, double>::value) return "%.5f";
-		else if constexpr (std::is_same<T, float>::value) return "%.3f";
-		else return "%d";
+		if constexpr (std::is_same<T, double>::value)
+		{
+			return "%.5f";
+		}
+		else if constexpr (std::is_same<T, float>::value)
+		{
+			return "%.3f";
+		}
+		else
+		{
+			return "%d";
+		}
 	}
 
 	template<typename T>
-	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& pRoot, const std::string& pName, T& pData, float p_step, T p_min, T p_max)
+	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& pRoot, const std::string& pName, T& pData, float pStep, T pMin, T pMax)
 	{
 		static_assert(std::is_scalar<T>::value, "T must be a scalar");
 
 		CreateTitle(pRoot, pName);
-		auto& widget = pRoot.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), p_min, p_max, pData, p_step, "", GetFormat<T>());
+		auto& widget = pRoot.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), pMin, pMax, pData, pStep, "", GetFormat<T>());
 		auto& dispatcher = widget.AddPlugin<UI::UI_DataDispatcher<T>>();
 		dispatcher.RegisterReference(pData);
 	}
 
 	template<typename T>
-	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& pRoot, const std::string& pName, std::function<T(void)> p_gatherer, std::function<void(T)> p_provider, float p_step, T p_min, T p_max)
+	inline void Core_GUIDrawer::DrawScalar(UI::UI_WidgetContainer& pRoot, const std::string& pName, std::function<T(void)> pGatherer, std::function<void(T)> pProvider, float pStep, T pMin, T pMax)
 	{
 		static_assert(std::is_scalar<T>::value, "T must be a scalar");
 
 		CreateTitle(pRoot, pName);
-		auto& widget = pRoot.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), p_min, p_max, static_cast<T>(0), p_step, "", GetFormat<T>());
+		auto& widget = pRoot.CreateWidget<UI::UI_DragSingleScalar<T>>(GetDataType<T>(), pMin, pMax, static_cast<T>(0), pStep, "", GetFormat<T>());
 		auto& dispatcher = widget.AddPlugin<UI::UI_DataDispatcher<T>>();
-		dispatcher.RegisterGatherer(p_gatherer);
-		dispatcher.RegisterProvider(p_provider);
+		dispatcher.RegisterGatherer(pGatherer);
+		dispatcher.RegisterProvider(pProvider);
 	}
 }

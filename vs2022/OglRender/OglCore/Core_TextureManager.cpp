@@ -24,21 +24,23 @@ Render::Render_Texture* Core::Core_TextureManager::CreateResource(const std::str
 
 	Render::Render_Texture* texture = Render::Render_TextureLoader::Create(realPath, min, mag, mipmap);
 	if (texture)
+	{
 		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(texture) + offsetof(Render::Render_Texture, mPath)) = pPath;
+	}
 
 	return texture;
 }
 
-void Core::Core_TextureManager::DestroyResource(Render::Render_Texture* p_resource)
+void Core::Core_TextureManager::DestroyResource(Render::Render_Texture* pResource)
 {
-	Render::Render_TextureLoader::Destroy(p_resource);
+	Render::Render_TextureLoader::Destroy(pResource);
 }
 
-void Core::Core_TextureManager::ReloadResource(Render::Render_Texture* p_resource, const std::string& pPath)
+void Core::Core_TextureManager::ReloadResource(Render::Render_Texture* pResource, const std::string& pPath)
 {
 	std::string realPath = GetRealPath(pPath);
 
 	auto [min, mag, mipmap] = GetAssetMetadata(realPath);
 
-	Render::Render_TextureLoader::Reload(*p_resource, realPath, min, mag, mipmap);
+	Render::Render_TextureLoader::Reload(*pResource, realPath, min, mag, mipmap);
 }

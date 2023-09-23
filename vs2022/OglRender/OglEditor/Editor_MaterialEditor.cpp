@@ -118,7 +118,7 @@ void Editor::Editor_MaterialEditor::Refresh()
 void Editor::Editor_MaterialEditor::SetTarget(Core::Core_Material& p_newTarget)
 {
 	m_target = &p_newTarget;
-	m_targetMaterialText->mContent = m_target->path;
+	m_targetMaterialText->mContent = m_target->mPath;
 	OnMaterialDropped();
 }
 
@@ -146,7 +146,7 @@ void Editor::Editor_MaterialEditor::Preview()
 
 void Editor::Editor_MaterialEditor::Reset()
 {
-	if (m_target && m_shader)
+	if (m_target && mShader)
 	{
 		m_target->SetShader(nullptr);
 		OnShaderDropped();
@@ -161,7 +161,7 @@ void Editor::Editor_MaterialEditor::OnMaterialDropped()
 	{
 		GenerateMaterialSettingsContent();
 		m_shaderText->mContent = m_target->GetShader() ? m_target->GetShader()->mPath : "Empty";
-		m_shader = m_target->GetShader();
+		mShader = m_target->GetShader();
 	}
 	else
 	{
@@ -179,11 +179,11 @@ void Editor::Editor_MaterialEditor::OnMaterialDropped()
 
 void Editor::Editor_MaterialEditor::OnShaderDropped()
 {
-	m_shaderSettings->mEnabled = m_shader;
+	m_shaderSettings->mEnabled = mShader;
 
-	if (m_shader != m_target->GetShader())
+	if (mShader != m_target->GetShader())
 	{
-		m_target->SetShader(m_shader);
+		m_target->SetShader(mShader);
 	}
 
 	if (m_shaderSettings->mEnabled)
@@ -204,7 +204,7 @@ void Editor::Editor_MaterialEditor::CreateHeaderButtons()
 		{
 			if (m_target)
 			{
-				Core::Core_MaterialLoader::Save(*m_target, EDITOR_EXEC(GetRealPath(m_target->path)));
+				Core::Core_MaterialLoader::Save(*m_target, EDITOR_EXEC(GetRealPath(m_target->mPath)));
 			}
 		};
 
@@ -215,7 +215,7 @@ void Editor::Editor_MaterialEditor::CreateHeaderButtons()
 	reloadButton.mClickedEvent += [this]
 		{
 			if (m_target)
-				Core::Core_MaterialLoader::Reload(*m_target, EDITOR_EXEC(GetRealPath(m_target->path)));
+				Core::Core_MaterialLoader::Reload(*m_target, EDITOR_EXEC(GetRealPath(m_target->mPath)));
 
 			OnMaterialDropped();
 		};
@@ -243,7 +243,7 @@ void Editor::Editor_MaterialEditor::CreateShaderSelector()
 {
 	auto& columns = m_settings->CreateWidget<UI::UI_Columns<2>>();
 	columns.mWidths[0] = 150;
-	m_shaderText = &Core::Core_GUIDrawer::DrawShader(columns, "Shader", m_shader, &m_shaderDroppedEvent);
+	m_shaderText = &Core::Core_GUIDrawer::DrawShader(columns, "Shader", mShader, &m_shaderDroppedEvent);
 }
 
 void Editor::Editor_MaterialEditor::CreateMaterialSettings()

@@ -1,6 +1,8 @@
 #include <OglCore/Core_CAmbientBoxLight.h>
 #include <OglCore/Core_CAmbientSphereLight.h>
 
+#include <OglMaths/Maths_GlmExt.h>
+
 #include "OglUI/imgui.h"
 
 #include "Editor_EditorActions.h"
@@ -70,16 +72,16 @@ void Editor::Editor_CameraController::HandleInputs(float pDeltaTime)
 					{
 						auto camPos = targetPos + pOffset * dist;
 						auto direction = glm::normalize(targetPos - camPos);
-						mCameraRotation = glm::lookAt(direction, glm::zero<glm::vec3>(), abs(direction.y) == 1.0f ? glm::vec3(1.f, 0.f, 0.f) : glm::vec3(0.f, 1.f, 0.f));
+						mCameraRotation = glm::lookAt(direction, glm::zero<glm::vec3>(), abs(direction.y) == 1.0f ? glm::right<glm::vec3>() : glm::up<glm::vec3>());
 						mCameraDestinations.push({ camPos, mCameraRotation });
 					};
 
-				if (mInputManager.IsKeyPressed(Window::EKey::KEY_UP))			focusObjectFromAngle(glm::vec3(0.f, 1.f, 0.f));
-				if (mInputManager.IsKeyPressed(Window::EKey::KEY_DOWN))			focusObjectFromAngle(-glm::vec3(0.f, 1.f, 0.f));
-				if (mInputManager.IsKeyPressed(Window::EKey::KEY_RIGHT))		focusObjectFromAngle(glm::vec3(1.f, 0.f, 0.f));
-				if (mInputManager.IsKeyPressed(Window::EKey::KEY_LEFT))			focusObjectFromAngle(-glm::vec3(1.f, 0.f, 0.f));
-				if (mInputManager.IsKeyPressed(Window::EKey::KEY_PAGE_UP))		focusObjectFromAngle(glm::vec3(0.f, 0.f, 1.f));
-				if (mInputManager.IsKeyPressed(Window::EKey::KEY_PAGE_DOWN))	focusObjectFromAngle(-glm::vec3(0.f, 0.f, 1.f));
+				if (mInputManager.IsKeyPressed(Window::EKey::KEY_UP))			focusObjectFromAngle(glm::up<glm::vec3>());
+				if (mInputManager.IsKeyPressed(Window::EKey::KEY_DOWN))			focusObjectFromAngle(-glm::up<glm::vec3>());
+				if (mInputManager.IsKeyPressed(Window::EKey::KEY_RIGHT))		focusObjectFromAngle(glm::right<glm::vec3>());
+				if (mInputManager.IsKeyPressed(Window::EKey::KEY_LEFT))			focusObjectFromAngle(-glm::right<glm::vec3>());
+				if (mInputManager.IsKeyPressed(Window::EKey::KEY_PAGE_UP))		focusObjectFromAngle(glm::forward<glm::vec3>());
+				if (mInputManager.IsKeyPressed(Window::EKey::KEY_PAGE_DOWN))	focusObjectFromAngle(-glm::forward<glm::vec3>());
 			}
 		}
 	}
@@ -211,8 +213,8 @@ void Editor::Editor_CameraController::HandleCameraPanning(const glm::vec2& pMous
 
 	auto mouseOffset = pMouseOffset * mCameraDragSpeed;
 
-	mCameraPosition += mCameraRotation * glm::vec3(1.f, 0.f, 0.f) * mouseOffset.x;
-	mCameraPosition -= mCameraRotation * glm::vec3(0.f, 1.f, 0.f) * mouseOffset.y;
+	mCameraPosition += mCameraRotation * glm::right<glm::vec3>() * mouseOffset.x;
+	mCameraPosition -= mCameraRotation * glm::up<glm::vec3>() * mouseOffset.y;
 }
 
 glm::vec3 RemoveRoll(const glm::vec3& p_ypr)
@@ -241,7 +243,7 @@ void Editor::Editor_CameraController::HandleCameraOrbit(const glm::vec2& pMouseO
 		mYPR = glm::eulerAngles(mCameraRotation);
 		mYPR = RemoveRoll(mYPR);
 		mOrbitTarget = &EDITOR_EXEC(GetSelectedActor()).transform.GetFTransform();
-		mOrbitStartOffset = -glm::vec3(0.f, 1.f, 0.f) * glm::distance(mOrbitTarget->GetWorldPosition(), mCameraPosition);
+		mOrbitStartOffset = -glm::up<glm::vec3>() * glm::distance(mOrbitTarget->GetWorldPosition(), mCameraPosition);
 	}
 
 	mYPR.y += -mouseOffset.x;
@@ -276,7 +278,7 @@ void Editor::Editor_CameraController::HandleCameraFPSMouse(const glm::vec2& pMou
 
 void Editor::Editor_CameraController::HandleCameraZoom()
 {
-	mCameraPosition += mCameraRotation * glm::vec3(0.f, 1.f, 0.f) * ImGui::GetIO().MouseWheel;
+	mCameraPosition += mCameraRotation * glm::up<glm::vec3>() * ImGui::GetIO().MouseWheel;
 }
 
 void Editor::Editor_CameraController::HandleCameraFPSKeyboard(float pDeltaTime)
@@ -290,19 +292,19 @@ void Editor::Editor_CameraController::HandleCameraFPSKeyboard(float pDeltaTime)
 
 		if (mInputManager.GetKeyState(Window::EKey::KEY_W) == Window::EKeyState::KEY_DOWN)
 		{
-			mTargetSpeed += mCameraRotation * glm::vec3(0.f, 0.f, 1.f) * velocity;
+			mTargetSpeed += mCameraRotation * glm::forward<glm::vec3>() * velocity;
 		}
 		if (mInputManager.GetKeyState(Window::EKey::KEY_S) == Window::EKeyState::KEY_DOWN)
 		{
-			mTargetSpeed += mCameraRotation * glm::vec3(0.f, 0.f, 1.f) * -velocity;
+			mTargetSpeed += mCameraRotation * glm::forward<glm::vec3>() * -velocity;
 		}
 		if (mInputManager.GetKeyState(Window::EKey::KEY_A) == Window::EKeyState::KEY_DOWN)
 		{
-			mTargetSpeed += mCameraRotation * glm::vec3(1.f, 0.f, 0.f) * velocity;
+			mTargetSpeed += mCameraRotation * glm::right<glm::vec3>() * velocity;
 		}
 		if (mInputManager.GetKeyState(Window::EKey::KEY_D) == Window::EKeyState::KEY_DOWN)
 		{
-			mTargetSpeed += mCameraRotation * glm::vec3(1.f, 0.f, 1.f) * -velocity;
+			mTargetSpeed += mCameraRotation * glm::right<glm::vec3>() * -velocity;
 		}
 		if (mInputManager.GetKeyState(Window::EKey::KEY_E) == Window::EKeyState::KEY_DOWN)
 		{

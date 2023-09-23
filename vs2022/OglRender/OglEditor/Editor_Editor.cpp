@@ -85,7 +85,7 @@ void Editor::Editor_Editor::Update(float pDeltaTime)
 void Editor::Editor_Editor::HandleGlobalShortcuts()
 {
 	if (mContext.mInputManager->IsKeyPressed(Window::EKey::KEY_DELETE) && EDITOR_EXEC(IsAnyActorSelected()) && 
-		(EDITOR_PANEL(Editor_SceneView, "Scene View").IsFocused() || EDITOR_PANEL(Editor_Hierarchy, "Hierarchy").IsFocused()))
+		(EDITOR_PANEL(Editor_SceneView, "Scene").IsFocused() || EDITOR_PANEL(Editor_Hierarchy, "Hierarchy").IsFocused()))
 	{
 		EDITOR_EXEC(DestroyActor(EDITOR_EXEC(GetSelectedActor())));
 	}
@@ -93,7 +93,8 @@ void Editor::Editor_Editor::HandleGlobalShortcuts()
 
 void Editor::Editor_Editor::UpdateCurrentEditorMode(float pDeltaTime)
 {
-	if (auto editorMode = mEditorActions.GetCurrentEditorMode(); editorMode == Editor_EditorActions::EEditorMode::PLAY || editorMode == Editor_EditorActions::EEditorMode::FRAME_BY_FRAME)
+	auto editorMode = mEditorActions.GetCurrentEditorMode();
+	if (editorMode == Editor_EditorActions::EEditorMode::PLAY || editorMode == Editor_EditorActions::EEditorMode::FRAME_BY_FRAME)
 	{
 		UpdatePlayMode(pDeltaTime);
 	}

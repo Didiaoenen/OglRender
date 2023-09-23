@@ -1164,23 +1164,23 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 
 			contextMenu.DestroyedEvent += [&itemGroup](std::string p_deletedPath) { itemGroup.Destroy(); };
 
-			contextMenu.RenamedEvent += [this, &treeNode, path, &ddSource, p_isEngineItem](std::string p_prev, std::string p_newPath)
+			contextMenu.RenamedEvent += [this, &treeNode, path, &ddSource, p_isEngineItem](std::string p_prev, std::string pNewPath)
 				{
-					p_newPath += '\\';
+					pNewPath += '\\';
 
-					if (!std::filesystem::exists(p_newPath))
+					if (!std::filesystem::exists(pNewPath))
 					{
-						RenameAsset(p_prev, p_newPath);
-						EDITOR_EXEC(PropagateFolderRename(p_prev, p_newPath));
-						std::string elementName = Tools::Tools_PathParser::GetElementName(p_newPath);
+						RenameAsset(p_prev, pNewPath);
+						EDITOR_EXEC(PropagateFolderRename(p_prev, pNewPath));
+						std::string elementName = Tools::Tools_PathParser::GetElementName(pNewPath);
 						std::string data = Tools::Tools_PathParser::GetContainingFolder(ddSource.mData.first) + elementName + "\\";
 						ddSource.mData.first = data;
 						ddSource.mTooltip = data;
 						treeNode.mName = elementName;
 						treeNode.Open();
 						treeNode.RemoveAllWidgets();
-						ParseFolder(treeNode, std::filesystem::directory_entry(p_newPath), p_isEngineItem);
-						m_pathUpdate[&treeNode] = p_newPath;
+						ParseFolder(treeNode, std::filesystem::directory_entry(pNewPath), p_isEngineItem);
+						m_pathUpdate[&treeNode] = pNewPath;
 					}
 					else
 					{
@@ -1245,27 +1245,27 @@ void Editor::Editor_AssetBrowser::ConsiderItem(UI::UI_TreeNode* pRoot, const std
 				std::make_pair(resourceFormatPath, &itemGroup)
 			);
 
-		contextMenu->RenamedEvent += [&ddSource, &clickableText, p_scriptFolder](std::string p_prev, std::string p_newPath)
+		contextMenu->RenamedEvent += [&ddSource, &clickableText, p_scriptFolder](std::string p_prev, std::string pNewPath)
 			{
-				if (p_newPath != p_prev)
+				if (pNewPath != p_prev)
 				{
-					if (!std::filesystem::exists(p_newPath))
+					if (!std::filesystem::exists(pNewPath))
 					{
-						RenameAsset(p_prev, p_newPath);
-						std::string elementName = Tools::Tools_PathParser::GetElementName(p_newPath);
+						RenameAsset(p_prev, pNewPath);
+						std::string elementName = Tools::Tools_PathParser::GetElementName(pNewPath);
 						ddSource.mData.first = Tools::Tools_PathParser::GetContainingFolder(ddSource.mData.first) + elementName;
 
 						if (!p_scriptFolder)
 						{
-							EDITOR_EXEC(PropagateFileRename(p_prev, p_newPath));
+							EDITOR_EXEC(PropagateFileRename(p_prev, pNewPath));
 							if (EDITOR_CONTEXT(mSceneManager).GetCurrentSceneSourcePath() == p_prev)
 							{
-								EDITOR_CONTEXT(mSceneManager).StoreCurrentSceneSourcePath(p_newPath);
+								EDITOR_CONTEXT(mSceneManager).StoreCurrentSceneSourcePath(pNewPath);
 							}
 						}
 						else
 						{
-							EDITOR_EXEC(PropagateScriptRename(p_prev, p_newPath));
+							EDITOR_EXEC(PropagateScriptRename(p_prev, pNewPath));
 						}
 
 						clickableText.mContent = elementName;

@@ -609,11 +609,11 @@ void Editor::Editor_EditorRenderer::RenderModelAsset(Render::Render_Model& pMode
 	mContext.mRenderer->DrawModelWithSingleMaterial(pModel, m_defaultMaterial, &model);
 }
 
-void Editor::Editor_EditorRenderer::RenderTextureAsset(Render::Render_Texture& p_texture)
+void Editor::Editor_EditorRenderer::RenderTextureAsset(Render::Render_Texture& pTexture)
 {
 	glm::mat4 model = glm::rotate(glm::scale(glm::identity<glm::mat4>(), { 5.f, 5.f, 5.f }), glm::radians(90.f * 0.0174f), glm::vec3(1, 0, 0));
 
-	m_textureMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", &p_texture);
+	m_textureMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", &pTexture);
 	mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Plane"), m_textureMaterial, &model);
 }
 

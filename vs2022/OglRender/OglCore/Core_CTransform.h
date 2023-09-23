@@ -15,7 +15,7 @@ namespace Core
 	class Core_CTransform : public Core_AComponent
 	{
 	public:
-		Core_CTransform(Core_Actor& pOwner, glm::vec3 pLocalPosition = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat pLocalRotation = glm::identity<glm::quat>(), glm::vec3 pLocalScale = glm::vec3(1.0f, 1.0f, 1.0f));
+		Core_CTransform(Core_Actor& pOwner, glm::vec3 pLocalPosition = glm::zero<glm::vec3>(), glm::quat pLocalRotation = glm::identity<glm::quat>(), glm::vec3 pLocalScale = glm::one<glm::vec3>());
 
 		std::string GetName() override;
 

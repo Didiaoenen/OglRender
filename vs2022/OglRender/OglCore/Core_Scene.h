@@ -51,9 +51,9 @@ namespace Core
 
 		std::vector<std::reference_wrapper<Core_Actor>> FindActorsByTag(const std::string& pTag);
 
-		void OnComponentAdded(Core_AComponent& p_compononent);
+		void OnComponentAdded(Core_AComponent& pCompononent);
 
-		void OnComponentRemoved(Core_AComponent& p_compononent);
+		void OnComponentRemoved(Core_AComponent& pCompononent);
 
 		std::vector<Core_Actor*>& GetActors();
 
@@ -64,11 +64,11 @@ namespace Core
 		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pRoot) override;
 
 	private:
-		int64_t m_availableID{ 1 };
-		bool m_isPlaying{ false };
-		std::vector<Core_Actor*> m_actors;
+		int64_t mAvailableID{ 1 };
+		bool mIsPlaying{ false };
+		std::vector<Core_Actor*> mActors;
 
-		FastAccessComponents m_fastAccessComponents;
+		FastAccessComponents mFastAccessComponents;
 	};
 }
 

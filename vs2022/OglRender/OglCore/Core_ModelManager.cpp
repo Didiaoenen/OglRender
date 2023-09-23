@@ -55,13 +55,13 @@ Render::Render_Model* Core::Core_ModelManager::CreateResource(const std::string&
 	return model;
 }
 
-void Core::Core_ModelManager::DestroyResource(Render::Render_Model* p_resource)
+void Core::Core_ModelManager::DestroyResource(Render::Render_Model* pResource)
 {
-	Render::Render_ModelLoader::Destroy(p_resource);
+	Render::Render_ModelLoader::Destroy(pResource);
 }
 
-void Core::Core_ModelManager::ReloadResource(Render::Render_Model* p_resource, const std::string& pPath)
+void Core::Core_ModelManager::ReloadResource(Render::Render_Model* pResource, const std::string& pPath)
 {
 	std::string realPath = GetRealPath(pPath);
-	Render::Render_ModelLoader::Reload(*p_resource, realPath, GetAssetMetadata(realPath));
+	Render::Render_ModelLoader::Reload(*pResource, realPath, GetAssetMetadata(realPath));
 }

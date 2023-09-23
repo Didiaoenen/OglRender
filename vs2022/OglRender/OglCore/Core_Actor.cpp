@@ -30,10 +30,14 @@ Core::Core_Actor::~Core_Actor()
 	if (!mSleeping)
 	{
 		if (IsActive())
+		{
 			OnDisable();
+		}
 
 		if (mAwaked && mStarted)
+		{
 			OnDestroy();
+		}
 	}
 
 	mDestroyedEvent.Invoke(*this);
@@ -41,15 +45,17 @@ Core::Core_Actor::~Core_Actor()
 	std::vector<Core_Actor*> toDetach = mChildren;
 
 	for (auto child : toDetach)
+	{
 		child->DetachFromParent();
+	}
 
 	toDetach.clear();
 
 	DetachFromParent();
 
-	std::for_each(mComponents.begin(), mComponents.end(), [&](std::shared_ptr<Core_AComponent> p_component) { mComponentRemovedEvent.Invoke(*p_component); });
+	std::for_each(mComponents.begin(), mComponents.end(), [&](std::shared_ptr<Core_AComponent> pComponent) { mComponentRemovedEvent.Invoke(*pComponent); });
 	std::for_each(mBehaviours.begin(), mBehaviours.end(), [&](auto& pBehaviour) { mBehaviourRemovedEvent.Invoke(std::ref(pBehaviour.second)); });
-	std::for_each(mChildren.begin(), mChildren.end(), [](Core_Actor* p_element) { delete p_element; });
+	std::for_each(mChildren.begin(), mChildren.end(), [](Core_Actor* pElement) { delete pElement; });
 }
 
 const std::string& Core::Core_Actor::GetName() const
@@ -89,7 +95,7 @@ bool Core::Core_Actor::IsSelfActive() const
 
 bool Core::Core_Actor::IsActive() const
 {
-	return mActive && (m_parent ? m_parent->IsActive() : true);
+	return mActive && (mParent ? mParent->IsActive() : true);
 }
 
 void Core::Core_Actor::SetID(int64_t pId)
@@ -106,7 +112,7 @@ void Core::Core_Actor::SetParent(Core_Actor& pParent)
 {
 	DetachFromParent();
 
-	m_parent = &pParent;
+	mParent = &pParent;
 	mParentID = pParent.mActorID;
 	transform.SetParent(pParent.transform);
 
@@ -119,15 +125,15 @@ void Core::Core_Actor::DetachFromParent()
 {
 	mDettachEvent.Invoke(*this);
 
-	if (m_parent)
+	if (mParent)
 	{
-		m_parent->mChildren.erase(std::remove_if(m_parent->mChildren.begin(), m_parent->mChildren.end(), [this](Core_Actor* p_element)
+		mParent->mChildren.erase(std::remove_if(mParent->mChildren.begin(), mParent->mChildren.end(), [this](Core_Actor* pElement)
 			{
-				return p_element == this;
+				return pElement == this;
 			}));
 	}
 
-	m_parent = nullptr;
+	mParent = nullptr;
 	mParentID = 0;
 
 	transform.RemoveParent();
@@ -135,12 +141,12 @@ void Core::Core_Actor::DetachFromParent()
 
 bool Core::Core_Actor::HasParent() const
 {
-	return m_parent;
+	return mParent;
 }
 
 Core::Core_Actor* Core::Core_Actor::GetParent() const
 {
-	return m_parent;
+	return mParent;
 }
 
 int64_t Core::Core_Actor::GetParentID() const
@@ -158,7 +164,9 @@ void Core::Core_Actor::MarkAsDestroy()
 	mDestroyed = true;
 
 	for (auto child : mChildren)
+	{
 		child->MarkAsDestroy();
+	}
 }
 
 bool Core::Core_Actor::IsAlive() const
@@ -174,41 +182,41 @@ void Core::Core_Actor::SetSleeping(bool pSleeping)
 void Core::Core_Actor::OnAwake()
 {
 	mAwaked = true;
-	std::for_each(mComponents.begin(), mComponents.end(), [](auto element) { element->OnAwake(); });
-	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& element) { element.second.OnAwake(); });
+	std::for_each(mComponents.begin(), mComponents.end(), [](auto pElement) { pElement->OnAwake(); });
+	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& pElement) { pElement.second.OnAwake(); });
 }
 
 void Core::Core_Actor::OnStart()
 {
 	mStarted = true;
-	std::for_each(mComponents.begin(), mComponents.end(), [](auto element) { element->OnStart(); });
-	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& element) { element.second.OnStart(); });
+	std::for_each(mComponents.begin(), mComponents.end(), [](auto pElement) { pElement->OnStart(); });
+	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& pElement) { pElement.second.OnStart(); });
 }
 
 void Core::Core_Actor::OnEnable()
 {
-	std::for_each(mComponents.begin(), mComponents.end(), [](auto element) { element->OnEnable(); });
-	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& element) { element.second.OnEnable(); });
+	std::for_each(mComponents.begin(), mComponents.end(), [](auto pElement) { pElement->OnEnable(); });
+	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& pElement) { pElement.second.OnEnable(); });
 }
 
 void Core::Core_Actor::OnDisable()
 {
-	std::for_each(mComponents.begin(), mComponents.end(), [](auto element) { element->OnDisable(); });
-	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& element) { element.second.OnDisable(); });
+	std::for_each(mComponents.begin(), mComponents.end(), [](auto pElement) { pElement->OnDisable(); });
+	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& pElement) { pElement.second.OnDisable(); });
 }
 
 void Core::Core_Actor::OnDestroy()
 {
-	std::for_each(mComponents.begin(), mComponents.end(), [](auto element) { element->OnDestroy(); });
-	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& element) { element.second.OnDestroy(); });
+	std::for_each(mComponents.begin(), mComponents.end(), [](auto pElement) { pElement->OnDestroy(); });
+	std::for_each(mBehaviours.begin(), mBehaviours.end(), [](auto& pElement) { pElement.second.OnDestroy(); });
 }
 
 void Core::Core_Actor::OnUpdate(float pDeltaTime)
 {
 	if (IsActive())
 	{
-		std::for_each(mComponents.begin(), mComponents.end(), [&](auto element) { element->OnUpdate(pDeltaTime); });
-		std::for_each(mBehaviours.begin(), mBehaviours.end(), [&](auto& element) { element.second.OnUpdate(pDeltaTime); });
+		std::for_each(mComponents.begin(), mComponents.end(), [&](auto pElement) { pElement->OnUpdate(pDeltaTime); });
+		std::for_each(mBehaviours.begin(), mBehaviours.end(), [&](auto& pElement) { pElement.second.OnUpdate(pDeltaTime); });
 	}
 }
 
@@ -216,8 +224,8 @@ void Core::Core_Actor::OnFixedUpdate(float pDeltaTime)
 {
 	if (IsActive())
 	{
-		std::for_each(mComponents.begin(), mComponents.end(), [&](auto element) { element->OnFixedUpdate(pDeltaTime); });
-		std::for_each(mBehaviours.begin(), mBehaviours.end(), [&](auto& element) { element.second.OnFixedUpdate(pDeltaTime); });
+		std::for_each(mComponents.begin(), mComponents.end(), [&](auto pElement) { pElement->OnFixedUpdate(pDeltaTime); });
+		std::for_each(mBehaviours.begin(), mBehaviours.end(), [&](auto& pElement) { pElement.second.OnFixedUpdate(pDeltaTime); });
 	}
 }
 
@@ -225,18 +233,18 @@ void Core::Core_Actor::OnLateUpdate(float pDeltaTime)
 {
 	if (IsActive())
 	{
-		std::for_each(mComponents.begin(), mComponents.end(), [&](auto element) { element->OnLateUpdate(pDeltaTime); });
-		std::for_each(mBehaviours.begin(), mBehaviours.end(), [&](auto& element) { element.second.OnLateUpdate(pDeltaTime); });
+		std::for_each(mComponents.begin(), mComponents.end(), [&](auto pElement) { pElement->OnLateUpdate(pDeltaTime); });
+		std::for_each(mBehaviours.begin(), mBehaviours.end(), [&](auto& pElement) { pElement.second.OnLateUpdate(pDeltaTime); });
 	}
 }
 
-bool Core::Core_Actor::RemoveComponent(Core_AComponent& p_component)
+bool Core::Core_Actor::RemoveComponent(Core_AComponent& pComponent)
 {
 	for (auto it = mComponents.begin(); it != mComponents.end(); ++it)
 	{
-		if (it->get() == &p_component)
+		if (it->get() == &pComponent)
 		{
-			mComponentRemovedEvent.Invoke(p_component);
+			mComponentRemovedEvent.Invoke(pComponent);
 			mComponents.erase(it);
 			return true;
 		}
@@ -278,9 +286,13 @@ bool Core::Core_Actor::RemoveBehaviour(Core_Behaviour& pBehaviour)
 	}
 
 	if (found)
+	{
 		return RemoveBehaviour(pBehaviour.name);
+	}
 	else
+	{
 		return false;
+	}
 }
 
 bool Core::Core_Actor::RemoveBehaviour(const std::string& pName)
@@ -300,9 +312,13 @@ bool Core::Core_Actor::RemoveBehaviour(const std::string& pName)
 Core::Core_Behaviour* Core::Core_Actor::GetBehaviour(const std::string& pName)
 {
 	if (auto result = mBehaviours.find(pName); result != mBehaviours.end())
+	{
 		return &result->second;
+	}
 	else
+	{
 		return nullptr;
+	}
 }
 
 std::unordered_map<std::string, Core::Core_Behaviour>& Core::Core_Actor::GetBehaviours()
@@ -384,7 +400,9 @@ void Core::Core_Actor::OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLN
 				else if (componentType == typeid(Core_CAmbientSphereLight).name())	component = &AddComponent<Core_CAmbientSphereLight>();
 
 				if (component)
+				{
 					component->OnDeserialize(pDoc, currentComponent->FirstChildElement("data"));
+				}
 
 				currentComponent = currentComponent->NextSiblingElement("component");
 			}

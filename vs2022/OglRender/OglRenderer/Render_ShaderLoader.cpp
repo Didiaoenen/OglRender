@@ -16,17 +16,21 @@ Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pF
 	uint32_t programID = CreateProgram(source.first, source.second);
 
 	if (programID)
+	{
 		return new Render_Shader(pFilePath, programID);
+	}
 
 	return nullptr;
 }
 
-Render::Render_Shader* Render::Render_ShaderLoader::CreateFromSource(const std::string& p_vertexShader, const std::string& p_fragmentShader)
+Render::Render_Shader* Render::Render_ShaderLoader::CreateFromSource(const std::string& pVertexShader, const std::string& pFragmentShader)
 {
-	uint32_t programID = CreateProgram(p_vertexShader, p_fragmentShader);
+	uint32_t programID = CreateProgram(pVertexShader, pFragmentShader);
 
 	if (programID)
+	{
 		return new Render_Shader("", programID);
+	}
 
 	return nullptr;
 }
@@ -108,15 +112,17 @@ std::pair<std::string, std::string> Render::Render_ShaderLoader::ParseShader(con
 	};
 }
 
-uint32_t Render::Render_ShaderLoader::CreateProgram(const std::string& p_vertexShader, const std::string& p_fragmentShader)
+uint32_t Render::Render_ShaderLoader::CreateProgram(const std::string& pVertexShader, const std::string& pFragmentShader)
 {
 	const uint32_t program = glCreateProgram();
 
-	const uint32_t vs = CompileShader(GL_VERTEX_SHADER, p_vertexShader);
-	const uint32_t fs = CompileShader(GL_FRAGMENT_SHADER, p_fragmentShader);
+	const uint32_t vs = CompileShader(GL_VERTEX_SHADER, pVertexShader);
+	const uint32_t fs = CompileShader(GL_FRAGMENT_SHADER, pFragmentShader);
 
 	if (vs == 0 || fs == 0)
+	{
 		return 0;
+	}
 
 	glAttachShader(program, vs);
 	glAttachShader(program, fs);

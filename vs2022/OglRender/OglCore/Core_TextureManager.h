@@ -11,9 +11,9 @@ namespace Core
 	public:
 		virtual Render::Render_Texture* CreateResource(const std::string& pPath) override;
 
-		virtual void DestroyResource(Render::Render_Texture* p_resource) override;
+		virtual void DestroyResource(Render::Render_Texture* pResource) override;
 
-		virtual void ReloadResource(Render::Render_Texture* p_resource, const std::string& pPath) override;
+		virtual void ReloadResource(Render::Render_Texture* pResource, const std::string& pPath) override;
 	};
 }
 

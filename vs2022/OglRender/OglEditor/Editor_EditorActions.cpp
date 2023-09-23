@@ -13,6 +13,8 @@
 #include <OglTools/Tools_PathParser.h>
 #include <OglTools/Tools_SystemCalls.h>
 
+#include <OglMaths/Maths_GlmExt.h>
+
 #include "Editor_GameView.h"
 #include "Editor_SceneView.h"
 #include "Editor_AssetView.h"
@@ -30,9 +32,9 @@ Editor::Editor_EditorActions::Editor_EditorActions(Editor_Context& pContext, Edi
 {
 	Core::Core_ServiceLocator::Provide<Editor_EditorActions>(*this);
 
-	mContext.mSceneManager.mCurrentSceneSourcePathChangedEvent += [this](const std::string& p_newPath)
+	mContext.mSceneManager.mCurrentSceneSourcePathChangedEvent += [this](const std::string& pNewPath)
 		{
-			std::string titleExtra = " - " + (p_newPath.empty() ? "Untitled Scene" : GetResourcePath(p_newPath));
+			std::string titleExtra = " - " + (pNewPath.empty() ? "Untitled Scene" : GetResourcePath(pNewPath));
 			mContext.mWindow->SetTitle(mContext.mWindowSettings.title + titleExtra);
 		};
 }
@@ -76,32 +78,32 @@ void Editor::Editor_EditorActions::ResetLayout()
 
 void Editor::Editor_EditorActions::SetSceneViewCameraSpeed(int pSpeed)
 {
-	EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().SetSpeed((float)pSpeed);
+	EDITOR_PANEL(Editor_SceneView, "Scene").GetCameraController().SetSpeed((float)pSpeed);
 }
 
 int Editor::Editor_EditorActions::GetSceneViewCameraSpeed()
 {
-	return (int)EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().GetSpeed();
+	return (int)EDITOR_PANEL(Editor_SceneView, "Scene").GetCameraController().GetSpeed();
 }
 
 void Editor::Editor_EditorActions::SetAssetViewCameraSpeed(int pSpeed)
 {
-	EDITOR_PANEL(Editor_AssetView, "Asset View").GetCameraController().SetSpeed((float)pSpeed);
+	EDITOR_PANEL(Editor_AssetView, "Asset").GetCameraController().SetSpeed((float)pSpeed);
 }
 
 int Editor::Editor_EditorActions::GetAssetViewCameraSpeed()
 {
-	return (int)EDITOR_PANEL(Editor_AssetView, "Asset View").GetCameraController().GetSpeed();
+	return (int)EDITOR_PANEL(Editor_AssetView, "Asset").GetCameraController().GetSpeed();
 }
 
 void Editor::Editor_EditorActions::ResetSceneViewCameraPosition()
 {
-	EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().SetPosition({ -10.0f, 4.0f, 10.0f });
+	EDITOR_PANEL(Editor_SceneView, "Scene").GetCameraController().SetPosition({ -10.0f, 4.0f, 10.0f });
 }
 
 void Editor::Editor_EditorActions::ResetAssetViewCameraPosition()
 {
-	EDITOR_PANEL(Editor_AssetView, "Asset View").GetCameraController().SetPosition({ -10.0f, 4.0f, 10.0f });
+	EDITOR_PANEL(Editor_AssetView, "Asset").GetCameraController().SetPosition({ -10.0f, 4.0f, 10.0f });
 }
 
 Editor::Editor_EditorActions::EEditorMode Editor::Editor_EditorActions::GetCurrentEditorMode() const
@@ -166,7 +168,9 @@ void Editor::Editor_EditorActions::StopPlaying()
 
 		mContext.mSceneManager.LoadSceneFromMemory(m_sceneBackup);
 		if (loadedFromDisk)
+		{
 			mContext.mSceneManager.StoreCurrentSceneSourcePath(sceneSourcePath);
+		}
 		m_sceneBackup.Clear();
 		EDITOR_PANEL(Editor_SceneView, "Scene View").Focus();
 		if (auto actorInstance = mContext.mSceneManager.GetCurrentScene()->FindActorByID(focusedActorID))
@@ -186,8 +190,8 @@ void Editor::Editor_EditorActions::NextFrame()
 
 glm::vec3 Editor::Editor_EditorActions::CalculateActorSpawnPoint(float p_distanceToCamera)
 {
-	auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View");
-	return sceneView.GetCameraPosition() + sceneView.GetCameraRotation() * glm::vec3(0.f, 0.f, 1.f) * p_distanceToCamera;
+	auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene");
+	return sceneView.GetCameraPosition() + sceneView.GetCameraRotation() * glm::forward<glm::vec3>() * p_distanceToCamera;
 }
 
 Core::Core_Actor& Editor::Editor_EditorActions::CreateEmptyActor(bool p_focusOnCreation, Core::Core_Actor* pParent, const std::string& pName)
@@ -322,7 +326,7 @@ Core::Core_Actor& Editor::Editor_EditorActions::GetSelectedActor() const
 
 void Editor::Editor_EditorActions::MoveToTarget(Core::Core_Actor& pTarget)
 {
-	EDITOR_PANEL(Editor_SceneView, "Scene View").GetCameraController().MoveToTarget(pTarget);
+	EDITOR_PANEL(Editor_SceneView, "Scene").GetCameraController().MoveToTarget(pTarget);
 }
 
 void Editor::Editor_EditorActions::CompileShaders()
@@ -337,7 +341,7 @@ void Editor::Editor_EditorActions::SaveMaterials()
 {
 	for (auto& [id, material] : mContext.mMaterialManager.GetResources())
 	{
-		Core::Core_MaterialLoader::Save(*material, GetRealPath(material->path));
+		Core::Core_MaterialLoader::Save(*material, GetRealPath(material->mPath));
 	}
 }
 
@@ -541,7 +545,7 @@ void Editor::Editor_EditorActions::PropagateFileRename(std::string p_previousNam
 		if (Core::Core_ServiceLocator::Get<Core::Core_MaterialManager>().MoveResource(p_previousName, p_newName))
 		{
 			Core::Core_Material* resource = Core::Core_ServiceLocator::Get<Core::Core_MaterialManager>()[p_newName];
-			*reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(Core::Core_Material, path)) = p_newName;
+			*reinterpret_cast<std::string*>(reinterpret_cast<char*>(resource) + offsetof(Core::Core_Material, mPath)) = p_newName;
 		}
 	}
 	else

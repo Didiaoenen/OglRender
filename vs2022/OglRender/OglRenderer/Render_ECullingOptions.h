@@ -4,9 +4,9 @@ namespace Render
 {
 	enum class ECullingOptions
 	{
-		NONE = 0x0,
-		FRUSTUM_PER_MODEL = 0x1,
-		FRUSTUM_PER_MESH = 0x2
+		NONE				= 0x0,
+		FRUSTUM_PER_MODEL	= 0x1,
+		FRUSTUM_PER_MESH	= 0x2,
 	};
 
 	inline ECullingOptions operator~ (ECullingOptions a) { return (ECullingOptions)~(int)a; }

@@ -79,9 +79,9 @@ void Editor::Editor_AssetView::_Render_Impl()
 	mFbo.Unbind();
 }
 
-void Editor::Editor_AssetView::SetResource(ViewableResource p_resource)
+void Editor::Editor_AssetView::SetResource(ViewableResource pResource)
 {
-	m_resource = p_resource;
+	m_resource = pResource;
 }
 
 Editor::Editor_AssetView::ViewableResource Editor::Editor_AssetView::GetResource() const

@@ -22,7 +22,7 @@ void Core::Core_SceneManager::Update()
 	if (mDelayedLoadCall)
 	{
 		mDelayedLoadCall();
-		mDelayedLoadCall = 0;
+		mDelayedLoadCall = nullptr;
 	}
 }
 

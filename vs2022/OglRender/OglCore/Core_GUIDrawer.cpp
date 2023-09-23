@@ -98,7 +98,7 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawMesh(UI::UI_WidgetContainer& pRoot, const
 {
 	CreateTitle(pRoot, pName);
 
-	std::string displayedText = (pData ? pData->mPath : std::string("Empty"));
+	std::string displayedText = pData ? pData->mPath : std::string("Empty");
 	auto& rightSide = pRoot.CreateWidget<UI::UI_Group>();
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);
@@ -112,7 +112,9 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawMesh(UI::UI_WidgetContainer& pRoot, const
 					pData = resource;
 					widget.mContent = p_receivedData.first;
 					if (pUpdateNotifier)
+					{
 						pUpdateNotifier->Invoke();
+					}
 				}
 			}
 		};
@@ -126,7 +128,9 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawMesh(UI::UI_WidgetContainer& pRoot, const
 			pData = nullptr;
 			widget.mContent = "Empty";
 			if (pUpdateNotifier)
+			{
 				pUpdateNotifier->Invoke();
+			}
 		};
 
 	return widget;
@@ -150,7 +154,9 @@ UI::UI_Image& Core::Core_GUIDrawer::DrawTexture(UI::UI_WidgetContainer& pRoot, c
 					pData = resource;
 					widget.mTextureID.mId = resource->mId;
 					if (pUpdateNotifier)
+					{
 						pUpdateNotifier->Invoke();
+					}
 				}
 			}
 		};
@@ -164,7 +170,9 @@ UI::UI_Image& Core::Core_GUIDrawer::DrawTexture(UI::UI_WidgetContainer& pRoot, c
 			pData = nullptr;
 			widget.mTextureID.mId = (__EMPTY_TEXTURE ? __EMPTY_TEXTURE->mId : 0);
 			if (pUpdateNotifier)
+			{
 				pUpdateNotifier->Invoke();
+			}
 		};
 
 	return widget;
@@ -179,16 +187,18 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawShader(UI::UI_WidgetContainer& pRoot, con
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);
 
-	widget.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [&widget, &pData, pUpdateNotifier](auto p_receivedData)
+	widget.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [&widget, &pData, pUpdateNotifier](auto pReceivedData)
 		{
-			if (Tools::Tools_PathParser::GetFileType(p_receivedData.first) == Tools::Tools_PathParser::EFileType::SHADER)
+			if (Tools::Tools_PathParser::GetFileType(pReceivedData.first) == Tools::Tools_PathParser::EFileType::SHADER)
 			{
-				if (auto resource = OVSERVICE(Core_ShaderManager).GetResource(p_receivedData.first); resource)
+				if (auto resource = OVSERVICE(Core_ShaderManager).GetResource(pReceivedData.first); resource)
 				{
 					pData = resource;
-					widget.mContent = p_receivedData.first;
+					widget.mContent = pReceivedData.first;
 					if (pUpdateNotifier)
+					{
 						pUpdateNotifier->Invoke();
+					}
 				}
 			}
 		};
@@ -202,7 +212,9 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawShader(UI::UI_WidgetContainer& pRoot, con
 			pData = nullptr;
 			widget.mContent = "Empty";
 			if (pUpdateNotifier)
+			{
 				pUpdateNotifier->Invoke();
+			}
 		};
 
 	return widget;
@@ -212,7 +224,7 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawMaterial(UI::UI_WidgetContainer& pRoot, c
 {
 	CreateTitle(pRoot, pName);
 
-	std::string displayedText = (pData ? pData->path : std::string("Empty"));
+	std::string displayedText = (pData ? pData->mPath : std::string("Empty"));
 	auto& rightSide = pRoot.CreateWidget<UI::UI_Group>();
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);
@@ -226,7 +238,9 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawMaterial(UI::UI_WidgetContainer& pRoot, c
 					pData = resource;
 					widget.mContent = p_receivedData.first;
 					if (pUpdateNotifier)
+					{
 						pUpdateNotifier->Invoke();
+					}
 				}
 			}
 		};
@@ -240,7 +254,9 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawMaterial(UI::UI_WidgetContainer& pRoot, c
 			pData = nullptr;
 			widget.mContent = "Empty";
 			if (pUpdateNotifier)
+			{
 				pUpdateNotifier->Invoke();
+			}
 		};
 
 	return widget;
@@ -255,12 +271,14 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawAsset(UI::UI_WidgetContainer& pRoot, cons
 
 	auto& widget = rightSide.CreateWidget<UI::UI_Text>(displayedText);
 
-	widget.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [&widget, &pData, pUpdateNotifier](auto p_receivedData)
+	widget.AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [&widget, &pData, pUpdateNotifier](auto pReceivedData)
 		{
-			pData = p_receivedData.first;
-			widget.mContent = p_receivedData.first;
+			pData = pReceivedData.first;
+			widget.mContent = pReceivedData.first;
 			if (pUpdateNotifier)
+			{
 				pUpdateNotifier->Invoke();
+			}
 		};
 
 	widget.mLineBreak = false;
@@ -272,7 +290,9 @@ UI::UI_Text& Core::Core_GUIDrawer::DrawAsset(UI::UI_WidgetContainer& pRoot, cons
 			pData = "";
 			widget.mContent = "Empty";
 			if (pUpdateNotifier)
+			{
 				pUpdateNotifier->Invoke();
+			}
 		};
 
 	return widget;

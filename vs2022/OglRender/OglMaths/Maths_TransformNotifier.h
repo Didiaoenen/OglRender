@@ -25,7 +25,7 @@ namespace Maths
 
 	private:
 		std::unordered_map<NotificationHandlerID, NotificationHandler> mNotificationHandlers;
-		NotificationHandlerID mAvailableHandlerID = 0;
+		NotificationHandlerID mAvailableHandlerID{ 0 };
 	};
 }
 

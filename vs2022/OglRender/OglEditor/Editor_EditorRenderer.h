@@ -64,7 +64,7 @@ namespace Editor
 
 		void RenderModelAsset(Render::Render_Model& pModel);
 
-		void RenderTextureAsset(Render::Render_Texture& p_texture);
+		void RenderTextureAsset(Render::Render_Texture& pTexture);
 
 		void RenderMaterialAsset(Core::Core_Material& pMaterial);
 

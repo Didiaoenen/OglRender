@@ -88,9 +88,9 @@ glm::mat4 Render::Render_Shader::GetUniformMat4(const std::string& pName)
 
 const Render::Render_UniformInfo* Render::Render_Shader::GetUniformInfo(const std::string& pName) const
 {
-	auto found = std::find_if(mUniforms.begin(), mUniforms.end(), [&pName](const Render_UniformInfo& p_element)
+	auto found = std::find_if(mUniforms.begin(), mUniforms.end(), [&pName](const Render_UniformInfo& pElement)
 		{
-			return pName == p_element.name;
+			return pName == pElement.name;
 		});
 
 	if (found != mUniforms.end())
@@ -123,7 +123,7 @@ void Render::Render_Shader::QueryUniforms()
 
 			switch (static_cast<EUniformType>(type))
 			{
-			case EUniformType::UNIFORM_BOOL:			defaultValue = std::make_any<bool>(GetUniformInt(name));			break;
+			case EUniformType::UNIFORM_BOOL:		defaultValue = std::make_any<bool>(GetUniformInt(name));			break;
 			case EUniformType::UNIFORM_INT:			defaultValue = std::make_any<int>(GetUniformInt(name));				break;
 			case EUniformType::UNIFORM_FLOAT:		defaultValue = std::make_any<float>(GetUniformFloat(name));			break;
 			case EUniformType::UNIFORM_FLOAT_VEC2:	defaultValue = std::make_any<glm::vec2>(GetUniformVec2(name));		break;
@@ -140,7 +140,7 @@ void Render::Render_Shader::QueryUniforms()
 					name,
 					GetUniformLocation(nameData.data()),
 					defaultValue
-					});
+				});
 			}
 		}
 	}

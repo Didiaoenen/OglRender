@@ -4,7 +4,7 @@
 
 #include "Render_TextureLoader.h"
 
-Render::Render_Texture* Render::Render_TextureLoader::Create(const std::string& p_filepath, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap)
+Render::Render_Texture* Render::Render_TextureLoader::Create(const std::string& pFilepath, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap)
 {
 	GLuint textureID;
 	int textureWidth;
@@ -13,7 +13,7 @@ Render::Render_Texture* Render::Render_TextureLoader::Create(const std::string& 
 	glGenTextures(1, &textureID);
 
 	stbi_set_flip_vertically_on_load(true);
-	unsigned char* dataBuffer = stbi_load(p_filepath.c_str(), &textureWidth, &textureHeight, &bitsPerPixel, 4);
+	unsigned char* dataBuffer = stbi_load(pFilepath.c_str(), &textureWidth, &textureHeight, &bitsPerPixel, 4);
 
 	if (dataBuffer)
 	{
@@ -34,7 +34,7 @@ Render::Render_Texture* Render::Render_TextureLoader::Create(const std::string& 
 		stbi_image_free(dataBuffer);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		return new Render_Texture(p_filepath, textureID, textureWidth, textureHeight, bitsPerPixel, pFirstFilter, pSecondFilter, pGenerateMipmap);
+		return new Render_Texture(pFilepath, textureID, textureWidth, textureHeight, bitsPerPixel, pFirstFilter, pSecondFilter, pGenerateMipmap);
 	}
 	else
 	{
@@ -90,32 +90,32 @@ Render::Render_Texture* Render::Render_TextureLoader::CreateFromMemory(uint8_t* 
 	return new Render_Texture("", textureID, 1, 1, 32, pFirstFilter, pSecondFilter, pGenerateMipmap);
 }
 
-void Render::Render_TextureLoader::Reload(Render_Texture& p_texture, const std::string& pFilePath, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap)
+void Render::Render_TextureLoader::Reload(Render_Texture& pTexture, const std::string& pFilePath, ETextureFilteringMode pFirstFilter, ETextureFilteringMode pSecondFilter, bool pGenerateMipmap)
 {
 	Render_Texture* newTexture = Create(pFilePath, pFirstFilter, pSecondFilter, pGenerateMipmap);
 
 	if (newTexture)
 	{
-		glDeleteTextures(1, &p_texture.mId);
+		glDeleteTextures(1, &pTexture.mId);
 
-		*const_cast<uint32_t*>(&p_texture.mId) = newTexture->mId;
-		*const_cast<uint32_t*>(&p_texture.mWidth) = newTexture->mWidth;
-		*const_cast<uint32_t*>(&p_texture.mHeight) = newTexture->mHeight;
-		*const_cast<uint32_t*>(&p_texture.mBitsPerPixel) = newTexture->mBitsPerPixel;
-		*const_cast<ETextureFilteringMode*>(&p_texture.mFirstFilter) = newTexture->mFirstFilter;
-		*const_cast<ETextureFilteringMode*>(&p_texture.mSecondFilter) = newTexture->mSecondFilter;
-		*const_cast<bool*>(&p_texture.mIsMimapped) = newTexture->mIsMimapped;
+		*const_cast<uint32_t*>(&pTexture.mId) = newTexture->mId;
+		*const_cast<uint32_t*>(&pTexture.mWidth) = newTexture->mWidth;
+		*const_cast<uint32_t*>(&pTexture.mHeight) = newTexture->mHeight;
+		*const_cast<uint32_t*>(&pTexture.mBitsPerPixel) = newTexture->mBitsPerPixel;
+		*const_cast<ETextureFilteringMode*>(&pTexture.mFirstFilter) = newTexture->mFirstFilter;
+		*const_cast<ETextureFilteringMode*>(&pTexture.mSecondFilter) = newTexture->mSecondFilter;
+		*const_cast<bool*>(&pTexture.mIsMimapped) = newTexture->mIsMimapped;
 		delete newTexture;
 	}
 }
 
-bool Render::Render_TextureLoader::Destroy(Render_Texture*& p_textureInstance)
+bool Render::Render_TextureLoader::Destroy(Render_Texture*& pTextureInstance)
 {
-	if (p_textureInstance)
+	if (pTextureInstance)
 	{
-		glDeleteTextures(1, &p_textureInstance->mId);
-		delete p_textureInstance;
-		p_textureInstance = nullptr;
+		glDeleteTextures(1, &pTextureInstance->mId);
+		delete pTextureInstance;
+		pTextureInstance = nullptr;
 		return true;
 	}
 

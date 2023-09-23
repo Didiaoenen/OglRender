@@ -78,24 +78,24 @@ namespace Maths
 		glm::vec3 GetLocalRight() const;
 
 	public:
-		Maths_TransformNotifier Notifier;
-		Maths_TransformNotifier::NotificationHandlerID m_notificationHandlerID;
+		Maths_TransformNotifier mNotifier;
+		Maths_TransformNotifier::NotificationHandlerID mNotificationHandlerID;
 
 	private:
 		void PreDecomposeWorldMatrix();
 		void PreDecomposeLocalMatrix();
 
-		glm::vec3 m_localPosition;
-		glm::quat m_localRotation;
-		glm::vec3 m_localScale;
-		glm::vec3 m_worldPosition;
-		glm::quat m_worldRotation;
-		glm::vec3 m_worldScale;
+		glm::vec3 mLocalPosition;
+		glm::quat mLocalRotation;
+		glm::vec3 mLocalScale;
+		glm::vec3 mWorldPosition;
+		glm::quat mWorldRotation;
+		glm::vec3 mWorldScale;
 
-		glm::mat4 m_localMatrix;
-		glm::mat4 m_worldMatrix;
+		glm::mat4 mLocalMatrix;
+		glm::mat4 mWorldMatrix;
 
-		Maths_FTransform* m_parent;
+		Maths_FTransform* mParent;
 	};
 }
 

@@ -20,7 +20,9 @@ Core::Core_CModelRenderer::Core_CModelRenderer(Core_Actor& pOwner) :
 	mModelChangedEvent += [this]
 		{
 			if (auto materialRenderer = mOwner.GetComponent<Core_CMaterialRenderer>())
+			{
 				materialRenderer->UpdateMaterialList();
+			}
 		};
 }
 
@@ -99,9 +101,9 @@ void Core::Core_CModelRenderer::OnInspector(UI::UI_WidgetContainer& pRoot)
 	auto& radiusDispatcher = radiusWidget.AddPlugin<UI::UI_DataDispatcher<float>>();
 	radiusDispatcher.RegisterReference(mCustomBoundingSphere.radius);
 
-	boundingMode.mValueChangedEvent += [&](int p_choice)
+	boundingMode.mValueChangedEvent += [&](int pChoice)
 		{
-			centerLabel.mEnabled = centerWidget.mEnabled = radiusLabel.mEnabled = radiusWidget.mEnabled = p_choice == 3;
+			centerLabel.mEnabled = centerWidget.mEnabled = radiusLabel.mEnabled = radiusWidget.mEnabled = pChoice == 3;
 		};
 
 	centerLabel.mEnabled = centerWidget.mEnabled = radiusLabel.mEnabled = radiusWidget.mEnabled = mFrustumBehaviour == EFrustumBehaviour::CULL_CUSTOM;

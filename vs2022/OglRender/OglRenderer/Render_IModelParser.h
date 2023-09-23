@@ -15,7 +15,7 @@ namespace Render
 			const std::string& p_fileName,
 			std::vector<Render_Mesh*>& p_meshes,
 			std::vector<std::string>& pMaterials,
-			EModelParserFlags p_parserFlags
+			EModelParserFlags pParserFlags
 		) = 0;
 	};
 

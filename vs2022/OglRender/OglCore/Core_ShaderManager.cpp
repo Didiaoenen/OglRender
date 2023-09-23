@@ -12,12 +12,12 @@ Render::Render_Shader* Core::Core_ShaderManager::CreateResource(const std::strin
 	return shader;
 }
 
-void Core::Core_ShaderManager::DestroyResource(Render::Render_Shader* p_resource)
+void Core::Core_ShaderManager::DestroyResource(Render::Render_Shader* pResource)
 {
-	Render::Render_ShaderLoader::Destroy(p_resource);
+	Render::Render_ShaderLoader::Destroy(pResource);
 }
 
-void Core::Core_ShaderManager::ReloadResource(Render::Render_Shader* p_resource, const std::string& pPath)
+void Core::Core_ShaderManager::ReloadResource(Render::Render_Shader* pResource, const std::string& pPath)
 {
-	Render::Render_ShaderLoader::Recompile(*p_resource, pPath);
+	Render::Render_ShaderLoader::Recompile(*pResource, pPath);
 }

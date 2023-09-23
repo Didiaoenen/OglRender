@@ -206,7 +206,6 @@ void Editor::Editor_SceneView::HandleActorPicking()
 			if (direction.has_value())
 			{
 				mHighlightedGizmoDirection = direction;
-
 			}
 			else if (actorUnderMouse != nullptr)
 			{

@@ -10,9 +10,9 @@ namespace Core
 	public:
 		virtual Core_Material* CreateResource(const std::string& pPath) override;
 
-		virtual void DestroyResource(Core_Material* p_resource) override;
+		virtual void DestroyResource(Core_Material* pResource) override;
 
-		virtual void ReloadResource(Core_Material* p_resource, const std::string& pPath) override;
+		virtual void ReloadResource(Core_Material* pResource, const std::string& pPath) override;
 	};
 }
 

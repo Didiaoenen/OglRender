@@ -38,13 +38,13 @@ namespace Core
 	}
 
 	template<typename T>
-	inline bool Core_AResourceManager<T>::MoveResource(const std::string& p_previousPath, const std::string& p_newPath)
+	inline bool Core_AResourceManager<T>::MoveResource(const std::string& pPreviousPath, const std::string& pNewPath)
 	{
-		if (IsResourceRegistered(p_previousPath) && !IsResourceRegistered(p_newPath))
+		if (IsResourceRegistered(pPreviousPath) && !IsResourceRegistered(pNewPath))
 		{
-			T* toMove = m_resources.at(p_previousPath);
-			UnregisterResource(p_previousPath);
-			RegisterResource(p_newPath, toMove);
+			T* toMove = mResources.at(pPreviousPath);
+			UnregisterResource(pPreviousPath);
+			RegisterResource(pNewPath, toMove);
 			return true;
 		}
 
@@ -63,18 +63,18 @@ namespace Core
 	template<typename T>
 	inline bool Core_AResourceManager<T>::IsResourceRegistered(const std::string& pPath)
 	{
-		return m_resources.find(pPath) != m_resources.end();
+		return mResources.find(pPath) != mResources.end();
 	}
 
 	template<typename T>
 	inline void Core_AResourceManager<T>::UnloadResources()
 	{
-		for (auto& [key, value] : m_resources)
+		for (auto& [key, value] : mResources)
 		{
 			DestroyResource(value);
 		}
 
-		m_resources.clear();
+		mResources.clear();
 	}
 
 	template<typename T>
@@ -85,7 +85,7 @@ namespace Core
 			DestroyResource(resource);
 		}
 
-		m_resources[pPath] = pInstance;
+		mResources[pPath] = pInstance;
 
 		return pInstance;
 	}
@@ -93,17 +93,17 @@ namespace Core
 	template<typename T>
 	inline void Core_AResourceManager<T>::UnregisterResource(const std::string& pPath)
 	{
-		m_resources.erase(pPath);
+		mResources.erase(pPath);
 	}
 
 	template<typename T>
-	inline T* Core_AResourceManager<T>::GetResource(const std::string& pPath, bool p_tryToLoadIfNotFound)
+	inline T* Core_AResourceManager<T>::GetResource(const std::string& pPath, bool pTryToLoadIfNotFound)
 	{
-		if (auto resource = m_resources.find(pPath); resource != m_resources.end())
+		if (auto resource = mResources.find(pPath); resource != mResources.end())
 		{
 			return resource->second;
 		}
-		else if (p_tryToLoadIfNotFound)
+		else if (pTryToLoadIfNotFound)
 		{
 			return LoadResource(pPath);
 		}
@@ -118,16 +118,16 @@ namespace Core
 	}
 
 	template<typename T>
-	inline void Core_AResourceManager<T>::ProvideAssetPaths(const std::string& p_projectAssetsPath, const std::string& p_engineAssetsPath)
+	inline void Core_AResourceManager<T>::ProvideAssetPaths(const std::string& pProjectAssetsPath, const std::string& pEngineAssetsPath)
 	{
-		__PROJECT_ASSETS_PATH = p_projectAssetsPath;
-		__ENGINE_ASSETS_PATH = p_engineAssetsPath;
+		__PROJECT_ASSETS_PATH = pProjectAssetsPath;
+		__ENGINE_ASSETS_PATH = pEngineAssetsPath;
 	}
 
 	template<typename T>
 	inline std::unordered_map<std::string, T*>& Core_AResourceManager<T>::GetResources()
 	{
-		return m_resources;
+		return mResources;
 	}
 
 	template<typename T>

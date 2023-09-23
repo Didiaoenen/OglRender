@@ -116,12 +116,12 @@ namespace Core
 		static Tools::Tools_Event<Core_Actor&>				mDettachEvent;
 
 	private:
-		std::string		mName;
-		std::string		mTag;
+		std::string		mName{ "" };
+		std::string		mTag{ "" };
 		bool			mActive{ true };
 		bool&			mPlaying;
 
-		int64_t	mActorID;
+		int64_t	mActorID{ 0 };
 		bool	mDestroyed{ false };
 		bool	mSleeping{ true };
 		bool	mAwaked{ false };
@@ -129,7 +129,7 @@ namespace Core
 		bool	mWasActive{ false };
 
 		int64_t		mParentID{ 0 };
-		Core_Actor* m_parent{ nullptr };
+		Core_Actor* mParent{ nullptr };
 		std::vector<Core_Actor*> mChildren;
 
 		std::vector<std::shared_ptr<Core_AComponent>> mComponents;

@@ -9,9 +9,9 @@ namespace Core
 	{
 		if (HasShader())
 		{
-			if (m_uniformsData.find(pKey) != m_uniformsData.end())
+			if (mUniformsData.find(pKey) != mUniformsData.end())
 			{
-				m_uniformsData[pKey] = std::any(pValue);
+				mUniformsData[pKey] = std::any(pValue);
 			}
 		}
 		else
@@ -23,13 +23,13 @@ namespace Core
 	template<typename T>
 	inline const T& Core_Material::Get(const std::string pKey)
 	{
-		if (m_uniformsData.find(pKey) != m_uniformsData.end())
+		if (mUniformsData.find(pKey) != mUniformsData.end())
 		{
 			return T();
 		}
 		else
 		{
-			return std::any_cast<T>(m_uniformsData.at(pKey));
+			return std::any_cast<T>(mUniformsData.at(pKey));
 		}
 	}
 }

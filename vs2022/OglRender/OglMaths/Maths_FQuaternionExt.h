@@ -9,7 +9,7 @@ namespace Maths
 	class Maths_FQuaternionExt
 	{
 	public:
-		static glm::vec3 RotatePoint(const glm::vec3& p_point, const glm::quat& p_quaternion);
+		static glm::vec3 RotatePoint(const glm::vec3& pPoint, const glm::quat& pQuaternion);
 	};
 }
 

@@ -43,7 +43,7 @@ namespace Core
 		Tools::Tools_Event<const std::string&> mCurrentSceneSourcePathChangedEvent;
 
 	private:
-		const std::string mSceneRootFolder;
+		const std::string mSceneRootFolder{ "" };
 		Core_Scene* mCurrentScene{ nullptr };
 
 		bool mCurrentSceneLoadedFromPath{ false };

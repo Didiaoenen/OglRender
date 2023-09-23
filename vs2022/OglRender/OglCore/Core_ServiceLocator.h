@@ -11,9 +11,9 @@ namespace Core
 	{
 	public:
 		template<typename T>
-		static void Provide(T& p_service)
+		static void Provide(T& pService)
 		{
-			__SERVICES[typeid(T).hash_code()] = std::any(&p_service);
+			__SERVICES[typeid(T).hash_code()] = std::any(&pService);
 		}
 
 		template<typename T>

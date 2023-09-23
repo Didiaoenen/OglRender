@@ -169,13 +169,15 @@ void Core::Core_Serializer::SerializeTexture(tinyxml2::XMLDocument& pDoc, tinyxm
 
 void Core::Core_Serializer::SerializeMaterial(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Core_Material* pValue)
 {
-	SerializeString(pDoc, pNode, pName.c_str(), pValue ? pValue->path : "?");
+	SerializeString(pDoc, pNode, pName.c_str(), pValue ? pValue->mPath : "?");
 }
 
 void Core::Core_Serializer::DeserializeBoolean(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, bool& pOut)
 {
 	if (auto element = pNode->FirstChildElement(pName.c_str()); element)
+	{
 		element->QueryBoolText(&pOut);
+	}
 }
 
 void Core::Core_Serializer::DeserializeString(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, std::string& pOut)
@@ -190,31 +192,41 @@ void Core::Core_Serializer::DeserializeString(tinyxml2::XMLDocument& pDoc, tinyx
 void Core::Core_Serializer::DeserializeFloat(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, float& pOut)
 {
 	if (auto element = pNode->FirstChildElement(pName.c_str()); element)
+	{
 		element->QueryFloatText(&pOut);
+	}
 }
 
 void Core::Core_Serializer::DeserializeDouble(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, double& pOut)
 {
 	if (auto element = pNode->FirstChildElement(pName.c_str()); element)
+	{
 		element->QueryDoubleText(&pOut);
+	}
 }
 
 void Core::Core_Serializer::DeserializeInt(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, int& pOut)
 {
 	if (auto element = pNode->FirstChildElement(pName.c_str()); element)
+	{
 		element->QueryIntText(&pOut);
+	}
 }
 
 void Core::Core_Serializer::DeserializeUint(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, unsigned& pOut)
 {
 	if (auto element = pNode->FirstChildElement(pName.c_str()); element)
+	{
 		element->QueryUnsignedText(&pOut);
+	}
 }
 
 void Core::Core_Serializer::DeserializeInt64(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, int64_t& pOut)
 {
 	if (auto element = pNode->FirstChildElement(pName.c_str()); element)
+	{
 		element->QueryInt64Text(&pOut);
+	}
 }
 
 void Core::Core_Serializer::DeserializeVec2(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, glm::vec2& pOut)
@@ -222,10 +234,14 @@ void Core::Core_Serializer::DeserializeVec2(tinyxml2::XMLDocument& pDoc, tinyxml
 	if (auto node = pNode->FirstChildElement(pName.c_str()); node)
 	{
 		if (auto element = node->FirstChildElement("x"); element)
+		{
 			element->QueryFloatText(&pOut.x);
+		}
 
 		if (auto element = node->FirstChildElement("y"); element)
+		{
 			element->QueryFloatText(&pOut.y);
+		}
 	}
 }
 
@@ -234,13 +250,19 @@ void Core::Core_Serializer::DeserializeVec3(tinyxml2::XMLDocument& pDoc, tinyxml
 	if (auto node = pNode->FirstChildElement(pName.c_str()); node)
 	{
 		if (auto element = node->FirstChildElement("x"); element)
+		{
 			element->QueryFloatText(&pOut.x);
+		}
 
 		if (auto element = node->FirstChildElement("y"); element)
+		{
 			element->QueryFloatText(&pOut.y);
+		}
 
 		if (auto element = node->FirstChildElement("z"); element)
+		{
 			element->QueryFloatText(&pOut.z);
+		}
 	}
 }
 
@@ -249,16 +271,24 @@ void Core::Core_Serializer::DeserializeVec4(tinyxml2::XMLDocument& pDoc, tinyxml
 	if (auto node = pNode->FirstChildElement(pName.c_str()); node)
 	{
 		if (auto element = node->FirstChildElement("x"); element)
+		{
 			element->QueryFloatText(&pOut.x);
+		}
 
 		if (auto element = node->FirstChildElement("y"); element)
+		{
 			element->QueryFloatText(&pOut.y);
+		}
 
 		if (auto element = node->FirstChildElement("z"); element)
+		{
 			element->QueryFloatText(&pOut.z);
+		}
 
 		if (auto element = node->FirstChildElement("w"); element)
+		{
 			element->QueryFloatText(&pOut.w);
+		}
 	}
 }
 
@@ -267,16 +297,24 @@ void Core::Core_Serializer::DeserializeQuat(tinyxml2::XMLDocument& pDoc, tinyxml
 	if (auto node = pNode->FirstChildElement(pName.c_str()); node)
 	{
 		if (auto element = node->FirstChildElement("x"); element)
+		{
 			element->QueryFloatText(&pOut.x);
+		}
 
 		if (auto element = node->FirstChildElement("y"); element)
+		{
 			element->QueryFloatText(&pOut.y);
+		}
 
 		if (auto element = node->FirstChildElement("z"); element)
+		{
 			element->QueryFloatText(&pOut.z);
+		}
 
 		if (auto element = node->FirstChildElement("w"); element)
+		{
 			element->QueryFloatText(&pOut.w);
+		}
 	}
 }
 
@@ -285,41 +323,61 @@ void Core::Core_Serializer::DeserializeColor(tinyxml2::XMLDocument& pDoc, tinyxm
 	if (auto node = pNode->FirstChildElement(pName.c_str()); node)
 	{
 		if (auto element = node->FirstChildElement("r"); element)
+		{
 			element->QueryFloatText(&pOut.r);
+		}
 
 		if (auto element = node->FirstChildElement("g"); element)
+		{
 			element->QueryFloatText(&pOut.g);
+		}
 
 		if (auto element = node->FirstChildElement("b"); element)
+		{
 			element->QueryFloatText(&pOut.b);
+		}
 
 		if (auto element = node->FirstChildElement("q"); element)
+		{
 			element->QueryFloatText(&pOut.a);
+		}
 	}
 }
 
 void Core::Core_Serializer::DeserializeModel(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Render::Render_Model*& pOut)
 {
 	if (std::string path = DeserializeString(pDoc, pNode, pName.c_str()); path != "?" && path != "")
+	{
 		pOut = Core::Core_ServiceLocator::Get<Core::Core_ModelManager>().GetResource(path);
+	}
 	else
+	{
 		pOut = nullptr;
+	}
 }
 
 void Core::Core_Serializer::DeserializeShader(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Render::Render_Shader*& pOut)
 {
 	if (std::string path = DeserializeString(pDoc, pNode, pName.c_str()); path != "?" && path != "")
+	{
 		pOut = Core::Core_ServiceLocator::Get<Core::Core_ShaderManager>().GetResource(path);
+	}
 	else
+	{
 		pOut = nullptr;
+	}
 }
 
 void Core::Core_Serializer::DeserializeTexture(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Render::Render_Texture*& pOut)
 {
 	if (std::string path = DeserializeString(pDoc, pNode, pName.c_str()); path != "?" && path != "")
+	{
 		pOut = Core::Core_ServiceLocator::Get<Core::Core_TextureManager>().GetResource(path);
+	}
 	else
+	{
 		pOut = nullptr;
+	}
 }
 
 void Core::Core_Serializer::DeserializeMaterial(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pNode, const std::string& pName, Core_Material*& pOut)

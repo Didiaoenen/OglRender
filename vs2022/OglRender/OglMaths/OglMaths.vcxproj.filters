@@ -41,5 +41,8 @@
     <ClInclude Include="Maths_FQuaternionExt.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Maths_GlmExt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
