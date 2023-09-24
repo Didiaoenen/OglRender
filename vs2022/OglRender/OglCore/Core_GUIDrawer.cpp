@@ -178,7 +178,7 @@ UI::UI_Image& Core::Core_GUIDrawer::DrawTexture(UI::UI_WidgetContainer& pRoot, c
 	return widget;
 }
 
-UI::UI_Text& Core::Core_GUIDrawer::DrawShader(UI::UI_WidgetContainer& pRoot, const std::string& pName, Render::Render_Shader*& pData, Tools::Tools_Event<>* pUpdateNotifier)
+UI::UI_Text& Core::Core_GUIDrawer::DrawShader(UI::UI_WidgetContainer& pRoot, const std::string& pName, Render::Render_Shader* &pData, Tools::Tools_Event<>* pUpdateNotifier)
 {
 	CreateTitle(pRoot, pName);
 

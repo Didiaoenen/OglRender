@@ -78,7 +78,7 @@ namespace Editor
 
 		Core::Core_Actor& CreateActorWithModel(const std::string& pPath, bool p_focusOnCreation = true, Core::Core_Actor* pParent = nullptr, const std::string& pName = "");
 
-		bool DestroyActor(Core::Core_Actor& p_actor);
+		bool DestroyActor(Core::Core_Actor& pActor);
 
 		void DuplicateActor(Core::Core_Actor& p_toDuplicate, Core::Core_Actor* p_forcedParent = nullptr, bool p_focus = true);
 #pragma endregion

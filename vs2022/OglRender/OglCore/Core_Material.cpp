@@ -45,28 +45,28 @@ void Core::Core_Material::Bind(Render::Render_Texture* pEmptyTexture)
 			{
 				switch (uniformData->type)
 				{
-					case Render::EUniformType::UNIFORM_BOOL:		if (value.type() == typeid(bool))		mShader->SetUniformInt(name, std::any_cast<bool>(value));			break;
-					case Render::EUniformType::UNIFORM_INT:			if (value.type() == typeid(int))		mShader->SetUniformInt(name, std::any_cast<int>(value));			break;
-					case Render::EUniformType::UNIFORM_FLOAT:		if (value.type() == typeid(float))		mShader->SetUniformFloat(name, std::any_cast<float>(value));		break;
-					case Render::EUniformType::UNIFORM_FLOAT_VEC2:	if (value.type() == typeid(glm::vec2))	mShader->SetUniformVec2(name, std::any_cast<glm::vec2>(value));		break;
-					case Render::EUniformType::UNIFORM_FLOAT_VEC3:	if (value.type() == typeid(glm::vec3))	mShader->SetUniformVec3(name, std::any_cast<glm::vec3>(value));		break;
-					case Render::EUniformType::UNIFORM_FLOAT_VEC4:	if (value.type() == typeid(glm::vec4))	mShader->SetUniformVec4(name, std::any_cast<glm::vec4>(value));		break;
-					case Render::EUniformType::UNIFORM_SAMPLER_2D:
+				case Render::EUniformType::UNIFORM_BOOL:		if (value.type() == typeid(bool))		mShader->SetUniformInt(name, std::any_cast<bool>(value));			break;
+				case Render::EUniformType::UNIFORM_INT:			if (value.type() == typeid(int))		mShader->SetUniformInt(name, std::any_cast<int>(value));			break;
+				case Render::EUniformType::UNIFORM_FLOAT:		if (value.type() == typeid(float))		mShader->SetUniformFloat(name, std::any_cast<float>(value));		break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC2:	if (value.type() == typeid(glm::vec2))	mShader->SetUniformVec2(name, std::any_cast<glm::vec2>(value));		break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC3:	if (value.type() == typeid(glm::vec3))	mShader->SetUniformVec3(name, std::any_cast<glm::vec3>(value));		break;
+				case Render::EUniformType::UNIFORM_FLOAT_VEC4:	if (value.type() == typeid(glm::vec4))	mShader->SetUniformVec4(name, std::any_cast<glm::vec4>(value));		break;
+				case Render::EUniformType::UNIFORM_SAMPLER_2D:
+				{
+					if (value.type() == typeid(Render::Render_Texture*))
 					{
-						if (value.type() == typeid(Render::Render_Texture*))
+						if (auto tex = std::any_cast<Render::Render_Texture*>(value); tex)
 						{
-							if (auto tex = std::any_cast<Render::Render_Texture*>(value); tex)
-							{
-								tex->Bind(textureSlot);
-								mShader->SetUniformInt(uniformData->name, textureSlot++);
-							}
-							else if (pEmptyTexture)
-							{
-								pEmptyTexture->Bind(textureSlot);
-								mShader->SetUniformInt(uniformData->name, textureSlot++);
-							}
+							tex->Bind(textureSlot);
+							mShader->SetUniformInt(uniformData->name, textureSlot++);
+						}
+						else if (pEmptyTexture)
+						{
+							pEmptyTexture->Bind(textureSlot);
+							mShader->SetUniformInt(uniformData->name, textureSlot++);
 						}
 					}
+				}
 				}
 			}
 		}

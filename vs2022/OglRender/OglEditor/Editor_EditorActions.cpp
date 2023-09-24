@@ -242,9 +242,9 @@ Core::Core_Actor& Editor::Editor_EditorActions::CreateActorWithModel(const std::
 	return instance;
 }
 
-bool Editor::Editor_EditorActions::DestroyActor(Core::Core_Actor& p_actor)
+bool Editor::Editor_EditorActions::DestroyActor(Core::Core_Actor& pActor)
 {
-	p_actor.MarkAsDestroy();
+	pActor.MarkAsDestroy();
 	//OVLOG_INFO("Actor destroyed");
 	return true;
 }

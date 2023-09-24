@@ -25,17 +25,17 @@ namespace Editor
 
 		void UnselectActorsWidgets();
 
-		void SelectActorByInstance(Core::Core_Actor& p_actor);
+		void SelectActorByInstance(Core::Core_Actor& pActor);
 
 		void SelectActorByWidget(UI::UI_TreeNode& p_widget);
 
-		void AttachActorToParent(Core::Core_Actor& p_actor);
+		void AttachActorToParent(Core::Core_Actor& pActor);
 
-		void DetachFromParent(Core::Core_Actor& p_actor);
+		void DetachFromParent(Core::Core_Actor& pActor);
 
-		void DeleteActorByInstance(Core::Core_Actor& p_actor);
+		void DeleteActorByInstance(Core::Core_Actor& pActor);
 
-		void AddActorByInstance(Core::Core_Actor& p_actor);
+		void AddActorByInstance(Core::Core_Actor& pActor);
 
 	public:
 		Tools::Tools_Event<Core::Core_Actor&> ActorSelectedEvent;

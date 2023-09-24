@@ -16,6 +16,7 @@ Core::Core_Renderer::Core_Renderer(Render::Render_Driver& pDriver) :
 		false
 	))
 {
+
 }
 
 Core::Core_Renderer::~Core_Renderer()
@@ -289,7 +290,7 @@ void Core::Core_Renderer::DrawMesh(Render::Render_Mesh& pMesh, Core_Material& pM
 		ApplyStateMask(stateMask);
 
 		pMaterial.Bind(mEmptyTexture);
-		Draw(pMesh, Render::EPrimitiveMode::TRIANGLES, pMaterial.GetGPUInstances());
+		//Draw(pMesh, Render::EPrimitiveMode::TRIANGLES, pMaterial.GetGPUInstances());
 		pMaterial.UnBind();
 	}
 }

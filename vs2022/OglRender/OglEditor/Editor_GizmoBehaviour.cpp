@@ -14,19 +14,19 @@ bool Editor::Editor_GizmoBehaviour::IsSnappedBehaviourEnabled() const
     return inputManager->GetKeyState(Window::EKey::KEY_LEFT_CONTROL) == Window::EKeyState::KEY_DOWN || inputManager->GetKeyState(Window::EKey::KEY_RIGHT_CONTROL) == Window::EKeyState::KEY_DOWN;
 }
 
-void Editor::Editor_GizmoBehaviour::StartPicking(Core::Core_Actor& pTarget, const glm::vec3& pCameraPosition, EGizmoOperation p_operation, EDirection p_direction)
+void Editor::Editor_GizmoBehaviour::StartPicking(Core::Core_Actor& pTarget, const glm::vec3& pCameraPosition, EGizmoOperation pOperation, EDirection p_direction)
 {
-    m_target = &pTarget;
+    mTarget = &pTarget;
     mFirstMouse = true;
     m_originalTransform = pTarget.transform.GetFTransform();
-    m_distanceToActor = glm::distance(pCameraPosition, m_target->transform.GetWorldPosition());
-    mCurrentOperation = p_operation;
+    m_distanceToActor = glm::distance(pCameraPosition, mTarget->transform.GetWorldPosition());
+    mCurrentOperation = pOperation;
     m_direction = p_direction;
 }
 
 void Editor::Editor_GizmoBehaviour::StopPicking()
 {
-    m_target = nullptr;
+    mTarget = nullptr;
 }
 
 void Editor::Editor_GizmoBehaviour::ApplyOperation(const glm::mat4& p_viewMatrix, const glm::mat4& p_projectionMatrix, const glm::vec2& p_viewSize)
@@ -62,7 +62,7 @@ void Editor::Editor_GizmoBehaviour::SetCurrentMouse(const glm::vec2& p_mousePosi
 
 bool Editor::Editor_GizmoBehaviour::IsPicking() const
 {
-    return m_target;
+    return mTarget;
 }
 
 Editor::Editor_GizmoBehaviour::EDirection Editor::Editor_GizmoBehaviour::GetDirection() const
@@ -157,7 +157,7 @@ void Editor::Editor_GizmoBehaviour::ApplyTranslation(const glm::mat4& p_viewMatr
         translationCoefficient = SnapValue(translationCoefficient, Editor_EditorSettings::TranslationSnapUnit);
     }
 
-    m_target->transform.SetWorldPosition(originPosition + GetRealDirection(true) * translationCoefficient);
+    mTarget->transform.SetWorldPosition(originPosition + GetRealDirection(true) * translationCoefficient);
 }
 
 void Editor::Editor_GizmoBehaviour::ApplyRotation(const glm::mat4& p_viewMatrix, const glm::mat4& p_projectionMatrix, const glm::vec2& p_viewSize) const
@@ -177,7 +177,7 @@ void Editor::Editor_GizmoBehaviour::ApplyRotation(const glm::mat4& p_viewMatrix,
     }
 
     auto rotationToApply = glm::quat(glm::vec3(GetFakeDirection() * rotationCoefficient));
-    m_target->transform.SetWorldRotation(originRotation * rotationToApply);
+    mTarget->transform.SetWorldRotation(originRotation * rotationToApply);
 }
 
 void Editor::Editor_GizmoBehaviour::ApplyScale(const glm::mat4& p_viewMatrix, const glm::mat4& p_projectionMatrix, const glm::vec2& p_viewSize) const
@@ -201,5 +201,5 @@ void Editor::Editor_GizmoBehaviour::ApplyScale(const glm::mat4& p_viewMatrix, co
     newScale.y = std::max(newScale.y, 0.0001f);
     newScale.z = std::max(newScale.z, 0.0001f);
 
-    m_target->transform.SetWorldScale(newScale);
+    mTarget->transform.SetWorldScale(newScale);
 }

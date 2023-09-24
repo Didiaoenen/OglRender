@@ -24,9 +24,9 @@ namespace Editor
 
 		void InitMaterials();
 
-		void PreparePickingMaterial(Core::Core_Actor& p_actor, Core::Core_Material& pMaterial);
+		void PreparePickingMaterial(Core::Core_Actor& pActor, Core::Core_Material& pMaterial);
 
-		glm::mat4 CalculateCameraModelMatrix(Core::Core_Actor& p_actor);
+		glm::mat4 CalculateCameraModelMatrix(Core::Core_Actor& pActor);
 
 		void RenderScene(const glm::vec3& pCameraPosition, const Render::Render_Camera& pCamera, const Render::Render_Frustum* pCustomFrustum = nullptr);
 
@@ -38,13 +38,13 @@ namespace Editor
 
 		void RenderLights();
 
-		void RenderGizmo(const glm::vec3& pPosition, const glm::quat& pRotation, EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis = -1);
+		void RenderGizmo(const glm::vec3& pPosition, const glm::quat& pRotation, EGizmoOperation pOperation, bool pPickable, int pHighlightedAxis = -1);
 
-		void RenderModelToStencil(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel);
+		void RenderModelToStencil(const glm::mat4& pWorldMatrix, Render::Render_Model& pModel);
 
-		void RenderModelOutline(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel, float pWidth);
+		void RenderModelOutline(const glm::mat4& pWorldMatrix, Render::Render_Model& pModel, float pWidth);
 
-		void RenderActorOutlinePass(Core::Core_Actor& p_actor, bool p_toStencil, bool p_isSelected = false);
+		void RenderActorOutlinePass(Core::Core_Actor& pActor, bool pToStencil, bool pIsSelected = false);
 
 		void RenderCameraPerspectiveFrustum(std::pair<uint16_t, uint16_t>& pSize, Core::Core_CCamera& pCamera);
 		
@@ -52,15 +52,15 @@ namespace Editor
 
 		void RenderCameraFrustum(Core::Core_CCamera& pCamera);
 
-		void RenderActorCollider(Core::Core_Actor& p_actor);
+		void RenderActorCollider(Core::Core_Actor& pActor);
 
-		void RenderLightBounds(Core::Core_CLight& p_light);
+		void RenderLightBounds(Core::Core_CLight& pLight);
 
-		void RenderAmbientBoxVolume(Core::Core_CAmbientBoxLight& p_ambientBoxLight);
+		void RenderAmbientBoxVolume(Core::Core_CAmbientBoxLight& pAmbientBoxLight);
 
-		void RenderAmbientSphereVolume(Core::Core_CAmbientSphereLight& p_ambientSphereLight);
+		void RenderAmbientSphereVolume(Core::Core_CAmbientSphereLight& pAmbientSphereLight);
 
-		void RenderBoundingSpheres(Core::Core_CModelRenderer& p_modelRenderer);
+		void RenderBoundingSpheres(Core::Core_CModelRenderer& pModelRenderer);
 
 		void RenderModelAsset(Render::Render_Model& pModel);
 
@@ -68,7 +68,7 @@ namespace Editor
 
 		void RenderMaterialAsset(Core::Core_Material& pMaterial);
 
-		void RenderGrid(const glm::vec3& p_viewPos, const glm::vec3& pColor);
+		void RenderGrid(const glm::vec3& pViewPos, const glm::vec3& pColor);
 
 		void UpdateLights(Core::Core_Scene& pScene);
 
@@ -77,18 +77,18 @@ namespace Editor
 	private:
 		Editor_Context& mContext;
 
-		Core::Core_Material m_gridMaterial;
-		Core::Core_Material m_stencilFillMaterial;
-		Core::Core_Material m_textureMaterial;
-		Core::Core_Material m_outlineMaterial;
-		Core::Core_Material m_emptyMaterial;
-		Core::Core_Material m_defaultMaterial;
-		Core::Core_Material m_cameraMaterial;
-		Core::Core_Material m_lightMaterial;
-		Core::Core_Material m_gizmoArrowMaterial;
-		Core::Core_Material m_gizmoBallMaterial;
-		Core::Core_Material m_gizmoPickingMaterial;
-		Core::Core_Material m_actorPickingMaterial;
+		Core::Core_Material mGridMaterial;
+		Core::Core_Material mStencilFillMaterial;
+		Core::Core_Material mTextureMaterial;
+		Core::Core_Material mOutlineMaterial;
+		Core::Core_Material mEmptyMaterial;
+		Core::Core_Material mDefaultMaterial;
+		Core::Core_Material mCameraMaterial;
+		Core::Core_Material mLightMaterial;
+		Core::Core_Material mGizmoArrowMaterial;
+		Core::Core_Material mGizmoBallMaterial;
+		Core::Core_Material mGizmoPickingMaterial;
+		Core::Core_Material mActorPickingMaterial;
 	};
 }
 

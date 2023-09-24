@@ -32,15 +32,15 @@ Editor::Editor_AssetProperties::Editor_AssetProperties(const std::string& pTitle
 
     CreateAssetSelector();
 
-    m_settings = &CreateWidget<UI::UI_GroupCollapsable>("Settings");
-    m_settingsColumns = &m_settings->CreateWidget<UI::UI_Columns<2>>();
+    mSettings = &CreateWidget<UI::UI_GroupCollapsable>("Settings");
+    m_settingsColumns = &mSettings->CreateWidget<UI::UI_Columns<2>>();
     m_settingsColumns->mWidths[0] = 150;
 
     m_info = &CreateWidget<UI::UI_GroupCollapsable>("Info");
     m_infoColumns = &m_info->CreateWidget<UI::UI_Columns<2>>();
     m_infoColumns->mWidths[0] = 150;
 
-    m_settings->mEnabled = m_info->mEnabled = false;
+    mSettings->mEnabled = m_info->mEnabled = false;
 }
 
 void Editor::Editor_AssetProperties::SetTarget(const std::string& pPath)
@@ -62,9 +62,9 @@ void Editor::Editor_AssetProperties::Refresh()
     CreateSettings();
     CreateInfo();
 
-    m_applyButton->mEnabled = m_settings->mEnabled;
-    m_resetButton->mEnabled = m_settings->mEnabled;
-    m_revertButton->mEnabled = m_settings->mEnabled;
+    m_applyButton->mEnabled = mSettings->mEnabled;
+    m_resetButton->mEnabled = mSettings->mEnabled;
+    m_revertButton->mEnabled = mSettings->mEnabled;
 
     switch (Tools::Tools_PathParser::GetFileType(m_resource))
     {
@@ -153,7 +153,7 @@ void Editor::Editor_AssetProperties::CreateSettings()
 
     const auto fileType = Tools::Tools_PathParser::GetFileType(m_resource);
 
-    m_settings->mEnabled = true;
+    mSettings->mEnabled = true;
 
     if (fileType == Tools::Tools_PathParser::EFileType::MODEL)
     {
@@ -165,7 +165,7 @@ void Editor::Editor_AssetProperties::CreateSettings()
     }
     else
     {
-        m_settings->mEnabled = false;
+        mSettings->mEnabled = false;
     }
 }
 

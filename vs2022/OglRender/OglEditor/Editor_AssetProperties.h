@@ -46,7 +46,7 @@ namespace Editor
 		std::string m_resource;
 
 		Tools::Tools_Event<> m_targetChanged;
-		UI::UI_Group* m_settings = nullptr;
+		UI::UI_Group* mSettings = nullptr;
 		UI::UI_Group* m_info = nullptr;
 		UI::UI_Button* m_applyButton = nullptr;
 		UI::UI_Button* m_revertButton = nullptr;

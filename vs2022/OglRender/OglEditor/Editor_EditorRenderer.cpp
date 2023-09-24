@@ -34,11 +34,11 @@ Editor::Editor_EditorRenderer::Editor_EditorRenderer(Editor_Context& pContext) :
 			mContext.mEngineUBO->SetSubData(glm::transpose(pModelMatrix), 0);
 		});
 
-	mContext.mRenderer->RegisterUserMatrixSender([this](const glm::mat4& p_userMatrix)
+	mContext.mRenderer->RegisterUserMatrixSender([this](const glm::mat4& pUserMatrix)
 		{
 			mContext.mEngineUBO->SetSubData
 			(
-				p_userMatrix,
+				pUserMatrix,
 
 				sizeof(glm::mat4) +
 				sizeof(glm::mat4) +
@@ -51,70 +51,70 @@ Editor::Editor_EditorRenderer::Editor_EditorRenderer(Editor_Context& pContext) :
 
 void Editor::Editor_EditorRenderer::InitMaterials()
 {
-	m_defaultMaterial.SetShader(mContext.mShaderManager[":Shaders\\Standard.glsl"]);
-	m_defaultMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.f));
-	m_defaultMaterial.Set("u_Shininess", 100.0f);
-	m_defaultMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
+	mDefaultMaterial.SetShader(mContext.mShaderManager[":Shaders\\Standard.glsl"]);
+	mDefaultMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.f));
+	mDefaultMaterial.Set("u_Shininess", 100.0f);
+	mDefaultMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
-	m_emptyMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
-	m_emptyMaterial.Set("u_Diffuse", glm::vec4(1.f, 0.f, 1.f, 1.0f));
-	m_emptyMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
+	mEmptyMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mEmptyMaterial.Set("u_Diffuse", glm::vec4(1.f, 0.f, 1.f, 1.0f));
+	mEmptyMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
-	m_gridMaterial.SetShader(mContext.mEditorResources->GetShader("Grid"));
-	m_gridMaterial.SetBlendable(true);
-	m_gridMaterial.SetBackfaceCulling(false);
-	m_gridMaterial.SetDepthTest(false);
+	mGridMaterial.SetShader(mContext.mEditorResources->GetShader("Grid"));
+	mGridMaterial.SetBlendable(true);
+	mGridMaterial.SetBackfaceCulling(false);
+	mGridMaterial.SetDepthTest(false);
 
-	m_cameraMaterial.SetShader(mContext.mShaderManager[":Shaders\\Lambert.glsl"]);
-	m_cameraMaterial.Set("u_Diffuse", glm::vec4(0.0f, 0.3f, 0.7f, 1.0f));
-	m_cameraMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
+	mCameraMaterial.SetShader(mContext.mShaderManager[":Shaders\\Lambert.glsl"]);
+	mCameraMaterial.Set("u_Diffuse", glm::vec4(0.0f, 0.3f, 0.7f, 1.0f));
+	mCameraMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
-	m_lightMaterial.SetShader(mContext.mEditorResources->GetShader("Billboard"));
-	m_lightMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 0.5f, 0.5f));
-	m_lightMaterial.SetBackfaceCulling(false);
-	m_lightMaterial.SetBlendable(true);
-	m_lightMaterial.SetDepthTest(false);
+	mLightMaterial.SetShader(mContext.mEditorResources->GetShader("Billboard"));
+	mLightMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 0.5f, 0.5f));
+	mLightMaterial.SetBackfaceCulling(false);
+	mLightMaterial.SetBlendable(true);
+	mLightMaterial.SetDepthTest(false);
 
-	m_stencilFillMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
-	m_stencilFillMaterial.SetBackfaceCulling(true);
-	m_stencilFillMaterial.SetDepthTest(false);
-	m_stencilFillMaterial.SetColorWriting(false);
-	m_stencilFillMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
+	mStencilFillMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mStencilFillMaterial.SetBackfaceCulling(true);
+	mStencilFillMaterial.SetDepthTest(false);
+	mStencilFillMaterial.SetColorWriting(false);
+	mStencilFillMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
-	m_textureMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
-	m_textureMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.f));
-	m_textureMaterial.SetBackfaceCulling(false);
-	m_textureMaterial.SetBlendable(true);
-	m_textureMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
+	mTextureMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mTextureMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.f));
+	mTextureMaterial.SetBackfaceCulling(false);
+	mTextureMaterial.SetBlendable(true);
+	mTextureMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
-	m_outlineMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
-	m_outlineMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
-	m_outlineMaterial.SetDepthTest(false);
+	mOutlineMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mOutlineMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
+	mOutlineMaterial.SetDepthTest(false);
 
-	m_gizmoArrowMaterial.SetShader(mContext.mEditorResources->GetShader("Gizmo"));
-	m_gizmoArrowMaterial.SetGPUInstances(3);
-	m_gizmoArrowMaterial.Set("u_IsBall", false);
-	m_gizmoArrowMaterial.Set("u_IsPickable", false);
+	mGizmoArrowMaterial.SetShader(mContext.mEditorResources->GetShader("Gizmo"));
+	mGizmoArrowMaterial.SetGPUInstances(3);
+	mGizmoArrowMaterial.Set("u_IsBall", false);
+	mGizmoArrowMaterial.Set("u_IsPickable", false);
 
-	m_gizmoBallMaterial.SetShader(mContext.mEditorResources->GetShader("Gizmo"));
-	m_gizmoBallMaterial.Set("u_IsBall", true);
-	m_gizmoBallMaterial.Set("u_IsPickable", false);
+	mGizmoBallMaterial.SetShader(mContext.mEditorResources->GetShader("Gizmo"));
+	mGizmoBallMaterial.Set("u_IsBall", true);
+	mGizmoBallMaterial.Set("u_IsPickable", false);
 
-	m_gizmoPickingMaterial.SetShader(mContext.mEditorResources->GetShader("Gizmo"));
-	m_gizmoPickingMaterial.SetGPUInstances(3);
-	m_gizmoPickingMaterial.Set("u_IsBall", false);
-	m_gizmoPickingMaterial.Set("u_IsPickable", true);
+	mGizmoPickingMaterial.SetShader(mContext.mEditorResources->GetShader("Gizmo"));
+	mGizmoPickingMaterial.SetGPUInstances(3);
+	mGizmoPickingMaterial.Set("u_IsBall", false);
+	mGizmoPickingMaterial.Set("u_IsPickable", true);
 
-	m_actorPickingMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
-	m_actorPickingMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.0f));
-	m_actorPickingMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
-	m_actorPickingMaterial.SetFrontfaceCulling(false);
-	m_actorPickingMaterial.SetBackfaceCulling(false);
+	mActorPickingMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mActorPickingMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.0f));
+	mActorPickingMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
+	mActorPickingMaterial.SetFrontfaceCulling(false);
+	mActorPickingMaterial.SetBackfaceCulling(false);
 }
 
-void Editor::Editor_EditorRenderer::PreparePickingMaterial(Core::Core_Actor& p_actor, Core::Core_Material& pMaterial)
+void Editor::Editor_EditorRenderer::PreparePickingMaterial(Core::Core_Actor& pActor, Core::Core_Material& pMaterial)
 {
-	uint32_t actorID = static_cast<uint32_t>(p_actor.GetID());
+	uint32_t actorID = static_cast<uint32_t>(pActor.GetID());
 
 	auto bytes = reinterpret_cast<uint8_t*>(&actorID);
 	auto color = glm::vec4{ bytes[0] / 255.0f, bytes[1] / 255.0f, bytes[2] / 255.0f, 1.0f };
@@ -122,10 +122,10 @@ void Editor::Editor_EditorRenderer::PreparePickingMaterial(Core::Core_Actor& p_a
 	pMaterial.Set("u_Diffuse", color);
 }
 
-glm::mat4 Editor::Editor_EditorRenderer::CalculateCameraModelMatrix(Core::Core_Actor& p_actor)
+glm::mat4 Editor::Editor_EditorRenderer::CalculateCameraModelMatrix(Core::Core_Actor& pActor)
 {
-	auto translation = glm::translate(glm::identity<glm::mat4>(), p_actor.transform.GetWorldPosition());
-	auto rotation = glm::mat4(glm::quat(p_actor.transform.GetWorldRotation()));
+	auto translation = glm::translate(glm::identity<glm::mat4>(), pActor.transform.GetWorldPosition());
+	auto rotation = glm::mat4(glm::quat(pActor.transform.GetWorldRotation()));
 
 	return translation * rotation;
 }
@@ -133,7 +133,7 @@ glm::mat4 Editor::Editor_EditorRenderer::CalculateCameraModelMatrix(Core::Core_A
 void Editor::Editor_EditorRenderer::RenderScene(const glm::vec3& pCameraPosition, const Render::Render_Camera& pCamera, const Render::Render_Frustum* pCustomFrustum)
 {
 	mContext.mLightSSBO->Bind(0);
-	mContext.mRenderer->RenderScene(*mContext.mSceneManager.GetCurrentScene(), pCameraPosition, pCamera, pCustomFrustum, &m_emptyMaterial);
+	mContext.mRenderer->RenderScene(*mContext.mSceneManager.GetCurrentScene(), pCameraPosition, pCamera, pCustomFrustum, &mEmptyMaterial);
 	mContext.mLightSSBO->Unbind();
 }
 
@@ -154,7 +154,7 @@ void Editor::Editor_EditorRenderer::RenderSceneForActorPicking()
 					const Core::Core_CMaterialRenderer::MaterialList& materials = materialRenderer->GetMaterials();
 					const auto& modelMatrix = actor.transform.GetWorldMatrix();
 
-					PreparePickingMaterial(actor, m_actorPickingMaterial);
+					PreparePickingMaterial(actor, mActorPickingMaterial);
 
 					for (auto mesh : model->GetMeshes())
 					{
@@ -164,18 +164,18 @@ void Editor::Editor_EditorRenderer::RenderSceneForActorPicking()
 						{
 							material = materials.at(mesh->GetMaterialIndex());
 							if (!material || !material->GetShader())
-								material = &m_emptyMaterial;
+								material = &mEmptyMaterial;
 						}
 
 						if (material)
 						{
-							m_actorPickingMaterial.SetBackfaceCulling(material->HasBackfaceCulling());
-							m_actorPickingMaterial.SetFrontfaceCulling(material->HasFrontfaceCulling());
-							m_actorPickingMaterial.SetColorWriting(material->HasColorWriting());
-							m_actorPickingMaterial.SetDepthTest(material->HasDepthTest());
-							m_actorPickingMaterial.SetDepthWriting(material->HasDepthWriting());
+							mActorPickingMaterial.SetBackfaceCulling(material->HasBackfaceCulling());
+							mActorPickingMaterial.SetFrontfaceCulling(material->HasFrontfaceCulling());
+							mActorPickingMaterial.SetColorWriting(material->HasColorWriting());
+							mActorPickingMaterial.SetDepthTest(material->HasDepthTest());
+							mActorPickingMaterial.SetDepthWriting(material->HasDepthWriting());
 
-							mContext.mRenderer->DrawMesh(*mesh, m_actorPickingMaterial, &modelMatrix);
+							mContext.mRenderer->DrawMesh(*mesh, mActorPickingMaterial, &modelMatrix);
 						}
 					}
 				}
@@ -189,11 +189,11 @@ void Editor::Editor_EditorRenderer::RenderSceneForActorPicking()
 
 		if (actor.IsActive())
 		{
-			PreparePickingMaterial(actor, m_actorPickingMaterial);
+			PreparePickingMaterial(actor, mActorPickingMaterial);
 			auto& model = *mContext.mEditorResources->GetModel("Camera");
 			auto modelMatrix = CalculateCameraModelMatrix(actor);
 
-			mContext.mRenderer->DrawModelWithSingleMaterial(model, m_actorPickingMaterial, &modelMatrix);
+			mContext.mRenderer->DrawModelWithSingleMaterial(model, mActorPickingMaterial, &modelMatrix);
 		}
 	}
 
@@ -201,9 +201,9 @@ void Editor::Editor_EditorRenderer::RenderSceneForActorPicking()
 	{
 		mContext.mRenderer->Clear(false, true, false);
 
-		m_lightMaterial.SetDepthTest(true);
-		m_lightMaterial.Set<float>("u_Scale", Editor_EditorSettings::LightBillboardScale * 0.1f);
-		m_lightMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
+		mLightMaterial.SetDepthTest(true);
+		mLightMaterial.Set<float>("u_Scale", Editor_EditorSettings::LightBillboardScale * 0.1f);
+		mLightMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
 		for (auto light : mContext.mSceneManager.GetCurrentScene()->GetFastAccessComponents().lights)
 		{
@@ -211,10 +211,10 @@ void Editor::Editor_EditorRenderer::RenderSceneForActorPicking()
 
 			if (actor.IsActive())
 			{
-				PreparePickingMaterial(actor, m_lightMaterial);
+				PreparePickingMaterial(actor, mLightMaterial);
 				auto& model = *mContext.mEditorResources->GetModel("Vertical_Plane");
 				auto modelMatrix = glm::translate(glm::identity<glm::mat4>(), actor.transform.GetWorldPosition());
-				mContext.mRenderer->DrawModelWithSingleMaterial(model, m_lightMaterial, &modelMatrix);
+				mContext.mRenderer->DrawModelWithSingleMaterial(model, mLightMaterial, &modelMatrix);
 			}
 		}
 	}
@@ -236,15 +236,15 @@ void Editor::Editor_EditorRenderer::RenderCameras()
 			auto& model = *mContext.mEditorResources->GetModel("Camera");
 			auto modelMatrix = CalculateCameraModelMatrix(actor);
 
-			mContext.mRenderer->DrawModelWithSingleMaterial(model, m_cameraMaterial, &modelMatrix);
+			mContext.mRenderer->DrawModelWithSingleMaterial(model, mCameraMaterial, &modelMatrix);
 		}
 	}
 }
 
 void Editor::Editor_EditorRenderer::RenderLights()
 {
-	m_lightMaterial.SetDepthTest(false);
-	m_lightMaterial.Set<float>("u_Scale", Editor_EditorSettings::LightBillboardScale * 0.1f);
+	mLightMaterial.SetDepthTest(false);
+	mLightMaterial.Set<float>("u_Scale", Editor_EditorSettings::LightBillboardScale * 0.1f);
 
 	for (auto light : mContext.mSceneManager.GetCurrentScene()->GetFastAccessComponents().lights)
 	{
@@ -259,34 +259,34 @@ void Editor::Editor_EditorRenderer::RenderLights()
 
 			switch (static_cast<Render::Render_Light::ELightType>(static_cast<int>(light->GetData().mType)))
 			{
-			case Render::Render_Light::ELightType::POINT:				texture = mContext.mEditorResources->GetTexture("Bill_Point_Light");			break;
-			case Render::Render_Light::ELightType::SPOT:				texture = mContext.mEditorResources->GetTexture("Bill_Spot_Light");				break;
+			case Render::Render_Light::ELightType::POINT:			texture = mContext.mEditorResources->GetTexture("Bill_Point_Light");			break;
+			case Render::Render_Light::ELightType::SPOT:			texture = mContext.mEditorResources->GetTexture("Bill_Spot_Light");				break;
 			case Render::Render_Light::ELightType::DIRECTIONAL:		texture = mContext.mEditorResources->GetTexture("Bill_Directional_Light");		break;
 			case Render::Render_Light::ELightType::AMBIENT_BOX:		texture = mContext.mEditorResources->GetTexture("Bill_Ambient_Box_Light");		break;
 			case Render::Render_Light::ELightType::AMBIENT_SPHERE:	texture = mContext.mEditorResources->GetTexture("Bill_Ambient_Sphere_Light");	break;
 			}
 
 			const auto& lightColor = light->GetColor();
-			m_lightMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", texture);
-			m_lightMaterial.Set<glm::vec4>("u_Diffuse", glm::vec4(lightColor.x, lightColor.y, lightColor.z, 0.75f));
-			mContext.mRenderer->DrawModelWithSingleMaterial(model, m_lightMaterial, &modelMatrix);
+			mLightMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", texture);
+			mLightMaterial.Set<glm::vec4>("u_Diffuse", glm::vec4(lightColor.x, lightColor.y, lightColor.z, 0.75f));
+			mContext.mRenderer->DrawModelWithSingleMaterial(model, mLightMaterial, &modelMatrix);
 		}
 	}
 }
 
-void Editor::Editor_EditorRenderer::RenderGizmo(const glm::vec3& pPosition, const glm::quat& pRotation, EGizmoOperation p_operation, bool p_pickable, int p_highlightedAxis)
+void Editor::Editor_EditorRenderer::RenderGizmo(const glm::vec3& pPosition, const glm::quat& pRotation, EGizmoOperation pOperation, bool pPickable, int pHighlightedAxis)
 {
 	glm::mat4 model = glm::translate(glm::identity<glm::mat4>(), pPosition) * glm::mat4(glm::normalize(pRotation));
 
 	Render::Render_Model* arrowModel = nullptr;
 
-	if (!p_pickable)
+	if (!pPickable)
 	{
 		glm::mat4 sphereModel = model * glm::scale(glm::identity<glm::mat4>(), {0.1f, 0.1f, 0.1f});
-		mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Sphere"), m_gizmoBallMaterial, &sphereModel);
-		m_gizmoArrowMaterial.Set("u_HighlightedAxis", p_highlightedAxis);
+		mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Sphere"), mGizmoBallMaterial, &sphereModel);
+		mGizmoArrowMaterial.Set("u_HighlightedAxis", pHighlightedAxis);
 
-		switch (p_operation)
+		switch (pOperation)
 		{
 		case EGizmoOperation::TRANSLATE:
 			arrowModel = mContext.mEditorResources->GetModel("Arrow_Translate");
@@ -306,88 +306,88 @@ void Editor::Editor_EditorRenderer::RenderGizmo(const glm::vec3& pPosition, cons
 
 	if (arrowModel)
 	{
-		mContext.mRenderer->DrawModelWithSingleMaterial(*arrowModel, p_pickable ? m_gizmoPickingMaterial : m_gizmoArrowMaterial, &model);
+		mContext.mRenderer->DrawModelWithSingleMaterial(*arrowModel, pPickable ? mGizmoPickingMaterial : mGizmoArrowMaterial, &model);
 	}
 }
 
-void Editor::Editor_EditorRenderer::RenderModelToStencil(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel)
+void Editor::Editor_EditorRenderer::RenderModelToStencil(const glm::mat4& pWorldMatrix, Render::Render_Model& pModel)
 {
 	mContext.mRenderer->SetStencilMask(0xFF);
-	mContext.mRenderer->DrawModelWithSingleMaterial(pModel, m_stencilFillMaterial, &p_worldMatrix);
+	mContext.mRenderer->DrawModelWithSingleMaterial(pModel, mStencilFillMaterial, &pWorldMatrix);
 	mContext.mRenderer->SetStencilMask(0x00);
 }
 
-void Editor::Editor_EditorRenderer::RenderModelOutline(const glm::mat4& p_worldMatrix, Render::Render_Model& pModel, float pWidth)
+void Editor::Editor_EditorRenderer::RenderModelOutline(const glm::mat4& pWorldMatrix, Render::Render_Model& pModel, float pWidth)
 {
 	mContext.mRenderer->SetStencilAlgorithm(Render::EComparaisonAlgorithm::NOTEQUAL, 1, 0xFF);
 	mContext.mRenderer->SetRasterizationMode(Render::ERasterizationMode::LINE);
 	mContext.mRenderer->SetRasterizationLinesWidth(pWidth);
-	mContext.mRenderer->DrawModelWithSingleMaterial(pModel, m_outlineMaterial, &p_worldMatrix);
+	mContext.mRenderer->DrawModelWithSingleMaterial(pModel, mOutlineMaterial, &pWorldMatrix);
 	mContext.mRenderer->SetRasterizationLinesWidth(1.f);
 	mContext.mRenderer->SetRasterizationMode(Render::ERasterizationMode::FILL);
 	mContext.mRenderer->SetStencilAlgorithm(Render::EComparaisonAlgorithm::ALWAYS, 1, 0xFF);
 }
 
-void Editor::Editor_EditorRenderer::RenderActorOutlinePass(Core::Core_Actor& p_actor, bool p_toStencil, bool p_isSelected)
+void Editor::Editor_EditorRenderer::RenderActorOutlinePass(Core::Core_Actor& pActor, bool pToStencil, bool pIsSelected)
 {
-	float outlineWidth = p_isSelected ? 5.0f : 2.5f;
+	float outlineWidth = pIsSelected ? 5.0f : 2.5f;
 
-	m_outlineMaterial.Set("u_Diffuse", p_isSelected ? glm::vec4(1.f, 0.7f, 0.f, 1.0f) : glm::vec4(1.f, 1.f, 0.f, 1.0f));
+	mOutlineMaterial.Set("u_Diffuse", pIsSelected ? glm::vec4(1.f, 0.7f, 0.f, 1.0f) : glm::vec4(1.f, 1.f, 0.f, 1.0f));
 
-	if (p_actor.IsActive())
+	if (pActor.IsActive())
 	{
-		if (auto modelRenderer = p_actor.GetComponent<Core::Core_CModelRenderer>(); modelRenderer && modelRenderer->GetModel())
+		if (auto modelRenderer = pActor.GetComponent<Core::Core_CModelRenderer>(); modelRenderer && modelRenderer->GetModel())
 		{
-			if (p_toStencil)
-				RenderModelToStencil(p_actor.transform.GetWorldMatrix(), *modelRenderer->GetModel());
+			if (pToStencil)
+				RenderModelToStencil(pActor.transform.GetWorldMatrix(), *modelRenderer->GetModel());
 			else
-				RenderModelOutline(p_actor.transform.GetWorldMatrix(), *modelRenderer->GetModel(), outlineWidth);
+				RenderModelOutline(pActor.transform.GetWorldMatrix(), *modelRenderer->GetModel(), outlineWidth);
 
-			if (p_isSelected && Editor_EditorSettings::ShowGeometryBounds && !p_toStencil)
+			if (pIsSelected && Editor_EditorSettings::ShowGeometryBounds && !pToStencil)
 			{
 				RenderBoundingSpheres(*modelRenderer);
 			}
 		}
 
-		if (auto cameraComponent = p_actor.GetComponent<Core::Core_CCamera>(); cameraComponent)
+		if (auto cameraComponent = pActor.GetComponent<Core::Core_CCamera>(); cameraComponent)
 		{
-			auto model = CalculateCameraModelMatrix(p_actor);
+			auto model = CalculateCameraModelMatrix(pActor);
 
-			if (p_toStencil)
+			if (pToStencil)
 				RenderModelToStencil(model, *mContext.mEditorResources->GetModel("Camera"));
 			else
 				RenderModelOutline(model, *mContext.mEditorResources->GetModel("Camera"), outlineWidth);
 
-			if (p_isSelected && !p_toStencil)
+			if (pIsSelected && !pToStencil)
 			{
 				RenderCameraFrustum(*cameraComponent);
 			}
 		}
 
-		if (p_isSelected && !p_toStencil)
+		if (pIsSelected && !pToStencil)
 		{
-			if (auto ambientBoxComp = p_actor.GetComponent<Core::Core_CAmbientBoxLight>())
+			if (auto ambientBoxComp = pActor.GetComponent<Core::Core_CAmbientBoxLight>())
 			{
 				RenderAmbientBoxVolume(*ambientBoxComp);
 			}
 
-			if (auto ambientSphereComp = p_actor.GetComponent<Core::Core_CAmbientSphereLight>())
+			if (auto ambientSphereComp = pActor.GetComponent<Core::Core_CAmbientSphereLight>())
 			{
 				RenderAmbientSphereVolume(*ambientSphereComp);
 			}
 
 			if (Editor_EditorSettings::ShowLightBounds)
 			{
-				if (auto light = p_actor.GetComponent<Core::Core_CLight>())
+				if (auto light = pActor.GetComponent<Core::Core_CLight>())
 				{
 					RenderLightBounds(*light);
 				}
 			}
 		}
 
-		for (auto& child : p_actor.GetChildren())
+		for (auto& child : pActor.GetChildren())
 		{
-			RenderActorOutlinePass(*child, p_toStencil, p_isSelected);
+			RenderActorOutlinePass(*child, pToStencil, pIsSelected);
 		}
 	}
 }
@@ -442,7 +442,7 @@ void Editor::Editor_EditorRenderer::RenderCameraOrthographicFrustum(std::pair<ui
 
 void Editor::Editor_EditorRenderer::RenderCameraFrustum(Core::Core_CCamera& pCamera)
 {
-	auto& gameView = EDITOR_PANEL(Editor_GameView, "Game View");
+	auto& gameView = EDITOR_PANEL(Editor_GameView, "Game");
 	auto gameViewSize = gameView.GetSafeSize();
 
 	if (gameViewSize.first == 0 || gameViewSize.second == 0)
@@ -462,16 +462,16 @@ void Editor::Editor_EditorRenderer::RenderCameraFrustum(Core::Core_CCamera& pCam
 	}
 }
 
-void Editor::Editor_EditorRenderer::RenderActorCollider(Core::Core_Actor& p_actor)
+void Editor::Editor_EditorRenderer::RenderActorCollider(Core::Core_Actor& pActor)
 {
 }
 
-void Editor::Editor_EditorRenderer::RenderLightBounds(Core::Core_CLight& p_light)
+void Editor::Editor_EditorRenderer::RenderLightBounds(Core::Core_CLight& pLight)
 {
 	bool depthTestBackup = mContext.mRenderer->GetCapability(Render::ERenderingCapability::DEPTH_TEST);
 	mContext.mRenderer->SetCapability(Render::ERenderingCapability::DEPTH_TEST, false);
 
-	auto& data = p_light.GetData();
+	auto& data = pLight.GetData();
 
 	glm::quat rotation = data.GetTransform().GetWorldRotation();
 	glm::vec3 center = data.GetTransform().GetWorldPosition();
@@ -490,20 +490,20 @@ void Editor::Editor_EditorRenderer::RenderLightBounds(Core::Core_CLight& p_light
 	mContext.mRenderer->SetCapability(Render::ERenderingCapability::DEPTH_TEST, depthTestBackup);
 }
 
-void Editor::Editor_EditorRenderer::RenderAmbientBoxVolume(Core::Core_CAmbientBoxLight& p_ambientBoxLight)
+void Editor::Editor_EditorRenderer::RenderAmbientBoxVolume(Core::Core_CAmbientBoxLight& pAmbientBoxLight)
 {
 	bool depthTestBackup = mContext.mRenderer->GetCapability(Render::ERenderingCapability::DEPTH_TEST);
 	mContext.mRenderer->SetCapability(Render::ERenderingCapability::DEPTH_TEST, false);
 
-	auto& data = p_ambientBoxLight.GetData();
+	auto& data = pAmbientBoxLight.GetData();
 
 	glm::mat4 model =
-		glm::translate(glm::identity<glm::mat4>(), p_ambientBoxLight.mOwner.transform.GetWorldPosition()) *
+		glm::translate(glm::identity<glm::mat4>(), pAmbientBoxLight.mOwner.transform.GetWorldPosition()) *
 		glm::scale(glm::identity<glm::mat4>(), {data.mConstant * 2.f, data.mLinear * 2.f, data.mQuadratic * 2.f});
 
-	glm::vec3 center = p_ambientBoxLight.mOwner.transform.GetWorldPosition();
+	glm::vec3 center = pAmbientBoxLight.mOwner.transform.GetWorldPosition();
 	glm::vec3 size = { data.mConstant * 2.f, data.mLinear * 2.f, data.mQuadratic * 2.f };
-	glm::vec3 actorScale = p_ambientBoxLight.mOwner.transform.GetWorldScale();
+	glm::vec3 actorScale = pAmbientBoxLight.mOwner.transform.GetWorldScale();
 	glm::vec3 halfSize = size / 2.f;
 
 	mContext.mShapeDrawer->DrawLine(center + glm::vec3{ -halfSize.x, -halfSize.y, -halfSize.z }, center + glm::vec3{ -halfSize.x, -halfSize.y, +halfSize.z }, LIGHT_VOLUME_COLOR, 1.f);
@@ -522,15 +522,15 @@ void Editor::Editor_EditorRenderer::RenderAmbientBoxVolume(Core::Core_CAmbientBo
 	mContext.mRenderer->SetCapability(Render::ERenderingCapability::DEPTH_TEST, depthTestBackup);
 }
 
-void Editor::Editor_EditorRenderer::RenderAmbientSphereVolume(Core::Core_CAmbientSphereLight& p_ambientSphereLight)
+void Editor::Editor_EditorRenderer::RenderAmbientSphereVolume(Core::Core_CAmbientSphereLight& pAmbientSphereLight)
 {
 	bool depthTestBackup = mContext.mRenderer->GetCapability(Render::ERenderingCapability::DEPTH_TEST);
 	mContext.mRenderer->SetCapability(Render::ERenderingCapability::DEPTH_TEST, false);
 
-	auto& data = p_ambientSphereLight.GetData();
+	auto& data = pAmbientSphereLight.GetData();
 
-	glm::quat rotation = p_ambientSphereLight.mOwner.transform.GetWorldRotation();
-	glm::vec3 center = p_ambientSphereLight.mOwner.transform.GetWorldPosition();
+	glm::quat rotation = pAmbientSphereLight.mOwner.transform.GetWorldRotation();
+	glm::vec3 center = pAmbientSphereLight.mOwner.transform.GetWorldPosition();
 	float radius = data.mConstant;
 
 	for (float i = 0; i <= 360.0f; i += 10.0f)
@@ -543,22 +543,22 @@ void Editor::Editor_EditorRenderer::RenderAmbientSphereVolume(Core::Core_CAmbien
 	mContext.mRenderer->SetCapability(Render::ERenderingCapability::DEPTH_TEST, depthTestBackup);
 }
 
-void Editor::Editor_EditorRenderer::RenderBoundingSpheres(Core::Core_CModelRenderer& p_modelRenderer)
+void Editor::Editor_EditorRenderer::RenderBoundingSpheres(Core::Core_CModelRenderer& pModelRenderer)
 {
 	bool depthTestBackup = mContext.mRenderer->GetCapability(Render::ERenderingCapability::DEPTH_TEST);
 	mContext.mRenderer->SetCapability(Render::ERenderingCapability::DEPTH_TEST, false);
 
-	if (auto model = p_modelRenderer.GetModel())
+	if (auto model = pModelRenderer.GetModel())
 	{
-		auto& actor = p_modelRenderer.mOwner;
+		auto& actor = pModelRenderer.mOwner;
 
 		glm::vec3 actorScale = actor.transform.GetWorldScale();
 		glm::quat actorRotation = actor.transform.GetWorldRotation();
 		glm::vec3 actorPosition = actor.transform.GetWorldPosition();
 
 		const auto& modelBoundingsphere =
-			p_modelRenderer.GetFrustumBehaviour() == Core::Core_CModelRenderer::EFrustumBehaviour::CULL_CUSTOM ?
-			p_modelRenderer.GetCustomBoundingSphere() :
+			pModelRenderer.GetFrustumBehaviour() == Core::Core_CModelRenderer::EFrustumBehaviour::CULL_CUSTOM ?
+			pModelRenderer.GetCustomBoundingSphere() :
 			model->GetBoundingSphere();
 
 		float radiusScale = std::max(std::max(std::max(actorScale.x, actorScale.y), actorScale.z), 0.0f);
@@ -574,7 +574,7 @@ void Editor::Editor_EditorRenderer::RenderBoundingSpheres(Core::Core_CModelRende
 			mContext.mShapeDrawer->DrawLine(boundingSphereCenter + actorRotation * (glm::vec3{ cos(i * (3.14f / 180.0f)), 0.f, sin(i * (3.14f / 180.0f)) } *scaledRadius), boundingSphereCenter + actorRotation * (glm::vec3{ cos((i + 10.0f) * (3.14f / 180.0f)), 0.f, sin((i + 10.0f) * (3.14f / 180.0f)) } *scaledRadius), DEBUG_BOUNDS_COLOR, 1.f);
 		}
 
-		if (p_modelRenderer.GetFrustumBehaviour() == Core::Core_CModelRenderer::EFrustumBehaviour::CULL_MESHES)
+		if (pModelRenderer.GetFrustumBehaviour() == Core::Core_CModelRenderer::EFrustumBehaviour::CULL_MESHES)
 		{
 			const auto& meshes = model->GetMeshes();
 
@@ -606,36 +606,36 @@ void Editor::Editor_EditorRenderer::RenderBoundingSpheres(Core::Core_CModelRende
 void Editor::Editor_EditorRenderer::RenderModelAsset(Render::Render_Model& pModel)
 {
 	glm::mat4 model = glm::scale(glm::identity<glm::mat4>(), {3.f, 3.f, 3.f});
-	mContext.mRenderer->DrawModelWithSingleMaterial(pModel, m_defaultMaterial, &model);
+	mContext.mRenderer->DrawModelWithSingleMaterial(pModel, mDefaultMaterial, &model);
 }
 
 void Editor::Editor_EditorRenderer::RenderTextureAsset(Render::Render_Texture& pTexture)
 {
 	glm::mat4 model = glm::rotate(glm::scale(glm::identity<glm::mat4>(), { 5.f, 5.f, 5.f }), glm::radians(90.f * 0.0174f), glm::vec3(1, 0, 0));
 
-	m_textureMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", &pTexture);
-	mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Plane"), m_textureMaterial, &model);
+	mTextureMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", &pTexture);
+	mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Plane"), mTextureMaterial, &model);
 }
 
 void Editor::Editor_EditorRenderer::RenderMaterialAsset(Core::Core_Material& pMaterial)
 {
 	glm::mat4 model = glm::scale(glm::identity<glm::mat4>(), {3.f, 3.f, 3.f});
-	mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Sphere"), pMaterial, &model, &m_emptyMaterial);
+	mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Sphere"), pMaterial, &model, &mEmptyMaterial);
 }
 
-void Editor::Editor_EditorRenderer::RenderGrid(const glm::vec3& p_viewPos, const glm::vec3& pColor)
+void Editor::Editor_EditorRenderer::RenderGrid(const glm::vec3& pViewPos, const glm::vec3& pColor)
 {
 	constexpr float gridSize = 5000.0f;
 
 	glm::mat4 model = 
-		glm::translate(glm::identity<glm::mat4>(), {p_viewPos.x, 0.0f, p_viewPos.z}) * 
+		glm::translate(glm::identity<glm::mat4>(), {pViewPos.x, 0.0f, pViewPos.z}) * 
 		glm::scale(glm::identity<glm::mat4>(), {gridSize * 2.0f, 1.f, gridSize * 2.0f});
-	m_gridMaterial.Set("u_Color", pColor);
-	mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Plane"), m_gridMaterial, &model);
+	mGridMaterial.Set("u_Color", pColor);
+	mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Plane"), mGridMaterial, &model);
 
-	mContext.mShapeDrawer->DrawLine(glm::vec3(-gridSize + p_viewPos.x, 0.0f, 0.0f), glm::vec3(gridSize + p_viewPos.x, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), 1.0f);
-	mContext.mShapeDrawer->DrawLine(glm::vec3(0.0f, -gridSize + p_viewPos.y, 0.0f), glm::vec3(0.0f, gridSize + p_viewPos.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 1.0f);
-	mContext.mShapeDrawer->DrawLine(glm::vec3(0.0f, 0.0f, -gridSize + p_viewPos.z), glm::vec3(0.0f, 0.0f, gridSize + p_viewPos.z), glm::vec3(0.0f, 0.0f, 1.0f), 1.0f);
+	mContext.mShapeDrawer->DrawLine(glm::vec3(-gridSize + pViewPos.x, 0.0f, 0.0f), glm::vec3(gridSize + pViewPos.x, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), 1.0f);
+	mContext.mShapeDrawer->DrawLine(glm::vec3(0.0f, -gridSize + pViewPos.y, 0.0f), glm::vec3(0.0f, gridSize + pViewPos.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 1.0f);
+	mContext.mShapeDrawer->DrawLine(glm::vec3(0.0f, 0.0f, -gridSize + pViewPos.z), glm::vec3(0.0f, 0.0f, gridSize + pViewPos.z), glm::vec3(0.0f, 0.0f, 1.0f), 1.0f);
 }
 
 void Editor::Editor_EditorRenderer::UpdateLights(Core::Core_Scene& pScene)

@@ -67,6 +67,12 @@
     <Filter Include="头文件\Scripting">
       <UniqueIdentifier>{50fbc684-6913-4e5c-946d-f5f83b5b5e5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Graphics">
+      <UniqueIdentifier>{8c281192-39b2-42d4-8f07-b3c21e2c00bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Graphics">
+      <UniqueIdentifier>{9075bbbb-fc64-473b-9dd0-f7c20a487109}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core_IInspectorItem.h">

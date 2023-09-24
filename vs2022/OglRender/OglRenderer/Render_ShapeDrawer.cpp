@@ -17,6 +17,6 @@ void Render::Render_ShapeDrawer::DrawLine(const glm::vec3& p_start, const glm::v
 {
 }
 
-void Render::Render_ShapeDrawer::DrawGrid(const glm::vec3& p_viewPos, const glm::vec3& pColor, int32_t p_gridSize, float pLinear, float pQuadratic, float p_fadeThreshold, float p_lineWidth)
+void Render::Render_ShapeDrawer::DrawGrid(const glm::vec3& pViewPos, const glm::vec3& pColor, int32_t p_gridSize, float pLinear, float pQuadratic, float p_fadeThreshold, float p_lineWidth)
 {
 }

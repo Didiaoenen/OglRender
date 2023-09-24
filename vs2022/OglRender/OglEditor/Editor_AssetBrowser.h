@@ -18,9 +18,9 @@ namespace Editor
 				const std::string& pTitle,
 				bool pOpened,
 				const UI::UI_PanelWindowSettings& pWindowSettings,
-				const std::string& p_engineAssetFolder = "",
-				const std::string& p_projectAssetFolder = "",
-				const std::string& p_projectScriptFolder = ""
+				const std::string& pEngineAssetFolder = "",
+				const std::string& pProjectAssetFolder = "",
+				const std::string& pProjectScriptFolder = ""
 			);
 
 			void Fill();
@@ -30,18 +30,18 @@ namespace Editor
 			void Refresh();
 
 	private:
-		void ParseFolder(UI::UI_TreeNode& pRoot, const std::filesystem::directory_entry& p_directory, bool p_isEngineItem, bool p_scriptFolder = false);
-		void ConsiderItem(UI::UI_TreeNode* pRoot, const std::filesystem::directory_entry& p_entry, bool p_isEngineItem, bool p_autoOpen = false, bool p_scriptFolder = false);
+		void ParseFolder(UI::UI_TreeNode& pRoot, const std::filesystem::directory_entry& pDirectory, bool pIsEngineItem, bool pScriptFolder = false);
+		void ConsiderItem(UI::UI_TreeNode* pRoot, const std::filesystem::directory_entry& pEntry, bool pIsEngineItem, bool pAutoOpen = false, bool pScriptFolder = false);
 
 	public:
 		static const std::string __FILENAMES_CHARS;
 
 	private:
-		std::string m_engineAssetFolder;
-		std::string m_projectAssetFolder;
-		std::string m_projectScriptFolder;
-		UI::UI_Group* m_assetList;
-		std::unordered_map<UI::UI_TreeNode*, std::string> m_pathUpdate;
+		std::string mEngineAssetFolder;
+		std::string mProjectAssetFolder;
+		std::string mProjectScriptFolder;
+		UI::UI_Group* mAssetList;
+		std::unordered_map<UI::UI_TreeNode*, std::string> mPathUpdate;
 	};
 }
 

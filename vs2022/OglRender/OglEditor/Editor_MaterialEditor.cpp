@@ -95,83 +95,85 @@ Editor::Editor_MaterialEditor::Editor_MaterialEditor(const std::string& pTitle, 
 	CreateHeaderButtons();
 	CreateWidget<UI::UI_Separator>();
 	CreateMaterialSelector();
-	m_settings = &CreateWidget<UI::UI_Group>();
+	mSettings = &CreateWidget<UI::UI_Group>();
 	CreateShaderSelector();
 	CreateMaterialSettings();
 	CreateShaderSettings();
 
-	m_settings->mEnabled = false;
-	m_shaderSettings->mEnabled = false;
+	mSettings->mEnabled = false;
+	mShaderSettings->mEnabled = false;
 
-	m_materialDroppedEvent += std::bind(&Editor_MaterialEditor::OnMaterialDropped, this);
-	m_shaderDroppedEvent += std::bind(&Editor_MaterialEditor::OnShaderDropped, this);
+	mMaterialDroppedEvent += std::bind(&Editor_MaterialEditor::OnMaterialDropped, this);
+	mShaderDroppedEvent += std::bind(&Editor_MaterialEditor::OnShaderDropped, this);
 }
 
 void Editor::Editor_MaterialEditor::Refresh()
 {
-	if (m_target)
+	if (mTarget)
 	{
-		SetTarget(*m_target);
+		SetTarget(*mTarget);
 	}
 }
 
-void Editor::Editor_MaterialEditor::SetTarget(Core::Core_Material& p_newTarget)
+void Editor::Editor_MaterialEditor::SetTarget(Core::Core_Material& pNewTarget)
 {
-	m_target = &p_newTarget;
-	m_targetMaterialText->mContent = m_target->mPath;
+	mTarget = &pNewTarget;
+	mTargetMaterialText->mContent = mTarget->mPath;
 	OnMaterialDropped();
 }
 
 Core::Core_Material* Editor::Editor_MaterialEditor::GetTarget() const
 {
-	return m_target;
+	return mTarget;
 }
 
 void Editor::Editor_MaterialEditor::RemoveTarget()
 {
-	m_target = nullptr;
-	m_targetMaterialText->mContent = "Empty";
+	mTarget = nullptr;
+	mTargetMaterialText->mContent = "Empty";
 	OnMaterialDropped();
 }
 
 void Editor::Editor_MaterialEditor::Preview()
 {
-	auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset View");
+	auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset");
 
-	if (m_target)
-		assetView.SetResource(m_target);
+	if (mTarget)
+	{
+		assetView.SetResource(mTarget);
+	}
 
 	assetView.Open();
 }
 
 void Editor::Editor_MaterialEditor::Reset()
 {
-	if (m_target && mShader)
+	if (mTarget && mShader)
 	{
-		m_target->SetShader(nullptr);
+		mTarget->SetShader(nullptr);
 		OnShaderDropped();
 	}
 }
 
 void Editor::Editor_MaterialEditor::OnMaterialDropped()
 {
-	m_settings->mEnabled = m_target;
+	mSettings->mEnabled = mTarget;
 
-	if (m_settings->mEnabled)
+	if (mSettings->mEnabled)
 	{
 		GenerateMaterialSettingsContent();
-		m_shaderText->mContent = m_target->GetShader() ? m_target->GetShader()->mPath : "Empty";
-		mShader = m_target->GetShader();
+		mShaderText->mContent = mTarget->GetShader() ? mTarget->GetShader()->mPath : "Empty";
+		mShader = mTarget->GetShader();
 	}
 	else
 	{
-		m_materialSettingsColumns->RemoveAllWidgets();
+		mMaterialSettingsColumns->RemoveAllWidgets();
 	}
 
-	m_shaderSettings->mEnabled = false;
-	m_shaderSettingsColumns->RemoveAllWidgets();
+	mShaderSettings->mEnabled = false;
+	mShaderSettingsColumns->RemoveAllWidgets();
 
-	if (m_target && m_target->GetShader())
+	if (mTarget && mTarget->GetShader())
 	{
 		OnShaderDropped();
 	}
@@ -179,20 +181,20 @@ void Editor::Editor_MaterialEditor::OnMaterialDropped()
 
 void Editor::Editor_MaterialEditor::OnShaderDropped()
 {
-	m_shaderSettings->mEnabled = mShader;
+	mShaderSettings->mEnabled = mShader;
 
-	if (mShader != m_target->GetShader())
+	if (mShader != mTarget->GetShader())
 	{
-		m_target->SetShader(mShader);
+		mTarget->SetShader(mShader);
 	}
 
-	if (m_shaderSettings->mEnabled)
+	if (mShaderSettings->mEnabled)
 	{
 		GenerateShaderSettingsContent();
 	}
 	else
 	{
-		m_shaderSettingsColumns->RemoveAllWidgets();
+		mShaderSettingsColumns->RemoveAllWidgets();
 	}
 }
 
@@ -202,9 +204,9 @@ void Editor::Editor_MaterialEditor::CreateHeaderButtons()
 	saveButton.mIdleBackgroundColor = { 0.0f, 0.5f, 0.0f, 1.f };
 	saveButton.mClickedEvent += [this]
 		{
-			if (m_target)
+			if (mTarget)
 			{
-				Core::Core_MaterialLoader::Save(*m_target, EDITOR_EXEC(GetRealPath(m_target->mPath)));
+				Core::Core_MaterialLoader::Save(*mTarget, EDITOR_EXEC(GetRealPath(mTarget->mPath)));
 			}
 		};
 
@@ -214,8 +216,8 @@ void Editor::Editor_MaterialEditor::CreateHeaderButtons()
 	reloadButton.mIdleBackgroundColor = { 0.7f, 0.5f, 0.0f, 1.f };
 	reloadButton.mClickedEvent += [this]
 		{
-			if (m_target)
-				Core::Core_MaterialLoader::Reload(*m_target, EDITOR_EXEC(GetRealPath(m_target->mPath)));
+			if (mTarget)
+				Core::Core_MaterialLoader::Reload(*mTarget, EDITOR_EXEC(GetRealPath(mTarget->mPath)));
 
 			OnMaterialDropped();
 		};
@@ -236,28 +238,28 @@ void Editor::Editor_MaterialEditor::CreateMaterialSelector()
 {
 	auto& columns = CreateWidget<UI::UI_Columns<2>>();
 	columns.mWidths[0] = 150;
-	m_targetMaterialText = &Core::Core_GUIDrawer::DrawMaterial(columns, "Material", m_target, &m_materialDroppedEvent);
+	mTargetMaterialText = &Core::Core_GUIDrawer::DrawMaterial(columns, "Material", mTarget, &mMaterialDroppedEvent);
 }
 
 void Editor::Editor_MaterialEditor::CreateShaderSelector()
 {
-	auto& columns = m_settings->CreateWidget<UI::UI_Columns<2>>();
+	auto& columns = mSettings->CreateWidget<UI::UI_Columns<2>>();
 	columns.mWidths[0] = 150;
-	m_shaderText = &Core::Core_GUIDrawer::DrawShader(columns, "Shader", mShader, &m_shaderDroppedEvent);
+	mShaderText = &Core::Core_GUIDrawer::DrawShader(columns, "Shader", mShader, &mShaderDroppedEvent);
 }
 
 void Editor::Editor_MaterialEditor::CreateMaterialSettings()
 {
-	m_materialSettings = &m_settings->CreateWidget<UI::UI_GroupCollapsable>("Material Settings");
-	m_materialSettingsColumns = &m_materialSettings->CreateWidget<UI::UI_Columns<2>>();
-	m_materialSettingsColumns->mWidths[0] = 150;
+	mMaterialSettings = &mSettings->CreateWidget<UI::UI_GroupCollapsable>("Material Settings");
+	mMaterialSettingsColumns = &mMaterialSettings->CreateWidget<UI::UI_Columns<2>>();
+	mMaterialSettingsColumns->mWidths[0] = 150;
 }
 
 void Editor::Editor_MaterialEditor::CreateShaderSettings()
 {
-	m_shaderSettings = &m_settings->CreateWidget<UI::UI_GroupCollapsable>("Shader Settings");
-	m_shaderSettingsColumns = &m_shaderSettings->CreateWidget<UI::UI_Columns<2>>();
-	m_shaderSettingsColumns->mWidths[0] = 150;
+	mShaderSettings = &mSettings->CreateWidget<UI::UI_GroupCollapsable>("Shader Settings");
+	mShaderSettingsColumns = &mShaderSettings->CreateWidget<UI::UI_Columns<2>>();
+	mShaderSettingsColumns->mWidths[0] = 150;
 }
 
 std::string UniformFormat(const std::string& p_string)
@@ -303,27 +305,27 @@ std::string UniformFormat(const std::string& p_string)
 
 void Editor::Editor_MaterialEditor::GenerateShaderSettingsContent()
 {
-	m_shaderSettingsColumns->RemoveAllWidgets();
+	mShaderSettingsColumns->RemoveAllWidgets();
 
 	std::multimap<int, std::pair<std::string, std::any*>> sortedUniformsData;
 
-	for (auto& [name, value] : m_target->GetUniformsData())
+	for (auto& [name, value] : mTarget->GetUniformsData())
 	{
 		int orderID = 0;
 
-		auto uniformData = m_target->GetShader()->GetUniformInfo(name);
+		auto uniformData = mTarget->GetShader()->GetUniformInfo(name);
 
 		if (uniformData)
 		{
 			switch (uniformData->type)
 			{
-				case Render::EUniformType::UNIFORM_SAMPLER_2D:	orderID = 0; break;
-				case Render::EUniformType::UNIFORM_FLOAT_VEC4:	orderID = 1; break;
-				case Render::EUniformType::UNIFORM_FLOAT_VEC3:	orderID = 2; break;
-				case Render::EUniformType::UNIFORM_FLOAT_VEC2:	orderID = 3; break;
-				case Render::EUniformType::UNIFORM_FLOAT:		orderID = 4; break;
-				case Render::EUniformType::UNIFORM_INT:			orderID = 5; break;
-				case Render::EUniformType::UNIFORM_BOOL:			orderID = 6; break;
+			case Render::EUniformType::UNIFORM_SAMPLER_2D:	orderID = 0; break;
+			case Render::EUniformType::UNIFORM_FLOAT_VEC4:	orderID = 1; break;
+			case Render::EUniformType::UNIFORM_FLOAT_VEC3:	orderID = 2; break;
+			case Render::EUniformType::UNIFORM_FLOAT_VEC2:	orderID = 3; break;
+			case Render::EUniformType::UNIFORM_FLOAT:		orderID = 4; break;
+			case Render::EUniformType::UNIFORM_INT:			orderID = 5; break;
+			case Render::EUniformType::UNIFORM_BOOL:		orderID = 6; break;
 			}
 
 			sortedUniformsData.emplace(orderID, std::pair<std::string, std::any*>{ name, & value });
@@ -332,19 +334,19 @@ void Editor::Editor_MaterialEditor::GenerateShaderSettingsContent()
 
 	for (auto& [order, info] : sortedUniformsData)
 	{
-		auto uniformData = m_target->GetShader()->GetUniformInfo(info.first);
+		auto uniformData = mTarget->GetShader()->GetUniformInfo(info.first);
 
 		if (uniformData)
 		{
 			switch (uniformData->type)
 			{
-				case Render::EUniformType::UNIFORM_BOOL:			Core::Core_GUIDrawer::DrawBoolean(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<bool&>(*info.second));																	break;
-				case Render::EUniformType::UNIFORM_INT:			Core::Core_GUIDrawer::DrawScalar<int>(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<int&>(*info.second));																break;
-				case Render::EUniformType::UNIFORM_FLOAT:		Core::Core_GUIDrawer::DrawScalar<float>(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<float&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);		break;
-				case Render::EUniformType::UNIFORM_FLOAT_VEC2:	Core::Core_GUIDrawer::DrawVec2(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec2&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);	break;
-				case Render::EUniformType::UNIFORM_FLOAT_VEC3:	DrawHybridVec3(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec3&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);			break;
-				case Render::EUniformType::UNIFORM_FLOAT_VEC4:	DrawHybridVec4(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec4&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);			break;
-				case Render::EUniformType::UNIFORM_SAMPLER_2D:	Core::Core_GUIDrawer::DrawTexture(*m_shaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<Render::Render_Texture*&>(*info.second));																break;
+			case Render::EUniformType::UNIFORM_BOOL:		Core::Core_GUIDrawer::DrawBoolean(*mShaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<bool&>(*info.second));																						break;
+			case Render::EUniformType::UNIFORM_INT:			Core::Core_GUIDrawer::DrawScalar<int>(*mShaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<int&>(*info.second));																					break;
+			case Render::EUniformType::UNIFORM_FLOAT:		Core::Core_GUIDrawer::DrawScalar<float>(*mShaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<float&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);	break;
+			case Render::EUniformType::UNIFORM_FLOAT_VEC2:	Core::Core_GUIDrawer::DrawVec2(*mShaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec2&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);			break;
+			case Render::EUniformType::UNIFORM_FLOAT_VEC3:	DrawHybridVec3(*mShaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec3&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);							break;
+			case Render::EUniformType::UNIFORM_FLOAT_VEC4:	DrawHybridVec4(*mShaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<glm::vec4&>(*info.second), 0.01f, Core::Core_GUIDrawer::_MIN_FLOAT, Core::Core_GUIDrawer::_MAX_FLOAT);							break;
+			case Render::EUniformType::UNIFORM_SAMPLER_2D:	Core::Core_GUIDrawer::DrawTexture(*mShaderSettingsColumns, UniformFormat(info.first), reinterpret_cast<Render::Render_Texture*&>(*info.second));																	break;
 			}
 		}
 	}
@@ -352,13 +354,13 @@ void Editor::Editor_MaterialEditor::GenerateShaderSettingsContent()
 
 void Editor::Editor_MaterialEditor::GenerateMaterialSettingsContent()
 {
-	m_materialSettingsColumns->RemoveAllWidgets();
+	mMaterialSettingsColumns->RemoveAllWidgets();
 
-	Core::Core_GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Blendable", std::bind(&Core::Core_Material::IsBlendable, m_target), std::bind(&Core::Core_Material::SetBlendable, m_target, std::placeholders::_1));
-	Core::Core_GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Back-face Culling", std::bind(&Core::Core_Material::HasBackfaceCulling, m_target), std::bind(&Core::Core_Material::SetBackfaceCulling, m_target, std::placeholders::_1));
-	Core::Core_GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Front-face Culling", std::bind(&Core::Core_Material::HasFrontfaceCulling, m_target), std::bind(&Core::Core_Material::SetFrontfaceCulling, m_target, std::placeholders::_1));
-	Core::Core_GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Depth Test", std::bind(&Core::Core_Material::HasDepthTest, m_target), std::bind(&Core::Core_Material::SetDepthTest, m_target, std::placeholders::_1));
-	Core::Core_GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Depth Writing", std::bind(&Core::Core_Material::HasDepthWriting, m_target), std::bind(&Core::Core_Material::SetDepthWriting, m_target, std::placeholders::_1));
-	Core::Core_GUIDrawer::DrawBoolean(*m_materialSettingsColumns, "Color Writing", std::bind(&Core::Core_Material::HasColorWriting, m_target), std::bind(&Core::Core_Material::SetColorWriting, m_target, std::placeholders::_1));
-	Core::Core_GUIDrawer::DrawScalar<int>(*m_materialSettingsColumns, "GPU Instances", std::bind(&Core::Core_Material::GetGPUInstances, m_target), std::bind(&Core::Core_Material::SetGPUInstances, m_target, std::placeholders::_1), 1.0f, 0, 100000);
+	Core::Core_GUIDrawer::DrawBoolean(*mMaterialSettingsColumns, "Blendable", std::bind(&Core::Core_Material::IsBlendable, mTarget), std::bind(&Core::Core_Material::SetBlendable, mTarget, std::placeholders::_1));
+	Core::Core_GUIDrawer::DrawBoolean(*mMaterialSettingsColumns, "Back-face Culling", std::bind(&Core::Core_Material::HasBackfaceCulling, mTarget), std::bind(&Core::Core_Material::SetBackfaceCulling, mTarget, std::placeholders::_1));
+	Core::Core_GUIDrawer::DrawBoolean(*mMaterialSettingsColumns, "Front-face Culling", std::bind(&Core::Core_Material::HasFrontfaceCulling, mTarget), std::bind(&Core::Core_Material::SetFrontfaceCulling, mTarget, std::placeholders::_1));
+	Core::Core_GUIDrawer::DrawBoolean(*mMaterialSettingsColumns, "Depth Test", std::bind(&Core::Core_Material::HasDepthTest, mTarget), std::bind(&Core::Core_Material::SetDepthTest, mTarget, std::placeholders::_1));
+	Core::Core_GUIDrawer::DrawBoolean(*mMaterialSettingsColumns, "Depth Writing", std::bind(&Core::Core_Material::HasDepthWriting, mTarget), std::bind(&Core::Core_Material::SetDepthWriting, mTarget, std::placeholders::_1));
+	Core::Core_GUIDrawer::DrawBoolean(*mMaterialSettingsColumns, "Color Writing", std::bind(&Core::Core_Material::HasColorWriting, mTarget), std::bind(&Core::Core_Material::SetColorWriting, mTarget, std::placeholders::_1));
+	Core::Core_GUIDrawer::DrawScalar<int>(*mMaterialSettingsColumns, "GPU Instances", std::bind(&Core::Core_Material::GetGPUInstances, mTarget), std::bind(&Core::Core_Material::SetGPUInstances, mTarget, std::placeholders::_1), 1.0f, 0, 100000);
 }

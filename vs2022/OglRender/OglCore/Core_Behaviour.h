@@ -15,7 +15,7 @@ namespace Core
 
 		virtual std::string GetName() override;
 
-		//bool RegisterToLuaContext(sol::state& p_luaState, const std::string& p_scriptFolder);
+		//bool RegisterToLuaContext(sol::state& p_luaState, const std::string& pScriptFolder);
 
 		//void UnregisterFromLuaContext();
 

@@ -26,7 +26,7 @@ namespace Editor
 
 		void Refresh();
 
-		void SetTarget(Core::Core_Material& p_newTarget);
+		void SetTarget(Core::Core_Material& pNewTarget);
 
 		Core::Core_Material* GetTarget() const;
 
@@ -50,21 +50,21 @@ namespace Editor
 		void GenerateMaterialSettingsContent();
 
 	private:
-		Core::Core_Material* m_target = nullptr;
-		Render::Render_Shader* mShader = nullptr;
+		Core::Core_Material* mTarget{ nullptr };
+		Render::Render_Shader* mShader{ nullptr };
 
-		UI::UI_Text* m_targetMaterialText = nullptr;
-		UI::UI_Text* m_shaderText = nullptr;
+		UI::UI_Text* mTargetMaterialText{ nullptr };
+		UI::UI_Text* mShaderText{ nullptr };
 
-		Tools::Tools_Event<> m_materialDroppedEvent;
-		Tools::Tools_Event<> m_shaderDroppedEvent;
+		Tools::Tools_Event<> mMaterialDroppedEvent;
+		Tools::Tools_Event<> mShaderDroppedEvent;
 
-		UI::UI_Group* m_settings = nullptr;
-		UI::UI_Group* m_materialSettings = nullptr;
-		UI::UI_Group* m_shaderSettings = nullptr;
+		UI::UI_Group* mSettings{ nullptr };
+		UI::UI_Group* mMaterialSettings{ nullptr };
+		UI::UI_Group* mShaderSettings{ nullptr };
 
-		UI::UI_Columns<2>* m_shaderSettingsColumns = nullptr;
-		UI::UI_Columns<2>* m_materialSettingsColumns = nullptr;
+		UI::UI_Columns<2>* mShaderSettingsColumns{ nullptr };
+		UI::UI_Columns<2>* mMaterialSettingsColumns{ nullptr };
 	};
 }
 

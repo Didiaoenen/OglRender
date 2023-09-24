@@ -99,7 +99,7 @@ namespace Core
 		virtual void OnDeserialize(tinyxml2::XMLDocument& pDoc, tinyxml2::XMLNode* pActorsRoot) override;
 
 	private:
-		Core_Actor(const Core_Actor& p_actor) = delete;
+		Core_Actor(const Core_Actor& pActor) = delete;
 
 		void RecursiveActiveUpdate();
 		void RecursiveWasActiveUpdate();
