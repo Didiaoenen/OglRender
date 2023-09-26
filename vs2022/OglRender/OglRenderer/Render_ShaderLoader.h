@@ -35,6 +35,7 @@ namespace Render
 		static std::pair<std::string, std::string> ParseShader(const std::string& pFilePath);
 		static std::map<std::string, Render_ParseData*> ParseShader2(const std::string& pFilePath);
 		static uint32_t CreateProgram(const std::string& pVertexShader, const std::string& pFragmentShader);
+		static uint32_t CreateProgram2(Render_ParseData* parseData);
 		static uint32_t CompileShader(uint32_t pType, const std::string& pSource);
 
 		static std::string __FILE_TRACE;

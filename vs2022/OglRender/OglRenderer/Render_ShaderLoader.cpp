@@ -14,9 +14,18 @@ Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pF
 
 	std::pair<std::string, std::string> source = ParseShader(pFilePath);
 
-	auto a = ParseShader2(pFilePath);
-
 	uint32_t programID = CreateProgram(source.first, source.second);
+
+	std::map<std::string, Render::Render_ParseData*> parseDatas = ParseShader2(pFilePath);
+
+	std::map<std::string, Render_Shader*> subShaders;
+	for (auto it = parseDatas.begin(); it != parseDatas.end(); it++)
+	{
+		auto& [name, data] = *it;
+		uint32_t programID = CreateProgram2(data);
+
+		subShaders.emplace(name, new Render_Shader(pFilePath, programID));
+	}
 
 	if (programID)
 	{
@@ -85,7 +94,7 @@ bool Render::Render_ShaderLoader::Destroy(Render_Shader*& pShader)
 * #depth_test 0
 * #depth_write 0
 * #color_mask 0
-* #cull 0
+* #culling 0
 * #state_end
 * 
 * #shader vertex
@@ -116,7 +125,7 @@ std::pair<std::string, std::string> Render::Render_ShaderLoader::ParseShader(con
 			std::regex_search(line, sm, e);
 			std::string name = sm[2];
 		}
-		
+
 		bool state = false;
 		if (line.find("#state_begine") != std::string::npos)
 		{
@@ -288,6 +297,64 @@ uint32_t Render::Render_ShaderLoader::CreateProgram(const std::string& pVertexSh
 	glValidateProgram(program);
 	glDeleteShader(vs);
 	glDeleteShader(fs);
+
+	return program;
+}
+
+uint32_t Render::Render_ShaderLoader::CreateProgram2(Render_ParseData* parseData)
+{
+	const uint32_t program = glCreateProgram();
+
+	const uint32_t vs = CompileShader(GL_VERTEX_SHADER, parseData->vertex);
+	const uint32_t fs = CompileShader(GL_FRAGMENT_SHADER, parseData->fragment);
+
+	uint32_t gs = 0;
+	if (!parseData->geometry.empty())
+	{
+		gs = CompileShader(GL_FRAGMENT_SHADER, parseData->geometry);
+	}
+
+	if (vs == 0 || fs == 0)
+	{
+		return 0;
+	}
+
+	glAttachShader(program, vs);
+	glAttachShader(program, fs);
+
+	if (gs > 0)
+	{
+		glAttachShader(program, gs);
+	}
+
+	glLinkProgram(program);
+
+	GLint linkStatus;
+	glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
+
+	if (linkStatus == GL_FALSE)
+	{
+		GLint maxLength;
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+		std::string errorLog(maxLength, ' ');
+		glGetProgramInfoLog(program, maxLength, &maxLength, errorLog.data());
+
+		//OVLOG_ERROR("[LINK] \"" + __FILE_TRACE + "\":\n" + errorLog);
+
+		glDeleteProgram(program);
+
+		return 0;
+	}
+
+	glValidateProgram(program);
+	glDeleteShader(vs);
+	glDeleteShader(fs);
+
+	if (gs > 0)
+	{
+		glDeleteShader(gs);
+	}
 
 	return program;
 }
