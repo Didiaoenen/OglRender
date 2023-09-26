@@ -201,6 +201,12 @@
     <ClInclude Include="Render_Defines.h">
       <Filter>头文件\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Render_EShaderType.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_PipelineState.h">
+      <Filter>头文件\Settings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Render_ModelLoader.cpp">

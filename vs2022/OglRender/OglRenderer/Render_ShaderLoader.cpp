@@ -1,3 +1,4 @@
+#include <regex>
 #include <sstream>
 #include <fstream>
 
@@ -12,6 +13,8 @@ Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pF
 	__FILE_TRACE = pFilePath;
 
 	std::pair<std::string, std::string> source = ParseShader(pFilePath);
+
+	auto a = ParseShader2(pFilePath);
 
 	uint32_t programID = CreateProgram(source.first, source.second);
 
@@ -74,42 +77,178 @@ bool Render::Render_ShaderLoader::Destroy(Render_Shader*& pShader)
 	return false;
 }
 
+/*
+* #name default
+* #state_begine
+* #blend_src 0
+* #blend_dst 0
+* #depth_test 0
+* #depth_write 0
+* #color_mask 0
+* #cull 0
+* #state_end
+* 
+* #shader vertex
+*
+* #shader fragment
+* 
+* #shader geometry
+*/
+
 std::pair<std::string, std::string> Render::Render_ShaderLoader::ParseShader(const std::string& pFilePath)
 {
 	std::ifstream stream(pFilePath);
 
-	enum class ShaderType { NONE = -1, VERTEX = 0, FRAGMENT = 1 };
-
 	std::string line;
 
-	std::stringstream ss[2];
+	std::stringstream ss[10];
 
-	ShaderType type = ShaderType::NONE;
+	std::regex e("(\\w+)[ ](\\w+)");
 
+	EShaderType type = EShaderType::NONE;
 	while (std::getline(stream, line))
 	{
-		if (line.find("#shader") != std::string::npos)
+		if (line.find("#name") != std::string::npos)
 		{
-			if (line.find("vertex") != std::string::npos)
-			{
-				type = ShaderType::VERTEX;
-			}
-			else if (line.find("fragment") != std::string::npos)
-			{
-				type = ShaderType::FRAGMENT;
-			}
+			type = EShaderType::NONE;
+
+			std::smatch sm;
+			std::regex_search(line, sm, e);
+			std::string name = sm[2];
 		}
-		else if (type != ShaderType::NONE)
+		
+		bool state = false;
+		if (line.find("#state_begine") != std::string::npos)
 		{
-			ss[static_cast<int>(type)] << line << '\n';
+			state = true;
+		}
+		else if (line.find("#state_end") != std::string::npos)
+		{
+			state = false;
+		}
+
+		if (state)
+		{
+
+		}
+		else
+		{
+			if (line.find("#shader") != std::string::npos)
+			{
+				if (line.find("vertex") != std::string::npos)
+				{
+					type = EShaderType::VERTEX;
+				}
+				else if (line.find("fragment") != std::string::npos)
+				{
+					type = EShaderType::FRAGMENT;
+				}
+				else if (line.find("geometry") != std::string::npos)
+				{
+					type = EShaderType::GEOMETRY;
+				}
+			}
+			else if (type != EShaderType::NONE)
+			{
+				ss[static_cast<int>(type)] << line << '\n';
+			}
 		}
 	}
 
 	return
 	{
-		ss[static_cast<int>(ShaderType::VERTEX)].str(),
-		ss[static_cast<int>(ShaderType::FRAGMENT)].str()
+		ss[static_cast<int>(EShaderType::VERTEX)].str(),
+		ss[static_cast<int>(EShaderType::FRAGMENT)].str(),
 	};
+}
+
+std::map<std::string, Render::Render_ParseData*> Render::Render_ShaderLoader::ParseShader2(const std::string& pFilePath)
+{
+	std::ifstream stream(pFilePath);
+
+	std::string name;
+
+	std::string line;
+
+	bool state = false;
+
+	std::regex e("(\\w+)[ ](\\w+)");
+
+	EShaderType type = EShaderType::NONE;
+
+	std::map<std::string, Render_ParseData*> datas;
+
+	std::map<std::string, std::map<int, std::stringstream>> sss;
+
+	while (std::getline(stream, line))
+	{
+		if (line.find("#name") != std::string::npos)
+		{
+			Render_ParseData* data = new Render_ParseData();
+
+			type = EShaderType::NONE;
+
+			std::smatch sm;
+			std::regex_search(line, sm, e);
+			name = data->name = sm[2];
+
+			datas.emplace(data->name, data);
+		}else if (line.find("#state_begine") != std::string::npos)
+		{
+			state = true;
+		}
+		else if (line.find("#state_end") != std::string::npos)
+		{
+			state = false;
+		}
+		else
+		{
+			if (state)
+			{
+				std::smatch sm;
+				std::regex_search(line, sm, e);
+				datas[name]->state.emplace(sm[1], std::stoi(sm[2]));
+			}
+			else
+			{
+				if (line.find("#shader") != std::string::npos)
+				{
+					if (line.find("vertex") != std::string::npos)
+					{
+						type = EShaderType::VERTEX;
+					}
+					else if (line.find("fragment") != std::string::npos)
+					{
+						type = EShaderType::FRAGMENT;
+					}
+					else if (line.find("geometry") != std::string::npos)
+					{
+						type = EShaderType::GEOMETRY;
+					}
+
+					if (auto temp = sss.find(name); temp == sss.end())
+					{
+						sss.emplace(name, std::map<int, std::stringstream>());
+					}
+					sss[name].emplace(static_cast<int>(type), std::stringstream());
+				}
+				else if (type != EShaderType::NONE)
+				{
+					sss[name][static_cast<int>(type)] << line << '\n';
+				}
+			}
+		}
+	}
+
+	for (auto it = datas.begin(); it != datas.end(); it++)
+	{
+		auto& [name, data] = *it;
+		data->vertex = sss[name][static_cast<int>(EShaderType::VERTEX)].str();
+		data->fragment = sss[name][static_cast<int>(EShaderType::FRAGMENT)].str();
+		data->geometry = sss[name][static_cast<int>(EShaderType::GEOMETRY)].str();
+	}
+
+	return datas;
 }
 
 uint32_t Render::Render_ShaderLoader::CreateProgram(const std::string& pVertexShader, const std::string& pFragmentShader)

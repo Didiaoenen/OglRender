@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f97a5cc1-887d-451f-af4d-9ae8dc76bbaf}</ProjectGuid>
-    <RootNamespace>OglRenderer</RootNamespace>
+    <ProjectGuid>{401e6d77-1996-4c66-a3a6-cb0dcd70437d}</ProjectGuid>
+    <RootNamespace>OglTest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>OglRenderer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -105,8 +104,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../;./../../../includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,76 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Render_AssimpParser.h" />
-    <ClInclude Include="Render_BoundingSphere.h" />
-    <ClInclude Include="Render_Camera.h" />
-    <ClInclude Include="Render_Defines.h" />
-    <ClInclude Include="Render_Driver.h" />
-    <ClInclude Include="Render_DriverSettings.h" />
-    <ClInclude Include="Render_EAccessSpecifier.h" />
-    <ClInclude Include="Render_EComparaisonAlgorithm.h" />
-    <ClInclude Include="Render_ECullFace.h" />
-    <ClInclude Include="Render_ECullingOptions.h" />
-    <ClInclude Include="Render_EModelParserFlags.h" />
-    <ClInclude Include="Render_EOperation.h" />
-    <ClInclude Include="Render_EPixelDataFormat.h" />
-    <ClInclude Include="Render_EPixelDataType.h" />
-    <ClInclude Include="Render_EPrimitiveMode.h" />
-    <ClInclude Include="Render_EProjectionMode.h" />
-    <ClInclude Include="Render_ERasterizationMode.h" />
-    <ClInclude Include="Render_ERenderingCapability.h" />
-    <ClInclude Include="Render_EShaderType.h" />
-    <ClInclude Include="Render_ETextureFilteringMode.h" />
-    <ClInclude Include="Render_Framebuffer.h" />
-    <ClInclude Include="Render_Frustum.h" />
-    <ClInclude Include="Render_IMesh.h" />
-    <ClInclude Include="Render_IModelParser.h" />
-    <ClInclude Include="Render_IndexBuffer.h" />
-    <ClInclude Include="Render_Light.h" />
-    <ClInclude Include="Render_Mesh.h" />
-    <ClInclude Include="Render_Model.h" />
-    <ClInclude Include="Render_ModelLoader.h" />
-    <ClInclude Include="Render_PipelineState.h" />
-    <ClInclude Include="Render_Renderer.h" />
-    <ClInclude Include="Render_Shader.h" />
-    <ClInclude Include="Render_ShaderLoader.h" />
-    <ClInclude Include="Render_ShaderStorageBuffer.h" />
-    <ClInclude Include="Render_ShapeDrawer.h" />
-    <ClInclude Include="Render_Texture.h" />
-    <ClInclude Include="Render_TextureLoader.h" />
-    <ClInclude Include="Render_UniformBuffer.h" />
-    <ClInclude Include="Render_UniformInfo.h" />
-    <ClInclude Include="Render_UniformType.h" />
-    <ClInclude Include="Render_Vertex.h" />
-    <ClInclude Include="Render_VertexArray.h" />
-    <ClInclude Include="Render_VertexBuffer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Render_AssimpParser.cpp" />
-    <ClCompile Include="Render_Camera.cpp" />
-    <ClCompile Include="Render_Driver.cpp" />
-    <ClCompile Include="Render_Framebuffer.cpp" />
-    <ClCompile Include="Render_Frustum.cpp" />
-    <ClCompile Include="Render_IndexBuffer.cpp" />
-    <ClCompile Include="Render_Light.cpp" />
-    <ClCompile Include="Render_Mesh.cpp" />
-    <ClCompile Include="Render_Model.cpp" />
-    <ClCompile Include="Render_ModelLoader.cpp" />
-    <ClCompile Include="Render_Renderer.cpp" />
-    <ClCompile Include="Render_Shader.cpp" />
-    <ClCompile Include="Render_ShaderLoader.cpp" />
-    <ClCompile Include="Render_ShaderStorageBuffer.cpp" />
-    <ClCompile Include="Render_ShapeDrawer.cpp" />
-    <ClCompile Include="Render_Texture.cpp" />
-    <ClCompile Include="Render_TextureLoader.cpp" />
-    <ClCompile Include="Render_UniformBuffer.cpp" />
-    <ClCompile Include="Render_VertexArray.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Render_ShaderStorageBuffer.inl" />
-    <None Include="Render_UniformBuffer.inl" />
-    <None Include="Render_VertexArray.inl" />
-    <None Include="Render_VertexBuffer.inl" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
