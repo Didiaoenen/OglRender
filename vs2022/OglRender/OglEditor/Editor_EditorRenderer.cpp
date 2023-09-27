@@ -406,11 +406,11 @@ void DrawFrustumLines(Render::Render_ShapeDrawer& p_drawer,
 	const glm::vec3& g,
 	const glm::vec3& h)
 {
-	auto draw = [&](const glm::vec3& p_start, const glm::vec3& p_end, const float planeDistance)
+	auto draw = [&](const glm::vec3& pStart, const glm::vec3& pEnd, const float planeDistance)
 		{
 			auto offset = pos + forward * planeDistance;
-			auto start = offset + p_start;
-			auto end = offset + p_end;
+			auto start = offset + pStart;
+			auto end = offset + pEnd;
 			p_drawer.DrawLine(start, end, FRUSTUM_COLOR);
 		};
 

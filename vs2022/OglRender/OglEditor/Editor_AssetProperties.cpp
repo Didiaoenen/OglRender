@@ -23,33 +23,33 @@
 Editor::Editor_AssetProperties::Editor_AssetProperties(const std::string& pTitle, bool pOpened, const UI::UI_PanelWindowSettings& pWindowSettings) :
 	UI::UI_PanelWindow(pTitle, pOpened, pWindowSettings)
 {
-    m_targetChanged += [this]() { SetTarget(m_assetSelector->mContent); };
+    mTargetChanged += [this]() { SetTarget(mAssetSelector->mContent); };
 
     CreateHeaderButtons();
 
-    m_headerSeparator = &CreateWidget<UI::UI_Separator>();
-    m_headerSeparator->mEnabled = false;
+    mHeaderSeparator = &CreateWidget<UI::UI_Separator>();
+    mHeaderSeparator->mEnabled = false;
 
     CreateAssetSelector();
 
     mSettings = &CreateWidget<UI::UI_GroupCollapsable>("Settings");
-    m_settingsColumns = &mSettings->CreateWidget<UI::UI_Columns<2>>();
-    m_settingsColumns->mWidths[0] = 150;
+    mSettingsColumns = &mSettings->CreateWidget<UI::UI_Columns<2>>();
+    mSettingsColumns->mWidths[0] = 150;
 
-    m_info = &CreateWidget<UI::UI_GroupCollapsable>("Info");
-    m_infoColumns = &m_info->CreateWidget<UI::UI_Columns<2>>();
-    m_infoColumns->mWidths[0] = 150;
+    mInfo = &CreateWidget<UI::UI_GroupCollapsable>("Info");
+    mInfoColumns = &mInfo->CreateWidget<UI::UI_Columns<2>>();
+    mInfoColumns->mWidths[0] = 150;
 
-    mSettings->mEnabled = m_info->mEnabled = false;
+    mSettings->mEnabled = mInfo->mEnabled = false;
 }
 
 void Editor::Editor_AssetProperties::SetTarget(const std::string& pPath)
 {
-    m_resource = pPath == "" ? pPath : EDITOR_EXEC(GetResourcePath(pPath));
+    mResource = pPath == "" ? pPath : EDITOR_EXEC(GetResourcePath(pPath));
 
-    if (m_assetSelector)
+    if (mAssetSelector)
     {
-        m_assetSelector->mContent = m_resource;
+        mAssetSelector->mContent = mResource;
     }
 
     Refresh();
@@ -57,47 +57,47 @@ void Editor::Editor_AssetProperties::SetTarget(const std::string& pPath)
 
 void Editor::Editor_AssetProperties::Refresh()
 {
-    m_metadata.reset(new Tools::Tools_IniFile(EDITOR_EXEC(GetRealPath(m_resource)) + ".meta"));
+    mMetadata.reset(new Tools::Tools_IniFile(EDITOR_EXEC(GetRealPath(mResource)) + ".meta"));
 
     CreateSettings();
     CreateInfo();
 
-    m_applyButton->mEnabled = mSettings->mEnabled;
-    m_resetButton->mEnabled = mSettings->mEnabled;
-    m_revertButton->mEnabled = mSettings->mEnabled;
+    mApplyButton->mEnabled = mSettings->mEnabled;
+    mResetButton->mEnabled = mSettings->mEnabled;
+    mRevertButton->mEnabled = mSettings->mEnabled;
 
-    switch (Tools::Tools_PathParser::GetFileType(m_resource))
+    switch (Tools::Tools_PathParser::GetFileType(mResource))
     {
         case Tools::Tools_PathParser::EFileType::MODEL:
         case Tools::Tools_PathParser::EFileType::TEXTURE:
         case Tools::Tools_PathParser::EFileType::MATERIAL:
-            m_previewButton->mEnabled = true;
+            mPreviewButton->mEnabled = true;
             break;
         default:
-            m_previewButton->mEnabled = false;
+            mPreviewButton->mEnabled = false;
             break;
     }
 
-    m_headerSeparator->mEnabled = m_applyButton->mEnabled || m_resetButton->mEnabled || m_revertButton->mEnabled || m_previewButton->mEnabled;
-    m_headerLineBreak->mEnabled = m_headerSeparator->mEnabled;
+    mHeaderSeparator->mEnabled = mApplyButton->mEnabled || mResetButton->mEnabled || mRevertButton->mEnabled || mPreviewButton->mEnabled;
+    mHeaderLineBreak->mEnabled = mHeaderSeparator->mEnabled;
 }
 
 void Editor::Editor_AssetProperties::Preview()
 {
     auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset View");
 
-    const auto fileType = Tools::Tools_PathParser::GetFileType(m_resource);
+    const auto fileType = Tools::Tools_PathParser::GetFileType(mResource);
 
     if (fileType == Tools::Tools_PathParser::EFileType::MODEL)
     {
-        if (auto resource = OVSERVICE(Core::Core_ModelManager).GetResource(m_resource))
+        if (auto resource = OVSERVICE(Core::Core_ModelManager).GetResource(mResource))
         {
             assetView.SetResource(resource);
         }
     }
     else if (fileType == Tools::Tools_PathParser::EFileType::TEXTURE)
     {
-        if (auto resource = OVSERVICE(Core::Core_TextureManager).GetResource(m_resource))
+        if (auto resource = OVSERVICE(Core::Core_TextureManager).GetResource(mResource))
         {
             assetView.SetResource(resource);
         }
@@ -108,50 +108,50 @@ void Editor::Editor_AssetProperties::Preview()
 
 void Editor::Editor_AssetProperties::CreateHeaderButtons()
 {
-    m_applyButton = &CreateWidget<UI::UI_Button>("Apply");
-    m_applyButton->mIdleBackgroundColor = { 0.0f, 0.5f, 0.0f, 1.f };
-    m_applyButton->mEnabled = false;
-    m_applyButton->mLineBreak = false;
-    m_applyButton->mClickedEvent += std::bind(&Editor_AssetProperties::Apply, this);
+    mApplyButton = &CreateWidget<UI::UI_Button>("Apply");
+    mApplyButton->mIdleBackgroundColor = { 0.0f, 0.5f, 0.0f, 1.f };
+    mApplyButton->mEnabled = false;
+    mApplyButton->mLineBreak = false;
+    mApplyButton->mClickedEvent += std::bind(&Editor_AssetProperties::Apply, this);
 
-    m_revertButton = &CreateWidget<UI::UI_Button>("Revert");
-    m_revertButton->mIdleBackgroundColor = { 0.7f, 0.5f, 0.0f, 1.f };
-    m_revertButton->mEnabled = false;
-    m_revertButton->mLineBreak = false;
-    m_revertButton->mClickedEvent += std::bind(&Editor_AssetProperties::SetTarget, this, m_resource);
+    mRevertButton = &CreateWidget<UI::UI_Button>("Revert");
+    mRevertButton->mIdleBackgroundColor = { 0.7f, 0.5f, 0.0f, 1.f };
+    mRevertButton->mEnabled = false;
+    mRevertButton->mLineBreak = false;
+    mRevertButton->mClickedEvent += std::bind(&Editor_AssetProperties::SetTarget, this, mResource);
 
-    m_previewButton = &CreateWidget<UI::UI_Button>("Preview");
-    m_previewButton->mIdleBackgroundColor = { 0.7f, 0.5f, 0.0f, 1.f };
-    m_previewButton->mEnabled = false;
-    m_previewButton->mLineBreak = false;
-    m_previewButton->mClickedEvent += std::bind(&Editor_AssetProperties::Preview, this);
+    mPreviewButton = &CreateWidget<UI::UI_Button>("Preview");
+    mPreviewButton->mIdleBackgroundColor = { 0.7f, 0.5f, 0.0f, 1.f };
+    mPreviewButton->mEnabled = false;
+    mPreviewButton->mLineBreak = false;
+    mPreviewButton->mClickedEvent += std::bind(&Editor_AssetProperties::Preview, this);
 
-    m_resetButton = &CreateWidget<UI::UI_Button>("Reset to default");
-    m_resetButton->mIdleBackgroundColor = { 0.5f, 0.0f, 0.0f, 1.f };
-    m_resetButton->mEnabled = false;
-    m_resetButton->mLineBreak = false;
-    m_resetButton->mClickedEvent += [this]
+    mResetButton = &CreateWidget<UI::UI_Button>("Reset to default");
+    mResetButton->mIdleBackgroundColor = { 0.5f, 0.0f, 0.0f, 1.f };
+    mResetButton->mEnabled = false;
+    mResetButton->mLineBreak = false;
+    mResetButton->mClickedEvent += [this]
         {
-            m_metadata->RemoveAll();
+            mMetadata->RemoveAll();
             CreateSettings();
         };
 
-    m_headerLineBreak = &CreateWidget<UI::UI_NewLine>();
-    m_headerLineBreak->mEnabled = false;
+    mHeaderLineBreak = &CreateWidget<UI::UI_NewLine>();
+    mHeaderLineBreak->mEnabled = false;
 }
 
 void Editor::Editor_AssetProperties::CreateAssetSelector()
 {
     auto& columns = CreateWidget<UI::UI_Columns<2>>();
     columns.mWidths[0] = 150;
-    m_assetSelector = &Core::Core_GUIDrawer::DrawAsset(columns, "Target", m_resource, &m_targetChanged);
+    mAssetSelector = &Core::Core_GUIDrawer::DrawAsset(columns, "Target", mResource, &mTargetChanged);
 }
 
 void Editor::Editor_AssetProperties::CreateSettings()
 {
-    m_settingsColumns->RemoveAllWidgets();
+    mSettingsColumns->RemoveAllWidgets();
 
-    const auto fileType = Tools::Tools_PathParser::GetFileType(m_resource);
+    const auto fileType = Tools::Tools_PathParser::GetFileType(mResource);
 
     mSettings->mEnabled = true;
 
@@ -171,65 +171,65 @@ void Editor::Editor_AssetProperties::CreateSettings()
 
 void Editor::Editor_AssetProperties::CreateInfo()
 {
-    const auto realPath = EDITOR_EXEC(GetRealPath(m_resource));
+    const auto realPath = EDITOR_EXEC(GetRealPath(mResource));
 
-    m_infoColumns->RemoveAllWidgets();
+    mInfoColumns->RemoveAllWidgets();
 
     if (std::filesystem::exists(realPath))
     {
-        m_info->mEnabled = true;
+        mInfo->mEnabled = true;
 
-        Core::Core_GUIDrawer::CreateTitle(*m_infoColumns, "Path");
-        m_infoColumns->CreateWidget<UI::UI_Text>(realPath);
+        Core::Core_GUIDrawer::CreateTitle(*mInfoColumns, "Path");
+        mInfoColumns->CreateWidget<UI::UI_Text>(realPath);
 
-        Core::Core_GUIDrawer::CreateTitle(*m_infoColumns, "Size");
+        Core::Core_GUIDrawer::CreateTitle(*mInfoColumns, "Size");
         const auto [size, unit] = Tools::Tools_SizeConverter::ConvertToOptimalUnit(static_cast<float>(std::filesystem::file_size(realPath)), Tools::Tools_SizeConverter::ESizeUnit::BYTE);
-        m_infoColumns->CreateWidget<UI::UI_Text>(std::to_string(size) + " " + Tools::Tools_SizeConverter::UnitToString(unit));
+        mInfoColumns->CreateWidget<UI::UI_Text>(std::to_string(size) + " " + Tools::Tools_SizeConverter::UnitToString(unit));
 
-        Core::Core_GUIDrawer::CreateTitle(*m_infoColumns, "Metadata");
-        m_infoColumns->CreateWidget<UI::UI_Text>(std::filesystem::exists(realPath + ".meta") ? "Yes" : "No");
+        Core::Core_GUIDrawer::CreateTitle(*mInfoColumns, "Metadata");
+        mInfoColumns->CreateWidget<UI::UI_Text>(std::filesystem::exists(realPath + ".meta") ? "Yes" : "No");
     }
     else
     {
-        m_info->mEnabled = false;
+        mInfo->mEnabled = false;
     }
 }
 
-#define MODEL_FLAG_ENTRY(setting) Core::Core_GUIDrawer::DrawBoolean(*m_settingsColumns, setting, [&]() { return m_metadata->Get<bool>(setting); }, [&](bool value) { m_metadata->Set<bool>(setting, value); })
+#define MODEL_FLAG_ENTRY(setting) Core::Core_GUIDrawer::DrawBoolean(*mSettingsColumns, setting, [&]() { return mMetadata->Get<bool>(setting); }, [&](bool value) { mMetadata->Set<bool>(setting, value); })
 
 void Editor::Editor_AssetProperties::CreateModelSettings()
 {
-    m_metadata->Add("CALC_TANGENT_SPACE", true);
-    m_metadata->Add("JOIN_IDENTICAL_VERTICES", true);
-    m_metadata->Add("MAKE_LEFT_HANDED", false);
-    m_metadata->Add("TRIANGULATE", true);
-    m_metadata->Add("REMOVE_COMPONENT", false);
-    m_metadata->Add("GEN_NORMALS", false);
-    m_metadata->Add("GEN_SMOOTH_NORMALS", true);
-    m_metadata->Add("SPLIT_LARGE_MESHES", false);
-    m_metadata->Add("PRE_TRANSFORM_VERTICES", true);
-    m_metadata->Add("LIMIT_BONE_WEIGHTS", false);
-    m_metadata->Add("VALIDATE_DATA_STRUCTURE", false);
-    m_metadata->Add("IMPROVE_CACHE_LOCALITY", true);
-    m_metadata->Add("REMOVE_REDUNDANT_MATERIALS", false);
-    m_metadata->Add("FIX_INFACING_NORMALS", false);
-    m_metadata->Add("SORT_BY_PTYPE", false);
-    m_metadata->Add("FIND_DEGENERATES", false);
-    m_metadata->Add("FIND_INVALID_DATA", true);
-    m_metadata->Add("GEN_UV_COORDS", true);
-    m_metadata->Add("TRANSFORM_UV_COORDS", false);
-    m_metadata->Add("FIND_INSTANCES", true);
-    m_metadata->Add("OPTIMIZE_MESHES", true);
-    m_metadata->Add("OPTIMIZE_GRAPH", true);
-    m_metadata->Add("FLIP_UVS", false);
-    m_metadata->Add("FLIP_WINDING_ORDER", false);
-    m_metadata->Add("SPLIT_BY_BONE_COUNT", false);
-    m_metadata->Add("DEBONE", true);
-    m_metadata->Add("GLOBAL_SCALE", true);
-    m_metadata->Add("EMBED_TEXTURES", false);
-    m_metadata->Add("FORCE_GEN_NORMALS", false);
-    m_metadata->Add("DROP_NORMALS", false);
-    m_metadata->Add("GEN_BOUNDING_BOXES", false);
+    mMetadata->Add("CALC_TANGENT_SPACE", true);
+    mMetadata->Add("JOIN_IDENTICAL_VERTICES", true);
+    mMetadata->Add("MAKE_LEFT_HANDED", false);
+    mMetadata->Add("TRIANGULATE", true);
+    mMetadata->Add("REMOVE_COMPONENT", false);
+    mMetadata->Add("GEN_NORMALS", false);
+    mMetadata->Add("GEN_SMOOTH_NORMALS", true);
+    mMetadata->Add("SPLIT_LARGE_MESHES", false);
+    mMetadata->Add("PRE_TRANSFORM_VERTICES", true);
+    mMetadata->Add("LIMIT_BONE_WEIGHTS", false);
+    mMetadata->Add("VALIDATE_DATA_STRUCTURE", false);
+    mMetadata->Add("IMPROVE_CACHE_LOCALITY", true);
+    mMetadata->Add("REMOVE_REDUNDANT_MATERIALS", false);
+    mMetadata->Add("FIX_INFACING_NORMALS", false);
+    mMetadata->Add("SORT_BY_PTYPE", false);
+    mMetadata->Add("FIND_DEGENERATES", false);
+    mMetadata->Add("FIND_INVALID_DATA", true);
+    mMetadata->Add("GEN_UV_COORDS", true);
+    mMetadata->Add("TRANSFORM_UV_COORDS", false);
+    mMetadata->Add("FIND_INSTANCES", true);
+    mMetadata->Add("OPTIMIZE_MESHES", true);
+    mMetadata->Add("OPTIMIZE_GRAPH", true);
+    mMetadata->Add("FLIP_UVS", false);
+    mMetadata->Add("FLIP_WINDING_ORDER", false);
+    mMetadata->Add("SPLIT_BY_BONE_COUNT", false);
+    mMetadata->Add("DEBONE", true);
+    mMetadata->Add("GLOBAL_SCALE", true);
+    mMetadata->Add("EMBED_TEXTURES", false);
+    mMetadata->Add("FORCE_GEN_NORMALS", false);
+    mMetadata->Add("DROP_NORMALS", false);
+    mMetadata->Add("GEN_BOUNDING_BOXES", false);
 
     MODEL_FLAG_ENTRY("CALC_TANGENT_SPACE");
     MODEL_FLAG_ENTRY("JOIN_IDENTICAL_VERTICES");
@@ -266,9 +266,9 @@ void Editor::Editor_AssetProperties::CreateModelSettings()
 
 void Editor::Editor_AssetProperties::CreateTextureSettings()
 {
-    m_metadata->Add("MIN_FILTER", static_cast<int>(Render::ETextureFilteringMode::LINEAR_MIPMAP_LINEAR));
-    m_metadata->Add("MAG_FILTER", static_cast<int>(Render::ETextureFilteringMode::LINEAR));
-    m_metadata->Add("ENABLE_MIPMAPPING", true);
+    mMetadata->Add("MIN_FILTER", static_cast<int>(Render::ETextureFilteringMode::LINEAR_MIPMAP_LINEAR));
+    mMetadata->Add("MAG_FILTER", static_cast<int>(Render::ETextureFilteringMode::LINEAR));
+    mMetadata->Add("ENABLE_MIPMAPPING", true);
 
     std::map<int, std::string> filteringModes
     {
@@ -280,31 +280,31 @@ void Editor::Editor_AssetProperties::CreateTextureSettings()
         {0x2702, "NEAREST_MIPMAP_LINEAR"}
     };
 
-    Core::Core_GUIDrawer::CreateTitle(*m_settingsColumns, "MIN_FILTER");
-    auto& minFilter = m_settingsColumns->CreateWidget<UI::UI_ComboBox>(m_metadata->Get<int>("MIN_FILTER"));
+    Core::Core_GUIDrawer::CreateTitle(*mSettingsColumns, "MIN_FILTER");
+    auto& minFilter = mSettingsColumns->CreateWidget<UI::UI_ComboBox>(mMetadata->Get<int>("MIN_FILTER"));
     minFilter.mChoices = filteringModes;
     minFilter.mValueChangedEvent += [this](int p_choice)
         {
-            m_metadata->Set("MIN_FILTER", p_choice);
+            mMetadata->Set("MIN_FILTER", p_choice);
         };
 
-    Core::Core_GUIDrawer::CreateTitle(*m_settingsColumns, "MAG_FILTER");
-    auto& magFilter = m_settingsColumns->CreateWidget<UI::UI_ComboBox>(m_metadata->Get<int>("MAG_FILTER"));
+    Core::Core_GUIDrawer::CreateTitle(*mSettingsColumns, "MAG_FILTER");
+    auto& magFilter = mSettingsColumns->CreateWidget<UI::UI_ComboBox>(mMetadata->Get<int>("MAG_FILTER"));
     magFilter.mChoices = filteringModes;
     magFilter.mValueChangedEvent += [this](int p_choice)
         {
-            m_metadata->Set("MAG_FILTER", p_choice);
+            mMetadata->Set("MAG_FILTER", p_choice);
         };
 
-    Core::Core_GUIDrawer::DrawBoolean(*m_settingsColumns, "ENABLE_MIPMAPPING", [&]() { return m_metadata->Get<bool>("ENABLE_MIPMAPPING"); }, [&](bool value) { m_metadata->Set<bool>("ENABLE_MIPMAPPING", value); });
+    Core::Core_GUIDrawer::DrawBoolean(*mSettingsColumns, "ENABLE_MIPMAPPING", [&]() { return mMetadata->Get<bool>("ENABLE_MIPMAPPING"); }, [&](bool value) { mMetadata->Set<bool>("ENABLE_MIPMAPPING", value); });
 }
 
 void Editor::Editor_AssetProperties::Apply()
 {
-    m_metadata->Rewrite();
+    mMetadata->Rewrite();
 
-    const auto resourcePath = EDITOR_EXEC(GetResourcePath(m_resource));
-    const auto fileType = Tools::Tools_PathParser::GetFileType(m_resource);
+    const auto resourcePath = EDITOR_EXEC(GetResourcePath(mResource));
+    const auto fileType = Tools::Tools_PathParser::GetFileType(mResource);
 
     if (fileType == Tools::Tools_PathParser::EFileType::MODEL)
     {

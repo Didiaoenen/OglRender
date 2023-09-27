@@ -1,7 +1,6 @@
 
 #include <GL/glew.h>
 
-#include "Render_Program.h"
 #include "Render_Texture.h"
 #include "Render_Shader.h"
 
@@ -68,21 +67,18 @@ void Render::Render_Shader::QueryUniforms()
 
 const Render::Render_UniformInfo* Render::Render_Shader::GetUniformInfo(const std::string& pName) const
 {
-	auto found = std::find_if(mUniforms.begin(), mUniforms.end(), [&pName](const Render_UniformInfo& pElement)
-		{
-			return pName == pElement.name;
-		});
-
-	if (found != mUniforms.end())
+	auto it = mUniforms.find(pName);
+	if (it != mUniforms.end())
 	{
-		auto& [_, uniformInfo] = *found;
+		auto& [_, uniformInfo] = *it;
+
 		return &uniformInfo;
 	}
 		
 	return nullptr;
 }
 
-Render::Render_Shader::Render_Shader(const std::string& pPath, const std::map<std::string, Render_Program>& pPrograms) :
+Render::Render_Shader::Render_Shader(const std::string& pPath, const std::map<std::string, Render_Program> pPrograms) :
 	mPath(pPath), mPrograms(pPrograms)
 {
 	QueryUniforms();

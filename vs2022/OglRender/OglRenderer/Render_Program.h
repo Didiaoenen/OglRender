@@ -14,6 +14,8 @@ namespace Render
 		friend class Render_ShaderLoader;
 
 	public:
+		~Render_Program();
+
 		void Bind() const;
 
 		void Unbind() const;
@@ -48,7 +50,6 @@ namespace Render
 
 	private:
 		Render_Program(const std::string pPath, uint32_t pId);
-		~Render_Program();
 
 		static bool IsEngineUBOMember(const std::string& pUniformName);
 		uint32_t GetUniformLocation(const std::string& pName);

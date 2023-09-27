@@ -7,7 +7,7 @@ Tools::Tools_Event<Core::Core_Behaviour*> Core::Core_Behaviour::mCreatedEvent;
 Tools::Tools_Event<Core::Core_Behaviour*> Core::Core_Behaviour::mDestroyedEvent;
 
 Core::Core_Behaviour::Core_Behaviour(Core_Actor& pOwner, const std::string& pName) :
-	name(pName), Core_AComponent(pOwner)
+	mName(pName), Core_AComponent(pOwner)
 {
 	mCreatedEvent.Invoke(this);
 }

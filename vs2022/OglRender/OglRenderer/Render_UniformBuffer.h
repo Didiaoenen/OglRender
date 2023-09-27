@@ -9,6 +9,7 @@
 namespace Render
 {
 	class Render_Shader;
+	class Render_Program;
 
 	class Render_UniformBuffer
 	{
@@ -33,7 +34,7 @@ namespace Render
 
 		static void BindBlockToShader(Render_Shader& pShader, const std::string& pName, uint32_t pBindingPoint = 0);
 
-		static uint32_t GetBlockLocation(Render_Shader& pShader, const std::string& pName);
+		static uint32_t GetBlockLocation(Render_Program& pProgram, const std::string& pName);
 
 	private:
 		uint32_t mBufferID{ 0 };

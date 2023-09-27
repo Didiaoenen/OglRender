@@ -50,7 +50,7 @@ namespace Core
 		static Tools::Tools_Event<Core_Behaviour*> mCreatedEvent;
 		static Tools::Tools_Event<Core_Behaviour*> mDestroyedEvent;
 
-		const std::string name;
+		const std::string mName;
 
 	private:
 		//sol::table m_object = sol::nil;

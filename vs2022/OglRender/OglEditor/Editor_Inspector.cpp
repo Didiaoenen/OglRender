@@ -274,7 +274,7 @@ void Editor::Editor_Inspector::DrawBehaviour(Core::Core_Behaviour& pBehaviour)
 {
 	if (auto inspectorItem = dynamic_cast<Core::Core_IInspectorItem*>(&pBehaviour); inspectorItem)
 	{
-		auto& header = m_actorInfo->CreateWidget<UI::UI_GroupCollapsable>(pBehaviour.name);
+		auto& header = m_actorInfo->CreateWidget<UI::UI_GroupCollapsable>(pBehaviour.mName);
 		header.mClosable = true;
 		header.mCloseEvent += [this, &header, &pBehaviour]
 			{

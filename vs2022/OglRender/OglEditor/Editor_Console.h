@@ -33,14 +33,14 @@ namespace Editor
 		void SetShowErrorLogs(bool pValue);
 
 	private:
-		UI::UI_Group* m_logGroup{ nullptr };
+		UI::UI_Group* mLogGroup{ nullptr };
 		//std::unordered_map<UI::UI_TextColored*, OvDebug::ELogLevel> m_logTextWidgets;
 
-		bool m_clearOnPlay = true;
-		bool m_showDefaultLog = true;
-		bool m_showInfoLog = true;
-		bool m_showWarningLog = true;
-		bool m_showErrorLog = true;
+		bool mClearOnPlay = true;
+		bool mShowDefaultLog = true;
+		bool mShowInfoLog = true;
+		bool mShowWarningLog = true;
+		bool mShowErrorLog = true;
 	};
 }
 

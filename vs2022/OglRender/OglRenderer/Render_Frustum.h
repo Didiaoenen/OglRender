@@ -12,7 +12,7 @@ namespace Render
 	class Render_Frustum
 	{
 	public:
-		void CalculateFrustum(const glm::mat4& p_viewProjection);
+		void CalculateFrustum(const glm::mat4& pViewProjection);
 
 		bool PointInFrustum(float p_x, float p_y, float p_z) const;
 

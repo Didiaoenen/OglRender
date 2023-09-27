@@ -22,7 +22,7 @@ Editor::Editor_Console::Editor_Console(const std::string& pTitle, bool pOpened, 
 	clearButton.mClickedEvent += std::bind(&Editor_Console::Clear, this);
 	clearButton.mLineBreak = false;
 
-	auto& clearOnPlay = CreateWidget<UI::UI_CheckBox>(m_clearOnPlay, "Auto clear on play");
+	auto& clearOnPlay = CreateWidget<UI::UI_CheckBox>(mClearOnPlay, "Auto clear on play");
 
 	CreateWidget<UI::UI_Spacing>(5).mLineBreak = false;
 
@@ -37,7 +37,7 @@ Editor::Editor_Console::Editor_Console(const std::string& pTitle, bool pOpened, 
 	enableWarning.mLineBreak = false;
 	enableError.mLineBreak = true;
 
-	clearOnPlay.mValueChangedEvent += [this](bool p_value) { m_clearOnPlay = p_value; };
+	clearOnPlay.mValueChangedEvent += [this](bool p_value) { mClearOnPlay = p_value; };
 	enableDefault.mValueChangedEvent += std::bind(&Editor_Console::SetShowDefaultLogs, this, std::placeholders::_1);
 	enableInfo.mValueChangedEvent += std::bind(&Editor_Console::SetShowInfoLogs, this, std::placeholders::_1);
 	enableWarning.mValueChangedEvent += std::bind(&Editor_Console::SetShowWarningLogs, this, std::placeholders::_1);
@@ -45,8 +45,8 @@ Editor::Editor_Console::Editor_Console(const std::string& pTitle, bool pOpened, 
 
 	CreateWidget<UI::UI_Separator>();
 
-	m_logGroup = &CreateWidget<UI::UI_Group>();
-	m_logGroup->ReverseDrawOrder();
+	mLogGroup = &CreateWidget<UI::UI_Group>();
+	mLogGroup->ReverseDrawOrder();
 
 	EDITOR_EVENT(PlayEvent) += std::bind(&Editor_Console::ClearOnPlay, this);
 
@@ -55,7 +55,7 @@ Editor::Editor_Console::Editor_Console(const std::string& pTitle, bool pOpened, 
 
 void Editor::Editor_Console::ClearOnPlay()
 {
-	if (m_clearOnPlay)
+	if (mClearOnPlay)
 	{
 		Clear();
 	}
@@ -64,7 +64,7 @@ void Editor::Editor_Console::ClearOnPlay()
 void Editor::Editor_Console::Clear()
 {
 	//m_logTextWidgets.clear();
-	m_logGroup->RemoveAllWidgets();
+	mLogGroup->RemoveAllWidgets();
 }
 
 void Editor::Editor_Console::FilterLogs()
@@ -77,24 +77,24 @@ void Editor::Editor_Console::FilterLogs()
 
 void Editor::Editor_Console::SetShowDefaultLogs(bool pValue)
 {
-	m_showDefaultLog = pValue;
+	mShowDefaultLog = pValue;
 	FilterLogs();
 }
 
 void Editor::Editor_Console::SetShowInfoLogs(bool pValue)
 {
-	m_showInfoLog = pValue;
+	mShowInfoLog = pValue;
 	FilterLogs();
 }
 
 void Editor::Editor_Console::SetShowWarningLogs(bool pValue)
 {
-	m_showWarningLog = pValue;
+	mShowWarningLog = pValue;
 	FilterLogs();
 }
 
 void Editor::Editor_Console::SetShowErrorLogs(bool pValue)
 {
-	m_showErrorLog = pValue;
+	mShowErrorLog = pValue;
 	FilterLogs();
 }

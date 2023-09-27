@@ -287,7 +287,7 @@ bool Core::Core_Actor::RemoveBehaviour(Core_Behaviour& pBehaviour)
 
 	if (found)
 	{
-		return RemoveBehaviour(pBehaviour.name);
+		return RemoveBehaviour(pBehaviour.mName);
 	}
 	else
 	{

@@ -27,7 +27,7 @@ namespace Editor
 		ViewableResource GetResource() const;
 
 	private:
-		ViewableResource m_resource;
+		ViewableResource mResource;
 	};
 }
 

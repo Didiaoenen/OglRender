@@ -4,11 +4,11 @@
 #include <unordered_map>
 #include <glm/glm.hpp>
 
+#include "Render_Program.h"
 #include "Render_UniformInfo.h"
 
 namespace Render
 {
-	class Render_Program;
 	class Render_ShaderLoader;
 
 	class Render_Shader
@@ -20,7 +20,7 @@ namespace Render
 
 		const Render_UniformInfo* GetUniformInfo(const std::string& pName) const;
 	private:
-		Render_Shader(const std::string& pPath, const std::map<std::string, Render_Program>& pPrograms);
+		Render_Shader(const std::string& pPath, const std::map<std::string, Render_Program> pPrograms);
 		~Render_Shader();
 
 		static bool IsEngineUBOMember(const std::string& pUniformName);

@@ -43,21 +43,21 @@ namespace Editor
 		void Apply();
 
 	private:
-		std::string m_resource;
+		std::string mResource;
 
-		Tools::Tools_Event<> m_targetChanged;
-		UI::UI_Group* mSettings = nullptr;
-		UI::UI_Group* m_info = nullptr;
-		UI::UI_Button* m_applyButton = nullptr;
-		UI::UI_Button* m_revertButton = nullptr;
-		UI::UI_Button* m_previewButton = nullptr;
-		UI::UI_Button* m_resetButton = nullptr;
-		UI::UI_AWidget* m_headerSeparator = nullptr;
-		UI::UI_AWidget* m_headerLineBreak = nullptr;
-		UI::UI_Columns<2>* m_settingsColumns = nullptr;
-		UI::UI_Columns<2>* m_infoColumns = nullptr;
-		UI::UI_Text* m_assetSelector = nullptr;
-		std::unique_ptr<Tools::Tools_IniFile> m_metadata;
+		Tools::Tools_Event<> mTargetChanged;
+		UI::UI_Group* mSettings{ nullptr };
+		UI::UI_Group* mInfo{ nullptr };
+		UI::UI_Button* mApplyButton{ nullptr };
+		UI::UI_Button* mRevertButton{ nullptr };
+		UI::UI_Button* mPreviewButton{ nullptr };
+		UI::UI_Button* mResetButton{ nullptr };
+		UI::UI_AWidget* mHeaderSeparator{ nullptr };
+		UI::UI_AWidget* mHeaderLineBreak{ nullptr };
+		UI::UI_Columns<2>* mSettingsColumns{ nullptr };
+		UI::UI_Columns<2>* mInfoColumns{ nullptr };
+		UI::UI_Text* mAssetSelector{ nullptr };
+		std::unique_ptr<Tools::Tools_IniFile> mMetadata;
 	};
 }
 

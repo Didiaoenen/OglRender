@@ -30,7 +30,7 @@ void NormalizePlane(float frustum[6][4], int side)
 	frustum[side][D] /= magnitude;
 }
 
-void Render::Render_Frustum::CalculateFrustum(const glm::mat4& p_viewProjection)
+void Render::Render_Frustum::CalculateFrustum(const glm::mat4& pViewProjection)
 {
 
 }
