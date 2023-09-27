@@ -4,6 +4,7 @@
 
 #include <GL/glew.h>
 
+#include "Render_Program.h"
 #include "Render_ShaderLoader.h"
 
 std::string Render::Render_ShaderLoader::__FILE_TRACE;
@@ -12,36 +13,30 @@ Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pF
 {
 	__FILE_TRACE = pFilePath;
 
-	std::pair<std::string, std::string> source = ParseShader(pFilePath);
+	std::map<std::string, Render::Render_ParseData> parseDatas = ParseShader(pFilePath);
 
-	uint32_t programID = CreateProgram(source.first, source.second);
-
-	std::map<std::string, Render::Render_ParseData*> parseDatas = ParseShader2(pFilePath);
-
-	std::map<std::string, Render_Shader*> subShaders;
+	std::map<std::string, Render_Program> programs;
 	for (auto it = parseDatas.begin(); it != parseDatas.end(); it++)
 	{
 		auto& [name, data] = *it;
-		uint32_t programID = CreateProgram2(data);
 
-		subShaders.emplace(name, new Render_Shader(pFilePath, programID));
+		uint32_t programID = CreateProgram({ data.vertex, data.fragment, data.geometry });
+		if (programID)
+		{
+			programs.emplace(name, Render_Program(name, programID));
+		}
 	}
 
-	if (programID)
-	{
-		return new Render_Shader(pFilePath, programID);
-	}
-
-	return nullptr;
+	return new Render_Shader(pFilePath, programs);
 }
 
-Render::Render_Shader* Render::Render_ShaderLoader::CreateFromSource(const std::string& pVertexShader, const std::string& pFragmentShader)
+Render::Render_Program* Render::Render_ShaderLoader::CreateFromSource(const std::string& pVertexShader, const std::string& pFragmentShader)
 {
-	uint32_t programID = CreateProgram(pVertexShader, pFragmentShader);
+	uint32_t programID = CreateProgram({ pVertexShader, pFragmentShader });
 
 	if (programID)
 	{
-		return new Render_Shader("", programID);
+		return new Render_Program("", programID);
 	}
 
 	return nullptr;
@@ -51,25 +46,35 @@ void Render::Render_ShaderLoader::Recompile(Render_Shader& pShader, const std::s
 {
 	__FILE_TRACE = pFilePath;
 
-	std::pair<std::string, std::string> source = ParseShader(pFilePath);
+	std::map<std::string, Render::Render_ParseData> parseDatas = ParseShader(pFilePath);
 
-	uint32_t newProgram = CreateProgram(source.first, source.second);
-
-	if (newProgram)
+	for (auto it = parseDatas.begin(); it != parseDatas.end(); it++)
 	{
-		std::uint32_t* shaderID = reinterpret_cast<uint32_t*>(&pShader) + offsetof(Render_Shader, mId);
+		auto& [name, data] = *it;
 
-		glDeleteProgram(*shaderID);
+		uint32_t newProgram = CreateProgram({ data.vertex, data.fragment, data.geometry });
 
-		*shaderID = newProgram;
+		if (newProgram)
+		{
+			if (auto it = pShader.mPrograms.begin(); it != pShader.mPrograms.end())
+			{
+				auto& [_, program] = *it;
 
-		pShader.QueryUniforms();
+				std::uint32_t* programID = reinterpret_cast<uint32_t*>(&program) + offsetof(Render_Program, mId);
 
-		//OVLOG_INFO("[COMPILE] \"" + __FILE_TRACE + "\": Success!");
-	}
-	else
-	{
-		//OVLOG_ERROR("[COMPILE] \"" + __FILE_TRACE + "\": Failed! Previous shader version kept");
+				glDeleteProgram(*programID);
+
+				*programID = newProgram;
+
+				pShader.QueryUniforms();
+
+				//OVLOG_INFO("[COMPILE] \"" + __FILE_TRACE + "\": Success!");
+			}
+		}
+		else
+		{
+			//OVLOG_ERROR("[COMPILE] \"" + __FILE_TRACE + "\": Failed! Previous shader version kept");
+		}
 	}
 }
 
@@ -104,74 +109,7 @@ bool Render::Render_ShaderLoader::Destroy(Render_Shader*& pShader)
 * #shader geometry
 */
 
-std::pair<std::string, std::string> Render::Render_ShaderLoader::ParseShader(const std::string& pFilePath)
-{
-	std::ifstream stream(pFilePath);
-
-	std::string line;
-
-	std::stringstream ss[10];
-
-	std::regex e("(\\w+)[ ](\\w+)");
-
-	EShaderType type = EShaderType::NONE;
-	while (std::getline(stream, line))
-	{
-		if (line.find("#name") != std::string::npos)
-		{
-			type = EShaderType::NONE;
-
-			std::smatch sm;
-			std::regex_search(line, sm, e);
-			std::string name = sm[2];
-		}
-
-		bool state = false;
-		if (line.find("#state_begine") != std::string::npos)
-		{
-			state = true;
-		}
-		else if (line.find("#state_end") != std::string::npos)
-		{
-			state = false;
-		}
-
-		if (state)
-		{
-
-		}
-		else
-		{
-			if (line.find("#shader") != std::string::npos)
-			{
-				if (line.find("vertex") != std::string::npos)
-				{
-					type = EShaderType::VERTEX;
-				}
-				else if (line.find("fragment") != std::string::npos)
-				{
-					type = EShaderType::FRAGMENT;
-				}
-				else if (line.find("geometry") != std::string::npos)
-				{
-					type = EShaderType::GEOMETRY;
-				}
-			}
-			else if (type != EShaderType::NONE)
-			{
-				ss[static_cast<int>(type)] << line << '\n';
-			}
-		}
-	}
-
-	return
-	{
-		ss[static_cast<int>(EShaderType::VERTEX)].str(),
-		ss[static_cast<int>(EShaderType::FRAGMENT)].str(),
-	};
-}
-
-std::map<std::string, Render::Render_ParseData*> Render::Render_ShaderLoader::ParseShader2(const std::string& pFilePath)
+std::map<std::string, Render::Render_ParseData> Render::Render_ShaderLoader::ParseShader(const std::string& pFilePath)
 {
 	std::ifstream stream(pFilePath);
 
@@ -185,7 +123,7 @@ std::map<std::string, Render::Render_ParseData*> Render::Render_ShaderLoader::Pa
 
 	EShaderType type = EShaderType::NONE;
 
-	std::map<std::string, Render_ParseData*> datas;
+	std::map<std::string, Render_ParseData> datas;
 
 	std::map<std::string, std::map<int, std::stringstream>> sss;
 
@@ -193,15 +131,15 @@ std::map<std::string, Render::Render_ParseData*> Render::Render_ShaderLoader::Pa
 	{
 		if (line.find("#name") != std::string::npos)
 		{
-			Render_ParseData* data = new Render_ParseData();
+			Render_ParseData data;
 
 			type = EShaderType::NONE;
 
 			std::smatch sm;
 			std::regex_search(line, sm, e);
-			name = data->name = sm[2];
+			name = data.name = sm[2];
 
-			datas.emplace(data->name, data);
+			datas.emplace(data.name, data);
 		}else if (line.find("#state_begine") != std::string::npos)
 		{
 			state = true;
@@ -216,7 +154,7 @@ std::map<std::string, Render::Render_ParseData*> Render::Render_ShaderLoader::Pa
 			{
 				std::smatch sm;
 				std::regex_search(line, sm, e);
-				datas[name]->state.emplace(sm[1], std::stoi(sm[2]));
+				datas[name].state.emplace(sm[1], std::stoi(sm[2]));
 			}
 			else
 			{
@@ -252,66 +190,25 @@ std::map<std::string, Render::Render_ParseData*> Render::Render_ShaderLoader::Pa
 	for (auto it = datas.begin(); it != datas.end(); it++)
 	{
 		auto& [name, data] = *it;
-		data->vertex = sss[name][static_cast<int>(EShaderType::VERTEX)].str();
-		data->fragment = sss[name][static_cast<int>(EShaderType::FRAGMENT)].str();
-		data->geometry = sss[name][static_cast<int>(EShaderType::GEOMETRY)].str();
+		data.vertex = sss[name][static_cast<int>(EShaderType::VERTEX)].str();
+		data.fragment = sss[name][static_cast<int>(EShaderType::FRAGMENT)].str();
+		data.geometry = sss[name][static_cast<int>(EShaderType::GEOMETRY)].str();
 	}
 
 	return datas;
 }
 
-uint32_t Render::Render_ShaderLoader::CreateProgram(const std::string& pVertexShader, const std::string& pFragmentShader)
+uint32_t Render::Render_ShaderLoader::CreateProgram(const Render_ShaderBuffer& buffer)
 {
 	const uint32_t program = glCreateProgram();
 
-	const uint32_t vs = CompileShader(GL_VERTEX_SHADER, pVertexShader);
-	const uint32_t fs = CompileShader(GL_FRAGMENT_SHADER, pFragmentShader);
-
-	if (vs == 0 || fs == 0)
-	{
-		return 0;
-	}
-
-	glAttachShader(program, vs);
-	glAttachShader(program, fs);
-	glLinkProgram(program);
-
-	GLint linkStatus;
-	glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
-
-	if (linkStatus == GL_FALSE)
-	{
-		GLint maxLength;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
-
-		std::string errorLog(maxLength, ' ');
-		glGetProgramInfoLog(program, maxLength, &maxLength, errorLog.data());
-
-		//OVLOG_ERROR("[LINK] \"" + __FILE_TRACE + "\":\n" + errorLog);
-
-		glDeleteProgram(program);
-
-		return 0;
-	}
-
-	glValidateProgram(program);
-	glDeleteShader(vs);
-	glDeleteShader(fs);
-
-	return program;
-}
-
-uint32_t Render::Render_ShaderLoader::CreateProgram2(Render_ParseData* parseData)
-{
-	const uint32_t program = glCreateProgram();
-
-	const uint32_t vs = CompileShader(GL_VERTEX_SHADER, parseData->vertex);
-	const uint32_t fs = CompileShader(GL_FRAGMENT_SHADER, parseData->fragment);
+	const uint32_t vs = CompileShader(GL_VERTEX_SHADER, buffer.vertex);
+	const uint32_t fs = CompileShader(GL_FRAGMENT_SHADER, buffer.fragment);
 
 	uint32_t gs = 0;
-	if (!parseData->geometry.empty())
+	if (!buffer.geometry.empty())
 	{
-		gs = CompileShader(GL_FRAGMENT_SHADER, parseData->geometry);
+		gs = CompileShader(GL_FRAGMENT_SHADER, buffer.geometry);
 	}
 
 	if (vs == 0 || fs == 0)
