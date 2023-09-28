@@ -31,19 +31,19 @@ public:
         {
             TracyDebug( "mmap failed: errno %i (%s)\n", errno, strerror( errno ) );
             m_fd = 0;
-            mMetadata = nullptr;
+            m_metadata = nullptr;
             close( fd );
             return;
         }
-        mMetadata = (perf_event_mmap_page*)mapAddr;
-        assert( mMetadata->data_offset == pageSize );
+        m_metadata = (perf_event_mmap_page*)mapAddr;
+        assert( m_metadata->data_offset == pageSize );
         m_buffer = ((char*)mapAddr) + pageSize;
-        m_tail = mMetadata->data_tail;
+        m_tail = m_metadata->data_tail;
     }
 
     ~RingBuffer()
     {
-        if( mMetadata ) munmap( mMetadata, m_mapSize );
+        if( m_metadata ) munmap( m_metadata, m_mapSize );
         if( m_fd ) close( m_fd );
     }
 
@@ -53,19 +53,19 @@ public:
     RingBuffer( RingBuffer&& other )
     {
         memcpy( (char*)&other, (char*)this, sizeof( RingBuffer ) );
-        mMetadata = nullptr;
+        m_metadata = nullptr;
         m_fd = 0;
     }
 
     RingBuffer& operator=( RingBuffer&& other )
     {
         memcpy( (char*)&other, (char*)this, sizeof( RingBuffer ) );
-        mMetadata = nullptr;
+        m_metadata = nullptr;
         m_fd = 0;
         return *this;
     }
 
-    bool IsValid() const { return mMetadata != nullptr; }
+    bool IsValid() const { return m_metadata != nullptr; }
     int GetId() const { return m_id; }
     int GetCpu() const { return m_cpu; }
 
@@ -99,21 +99,21 @@ public:
 
     bool CheckTscCaps() const
     {
-        return mMetadata->cap_user_time_zero;
+        return m_metadata->cap_user_time_zero;
     }
 
     int64_t ConvertTimeToTsc( int64_t timestamp ) const
     {
-        if( !mMetadata->cap_user_time_zero ) return 0;
-        const auto time = timestamp - mMetadata->time_zero;
-        const auto quot = time / mMetadata->time_mult;
-        const auto rem = time % mMetadata->time_mult;
-        return ( quot << mMetadata->time_shift ) + ( rem << mMetadata->time_shift ) / mMetadata->time_mult;
+        if( !m_metadata->cap_user_time_zero ) return 0;
+        const auto time = timestamp - m_metadata->time_zero;
+        const auto quot = time / m_metadata->time_mult;
+        const auto rem = time % m_metadata->time_mult;
+        return ( quot << m_metadata->time_shift ) + ( rem << m_metadata->time_shift ) / m_metadata->time_mult;
     }
 
     uint64_t LoadHead() const
     {
-        return std::atomic_load_explicit( (const volatile std::atomic<uint64_t>*)&mMetadata->data_head, std::memory_order_acquire );
+        return std::atomic_load_explicit( (const volatile std::atomic<uint64_t>*)&m_metadata->data_head, std::memory_order_acquire );
     }
 
     uint64_t GetTail() const
@@ -124,7 +124,7 @@ public:
 private:
     void StoreTail()
     {
-        std::atomic_store_explicit( (volatile std::atomic<uint64_t>*)&mMetadata->data_tail, m_tail, std::memory_order_release );
+        std::atomic_store_explicit( (volatile std::atomic<uint64_t>*)&m_metadata->data_tail, m_tail, std::memory_order_release );
     }
 
     unsigned int m_size;
@@ -132,7 +132,7 @@ private:
     char* m_buffer;
     int m_id;
     int m_cpu;
-    perf_event_mmap_page* mMetadata;
+    perf_event_mmap_page* m_metadata;
 
     size_t m_mapSize;
     int m_fd;

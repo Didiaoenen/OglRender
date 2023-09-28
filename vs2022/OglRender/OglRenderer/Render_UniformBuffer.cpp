@@ -36,23 +36,15 @@ uint32_t Render::Render_UniformBuffer::GetID() const
 
 void Render::Render_UniformBuffer::BindBlockToShader(Render_Shader& pShader, uint32_t pUniformBlockLocation, uint32_t pBindingPoint)
 {
-	for (auto it = pShader.mPrograms.begin(); it != pShader.mPrograms.end(); it++)
-	{
-		auto& [name, program] = *it;
-		glUniformBlockBinding(program.mId, pUniformBlockLocation, pBindingPoint);
-	}
+	glUniformBlockBinding(pShader.mId, pUniformBlockLocation, pBindingPoint);
 }
 
 void Render::Render_UniformBuffer::BindBlockToShader(Render_Shader& pShader, const std::string& pName, uint32_t pBindingPoint)
 {
-	for (auto it = pShader.mPrograms.begin(); it != pShader.mPrograms.end(); it++)
-	{
-		auto& [name, program] = *it;
-		glUniformBlockBinding(program.mId, GetBlockLocation(program, pName), pBindingPoint);
-	}
+	glUniformBlockBinding(pShader.mId, GetBlockLocation(pShader, pName), pBindingPoint);
 }
 
-uint32_t Render::Render_UniformBuffer::GetBlockLocation(Render_Program& pProgram, const std::string& pName)
+uint32_t Render::Render_UniformBuffer::GetBlockLocation(Render_Shader& pShader, const std::string& pName)
 {
-	return glGetUniformBlockIndex(pProgram.mId, pName.c_str());
+	return glGetUniformBlockIndex(pShader.mId, pName.c_str());
 }

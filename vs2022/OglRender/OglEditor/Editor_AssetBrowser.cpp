@@ -903,7 +903,7 @@ namespace Editor
 						materialEditor.Focus();
 
 						Core::Core_Material* resource = Core::Core_ServiceLocator::Get<Core::Core_MaterialManager>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
-						auto& assetView = EDITOR_PANEL(Editor::Editor_AssetView, "Asset View");
+						auto& assetView = EDITOR_PANEL(Editor::Editor_AssetView, "Asset");
 						assetView.SetResource(resource);
 						assetView.Open();
 						assetView.Focus();

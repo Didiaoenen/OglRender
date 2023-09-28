@@ -23,16 +23,15 @@ void Core::Core_Material::FillUniform()
 {
 	mUniformsData.clear();
 
-	for(auto it = mShader->mUniforms.begin(); it != mShader->mUniforms.end(); it++)
+	for (const Render::Render_UniformInfo& element : mShader->mUniforms)
 	{
-		auto& [name, uniform] = *it;
-		mUniformsData.emplace(uniform.name, uniform.defaultValue);
+		mUniformsData.emplace(element.name, element.defaultValue);
 	}
 }
 
 void Core::Core_Material::Bind(Render::Render_Texture* pEmptyTexture)
 {
-	/*if (HasShader())
+	if (HasShader())
 	{
 		mShader->Bind();
 
@@ -71,15 +70,15 @@ void Core::Core_Material::Bind(Render::Render_Texture* pEmptyTexture)
 				}
 			}
 		}
-	}*/
+	}
 }
 
 void Core::Core_Material::UnBind()
 {
-	//if (HasShader())
-	//{
-	//	mShader->Unbind();
-	//}
+	if (HasShader())
+	{
+		mShader->Unbind();
+	}
 }
 
 Render::Render_Shader*& Core::Core_Material::GetShader()
