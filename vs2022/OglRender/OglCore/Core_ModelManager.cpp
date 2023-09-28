@@ -16,7 +16,7 @@ Render::EModelParserFlags GetAssetMetadata(const std::string& pPath)
 	if (metaFile.GetOrDefault("GEN_NORMALS",				false))	flags |= Render::EModelParserFlags::GEN_NORMALS;
 	if (metaFile.GetOrDefault("GEN_SMOOTH_NORMALS",			true))	flags |= Render::EModelParserFlags::GEN_SMOOTH_NORMALS;
 	if (metaFile.GetOrDefault("SPLIT_LARGE_MESHES",			false))	flags |= Render::EModelParserFlags::SPLIT_LARGE_MESHES;
-	if (metaFile.GetOrDefault("PRE_TRANSFORM_VERTICES",		true))	flags |= Render::EModelParserFlags::PRE_TRANSFORM_VERTICES;
+	//if (metaFile.GetOrDefault("PRE_TRANSFORM_VERTICES",		true))	flags |= Render::EModelParserFlags::PRE_TRANSFORM_VERTICES;
 	if (metaFile.GetOrDefault("LIMIT_BONE_WEIGHTS",			false))	flags |= Render::EModelParserFlags::LIMIT_BONE_WEIGHTS;
 	if (metaFile.GetOrDefault("VALIDATE_DATA_STRUCTURE",	false))	flags |= Render::EModelParserFlags::VALIDATE_DATA_STRUCTURE;
 	if (metaFile.GetOrDefault("IMPROVE_CACHE_LOCALITY",		true))	flags |= Render::EModelParserFlags::IMPROVE_CACHE_LOCALITY;
@@ -34,7 +34,7 @@ Render::EModelParserFlags GetAssetMetadata(const std::string& pPath)
 	if (metaFile.GetOrDefault("FLIP_WINDING_ORDER",			false))	flags |= Render::EModelParserFlags::FLIP_WINDING_ORDER;
 	if (metaFile.GetOrDefault("SPLIT_BY_BONE_COUNT",		false))	flags |= Render::EModelParserFlags::SPLIT_BY_BONE_COUNT;
 	if (metaFile.GetOrDefault("DEBONE",						true))	flags |= Render::EModelParserFlags::DEBONE;
-	if (metaFile.GetOrDefault("GLOBAL_SCALE",				true))	flags |= Render::EModelParserFlags::GLOBAL_SCALE;
+	//if (metaFile.GetOrDefault("GLOBAL_SCALE",				true))	flags |= Render::EModelParserFlags::GLOBAL_SCALE;
 	if (metaFile.GetOrDefault("EMBED_TEXTURES",				false))	flags |= Render::EModelParserFlags::EMBED_TEXTURES;
 	if (metaFile.GetOrDefault("FORCE_GEN_NORMALS",			false))	flags |= Render::EModelParserFlags::FORCE_GEN_NORMALS;
 	if (metaFile.GetOrDefault("DROP_NORMALS",				false))	flags |= Render::EModelParserFlags::DROP_NORMALS;

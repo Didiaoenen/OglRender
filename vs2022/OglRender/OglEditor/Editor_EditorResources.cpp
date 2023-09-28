@@ -29,7 +29,7 @@ Editor::Editor_EditorResources::Editor_EditorResources(const std::string& p_edit
 	modelParserFlags |= Render::EModelParserFlags::IMPROVE_CACHE_LOCALITY;
 	modelParserFlags |= Render::EModelParserFlags::GEN_UV_COORDS;
 	//modelParserFlags |= Render::EModelParserFlags::PRE_TRANSFORM_VERTICES;
-	modelParserFlags |= Render::EModelParserFlags::GLOBAL_SCALE;
+	//modelParserFlags |= Render::EModelParserFlags::GLOBAL_SCALE;
 
 	Render::ETextureFilteringMode firstFilterEditor = Render::ETextureFilteringMode::LINEAR;
 	Render::ETextureFilteringMode secondFilterEditor = Render::ETextureFilteringMode::LINEAR;

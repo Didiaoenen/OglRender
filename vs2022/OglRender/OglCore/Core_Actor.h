@@ -77,7 +77,7 @@ namespace Core
 		template<typename T>
 		bool RemoveComponent();
 
-		bool RemoveComponent(Core_AComponent& p_component);
+		bool RemoveComponent(Core_AComponent& pComponent);
 
 		template<typename T>
 		T* GetComponent();

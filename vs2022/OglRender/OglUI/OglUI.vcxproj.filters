@@ -399,9 +399,6 @@
     <ClInclude Include="UI_ContextualMenu.h">
       <Filter>头文件\Plugins</Filter>
     </ClInclude>
-    <ClInclude Include="UI_DataDispatcher.h">
-      <Filter>头文件\Plugins</Filter>
-    </ClInclude>
     <ClInclude Include="UI_DDSource.h">
       <Filter>头文件\Plugins</Filter>
     </ClInclude>
@@ -416,6 +413,9 @@
     </ClInclude>
     <ClInclude Include="UI_PanelSideBar.h">
       <Filter>头文件\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DataDispatcher.h">
+      <Filter>头文件\Plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

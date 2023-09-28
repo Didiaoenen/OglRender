@@ -27,7 +27,7 @@ namespace Editor
 
 		void SelectActorByInstance(Core::Core_Actor& pActor);
 
-		void SelectActorByWidget(UI::UI_TreeNode& p_widget);
+		void SelectActorByWidget(UI::UI_TreeNode& pWidget);
 
 		void AttachActorToParent(Core::Core_Actor& pActor);
 
@@ -42,9 +42,9 @@ namespace Editor
 		Tools::Tools_Event<Core::Core_Actor&> ActorUnselectedEvent;
 
 	private:
-		UI::UI_TreeNode* m_sceneRoot;
+		UI::UI_TreeNode* mSceneRoot;
 
-		std::unordered_map<Core::Core_Actor*, UI::UI_TreeNode*> m_widgetActorLink;
+		std::unordered_map<Core::Core_Actor*, UI::UI_TreeNode*> mWidgetActorLink;
 	};
 }
 

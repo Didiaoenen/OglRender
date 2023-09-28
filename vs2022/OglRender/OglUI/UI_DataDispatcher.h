@@ -31,7 +31,7 @@ namespace UI
 
 		void Provide(T pData)
 		{
-			if (mValueChanged)
+			if (mDataPointer)
 			{
 				*mDataPointer = pData;
 			}

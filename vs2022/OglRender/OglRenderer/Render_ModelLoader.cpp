@@ -13,7 +13,7 @@ Render::Render_Model* Render::Render_ModelLoader::Create(const std::string& pFil
 	}
 
 	delete result;
-
+	 
 	return nullptr;
 }
 

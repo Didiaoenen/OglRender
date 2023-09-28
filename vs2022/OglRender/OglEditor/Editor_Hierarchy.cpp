@@ -104,7 +104,7 @@ Editor::Editor_Hierarchy::Editor_Hierarchy(const std::string& pTitle, bool pOpen
 			auto content = pContent;
 			std::transform(content.begin(), content.end(), content.begin(), ::tolower);
 
-			for (auto& [actor, item] : m_widgetActorLink)
+			for (auto& [actor, item] : mWidgetActorLink)
 			{
 				if (!pContent.empty())
 				{
@@ -130,7 +130,7 @@ Editor::Editor_Hierarchy::Editor_Hierarchy(const std::string& pTitle, bool pOpen
 
 				if (node->HasParent())
 				{
-					ExpandTreeNodeAndEnable(*static_cast<UI::UI_TreeNode*>(node->GetParent()), m_sceneRoot);
+					ExpandTreeNodeAndEnable(*static_cast<UI::UI_TreeNode*>(node->GetParent()), mSceneRoot);
 				}
 			}
 
@@ -145,20 +145,20 @@ Editor::Editor_Hierarchy::Editor_Hierarchy(const std::string& pTitle, bool pOpen
 			}
 		};
 
-	m_sceneRoot = &CreateWidget<UI::UI_TreeNode>("Root", true);
-	static_cast<UI::UI_TreeNode*>(m_sceneRoot)->Open();
-	m_sceneRoot->AddPlugin<UI::UI_DDTarget<std::pair<Core::Core_Actor*, UI::UI_TreeNode*>>>("Actor").mDataReceivedEvent += [this](std::pair<Core::Core_Actor*, UI::UI_TreeNode*> p_element)
+	mSceneRoot = &CreateWidget<UI::UI_TreeNode>("Root", true);
+	static_cast<UI::UI_TreeNode*>(mSceneRoot)->Open();
+	mSceneRoot->AddPlugin<UI::UI_DDTarget<std::pair<Core::Core_Actor*, UI::UI_TreeNode*>>>("Actor").mDataReceivedEvent += [this](std::pair<Core::Core_Actor*, UI::UI_TreeNode*> p_element)
 		{
 			if (p_element.second->HasParent())
 			{
 				p_element.second->GetParent()->UnconsiderWidget(*p_element.second);
 			}
 
-			m_sceneRoot->ConsiderWidget(*p_element.second);
+			mSceneRoot->ConsiderWidget(*p_element.second);
 
 			p_element.first->DetachFromParent();
 		};
-	m_sceneRoot->AddPlugin<Editor_HierarchyContextualMenu>(nullptr, *m_sceneRoot);
+	mSceneRoot->AddPlugin<Editor_HierarchyContextualMenu>(nullptr, *mSceneRoot);
 
 	EDITOR_EVENT(ActorUnselectedEvent) += std::bind(&Editor_Hierarchy::UnselectActorsWidgets, this);
 	EDITOR_CONTEXT(mSceneManager).mSceneUnloadEvent += std::bind(&Editor_Hierarchy::Clear, this);
@@ -173,13 +173,13 @@ void Editor::Editor_Hierarchy::Clear()
 {
 	EDITOR_EXEC(UnselectActor());
 
-	m_sceneRoot->RemoveAllWidgets();
-	m_widgetActorLink.clear();
+	mSceneRoot->RemoveAllWidgets();
+	mWidgetActorLink.clear();
 }
 
 void Editor::Editor_Hierarchy::UnselectActorsWidgets()
 {
-	for (auto& widget : m_widgetActorLink)
+	for (auto& widget : mWidgetActorLink)
 	{
 		widget.second->mSelected = false;
 	}
@@ -187,7 +187,7 @@ void Editor::Editor_Hierarchy::UnselectActorsWidgets()
 
 void Editor::Editor_Hierarchy::SelectActorByInstance(Core::Core_Actor& pActor)
 {
-	if (auto result = m_widgetActorLink.find(&pActor); result != m_widgetActorLink.end())
+	if (auto result = mWidgetActorLink.find(&pActor); result != mWidgetActorLink.end())
 	{
 		if (result->second)
 		{
@@ -196,23 +196,23 @@ void Editor::Editor_Hierarchy::SelectActorByInstance(Core::Core_Actor& pActor)
 	}
 }
 
-void Editor::Editor_Hierarchy::SelectActorByWidget(UI::UI_TreeNode& p_widget)
+void Editor::Editor_Hierarchy::SelectActorByWidget(UI::UI_TreeNode& pWidget)
 {
 	UnselectActorsWidgets();
 
-	p_widget.mSelected = true;
+	pWidget.mSelected = true;
 
-	if (p_widget.HasParent())
+	if (pWidget.HasParent())
 	{
-		ExpandTreeNode(*static_cast<UI::UI_TreeNode*>(p_widget.GetParent()), m_sceneRoot);
+		ExpandTreeNode(*static_cast<UI::UI_TreeNode*>(pWidget.GetParent()), mSceneRoot);
 	}
 }
 
 void Editor::Editor_Hierarchy::AttachActorToParent(Core::Core_Actor& pActor)
 {
-	auto actorWidget = m_widgetActorLink.find(&pActor);
+	auto actorWidget = mWidgetActorLink.find(&pActor);
 
-	if (actorWidget != m_widgetActorLink.end())
+	if (actorWidget != mWidgetActorLink.end())
 	{
 		auto widget = actorWidget->second;
 
@@ -223,7 +223,7 @@ void Editor::Editor_Hierarchy::AttachActorToParent(Core::Core_Actor& pActor)
 
 		if (pActor.HasParent())
 		{
-			auto parentWidget = m_widgetActorLink.at(pActor.GetParent());
+			auto parentWidget = mWidgetActorLink.at(pActor.GetParent());
 			parentWidget->mLeaf = false;
 			parentWidget->ConsiderWidget(*widget);
 		}
@@ -232,11 +232,11 @@ void Editor::Editor_Hierarchy::AttachActorToParent(Core::Core_Actor& pActor)
 
 void Editor::Editor_Hierarchy::DetachFromParent(Core::Core_Actor& pActor)
 {
-	if (auto actorWidget = m_widgetActorLink.find(&pActor); actorWidget != m_widgetActorLink.end())
+	if (auto actorWidget = mWidgetActorLink.find(&pActor); actorWidget != mWidgetActorLink.end())
 	{
 		if (pActor.HasParent() && pActor.GetParent()->GetChildren().size() == 1)
 		{
-			if (auto parentWidget = m_widgetActorLink.find(pActor.GetParent()); parentWidget != m_widgetActorLink.end())
+			if (auto parentWidget = mWidgetActorLink.find(pActor.GetParent()); parentWidget != mWidgetActorLink.end())
 			{
 				parentWidget->second->mLeaf = true;
 			}
@@ -249,26 +249,26 @@ void Editor::Editor_Hierarchy::DetachFromParent(Core::Core_Actor& pActor)
 			widget->GetParent()->UnconsiderWidget(*widget);
 		}
 
-		m_sceneRoot->ConsiderWidget(*widget);
+		mSceneRoot->ConsiderWidget(*widget);
 	}
 }
 
 void Editor::Editor_Hierarchy::DeleteActorByInstance(Core::Core_Actor& pActor)
 {
-	if (auto result = m_widgetActorLink.find(&pActor); result != m_widgetActorLink.end())
+	if (auto result = mWidgetActorLink.find(&pActor); result != mWidgetActorLink.end())
 	{
 		if (result->second)
 		{
 			result->second->Destroy();
 		}
 
-		m_widgetActorLink.erase(result);
+		mWidgetActorLink.erase(result);
 	}
 }
 
 void Editor::Editor_Hierarchy::AddActorByInstance(Core::Core_Actor& pActor)
 {
-	auto& textSelectable = m_sceneRoot->CreateWidget<UI::UI_TreeNode>(pActor.GetName(), true);
+	auto& textSelectable = mSceneRoot->CreateWidget<UI::UI_TreeNode>(pActor.GetName(), true);
 	textSelectable.mLeaf = true;
 	textSelectable.AddPlugin<Editor_HierarchyContextualMenu>(&pActor, textSelectable);
 	textSelectable.AddPlugin<UI::UI_DDSource<std::pair<Core::Core_Actor*, UI::UI_TreeNode*>>>("Actor", "Attach to...", std::make_pair(&pActor, &textSelectable));
@@ -288,7 +288,7 @@ void Editor::Editor_Hierarchy::AddActorByInstance(Core::Core_Actor& pActor)
 	Core::Core_Actor* targetPtr = &pActor;
 	dispatcher.RegisterGatherer([targetPtr] { return targetPtr->GetName(); });
 
-	m_widgetActorLink[targetPtr] = &textSelectable;
+	mWidgetActorLink[targetPtr] = &textSelectable;
 
 	textSelectable.mClickedEvent += EDITOR_BIND(SelectActor, std::ref(pActor));
 	textSelectable.mDoubleClickedEvent += EDITOR_BIND(MoveToTarget, std::ref(pActor));

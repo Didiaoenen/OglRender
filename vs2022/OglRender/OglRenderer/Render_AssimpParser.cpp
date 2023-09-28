@@ -9,10 +9,12 @@
 bool Render::Render_AssimpParser::LoadModel(const std::string& p_fileName, std::vector<Render_Mesh*>& p_meshes, std::vector<std::string>& pMaterials, EModelParserFlags pParserFlags)
 {
 	Assimp::Importer import;
-	const aiScene * scene = import.ReadFile(p_fileName, static_cast<unsigned int>(pParserFlags));
+	const aiScene* scene = import.ReadFile(p_fileName, static_cast<unsigned int>(pParserFlags));
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+	{
 		return false;
+	}
 
 	ProcessMaterials(scene, pMaterials);
 

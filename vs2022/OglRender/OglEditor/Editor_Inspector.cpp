@@ -35,26 +35,26 @@ Editor::Editor_Inspector::Editor_Inspector(const std::string& pTitle, bool pOpen
 {
 	SetIcon(ICON_MDI_INFORMATION " ");
 
-	m_inspectorHeader = &CreateWidget<UI::UI_Group>();
-	m_inspectorHeader->mEnabled = false;
-	m_actorInfo = &CreateWidget<UI::UI_Group>();
+	mInspectorHeader = &CreateWidget<UI::UI_Group>();
+	mInspectorHeader->mEnabled = false;
+	mActorInfo = &CreateWidget<UI::UI_Group>();
 
-	auto& headerColumns = m_inspectorHeader->CreateWidget<UI::UI_Columns<2>>();
+	auto& headerColumns = mInspectorHeader->CreateWidget<UI::UI_Columns<2>>();
 
-	auto nameGatherer = [this] { return m_targetActor ? m_targetActor->GetName() : "%undef%"; };
-	auto nameProvider = [this](const std::string& p_newName) { if (m_targetActor) m_targetActor->SetName(p_newName); };
+	auto nameGatherer = [this] { return mTargetActor ? mTargetActor->GetName() : "%undef%"; };
+	auto nameProvider = [this](const std::string& p_newName) { if (mTargetActor) mTargetActor->SetName(p_newName); };
 	Core::Core_GUIDrawer::DrawString(headerColumns, "Name", nameGatherer, nameProvider);
 
-	auto tagGatherer = [this] { return m_targetActor ? m_targetActor->GetTag() : "%undef%"; };
-	auto tagProvider = [this](const std::string& p_newName) { if (m_targetActor) m_targetActor->SetTag(p_newName); };
+	auto tagGatherer = [this] { return mTargetActor ? mTargetActor->GetTag() : "%undef%"; };
+	auto tagProvider = [this](const std::string& p_newName) { if (mTargetActor) mTargetActor->SetTag(p_newName); };
 	Core::Core_GUIDrawer::DrawString(headerColumns, "Tag", tagGatherer, tagProvider);
 
-	auto activeGatherer = [this] { return m_targetActor ? m_targetActor->IsSelfActive() : false; };
-	auto activeProvider = [this](bool p_active) { if (m_targetActor) m_targetActor->SetActive(p_active); };
+	auto activeGatherer = [this] { return mTargetActor ? mTargetActor->IsSelfActive() : false; };
+	auto activeProvider = [this](bool p_active) { if (mTargetActor) mTargetActor->SetActive(p_active); };
 	Core::Core_GUIDrawer::DrawBoolean(headerColumns, "Active", activeGatherer, activeProvider);
 
 	{
-		auto& componentSelectorWidget = m_inspectorHeader->CreateWidget<UI::UI_ComboBox>(0);
+		auto& componentSelectorWidget = mInspectorHeader->CreateWidget<UI::UI_ComboBox>(0);
 		componentSelectorWidget.mLineBreak = false;
 		componentSelectorWidget.mChoices.emplace(0, "Model Renderer");
 		componentSelectorWidget.mChoices.emplace(1, "Camera");
@@ -65,14 +65,17 @@ Editor::Editor_Inspector::Editor_Inspector(const std::string& pTitle, bool pOpen
 		componentSelectorWidget.mChoices.emplace(9, "Ambient Sphere Light");
 		componentSelectorWidget.mChoices.emplace(10, "Material Renderer");
 
-		auto& addComponentButton = m_inspectorHeader->CreateWidget<UI::UI_Button>("Add Component", glm::vec2{ 100.f, 0 });
+		auto& addComponentButton = mInspectorHeader->CreateWidget<UI::UI_Button>("Add Component", glm::vec2{ 100.f, 0 });
 		addComponentButton.mIdleBackgroundColor = UI::Color{ 0.7f, 0.5f, 0.f, 1.f };
 		addComponentButton.mTextColor = UI::White;
 		addComponentButton.mClickedEvent += [&componentSelectorWidget, this]
 			{
 				switch (componentSelectorWidget.mCurrentChoice)
 				{
-					case 0: GetTargetActor()->AddComponent<Core::Core_CModelRenderer>(); GetTargetActor()->AddComponent<Core::Core_CMaterialRenderer>(); break;
+					case 0: 
+						GetTargetActor()->AddComponent<Core::Core_CModelRenderer>(); 
+						GetTargetActor()->AddComponent<Core::Core_CMaterialRenderer>(); 
+						break;
 					case 1: GetTargetActor()->AddComponent<Core::Core_CCamera>();				break;
 					case 5: GetTargetActor()->AddComponent<Core::Core_CPointLight>();			break;
 					case 6: GetTargetActor()->AddComponent<Core::Core_CDirectionalLight>();		break;
@@ -106,15 +109,15 @@ Editor::Editor_Inspector::Editor_Inspector(const std::string& pTitle, bool pOpen
 				}
 			};
 
-		m_componentSelectorWidget = &componentSelectorWidget;
+		mComponentSelectorWidget = &componentSelectorWidget;
 	}
 
 	{
-		m_scriptSelectorWidget = &m_inspectorHeader->CreateWidget<UI::UI_InputText>("");
-		m_scriptSelectorWidget->mLineBreak = false;
-		auto& ddTarget = m_scriptSelectorWidget->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File");
+		mScriptSelectorWidget = &mInspectorHeader->CreateWidget<UI::UI_InputText>("");
+		mScriptSelectorWidget->mLineBreak = false;
+		auto& ddTarget = mScriptSelectorWidget->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File");
 
-		auto& addScriptButton = m_inspectorHeader->CreateWidget<UI::UI_Button>("Add Script", glm::vec2{ 100.f, 0 });
+		auto& addScriptButton = mInspectorHeader->CreateWidget<UI::UI_Button>("Add Script", glm::vec2{ 100.f, 0 });
 		addScriptButton.mIdleBackgroundColor = UI::Color{ 0.7f, 0.5f, 0.f, 1.f };
 		addScriptButton.mTextColor = UI::White;
 
@@ -129,76 +132,78 @@ Editor::Editor_Inspector::Editor_Inspector(const std::string& pTitle, bool pOpen
 				addScriptButton.mIdleBackgroundColor = isScriptValid ? UI::Color{ 0.7f, 0.5f, 0.f, 1.f } : UI::Color{ 0.1f, 0.1f, 0.1f, 1.f };
 			};
 
-		m_scriptSelectorWidget->mContentChangedEvent += updateAddScriptButton;
+		mScriptSelectorWidget->mContentChangedEvent += updateAddScriptButton;
 
 		addScriptButton.mClickedEvent += [updateAddScriptButton, this]
 			{
-				const std::string realScriptPath = EDITOR_CONTEXT(mProjectScriptsPath) + m_scriptSelectorWidget->mContent + ".lua";
+				const std::string realScriptPath = EDITOR_CONTEXT(mProjectScriptsPath) + mScriptSelectorWidget->mContent + ".lua";
 
 				if (std::filesystem::exists(realScriptPath))
 				{
-					GetTargetActor()->AddBehaviour(m_scriptSelectorWidget->mContent);
-					updateAddScriptButton(m_scriptSelectorWidget->mContent);
+					GetTargetActor()->AddBehaviour(mScriptSelectorWidget->mContent);
+					updateAddScriptButton(mScriptSelectorWidget->mContent);
 				}
 			};
 
 		ddTarget.mDataReceivedEvent += [updateAddScriptButton, this](std::pair<std::string, UI::UI_Group*> pData)
 			{
-				m_scriptSelectorWidget->mContent = EDITOR_EXEC(GetScriptPath(pData.first));
-				updateAddScriptButton(m_scriptSelectorWidget->mContent);
+				mScriptSelectorWidget->mContent = EDITOR_EXEC(GetScriptPath(pData.first));
+				updateAddScriptButton(mScriptSelectorWidget->mContent);
 			};
 	}
 
-	m_inspectorHeader->CreateWidget<UI::UI_Separator>();
+	mInspectorHeader->CreateWidget<UI::UI_Separator>();
 
-	m_destroyedListener = Core::Core_Actor::mDestroyedEvent += [this](Core::Core_Actor& p_destroyed)
+	mDestroyedListener = Core::Core_Actor::mDestroyedEvent += [this](Core::Core_Actor& p_destroyed)
 		{
-			if (&p_destroyed == m_targetActor)
+			if (&p_destroyed == mTargetActor)
+			{
 				UnFocus();
+			}
 		};
 }
 
 Editor::Editor_Inspector::~Editor_Inspector()
 {
-	Core::Core_Actor::mDestroyedEvent -= m_destroyedListener;
+	Core::Core_Actor::mDestroyedEvent -= mDestroyedListener;
 
 	UnFocus();
 }
 
 void Editor::Editor_Inspector::FocusActor(Core::Core_Actor& pTarget)
 {
-	if (m_targetActor)
+	if (mTargetActor)
 	{
 		UnFocus();
 	}
 
-	m_actorInfo->RemoveAllWidgets();
+	mActorInfo->RemoveAllWidgets();
 
-	m_targetActor = &pTarget;
+	mTargetActor = &pTarget;
 
-	m_componentAddedListener = m_targetActor->mComponentAddedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
-	m_behaviourAddedListener = m_targetActor->mBehaviourAddedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
-	m_componentRemovedListener = m_targetActor->mComponentRemovedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
-	m_behaviourRemovedListener = m_targetActor->mBehaviourRemovedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
+	mComponentAddedListener = mTargetActor->mComponentAddedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
+	mBehaviourAddedListener = mTargetActor->mBehaviourAddedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
+	mComponentRemovedListener = mTargetActor->mComponentRemovedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
+	mBehaviourRemovedListener = mTargetActor->mBehaviourRemovedEvent += [this](auto& useless) { EDITOR_EXEC(DelayAction([this] { Refresh(); })); };
 
-	m_inspectorHeader->mEnabled = true;
+	mInspectorHeader->mEnabled = true;
 
 	CreateActorInspector(pTarget);
 
-	m_componentSelectorWidget->mValueChangedEvent.Invoke(m_componentSelectorWidget->mCurrentChoice);
-	m_scriptSelectorWidget->mContentChangedEvent.Invoke(m_scriptSelectorWidget->mContent);
+	mComponentSelectorWidget->mValueChangedEvent.Invoke(mComponentSelectorWidget->mCurrentChoice);
+	mScriptSelectorWidget->mContentChangedEvent.Invoke(mScriptSelectorWidget->mContent);
 
-	EDITOR_EVENT(ActorSelectedEvent).Invoke(*m_targetActor);
+	EDITOR_EVENT(ActorSelectedEvent).Invoke(*mTargetActor);
 }
 
 void Editor::Editor_Inspector::UnFocus()
 {
-	if (m_targetActor)
+	if (mTargetActor)
 	{
-		m_targetActor->mComponentAddedEvent -= m_componentAddedListener;
-		m_targetActor->mComponentRemovedEvent -= m_componentRemovedListener;
-		m_targetActor->mBehaviourAddedEvent -= m_behaviourAddedListener;
-		m_targetActor->mBehaviourRemovedEvent -= m_behaviourRemovedListener;
+		mTargetActor->mComponentAddedEvent -= mComponentAddedListener;
+		mTargetActor->mComponentRemovedEvent -= mComponentRemovedListener;
+		mTargetActor->mBehaviourAddedEvent -= mBehaviourAddedListener;
+		mTargetActor->mBehaviourRemovedEvent -= mBehaviourRemovedListener;
 	}
 
 	SoftUnFocus();
@@ -206,18 +211,18 @@ void Editor::Editor_Inspector::UnFocus()
 
 void Editor::Editor_Inspector::SoftUnFocus()
 {
-	if (m_targetActor)
+	if (mTargetActor)
 	{
-		EDITOR_EVENT(ActorUnselectedEvent).Invoke(*m_targetActor);
-		m_inspectorHeader->mEnabled = false;
-		m_targetActor = nullptr;
-		m_actorInfo->RemoveAllWidgets();
+		EDITOR_EVENT(ActorUnselectedEvent).Invoke(*mTargetActor);
+		mInspectorHeader->mEnabled = false;
+		mTargetActor = nullptr;
+		mActorInfo->RemoveAllWidgets();
 	}
 }
 
 Core::Core_Actor* Editor::Editor_Inspector::GetTargetActor() const
 {
-	return m_targetActor;
+	return mTargetActor;
 }
 
 void Editor::Editor_Inspector::CreateActorInspector(Core::Core_Actor& pTarget)
@@ -251,17 +256,17 @@ void Editor::Editor_Inspector::CreateActorInspector(Core::Core_Actor& pTarget)
 	}
 }
 
-void Editor::Editor_Inspector::DrawComponent(Core::Core_AComponent& p_component)
+void Editor::Editor_Inspector::DrawComponent(Core::Core_AComponent& pComponent)
 {
-	if (auto inspectorItem = dynamic_cast<Core::Core_IInspectorItem*>(&p_component); inspectorItem)
+	if (auto inspectorItem = dynamic_cast<Core::Core_IInspectorItem*>(&pComponent); inspectorItem)
 	{
-		auto& header = m_actorInfo->CreateWidget<UI::UI_GroupCollapsable>(p_component.GetName());
-		header.mClosable = !dynamic_cast<Core::Core_CTransform*>(&p_component);
-		header.mCloseEvent += [this, &header, &p_component]
+		auto& header = mActorInfo->CreateWidget<UI::UI_GroupCollapsable>(pComponent.GetName());
+		header.mClosable = !dynamic_cast<Core::Core_CTransform*>(&pComponent);
+		header.mCloseEvent += [this, &header, &pComponent]
 			{
-				if (p_component.mOwner.RemoveComponent(p_component))
+				if (pComponent.mOwner.RemoveComponent(pComponent))
 				{
-					m_componentSelectorWidget->mValueChangedEvent.Invoke(m_componentSelectorWidget->mCurrentChoice);
+					mComponentSelectorWidget->mValueChangedEvent.Invoke(mComponentSelectorWidget->mCurrentChoice);
 				}
 			};
 		auto& columns = header.CreateWidget<UI::UI_Columns<2>>();
@@ -274,7 +279,7 @@ void Editor::Editor_Inspector::DrawBehaviour(Core::Core_Behaviour& pBehaviour)
 {
 	if (auto inspectorItem = dynamic_cast<Core::Core_IInspectorItem*>(&pBehaviour); inspectorItem)
 	{
-		auto& header = m_actorInfo->CreateWidget<UI::UI_GroupCollapsable>(pBehaviour.mName);
+		auto& header = mActorInfo->CreateWidget<UI::UI_GroupCollapsable>(pBehaviour.mName);
 		header.mClosable = true;
 		header.mCloseEvent += [this, &header, &pBehaviour]
 			{
@@ -289,9 +294,9 @@ void Editor::Editor_Inspector::DrawBehaviour(Core::Core_Behaviour& pBehaviour)
 
 void Editor::Editor_Inspector::Refresh()
 {
-	if (m_targetActor)
+	if (mTargetActor)
 	{
-		m_actorInfo->RemoveAllWidgets();
-		CreateActorInspector(*m_targetActor);
+		mActorInfo->RemoveAllWidgets();
+		CreateActorInspector(*mTargetActor);
 	}
 }

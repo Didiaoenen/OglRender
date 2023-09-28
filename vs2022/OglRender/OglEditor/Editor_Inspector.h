@@ -37,24 +37,25 @@ namespace Editor
 
 		void CreateActorInspector(Core::Core_Actor& pTarget);
 
-		void DrawComponent(Core::Core_AComponent& p_component);
+		void DrawComponent(Core::Core_AComponent& pComponent);
 
 		void DrawBehaviour(Core::Core_Behaviour& pBehaviour);
 
 		void Refresh();
 
 	private:
-		Core::Core_Actor* m_targetActor = nullptr;
-		UI::UI_Group* m_actorInfo;
-		UI::UI_Group* m_inspectorHeader;
-		UI::UI_ComboBox* m_componentSelectorWidget;
-		UI::UI_InputText* m_scriptSelectorWidget;
+		Core::Core_Actor* mTargetActor{ nullptr };
 
-		uint64_t m_componentAddedListener = 0;
-		uint64_t m_componentRemovedListener = 0;
-		uint64_t m_behaviourAddedListener = 0;
-		uint64_t m_behaviourRemovedListener = 0;
-		uint64_t m_destroyedListener = 0;
+		UI::UI_Group* mActorInfo;
+		UI::UI_Group* mInspectorHeader;
+		UI::UI_ComboBox* mComponentSelectorWidget;
+		UI::UI_InputText* mScriptSelectorWidget;
+
+		uint64_t mComponentAddedListener{ 0 };
+		uint64_t mComponentRemovedListener{ 0 };
+		uint64_t mBehaviourAddedListener{ 0 };
+		uint64_t mBehaviourRemovedListener{ 0 };
+		uint64_t mDestroyedListener{ 0 };
 	};
 }
 

@@ -569,7 +569,7 @@ void Editor::Editor_EditorActions::PropagateFileRename(std::string p_previousNam
 				}
 			}
 
-			auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset View");
+			auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset");
 			auto assetViewRes = assetView.GetResource();
 			if (auto pval = std::get_if<Render::Render_Texture*>(&assetViewRes); pval && *pval)
 			{
@@ -596,7 +596,7 @@ void Editor::Editor_EditorActions::PropagateFileRename(std::string p_previousNam
 
 		if (auto model = Core::Core_ServiceLocator::Get<Core::Core_ModelManager>().GetResource(p_previousName, false))
 		{
-			auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset View");
+			auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset");
 			auto assetViewRes = assetView.GetResource();
 			if (auto pval = std::get_if<Render::Render_Model*>(&assetViewRes); pval && *pval)
 			{
@@ -622,9 +622,11 @@ void Editor::Editor_EditorActions::PropagateFileRename(std::string p_previousNam
 			auto& materialEditor = EDITOR_PANEL(Editor_MaterialEditor, "Material Editor");
 
 			if (materialEditor.GetTarget() == material)
+			{
 				materialEditor.RemoveTarget();
+			}
 
-			auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset View");
+			auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset");
 			auto assetViewRes = assetView.GetResource();
 			if (auto pval = std::get_if<Core::Core_Material*>(&assetViewRes); pval && *pval)
 			{

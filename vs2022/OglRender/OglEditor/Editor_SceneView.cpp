@@ -21,8 +21,8 @@ Editor::Editor_SceneView::Editor_SceneView(const std::string& pTitle, bool pOpen
 
 			switch (Tools::Tools_PathParser::GetFileType(path))
 			{
-				case Tools::Tools_PathParser::EFileType::SCENE:	EDITOR_EXEC(LoadSceneFromDisk(path));			break;
-				case Tools::Tools_PathParser::EFileType::MODEL:	EDITOR_EXEC(CreateActorWithModel(path, true));	break;
+			case Tools::Tools_PathParser::EFileType::SCENE:	EDITOR_EXEC(LoadSceneFromDisk(path));			break;
+			case Tools::Tools_PathParser::EFileType::MODEL:	EDITOR_EXEC(CreateActorWithModel(path, true));	break;
 			}
 		};
 }
@@ -167,7 +167,7 @@ bool IsResizing()
 		cursor == ImGuiMouseCursor_ResizeNS ||
 		cursor == ImGuiMouseCursor_ResizeNWSE ||
 		cursor == ImGuiMouseCursor_ResizeNESW ||
-		cursor == ImGuiMouseCursor_ResizeAll;;
+		cursor == ImGuiMouseCursor_ResizeAll;
 }
 
 void Editor::Editor_SceneView::HandleActorPicking()
