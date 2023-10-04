@@ -159,6 +159,7 @@
     <ClInclude Include="Render_Mesh.h" />
     <ClInclude Include="Render_Model.h" />
     <ClInclude Include="Render_ModelLoader.h" />
+    <ClInclude Include="Render_Program.h" />
     <ClInclude Include="Render_Renderer.h" />
     <ClInclude Include="Render_Shader.h" />
     <ClInclude Include="Render_ShaderLoader.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="Render_Mesh.cpp" />
     <ClCompile Include="Render_Model.cpp" />
     <ClCompile Include="Render_ModelLoader.cpp" />
+    <ClCompile Include="Render_Program.cpp" />
     <ClCompile Include="Render_Renderer.cpp" />
     <ClCompile Include="Render_Shader.cpp" />
     <ClCompile Include="Render_ShaderLoader.cpp" />

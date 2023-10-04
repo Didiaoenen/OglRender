@@ -31,6 +31,8 @@ namespace Core
 
 		static void ProvideAssetPaths(const std::string& pProjectAssetsPath, const std::string& pEngineAssetsPath);
 
+		static std::pair<std::string, std::string> GetAssetPaths();
+
 		std::unordered_map<std::string, T*>& GetResources();
 
 	protected:

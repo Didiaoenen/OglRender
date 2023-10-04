@@ -125,6 +125,12 @@ namespace Core
 	}
 
 	template<typename T>
+	inline std::pair<std::string, std::string> Core_AResourceManager<T>::GetAssetPaths()
+	{
+		return { __PROJECT_ASSETS_PATH, __ENGINE_ASSETS_PATH };
+	}
+
+	template<typename T>
 	inline std::unordered_map<std::string, T*>& Core_AResourceManager<T>::GetResources()
 	{
 		return mResources;

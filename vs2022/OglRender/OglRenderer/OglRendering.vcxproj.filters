@@ -204,6 +204,9 @@
     <ClInclude Include="Render_EShaderType.h">
       <Filter>头文件\Settings</Filter>
     </ClInclude>
+    <ClInclude Include="Render_Program.h">
+      <Filter>头文件\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Render_ModelLoader.cpp">
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="Render_Framebuffer.cpp">
       <Filter>源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_Program.cpp">
+      <Filter>源文件\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

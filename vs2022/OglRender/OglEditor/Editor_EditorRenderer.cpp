@@ -39,7 +39,6 @@ Editor::Editor_EditorRenderer::Editor_EditorRenderer(Editor_Context& pContext) :
 			mContext.mEngineUBO->SetSubData
 			(
 				pUserMatrix,
-
 				sizeof(glm::mat4) +
 				sizeof(glm::mat4) +
 				sizeof(glm::mat4) +

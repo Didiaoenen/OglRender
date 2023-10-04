@@ -3,7 +3,7 @@
 Render::Render_Shader* Core::Core_ShaderManager::CreateResource(const std::string& pPath)
 {
 	std::string realPath = GetRealPath(pPath);
-	Render::Render_Shader* shader = Render::Render_ShaderLoader::Create(realPath);
+	Render::Render_Shader* shader = Render::Render_ShaderLoader::Create(realPath, Core_ShaderManager::GetAssetPaths().first);
 	if (shader)
 	{
 		*reinterpret_cast<std::string*>(reinterpret_cast<char*>(shader) + offsetof(Render::Render_Shader, mPath)) = pPath;

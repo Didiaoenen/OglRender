@@ -1,63 +1,75 @@
+#include <regex>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 
 #include <GL/glew.h>
 
+#include "Render_Program.h"
 #include "Render_ShaderLoader.h"
 
 std::string Render::Render_ShaderLoader::__FILE_TRACE;
+std::string Render::Render_ShaderLoader::__PROJECT_ASSETS_PATH;
 
-Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pFilePath)
+Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pFilePath, const std::string& pProjPath)
 {
 	__FILE_TRACE = pFilePath;
+	__PROJECT_ASSETS_PATH = pProjPath;
 
-	std::pair<std::string, std::string> source = ParseShader(pFilePath);
+	std::map<std::string, Render_Program*> programs = ParseShader(pFilePath);
 
-	uint32_t programID = CreateProgram(source.first, source.second);
-
-	if (programID)
+	for (auto it = programs.begin(); it != programs.end(); it++)
 	{
-		return new Render_Shader(pFilePath, programID);
+		auto& [_, program] = *it;
+
+		program->mId = CreateProgram(program->mVertex, program->mFragment);
 	}
 
-	return nullptr;
+	return new Render::Render_Shader(pFilePath, programs);
 }
 
 Render::Render_Shader* Render::Render_ShaderLoader::CreateFromSource(const std::string& pVertexShader, const std::string& pFragmentShader)
 {
-	uint32_t programID = CreateProgram(pVertexShader, pFragmentShader);
+	std::map<std::string, Render_Program*> programs;
 
-	if (programID)
-	{
-		return new Render_Shader("", programID);
-	}
+	Render_Program* program = new Render_Program();
+	programs.emplace("universal", program);
 
-	return nullptr;
+	program->mVertex = pVertexShader;
+	program->mFragment = pFragmentShader;
+	program->mId = CreateProgram(pVertexShader, pFragmentShader);
+
+	return new Render_Shader("", programs);
 }
 
 void Render::Render_ShaderLoader::Recompile(Render_Shader& pShader, const std::string& pFilePath)
 {
 	__FILE_TRACE = pFilePath;
 
-	std::pair<std::string, std::string> source = ParseShader(pFilePath);
+	std::map<std::string, Render_Program*> programs = ParseShader(pFilePath);
 
-	uint32_t newProgram = CreateProgram(source.first, source.second);
-
-	if (newProgram)
+	for (auto it = programs.begin(); it != programs.end(); it++)
 	{
-		std::uint32_t* shaderID = reinterpret_cast<uint32_t*>(&pShader) + offsetof(Render_Shader, mId);
+		auto& [_, program] = *it;
 
-		glDeleteProgram(*shaderID);
+		uint32_t newProgram = CreateProgram(program->mVertex, program->mFragment);
 
-		*shaderID = newProgram;
+		if (newProgram)
+		{
+			std::uint32_t* programID = reinterpret_cast<uint32_t*>(&program) + offsetof(Render_Program, mId);
 
-		pShader.QueryUniforms();
+			glDeleteProgram(*programID);
 
-		//OVLOG_INFO("[COMPILE] \"" + __FILE_TRACE + "\": Success!");
-	}
-	else
-	{
-		//OVLOG_ERROR("[COMPILE] \"" + __FILE_TRACE + "\": Failed! Previous shader version kept");
+			*programID = newProgram;
+
+			pShader.QueryUniforms();
+
+			//OVLOG_INFO("[COMPILE] \"" + __FILE_TRACE + "\": Success!");
+		}
+		else
+		{
+			//OVLOG_ERROR("[COMPILE] \"" + __FILE_TRACE + "\": Failed! Previous shader version kept");
+		}
 	}
 }
 
@@ -74,42 +86,92 @@ bool Render::Render_ShaderLoader::Destroy(Render_Shader*& pShader)
 	return false;
 }
 
-std::pair<std::string, std::string> Render::Render_ShaderLoader::ParseShader(const std::string& pFilePath)
+std::map<std::string, Render::Render_Program*> Render::Render_ShaderLoader::ParseShader(const std::string& pFilePath)
 {
+	std::string line, name;
+
+	std::map<std::string, Render_Program*> programs;
+
+	std::string states[] = { "#blend", "#culling", "#depth_test", "#depth_writing", "#color_writing" };
+
 	std::ifstream stream(pFilePath);
-
-	enum class ShaderType { NONE = -1, VERTEX = 0, FRAGMENT = 1 };
-
-	std::string line;
-
-	std::stringstream ss[2];
-
-	ShaderType type = ShaderType::NONE;
-
 	while (std::getline(stream, line))
 	{
-		if (line.find("#shader") != std::string::npos)
+		if (line.find("#pass") != std::string::npos)
 		{
-			if (line.find("vertex") != std::string::npos)
+			std::smatch sm;
+			std::regex_search(line, sm, std::regex("(\\w+)[ ](\\w+)"));
+
+			Render_Program *program = new Render_Program();
+			program->mName = name = sm[2];
+
+			programs.emplace(name, program);
+		}
+		
+		for (auto& state : states)
+		{
+			if (line.find(state) != std::string::npos)
 			{
-				type = ShaderType::VERTEX;
-			}
-			else if (line.find("fragment") != std::string::npos)
-			{
-				type = ShaderType::FRAGMENT;
+				if (auto it = programs.find(name); it != programs.end())
+				{
+					auto& [_, program] = *it;
+
+					std::smatch sm;
+					std::regex_search(line, sm, std::regex("(\\w+)[ ](\\w+)"));
+					program->mPipelineState.emplace(sm[1].str(), std::stoi(sm[2]));
+				}
 			}
 		}
-		else if (type != ShaderType::NONE)
+
+		if (line.find("#include") != std::string::npos)
 		{
-			ss[static_cast<int>(type)] << line << '\n';
+			if (auto it = programs.find(name); it != programs.end())
+			{
+				auto& [_, program] = *it;
+
+				std::smatch sm;
+				std::regex_search(line, sm, std::regex("(\").*(\")"));
+				program->mPath = std::regex_replace(sm[0].str(), std::regex("(\")"), "");
+			}
 		}
 	}
 
-	return
+	enum class ShaderType { NONE = -1, VERTEX = 0, FRAGMENT = 1 };
+
+	for (auto it = programs.begin(); it != programs.end(); it++)
 	{
-		ss[static_cast<int>(ShaderType::VERTEX)].str(),
-		ss[static_cast<int>(ShaderType::FRAGMENT)].str()
-	};
+		auto& [name, program] = *it;
+
+		std::ifstream stream(__PROJECT_ASSETS_PATH + program->mPath);
+
+		ShaderType type = ShaderType::NONE;
+
+		std::stringstream ss[2];
+
+		while (std::getline(stream, line))
+		{
+			if (line.find("#shader") != std::string::npos)
+			{
+				if (line.find("vertex") != std::string::npos)
+				{
+					type = ShaderType::VERTEX;
+				}
+				else if (line.find("fragment") != std::string::npos)
+				{
+					type = ShaderType::FRAGMENT;
+				}
+			}
+			else if (type != ShaderType::NONE)
+			{
+				ss[static_cast<int>(type)] << line << '\n';
+			}
+		}
+
+		program->mVertex = ss[static_cast<int>(ShaderType::VERTEX)].str();
+		program->mFragment = ss[static_cast<int>(ShaderType::FRAGMENT)].str();
+	}
+
+	return programs;
 }
 
 uint32_t Render::Render_ShaderLoader::CreateProgram(const std::string& pVertexShader, const std::string& pFragmentShader)
@@ -177,6 +239,8 @@ uint32_t Render::Render_ShaderLoader::CompileShader(uint32_t pType, const std::s
 		std::string shaderTypeString = pType == GL_VERTEX_SHADER ? "VERTEX SHADER" : "FRAGMENT SHADER";
 		std::string errorHeader = "[" + shaderTypeString + "] \"";
 		//OVLOG_ERROR(errorHeader + __FILE_TRACE + "\":\n" + errorLog);
+
+		std::cout << errorHeader + __FILE_TRACE + "\":\n" + errorLog << std::endl;
 
 		glDeleteShader(id);
 
