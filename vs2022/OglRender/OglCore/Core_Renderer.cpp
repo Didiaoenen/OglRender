@@ -268,7 +268,7 @@ void Core::Core_Renderer::DrawModelWithSingleMaterial(Render::Render_Model& pMod
 
 		if (material)
 		{
-			DrawMesh(*mesh, *material, "default", nullptr);
+			DrawMesh(*mesh, *material, "universal", nullptr);
 		}
 	}
 }
@@ -285,7 +285,7 @@ void Core::Core_Renderer::DrawModelWithMaterials(Render::Render_Model& pModel, s
 		Core_Material* material = pMaterials.size() > mesh->GetMaterialIndex() ? pMaterials[mesh->GetMaterialIndex()] : pDefaultMaterial;
 		if (material)
 		{
-			DrawMesh(*mesh, *material, "default", nullptr);
+			DrawMesh(*mesh, *material, "universal", nullptr);
 		}
 	}
 }
@@ -304,7 +304,7 @@ void Core::Core_Renderer::DrawMesh(Render::Render_Mesh& pMesh, Core_Material& pM
 
 		pMaterial.Bind(mEmptyTexture, pProgramName);
 		Draw(pMesh, Render::EPrimitiveMode::TRIANGLES, pMaterial.GetGPUInstances());
-		pMaterial.UnBind();
+		pMaterial.UnBind(pProgramName);
 	}
 }
 

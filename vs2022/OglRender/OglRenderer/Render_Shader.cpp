@@ -71,6 +71,15 @@ void Render::Render_Shader::QueryUniforms()
 						GetUniformLocation(program, nameData.data()),
 						defaultValue
 					};
+
+					if (auto it = mUniforms.find(name); it != mUniforms.end())
+					{
+						auto& [_, uniform] = *it;
+						if (eType != uniform.type)
+						{
+							// TODO
+						}
+					}
 					mUniforms.emplace(name, info);
 				}
 			}

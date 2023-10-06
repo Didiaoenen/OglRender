@@ -176,7 +176,7 @@ void Editor::Editor_EditorRenderer::RenderSceneForActorPicking()
 							mActorPickingMaterial.SetDepthTest(material->HasDepthTest());
 							mActorPickingMaterial.SetDepthWriting(material->HasDepthWriting());
 
-							mContext.mRenderer->DrawMesh(*mesh, mActorPickingMaterial, "default", &modelMatrix);
+							mContext.mRenderer->DrawMesh(*mesh, mActorPickingMaterial, "universal", &modelMatrix);
 						}
 					}
 				}
