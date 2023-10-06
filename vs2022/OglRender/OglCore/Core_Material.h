@@ -17,9 +17,9 @@ namespace Core
 
 		void FillUniform();
 
-		void Bind(Render::Render_Texture* pEmptyTexture);
+		void Bind(Render::Render_Texture* pEmptyTexture, const std::string& pProgramName);
 
-		void UnBind();
+		void UnBind(const std::string& pProgramName);
 
 		template<typename T> void Set(const std::string pKey, const T& pValue);
 

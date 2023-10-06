@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClInclude Include="Core_AComponent.h" />
     <ClInclude Include="Core_Actor.h" />
+    <ClInclude Include="Core_APass.h" />
     <ClInclude Include="Core_AResourceManager.h" />
     <ClInclude Include="Core_Behaviour.h" />
     <ClInclude Include="Core_CAmbientBoxLight.h" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Core_CPointLight.h" />
     <ClInclude Include="Core_CSpotLight.h" />
     <ClInclude Include="Core_CTransform.h" />
+    <ClInclude Include="Core_DrawObjectPass.h" />
     <ClInclude Include="Core_GUIDrawer.h" />
     <ClInclude Include="Core_IInspectorItem.h" />
     <ClInclude Include="Core_ISerializable.h" />
@@ -161,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="Core_AComponent.cpp" />
     <ClCompile Include="Core_Actor.cpp" />
+    <ClCompile Include="Core_APass.cpp" />
     <ClCompile Include="Core_Behaviour.cpp" />
     <ClCompile Include="Core_CAmbientBoxLight.cpp" />
     <ClCompile Include="Core_CAmbientSphereLight.cpp" />
@@ -172,6 +175,7 @@
     <ClCompile Include="Core_CPointLight.cpp" />
     <ClCompile Include="Core_CSpotLight.cpp" />
     <ClCompile Include="Core_CTransform.cpp" />
+    <ClCompile Include="Core_DrawObjectPass.cpp" />
     <ClCompile Include="Core_GUIDrawer.cpp" />
     <ClCompile Include="Core_Material.cpp" />
     <ClCompile Include="Core_MaterialLoader.cpp" />

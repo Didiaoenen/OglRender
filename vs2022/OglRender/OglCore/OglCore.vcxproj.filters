@@ -73,6 +73,12 @@
     <Filter Include="源文件\Graphics">
       <UniqueIdentifier>{9075bbbb-fc64-473b-9dd0-f7c20a487109}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Graphics\Pass">
+      <UniqueIdentifier>{bb459e1f-040e-4d3b-91b9-1e466b76f9d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Graphics\Pass">
+      <UniqueIdentifier>{e7568f00-d8d2-47a6-8508-149e79a473ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core_IInspectorItem.h">
@@ -159,6 +165,12 @@
     <ClInclude Include="Core_Renderer.h">
       <Filter>头文件\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="Core_DrawObjectPass.h">
+      <Filter>头文件\Graphics\Pass</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_APass.h">
+      <Filter>头文件\Graphics\Pass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core_Serializer.cpp">
@@ -235,6 +247,12 @@
     </ClCompile>
     <ClCompile Include="Core_Renderer.cpp">
       <Filter>源文件\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_DrawObjectPass.cpp">
+      <Filter>源文件\Graphics\Pass</Filter>
+    </ClCompile>
+    <ClCompile Include="Core_APass.cpp">
+      <Filter>源文件\Graphics\Pass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

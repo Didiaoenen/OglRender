@@ -13,6 +13,8 @@
 
 namespace Core
 {
+	class Core_APass;
+
 	class Core_Renderer : public Render::Render_Renderer
 	{
 	public:
@@ -54,13 +56,13 @@ namespace Core
 			Core_Material* pDefaultMaterial
 		);
 
-		void DrawDrawable(const Drawable& pToDraw);
+		void DrawDrawable(const Drawable& pToDraw, const std::string& pProgramName);
 
 		void DrawModelWithSingleMaterial(Render::Render_Model& pModel, Core_Material& pMaterial, glm::mat4 const* pModelMatrix, Core_Material* pDefaultMaterial = nullptr);
 
 		void DrawModelWithMaterials(Render::Render_Model& pModel, std::vector<Core_Material*> pMaterials, glm::mat4 const* pModelMatrix, Core_Material* pDefaultMaterial = nullptr);
 
-		void DrawMesh(Render::Render_Mesh& pMesh, Core_Material& pMaterial, glm::mat4 const* pModelMatrix);
+		void DrawMesh(Render::Render_Mesh& pMesh, Core_Material& pMaterial, const std::string& pProgramName, glm::mat4 const* pModelMatrix);
 
 		void RegisterModelMatrixSender(std::function<void(glm::mat4)> pModelMatrixSender);
 
@@ -70,6 +72,8 @@ namespace Core
 		std::function<void(glm::mat4)> mModelMatrixSender;
 		std::function<void(glm::mat4)> mUserMatrixSender;
 		Render::Render_Texture* mEmptyTexture{ nullptr };
+
+		std::vector<Core_APass*> mPasses;
 	};
 }
 

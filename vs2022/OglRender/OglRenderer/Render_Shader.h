@@ -18,6 +18,8 @@ namespace Render
 	public:
 		const Render_UniformInfo* GetUniformInfo(const std::string& pName) const;
 
+		Render_Program* GetRenderProgram(const std::string& pName);
+
 		void QueryUniforms();
 
 	private:

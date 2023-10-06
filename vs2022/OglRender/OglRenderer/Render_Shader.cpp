@@ -15,6 +15,17 @@ const Render::Render_UniformInfo* Render::Render_Shader::GetUniformInfo(const st
 	return nullptr;
 }
 
+Render::Render_Program* Render::Render_Shader::GetRenderProgram(const std::string& pName)
+{
+	if (auto it = mPrograms.find(pName); it != mPrograms.end())
+	{
+		auto& [_, program] = *it;
+
+		return program;
+	}
+	return nullptr;
+}
+
 void Render::Render_Shader::QueryUniforms()
 {
 	GLint numActiveUniforms = 0;

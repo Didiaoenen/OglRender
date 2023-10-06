@@ -2,6 +2,7 @@
 #include <OglRenderer/Render_Frustum.h>
 #include <OglRenderer/Render_TextureLoader.h>
 
+#include "Core_DrawObjectPass.h"
 #include "Core_CMaterialRenderer.h"
 #include "Core_CModelRenderer.h"
 #include "Core_Renderer.h"
@@ -16,7 +17,7 @@ Core::Core_Renderer::Core_Renderer(Render::Render_Driver& pDriver) :
 		false
 	))
 {
-
+	mPasses.push_back(new Core_DrawObjectPass(this));
 }
 
 Core::Core_Renderer::~Core_Renderer()
@@ -94,12 +95,24 @@ void Core::Core_Renderer::RenderScene(Core_Scene& pScene, const glm::vec3& pCame
 
 	for (const auto& [distance, drawable] : opaqueMeshes)
 	{
-		DrawDrawable(drawable);
+		for (const auto& pass : mPasses)
+		{
+			//DrawDrawable(drawable);
+			pass->BeginPass(drawable);
+			pass->DrawPass(drawable);
+			pass->EndPass(drawable);
+		}
 	}
 
 	for (const auto& [distance, drawable] : transparentMeshes)
 	{
-		DrawDrawable(drawable);
+		for (const auto& pass : mPasses)
+		{
+			//DrawDrawable(drawable);
+			pass->BeginPass(drawable);
+			pass->DrawPass(drawable);
+			pass->EndPass(drawable);
+		}
 	}
 }
 
@@ -236,10 +249,10 @@ std::pair<Core::Core_Renderer::OpaqueDrawables, Core::Core_Renderer::Transparent
 	return { opaqueDrawables, transparentDrawables };
 }
 
-void Core::Core_Renderer::DrawDrawable(const Drawable& pToDraw)
+void Core::Core_Renderer::DrawDrawable(const Drawable& pToDraw, const std::string& pProgramName)
 {
 	mUserMatrixSender(std::get<3>(pToDraw));
-	DrawMesh(*std::get<1>(pToDraw), *std::get<2>(pToDraw), &std::get<0>(pToDraw));
+	DrawMesh(*std::get<1>(pToDraw), *std::get<2>(pToDraw), pProgramName, &std::get<0>(pToDraw));
 }
 
 void Core::Core_Renderer::DrawModelWithSingleMaterial(Render::Render_Model& pModel, Core_Material& pMaterial, glm::mat4 const* pModelMatrix, Core_Material* pDefaultMaterial)
@@ -255,7 +268,7 @@ void Core::Core_Renderer::DrawModelWithSingleMaterial(Render::Render_Model& pMod
 
 		if (material)
 		{
-			DrawMesh(*mesh, *material, nullptr);
+			DrawMesh(*mesh, *material, "default", nullptr);
 		}
 	}
 }
@@ -272,12 +285,12 @@ void Core::Core_Renderer::DrawModelWithMaterials(Render::Render_Model& pModel, s
 		Core_Material* material = pMaterials.size() > mesh->GetMaterialIndex() ? pMaterials[mesh->GetMaterialIndex()] : pDefaultMaterial;
 		if (material)
 		{
-			DrawMesh(*mesh, *material, nullptr);
+			DrawMesh(*mesh, *material, "default", nullptr);
 		}
 	}
 }
 
-void Core::Core_Renderer::DrawMesh(Render::Render_Mesh& pMesh, Core_Material& pMaterial, glm::mat4 const* pModelMatrix)
+void Core::Core_Renderer::DrawMesh(Render::Render_Mesh& pMesh, Core_Material& pMaterial, const std::string& pProgramName, glm::mat4 const* pModelMatrix)
 {
 	if (pMaterial.HasShader() && pMaterial.GetGPUInstances() > 0)
 	{
@@ -289,8 +302,8 @@ void Core::Core_Renderer::DrawMesh(Render::Render_Mesh& pMesh, Core_Material& pM
 		uint8_t stateMask = pMaterial.GenerateStateMask();
 		ApplyStateMask(stateMask);
 
-		pMaterial.Bind(mEmptyTexture);
-		//Draw(pMesh, Render::EPrimitiveMode::TRIANGLES, pMaterial.GetGPUInstances());
+		pMaterial.Bind(mEmptyTexture, pProgramName);
+		Draw(pMesh, Render::EPrimitiveMode::TRIANGLES, pMaterial.GetGPUInstances());
 		pMaterial.UnBind();
 	}
 }

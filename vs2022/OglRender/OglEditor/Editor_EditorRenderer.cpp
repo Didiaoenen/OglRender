@@ -163,7 +163,9 @@ void Editor::Editor_EditorRenderer::RenderSceneForActorPicking()
 						{
 							material = materials.at(mesh->GetMaterialIndex());
 							if (!material || !material->GetShader())
+							{
 								material = &mEmptyMaterial;
+							}
 						}
 
 						if (material)
@@ -174,7 +176,7 @@ void Editor::Editor_EditorRenderer::RenderSceneForActorPicking()
 							mActorPickingMaterial.SetDepthTest(material->HasDepthTest());
 							mActorPickingMaterial.SetDepthWriting(material->HasDepthWriting());
 
-							mContext.mRenderer->DrawMesh(*mesh, mActorPickingMaterial, &modelMatrix);
+							mContext.mRenderer->DrawMesh(*mesh, mActorPickingMaterial, "default", &modelMatrix);
 						}
 					}
 				}
