@@ -31,7 +31,7 @@ namespace Core
 
 		static void ProvideAssetPaths(const std::string& pProjectAssetsPath, const std::string& pEngineAssetsPath);
 
-		static std::pair<std::string, std::string> GetAssetPaths();
+		static std::string GetRealPath(const std::string& pPath);
 
 		std::unordered_map<std::string, T*>& GetResources();
 
@@ -39,7 +39,6 @@ namespace Core
 		virtual T* CreateResource(const std::string& pPath) = 0;
 		virtual void DestroyResource(T* pResource) = 0;
 		virtual void ReloadResource(T* pResource, const std::string& pPath) = 0;
-		std::string GetRealPath(const std::string& pPath) const;
 
 	private:
 		inline static std::string __PROJECT_ASSETS_PATH{ "" };

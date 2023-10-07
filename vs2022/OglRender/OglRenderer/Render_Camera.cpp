@@ -149,7 +149,7 @@ glm::mat4 Render::Render_Camera::CalculateProjectionMatrix(uint16_t pWindowWidth
 glm::mat4 Render::Render_Camera::CalculateViewMatrix(const glm::vec3& pPosition, const glm::quat& pRotation) const
 {
 	const auto& up = pRotation * glm::vec3(0.f, 1.f, 0.f);
-	const auto& forward = pRotation * glm::vec3(0.f, 0.f, -1.f);
+	const auto& forward = pRotation * glm::vec3(0.f, 0.f, 1.f);
 	return glm::lookAt(pPosition, pPosition + forward, up);
 }
 

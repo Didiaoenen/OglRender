@@ -12,7 +12,7 @@ Editor::Editor_SceneView::Editor_SceneView(const std::string& pTitle, bool pOpen
 {
 	SetIcon(ICON_MDI_GAMEPAD_VARIANT " ");
 
-	mCamera.SetClearColor({ 0.098f, 0.098f, 0.098f });
+	mCamera.SetClearColor({ 0.3f, 0.3f, 0.3f });
 	mCamera.SetFar(5000.0f);
 
 	mImage->AddPlugin<UI::UI_DDTarget<std::pair<std::string, UI::UI_Group*>>>("File").mDataReceivedEvent += [this](auto pData)
@@ -70,15 +70,15 @@ void Editor::Editor_SceneView::RenderScene(uint8_t pDefaultRenderState)
 	auto& currentScene = *mSceneManager.GetCurrentScene();
 	auto& gameView = EDITOR_PANEL(Editor::Editor_GameView, "Game");
 
-	auto gameViewFrustum = gameView.GetActiveFrustum();
-	if (gameViewFrustum && gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumLightCulling() && Editor::Editor_EditorSettings::ShowLightFrustumCullingInSceneView)
-	{
-		mEditorRenderer.UpdateLightsInFrustum(currentScene, gameViewFrustum.value());
-	}
-	else
-	{
-		mEditorRenderer.UpdateLights(currentScene);
-	}
+	//auto gameViewFrustum = gameView.GetActiveFrustum();
+	//if (gameViewFrustum && gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumLightCulling() && Editor::Editor_EditorSettings::ShowLightFrustumCullingInSceneView)
+	//{
+	//	mEditorRenderer.UpdateLightsInFrustum(currentScene, gameViewFrustum.value());
+	//}
+	//else
+	//{
+	//	mEditorRenderer.UpdateLights(currentScene);
+	//}
 
 	mFbo.Bind();
 
@@ -87,51 +87,51 @@ void Editor::Editor_SceneView::RenderScene(uint8_t pDefaultRenderState)
 	baseRenderer.SetStencilMask(0x00);
 
 	mEditorRenderer.RenderGrid(mCameraPosition, mGridColor);
-	mEditorRenderer.RenderCameras();
+	//mEditorRenderer.RenderCameras();
 
-	if (gameViewFrustum && gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumGeometryCulling() && Editor::Editor_EditorSettings::ShowGeometryFrustumCullingInSceneView)
-	{
-		mCamera.SetFrustumGeometryCulling(gameView.HasCamera() ? gameView.GetCamera().HasFrustumGeometryCulling() : false);
-		mEditorRenderer.RenderScene(mCameraPosition, mCamera, &gameViewFrustum.value());
-		mCamera.SetFrustumGeometryCulling(false);
-	}
-	else
-	{
-		mEditorRenderer.RenderScene(mCameraPosition, mCamera);
-	}
+	//if (gameViewFrustum && gameViewFrustum.has_value() && gameView.GetCamera().HasFrustumGeometryCulling() && Editor::Editor_EditorSettings::ShowGeometryFrustumCullingInSceneView)
+	//{
+	//	mCamera.SetFrustumGeometryCulling(gameView.HasCamera() ? gameView.GetCamera().HasFrustumGeometryCulling() : false);
+	//	mEditorRenderer.RenderScene(mCameraPosition, mCamera, &gameViewFrustum.value());
+	//	mCamera.SetFrustumGeometryCulling(false);
+	//}
+	//else
+	//{
+	//	mEditorRenderer.RenderScene(mCameraPosition, mCamera);
+	//}
 
-	mEditorRenderer.RenderLights();
+	//mEditorRenderer.RenderLights();
 
-	if (EDITOR_EXEC(IsAnyActorSelected()))
-	{
-		auto& selectedActor = EDITOR_EXEC(GetSelectedActor());
+	//if (EDITOR_EXEC(IsAnyActorSelected()))
+	//{
+	//	auto& selectedActor = EDITOR_EXEC(GetSelectedActor());
 
-		if (selectedActor.IsActive())
-		{
-			mEditorRenderer.RenderActorOutlinePass(selectedActor, true, true);
-			baseRenderer.ApplyStateMask(pDefaultRenderState);
-			mEditorRenderer.RenderActorOutlinePass(selectedActor, false, true);
-		}
+	//	if (selectedActor.IsActive())
+	//	{
+	//		mEditorRenderer.RenderActorOutlinePass(selectedActor, true, true);
+	//		baseRenderer.ApplyStateMask(pDefaultRenderState);
+	//		mEditorRenderer.RenderActorOutlinePass(selectedActor, false, true);
+	//	}
 
-		baseRenderer.ApplyStateMask(pDefaultRenderState);
-		baseRenderer.Clear(false, true, false);
+	//	baseRenderer.ApplyStateMask(pDefaultRenderState);
+	//	baseRenderer.Clear(false, true, false);
 
-		int highlightedAxis = -1;
+	//	int highlightedAxis = -1;
 
-		if (mHighlightedGizmoDirection.has_value())
-		{
-			highlightedAxis = static_cast<int>(mHighlightedGizmoDirection.value());
-		}
+	//	if (mHighlightedGizmoDirection.has_value())
+	//	{
+	//		highlightedAxis = static_cast<int>(mHighlightedGizmoDirection.value());
+	//	}
 
-		mEditorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), mCurrentOperation, false, highlightedAxis);
-	}
+	//	mEditorRenderer.RenderGizmo(selectedActor.transform.GetWorldPosition(), selectedActor.transform.GetWorldRotation(), mCurrentOperation, false, highlightedAxis);
+	//}
 
-	if (mHighlightedActor.has_value())
-	{
-		mEditorRenderer.RenderActorOutlinePass(mHighlightedActor.value().get(), true, false);
-		baseRenderer.ApplyStateMask(pDefaultRenderState);
-		mEditorRenderer.RenderActorOutlinePass(mHighlightedActor.value().get(), false, false);
-	}
+	//if (mHighlightedActor.has_value())
+	//{
+	//	mEditorRenderer.RenderActorOutlinePass(mHighlightedActor.value().get(), true, false);
+	//	baseRenderer.ApplyStateMask(pDefaultRenderState);
+	//	mEditorRenderer.RenderActorOutlinePass(mHighlightedActor.value().get(), false, false);
+	//}
 
 	mFbo.Unbind();
 }

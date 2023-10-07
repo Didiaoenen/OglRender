@@ -208,7 +208,7 @@ void Window::Window_Window::SwapBuffers() const
 void Window::Window_Window::SetCursorMode(ECursorMode pCursorMode)
 {
 	mCursorMode = pCursorMode;
-	glfwSetInputMode(mGlfwWindow, GLFW_CURSOR, static_cast<int>(pCursorMode));
+	//glfwSetInputMode(mGlfwWindow, GLFW_CURSOR, static_cast<int>(pCursorMode));
 }
 
 void Window::Window_Window::SetCursorShape(ECursorShape pCursorShape)

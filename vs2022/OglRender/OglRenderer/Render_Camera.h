@@ -67,9 +67,9 @@ namespace Render
 		glm::mat4 CalculateViewMatrix(const glm::vec3& pPosition, const glm::quat& pRotation) const;
 
 	private:
-		Render_Frustum mFrustum;
-		glm::mat4 mViewMatrix;
-		glm::mat4 mProjectionMatrix;
+		Render_Frustum mFrustum{};
+		glm::mat4 mViewMatrix{ glm::identity<glm::mat4>() };
+		glm::mat4 mProjectionMatrix{ glm::identity<glm::mat4>() };
 		EProjectionMode mProjectionMode;
 
 		float mFov;

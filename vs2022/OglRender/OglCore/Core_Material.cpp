@@ -25,8 +25,8 @@ void Core::Core_Material::FillUniform()
 
 	for (auto it = mShader->mUniforms.begin(); it != mShader->mUniforms.end(); it++)
 	{
-		auto& [name, program] = *it;
-		mUniformsData.emplace(name, program);
+		auto& [name, element] = *it;
+		mUniformsData.emplace(name, element.defaultValue);
 	}
 }
 

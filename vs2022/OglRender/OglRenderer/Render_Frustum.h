@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 
 #include <OglMaths/Maths_FTransform.h>
+#include <OglMaths/Maths_FQuaternionExt.h>
 
 #include "Render_BoundingSphere.h"
 
@@ -12,15 +13,15 @@ namespace Render
 	class Render_Frustum
 	{
 	public:
-		void CalculateFrustum(const glm::mat4& p_viewProjection);
+		void CalculateFrustum(const glm::mat4& pViewProjection);
 
-		bool PointInFrustum(float p_x, float p_y, float p_z) const;
+		bool PointInFrustum(float pX, float pY, float pZ) const;
 
-		bool SphereInFrustum(float p_x, float p_y, float p_z, float pRadius) const;
+		bool SphereInFrustum(float pX, float pY, float pZ, float pRadius) const;
 
-		bool CubeInFrustum(float p_x, float p_y, float p_z, float pSize) const;
+		bool CubeInFrustum(float pX, float pY, float pZ, float pSize) const;
 
-		bool BoundingSphereInFrustum(const Render_BoundingSphere& pBoundingSphere, const Maths::Maths_FTransform& p_transform) const;
+		bool BoundingSphereInFrustum(const Render_BoundingSphere& pBoundingSphere, const Maths::Maths_FTransform& pTransform) const;
 
 		std::array<float, 4> GetNearPlane() const;
 

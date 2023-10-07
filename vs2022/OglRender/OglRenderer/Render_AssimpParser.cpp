@@ -39,9 +39,9 @@ void Render::Render_AssimpParser::ProcessMaterials(const aiScene* pScene, std::v
 	}
 }
 
-void Render::Render_AssimpParser::ProcessNode(void* p_transform, aiNode* pNode, const aiScene* pScene, std::vector<Render_Mesh*>& p_meshes)
+void Render::Render_AssimpParser::ProcessNode(void* pTransform, aiNode* pNode, const aiScene* pScene, std::vector<Render_Mesh*>& p_meshes)
 {
-	aiMatrix4x4 nodeTransformation = *reinterpret_cast<aiMatrix4x4*>(p_transform) * pNode->mTransformation;
+	aiMatrix4x4 nodeTransformation = *reinterpret_cast<aiMatrix4x4*>(pTransform) * pNode->mTransformation;
 
 	for (uint32_t i = 0; i < pNode->mNumMeshes; ++i)
 	{
@@ -58,9 +58,9 @@ void Render::Render_AssimpParser::ProcessNode(void* p_transform, aiNode* pNode, 
 	}
 }
 
-void Render::Render_AssimpParser::ProcessMesh(void* p_transform, aiMesh* pMesh, const aiScene* pScene, std::vector<Render_Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices)
+void Render::Render_AssimpParser::ProcessMesh(void* pTransform, aiMesh* pMesh, const aiScene* pScene, std::vector<Render_Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices)
 {
-	aiMatrix4x4 meshTransformation = *reinterpret_cast<aiMatrix4x4*>(p_transform);
+	aiMatrix4x4 meshTransformation = *reinterpret_cast<aiMatrix4x4*>(pTransform);
 
 	for (uint32_t i = 0; i < pMesh->mNumVertices; ++i)
 	{
@@ -96,6 +96,8 @@ void Render::Render_AssimpParser::ProcessMesh(void* p_transform, aiMesh* pMesh, 
 		auto& face = pMesh->mFaces[faceID];
 
 		for (size_t indexID = 0; indexID < 3; ++indexID)
+		{
 			p_outIndices.push_back(face.mIndices[indexID]);
+		}
 	}
 }

@@ -109,6 +109,11 @@ std::string Tools::Tools_PathParser::FileTypeToString(EFileType pFileType)
     return "Unknown";
 }
 
+std::string Tools::Tools_PathParser::GetRealPath(const std::string& pPath)
+{
+    return std::string();
+}
+
 Tools::Tools_PathParser::EFileType Tools::Tools_PathParser::GetFileType(const std::string& pPath)
 {
     std::string ext = GetExtension(pPath);

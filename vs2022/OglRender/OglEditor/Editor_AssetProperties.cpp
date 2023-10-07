@@ -84,7 +84,7 @@ void Editor::Editor_AssetProperties::Refresh()
 
 void Editor::Editor_AssetProperties::Preview()
 {
-    auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset View");
+    auto& assetView = EDITOR_PANEL(Editor_AssetView, "Asset");
 
     const auto fileType = Tools::Tools_PathParser::GetFileType(mResource);
 

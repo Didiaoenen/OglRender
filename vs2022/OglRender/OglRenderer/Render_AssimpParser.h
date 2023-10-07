@@ -20,8 +20,8 @@ namespace Render
 
 	private:
 		void ProcessMaterials(const struct aiScene* pScene, std::vector<std::string>& pMaterials);;
-		void ProcessNode(void* p_transform, struct aiNode* pNode, const struct aiScene* pScene, std::vector<Render_Mesh*>& p_meshes);
-		void ProcessMesh(void* p_transform, struct aiMesh* pMesh, const struct aiScene* pScene, std::vector<Render_Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices);
+		void ProcessNode(void* pTransform, struct aiNode* pNode, const struct aiScene* pScene, std::vector<Render_Mesh*>& p_meshes);
+		void ProcessMesh(void* pTransform, struct aiMesh* pMesh, const struct aiScene* pScene, std::vector<Render_Vertex>& p_outVertices, std::vector<uint32_t>& p_outIndices);
 	};
 }
 

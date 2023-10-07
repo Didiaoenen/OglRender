@@ -5,6 +5,8 @@ Render::Render_Mesh::Render_Mesh(const std::vector<Render_Vertex>& pVertices, co
 	mIndicesCount(static_cast<uint32_t>(pIndices.size())),
 	mMaterialIndex(pMaterialIndex)
 {
+	CreateBuffers(pVertices, pIndices);
+	ComputeBoundingSphere(pVertices);
 }
 
 void Render::Render_Mesh::Bind()

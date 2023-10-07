@@ -34,6 +34,8 @@ namespace Tools
 
 		static std::string FileTypeToString(EFileType pFileType);
 
+		static std::string GetRealPath(const std::string& pPath);
+
 		static EFileType GetFileType(const std::string& pPath);
 	};
 }

@@ -9,7 +9,7 @@ namespace Render
 	public:
 		Render_ShaderLoader() = delete;
 
-		static Render_Shader* Create(const std::string& pFilePath, const std::string& pProjPath);
+		static Render_Shader* Create(const std::string& pFilePath);
 
 		static Render_Shader* CreateFromSource(const std::string& pVertexShader, const std::string& pFragmentShader);
 
@@ -23,7 +23,6 @@ namespace Render
 		static uint32_t CompileShader(uint32_t pType, const std::string& pSource);
 
 		static std::string __FILE_TRACE;
-		static std::string __PROJECT_ASSETS_PATH;
 	};
 }
 

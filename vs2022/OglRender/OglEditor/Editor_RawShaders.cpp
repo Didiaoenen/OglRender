@@ -101,7 +101,7 @@ void main()
   const vec2  viewdirW    = ubo_ViewPos.xz - fs_in.FragPos.xz;
   const float viewdist    = length(viewdirW);
   
-  FRAGMENT_COLOR = vec4(u_Color, grid);
+  FRAGMENT_COLOR = vec4(u_Color, 1.0);
 }
 )";
 

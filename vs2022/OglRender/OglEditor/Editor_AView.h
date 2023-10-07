@@ -58,7 +58,7 @@ namespace Editor
 		glm::quat mCameraRotation;
 		UI::UI_Image* mImage;
 
-		glm::vec3 mGridColor = glm::vec3{ 0.176f, 0.176f, 0.176f };
+		glm::vec3 mGridColor = glm::vec3{ 1.f, 0.f, 0.f };
 
 		Render::Render_Framebuffer mFbo;
 	};

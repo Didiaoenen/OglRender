@@ -292,12 +292,12 @@ namespace Editor
 
 						do
 						{
-							finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
+							finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".shader";
 
 							++fails;
 						} while (std::filesystem::exists(finalPath));
 
-						std::filesystem::copy_file(EDITOR_CONTEXT(mEngineAssetsPath) + "Shaders\\Standard.glsl", finalPath);
+						std::filesystem::copy_file(EDITOR_CONTEXT(mEngineAssetsPath) + "Shaders\\Standard.shader", finalPath);
 						ItemAddedEvent.Invoke(finalPath);
 						Close();
 					};
@@ -309,12 +309,12 @@ namespace Editor
 
 						do
 						{
-							finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
+							finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".shader";
 
 							++fails;
 						} while (std::filesystem::exists(finalPath));
 
-						std::filesystem::copy_file(EDITOR_CONTEXT(mEngineAssetsPath) + "Shaders\\StandardPBR.glsl", finalPath);
+						std::filesystem::copy_file(EDITOR_CONTEXT(mEngineAssetsPath) + "Shaders\\StandardPBR.shader", finalPath);
 						ItemAddedEvent.Invoke(finalPath);
 						Close();
 					};
@@ -326,12 +326,12 @@ namespace Editor
 
 						do
 						{
-							finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
+							finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".shader";
 
 							++fails;
 						} while (std::filesystem::exists(finalPath));
 
-						std::filesystem::copy_file(EDITOR_CONTEXT(mEngineAssetsPath) + "Shaders\\Unlit.glsl", finalPath);
+						std::filesystem::copy_file(EDITOR_CONTEXT(mEngineAssetsPath) + "Shaders\\Unlit.shader", finalPath);
 						ItemAddedEvent.Invoke(finalPath);
 						Close();
 					};
@@ -343,12 +343,12 @@ namespace Editor
 
 						do
 						{
-							finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".glsl";
+							finalPath = filePath + '\\' + (!fails ? newShaderName : newShaderName + " (" + std::to_string(fails) + ')') + ".shader";
 
 							++fails;
 						} while (std::filesystem::exists(finalPath));
 
-						std::filesystem::copy_file(EDITOR_CONTEXT(mEngineAssetsPath) + "Shaders\\Lambert.glsl", finalPath);
+						std::filesystem::copy_file(EDITOR_CONTEXT(mEngineAssetsPath) + "Shaders\\Lambert.shader", finalPath);
 						ItemAddedEvent.Invoke(finalPath);
 						Close();
 					};
@@ -397,7 +397,7 @@ namespace Editor
 
 						{
 							std::ofstream outfile(finalPath);
-							outfile << "<root><shader>:Shaders\\Standard.glsl</shader></root>" << std::endl;
+							outfile << "<root><shader>:Shaders\\Standard.shader</shader></root>" << std::endl;
 						}
 
 						ItemAddedEvent.Invoke(finalPath);
@@ -427,7 +427,7 @@ namespace Editor
 
 						{
 							std::ofstream outfile(finalPath);
-							outfile << "<root><shader>:Shaders\\StandardPBR.glsl</shader></root>" << std::endl; // Empty standard material content
+							outfile << "<root><shader>:Shaders\\StandardPBR.shader</shader></root>" << std::endl; // Empty standard material content
 						}
 
 						ItemAddedEvent.Invoke(finalPath);
@@ -458,7 +458,7 @@ namespace Editor
 
 						{
 							std::ofstream outfile(finalPath);
-							outfile << "<root><shader>:Shaders\\Unlit.glsl</shader></root>" << std::endl; // Empty unlit material content
+							outfile << "<root><shader>:Shaders\\Unlit.shader</shader></root>" << std::endl; // Empty unlit material content
 						}
 
 						ItemAddedEvent.Invoke(finalPath);
@@ -488,7 +488,7 @@ namespace Editor
 
 						{
 							std::ofstream outfile(finalPath);
-							outfile << "<root><shader>:Shaders\\Lambert.glsl</shader></root>" << std::endl;
+							outfile << "<root><shader>:Shaders\\Lambert.shader</shader></root>" << std::endl;
 						}
 
 						ItemAddedEvent.Invoke(finalPath);
@@ -659,7 +659,7 @@ namespace Editor
 			previewAction.mClickedEvent += [this]
 				{
 					Resource* resource = Core::Core_ServiceLocator::Get<ResourceLoader>()[EDITOR_EXEC(GetResourcePath(filePath, m_protected))];
-					auto& assetView = EDITOR_PANEL(Editor::Editor_AssetView, "Asset View");
+					auto& assetView = EDITOR_PANEL(Editor::Editor_AssetView, "Asset");
 					assetView.SetResource(resource);
 					assetView.Open();
 					assetView.Focus();
@@ -744,7 +744,7 @@ namespace Editor
 
 								{
 									std::ofstream outfile(finalPath);
-									outfile << "<root><shader>:Shaders\\Standard.glsl</shader></root>" << std::endl; // Empty standard material content
+									outfile << "<root><shader>:Shaders\\Standard.shader</shader></root>" << std::endl; // Empty standard material content
 								}
 
 								DuplicateEvent.Invoke(finalPath);
@@ -772,7 +772,7 @@ namespace Editor
 
 								{
 									std::ofstream outfile(finalPath);
-									outfile << "<root><shader>:Shaders\\StandardPBR.glsl</shader></root>" << std::endl;
+									outfile << "<root><shader>:Shaders\\StandardPBR.shader</shader></root>" << std::endl;
 								}
 
 								DuplicateEvent.Invoke(finalPath);
@@ -800,7 +800,7 @@ namespace Editor
 
 								{
 									std::ofstream outfile(finalPath);
-									outfile << "<root><shader>:Shaders\\Unlit.glsl</shader></root>" << std::endl;
+									outfile << "<root><shader>:Shaders\\Unlit.shader</shader></root>" << std::endl;
 								}
 
 								DuplicateEvent.Invoke(finalPath);
@@ -828,7 +828,7 @@ namespace Editor
 
 								{
 									std::ofstream outfile(finalPath);
-									outfile << "<root><shader>:Shaders\\Lambert.glsl</shader></root>" << std::endl;
+									outfile << "<root><shader>:Shaders\\Lambert.shader</shader></root>" << std::endl;
 								}
 
 								DuplicateEvent.Invoke(finalPath);

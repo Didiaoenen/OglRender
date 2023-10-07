@@ -197,39 +197,39 @@ void Editor::Editor_Editor::PrepareRendering(float pDeltaTime)
 
 void Editor::Editor_Editor::RenderViews(float pDeltaTime)
 {
-	auto& assetView = mPanelsManager.GetPanelAs<Editor_AssetView>("Asset");
+	//auto& assetView = mPanelsManager.GetPanelAs<Editor_AssetView>("Asset");
 	auto& sceneView = mPanelsManager.GetPanelAs<Editor_SceneView>("Scene");
-	auto& gameView = mPanelsManager.GetPanelAs<Editor_GameView>("Game");
+	//auto& gameView = mPanelsManager.GetPanelAs<Editor_GameView>("Game");
 
 	{
 		//PROFILER_SPY("Editor Views Update");
 
-		assetView.Update(pDeltaTime);
-		gameView.Update(pDeltaTime);
+		//assetView.Update(pDeltaTime);
+		//gameView.Update(pDeltaTime);
 		sceneView.Update(pDeltaTime);
 	}
 
-	if (assetView.IsOpened())
-	{
-		//PROFILER_SPY("Asset View Rendering");
+	//if (assetView.IsOpened())
+	//{
+	//	//PROFILER_SPY("Asset Rendering");
 
-		mContext.mSimulatedLightSSBO->Bind(0);
-		assetView.Render();
-		mContext.mSimulatedLightSSBO->Unbind();
-	}
+	//	mContext.mSimulatedLightSSBO->Bind(0);
+	//	assetView.Render();
+	//	mContext.mSimulatedLightSSBO->Unbind();
+	//}
 
 	mContext.mLightSSBO->Bind(0);
 
-	if (gameView.IsOpened())
-	{
-		//PROFILER_SPY("Game View Rendering");
+	//if (gameView.IsOpened())
+	//{
+	//	//PROFILER_SPY("Game Rendering");
 
-		gameView.Render();
-	}
+	//	gameView.Render();
+	//}
 
 	if (sceneView.IsOpened())
 	{
-		//PROFILER_SPY("Scene View Rendering");
+		//PROFILER_SPY("Scene Rendering");
 
 		sceneView.Render();
 	}

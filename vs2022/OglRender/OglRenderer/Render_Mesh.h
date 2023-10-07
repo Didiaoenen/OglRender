@@ -33,15 +33,15 @@ namespace Render
 		void ComputeBoundingSphere(const std::vector<Render_Vertex>& pVertices);
 
 	private:
-		const uint32_t mVertexCount;
-		const uint32_t mIndicesCount;
-		const uint32_t mMaterialIndex;
+		const uint32_t mVertexCount{ 0 };
+		const uint32_t mIndicesCount{ 0 };
+		const uint32_t mMaterialIndex{ 0 };
 
 		Render_VertexArray							mVertexArray;
 		std::unique_ptr<Render_VertexBuffer<float>>	mVertexBuffer;
 		std::unique_ptr<Render_IndexBuffer>			mIndexBuffer;
 
-		Render_BoundingSphere mBoundingSphere;
+		Render_BoundingSphere mBoundingSphere{};
 	};
 }
 

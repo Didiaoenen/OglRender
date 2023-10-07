@@ -5,16 +5,16 @@
 
 #include <GL/glew.h>
 
+#include <OglCore/Core_ShaderManager.h>
+
 #include "Render_Program.h"
 #include "Render_ShaderLoader.h"
 
 std::string Render::Render_ShaderLoader::__FILE_TRACE;
-std::string Render::Render_ShaderLoader::__PROJECT_ASSETS_PATH;
 
-Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pFilePath, const std::string& pProjPath)
+Render::Render_Shader* Render::Render_ShaderLoader::Create(const std::string& pFilePath)
 {
 	__FILE_TRACE = pFilePath;
-	__PROJECT_ASSETS_PATH = pProjPath;
 
 	std::map<std::string, Render_Program*> programs = ParseShader(pFilePath);
 
@@ -35,6 +35,7 @@ Render::Render_Shader* Render::Render_ShaderLoader::CreateFromSource(const std::
 	Render_Program* program = new Render_Program();
 	programs.emplace("universal", program);
 
+	program->mName = "universal";
 	program->mVertex = pVertexShader;
 	program->mFragment = pFragmentShader;
 	program->mId = CreateProgram(pVertexShader, pFragmentShader);
@@ -142,7 +143,7 @@ std::map<std::string, Render::Render_Program*> Render::Render_ShaderLoader::Pars
 	{
 		auto& [name, program] = *it;
 
-		std::ifstream stream(__PROJECT_ASSETS_PATH + program->mPath);
+		std::ifstream stream(Core::Core_ShaderManager::GetRealPath(program->mPath));
 
 		ShaderType type = ShaderType::NONE;
 

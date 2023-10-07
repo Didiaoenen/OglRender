@@ -50,12 +50,12 @@ Editor::Editor_EditorRenderer::Editor_EditorRenderer(Editor_Context& pContext) :
 
 void Editor::Editor_EditorRenderer::InitMaterials()
 {
-	mDefaultMaterial.SetShader(mContext.mShaderManager[":Shaders\\Standard.glsl"]);
+	mDefaultMaterial.SetShader(mContext.mShaderManager[":Shaders\\Standard.shader"]);
 	mDefaultMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.f));
 	mDefaultMaterial.Set("u_Shininess", 100.0f);
 	mDefaultMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
-	mEmptyMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mEmptyMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.shader"]);
 	mEmptyMaterial.Set("u_Diffuse", glm::vec4(1.f, 0.f, 1.f, 1.0f));
 	mEmptyMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
@@ -64,7 +64,7 @@ void Editor::Editor_EditorRenderer::InitMaterials()
 	mGridMaterial.SetBackfaceCulling(false);
 	mGridMaterial.SetDepthTest(false);
 
-	mCameraMaterial.SetShader(mContext.mShaderManager[":Shaders\\Lambert.glsl"]);
+	mCameraMaterial.SetShader(mContext.mShaderManager[":Shaders\\Lambert.shader"]);
 	mCameraMaterial.Set("u_Diffuse", glm::vec4(0.0f, 0.3f, 0.7f, 1.0f));
 	mCameraMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
@@ -74,19 +74,19 @@ void Editor::Editor_EditorRenderer::InitMaterials()
 	mLightMaterial.SetBlendable(true);
 	mLightMaterial.SetDepthTest(false);
 
-	mStencilFillMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mStencilFillMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.shader"]);
 	mStencilFillMaterial.SetBackfaceCulling(true);
 	mStencilFillMaterial.SetDepthTest(false);
 	mStencilFillMaterial.SetColorWriting(false);
 	mStencilFillMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
-	mTextureMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mTextureMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.shader"]);
 	mTextureMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.f));
 	mTextureMaterial.SetBackfaceCulling(false);
 	mTextureMaterial.SetBlendable(true);
 	mTextureMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 
-	mOutlineMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mOutlineMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.shader"]);
 	mOutlineMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 	mOutlineMaterial.SetDepthTest(false);
 
@@ -104,7 +104,7 @@ void Editor::Editor_EditorRenderer::InitMaterials()
 	mGizmoPickingMaterial.Set("u_IsBall", false);
 	mGizmoPickingMaterial.Set("u_IsPickable", true);
 
-	mActorPickingMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.glsl"]);
+	mActorPickingMaterial.SetShader(mContext.mShaderManager[":Shaders\\Unlit.shader"]);
 	mActorPickingMaterial.Set("u_Diffuse", glm::vec4(1.f, 1.f, 1.f, 1.0f));
 	mActorPickingMaterial.Set<Render::Render_Texture*>("u_DiffuseMap", nullptr);
 	mActorPickingMaterial.SetFrontfaceCulling(false);
@@ -628,15 +628,17 @@ void Editor::Editor_EditorRenderer::RenderGrid(const glm::vec3& pViewPos, const 
 {
 	constexpr float gridSize = 5000.0f;
 
-	glm::mat4 model = 
-		glm::translate(glm::identity<glm::mat4>(), {pViewPos.x, 0.0f, pViewPos.z}) * 
-		glm::scale(glm::identity<glm::mat4>(), {gridSize * 2.0f, 1.f, gridSize * 2.0f});
+	glm::mat4 model = glm::identity<glm::mat4>();
+	model = glm::translate(model, { pViewPos.x, 0.0f, pViewPos.z });
+	model = glm::scale(model, { gridSize * 2.0f, 1.f, gridSize * 2.0f });
+
 	mGridMaterial.Set("u_Color", pColor);
+
 	mContext.mRenderer->DrawModelWithSingleMaterial(*mContext.mEditorResources->GetModel("Plane"), mGridMaterial, &model);
 
-	mContext.mShapeDrawer->DrawLine(glm::vec3(-gridSize + pViewPos.x, 0.0f, 0.0f), glm::vec3(gridSize + pViewPos.x, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), 1.0f);
-	mContext.mShapeDrawer->DrawLine(glm::vec3(0.0f, -gridSize + pViewPos.y, 0.0f), glm::vec3(0.0f, gridSize + pViewPos.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 1.0f);
-	mContext.mShapeDrawer->DrawLine(glm::vec3(0.0f, 0.0f, -gridSize + pViewPos.z), glm::vec3(0.0f, 0.0f, gridSize + pViewPos.z), glm::vec3(0.0f, 0.0f, 1.0f), 1.0f);
+	//mContext.mShapeDrawer->DrawLine(glm::vec3(-gridSize + pViewPos.x, 0.0f, 0.0f), glm::vec3(gridSize + pViewPos.x, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), 1.0f);
+	//mContext.mShapeDrawer->DrawLine(glm::vec3(0.0f, -gridSize + pViewPos.y, 0.0f), glm::vec3(0.0f, gridSize + pViewPos.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), 1.0f);
+	//mContext.mShapeDrawer->DrawLine(glm::vec3(0.0f, 0.0f, -gridSize + pViewPos.z), glm::vec3(0.0f, 0.0f, gridSize + pViewPos.z), glm::vec3(0.0f, 0.0f, 1.0f), 1.0f);
 }
 
 void Editor::Editor_EditorRenderer::UpdateLights(Core::Core_Scene& pScene)

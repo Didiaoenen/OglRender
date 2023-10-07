@@ -113,58 +113,58 @@ void Editor::Editor_MenuBar::CreateSettingsMenu()
 	settingsMenu.CreateWidget<UI::UI_MenuItem>("Spawn actors at origin", "", true, true).mValueChangedEvent += EDITOR_BIND(SetActorSpawnAtOrigin, std::placeholders::_1);
 	settingsMenu.CreateWidget<UI::UI_MenuItem>("Vertical Synchronization", "", true, true).mValueChangedEvent += [this](bool p_value) { EDITOR_CONTEXT(mDevice)->SetVsync(p_value); };
 	auto& cameraSpeedMenu = settingsMenu.CreateWidget<UI::UI_MenuList>("Camera Speed");
-	cameraSpeedMenu.CreateWidget<UI::UI_SliderInt>(1, 50, 15, UI::ESliderOrientation::HORIZONTAL, "Scene View").mValueChangedEvent += EDITOR_BIND(SetSceneViewCameraSpeed, std::placeholders::_1);
-	cameraSpeedMenu.CreateWidget<UI::UI_SliderInt>(1, 50, 15, UI::ESliderOrientation::HORIZONTAL, "Asset View").mValueChangedEvent += EDITOR_BIND(SetAssetViewCameraSpeed, std::placeholders::_1);
+	cameraSpeedMenu.CreateWidget<UI::UI_SliderInt>(1, 50, 15, UI::ESliderOrientation::HORIZONTAL, "Scene").mValueChangedEvent += EDITOR_BIND(SetSceneViewCameraSpeed, std::placeholders::_1);
+	cameraSpeedMenu.CreateWidget<UI::UI_SliderInt>(1, 50, 15, UI::ESliderOrientation::HORIZONTAL, "Asset").mValueChangedEvent += EDITOR_BIND(SetAssetViewCameraSpeed, std::placeholders::_1);
 	auto& cameraPositionMenu = settingsMenu.CreateWidget<UI::UI_MenuList>("Reset Camera");
-	cameraPositionMenu.CreateWidget<UI::UI_MenuItem>("Scene View").mClickedEvent += EDITOR_BIND(ResetSceneViewCameraPosition);
-	cameraPositionMenu.CreateWidget<UI::UI_MenuItem>("Asset View").mClickedEvent += EDITOR_BIND(ResetAssetViewCameraPosition);
+	cameraPositionMenu.CreateWidget<UI::UI_MenuItem>("Scene").mClickedEvent += EDITOR_BIND(ResetSceneViewCameraPosition);
+	cameraPositionMenu.CreateWidget<UI::UI_MenuItem>("Asset").mClickedEvent += EDITOR_BIND(ResetAssetViewCameraPosition);
 
 	auto& viewColors = settingsMenu.CreateWidget<UI::UI_MenuList>("View Colors");
-	auto& sceneViewBackground = viewColors.CreateWidget<UI::UI_MenuList>("Scene View Background");
+	auto& sceneViewBackground = viewColors.CreateWidget<UI::UI_MenuList>("Scene Background");
 	auto& sceneViewBackgroundPicker = sceneViewBackground.CreateWidget<UI::UI_ColorEdit>(false, UI::Color{ 0.098f, 0.098f, 0.098f, 1.f });
 	sceneViewBackgroundPicker.mColorChangedEvent += [this](const auto& color)
 		{
-			EDITOR_PANEL(Editor_SceneView, "Scene View").GetCamera().SetClearColor({ color.r, color.g, color.b });
+			EDITOR_PANEL(Editor_SceneView, "Scene").GetCamera().SetClearColor({ color.r, color.g, color.b });
 		};
 	sceneViewBackground.CreateWidget<UI::UI_MenuItem>("Reset").mClickedEvent += [this, &sceneViewBackgroundPicker]
 		{
-			EDITOR_PANEL(Editor_SceneView, "Scene View").GetCamera().SetClearColor({ 0.098f, 0.098f, 0.098f });
+			EDITOR_PANEL(Editor_SceneView, "Scene").GetCamera().SetClearColor({ 0.098f, 0.098f, 0.098f });
 			sceneViewBackgroundPicker.mColor = { 0.098f, 0.098f, 0.098f, 1.f };
 		};
 
-	auto& sceneViewGrid = viewColors.CreateWidget<UI::UI_MenuList>("Scene View Grid");
+	auto& sceneViewGrid = viewColors.CreateWidget<UI::UI_MenuList>("Scene Grid");
 	auto& sceneViewGridPicker = sceneViewGrid.CreateWidget<UI::UI_ColorEdit>(false, UI::Color(0.176f, 0.176f, 0.176f, 1.f));
 	sceneViewGridPicker.mColorChangedEvent += [this](const auto& color)
 		{
-			EDITOR_PANEL(Editor_SceneView, "Scene View").SetGridColor({ color.r, color.g, color.b });
+			EDITOR_PANEL(Editor_SceneView, "Scene").SetGridColor({ color.r, color.g, color.b });
 		};
 	sceneViewGrid.CreateWidget<UI::UI_MenuItem>("Reset").mClickedEvent += [this, &sceneViewGridPicker]
 		{
-			EDITOR_PANEL(Editor_SceneView, "Scene View").SetGridColor(glm::vec3(0.176f, 0.176f, 0.176f));
+			EDITOR_PANEL(Editor_SceneView, "Scene").SetGridColor(glm::vec3(0.176f, 0.176f, 0.176f));
 			sceneViewGridPicker.mColor = UI::Color(0.176f, 0.176f, 0.176f, 1.f);
 		};
 
-	auto& assetViewBackground = viewColors.CreateWidget<UI::UI_MenuList>("Asset View Background");
+	auto& assetViewBackground = viewColors.CreateWidget<UI::UI_MenuList>("Asset Background");
 	auto& assetViewBackgroundPicker = assetViewBackground.CreateWidget<UI::UI_ColorEdit>(false, UI::Color{ 0.098f, 0.098f, 0.098f, 1.f });
 	assetViewBackgroundPicker.mColorChangedEvent += [this](const auto& color)
 		{
-			EDITOR_PANEL(Editor_AssetView, "Asset View").GetCamera().SetClearColor({ color.r, color.g, color.b });
+			EDITOR_PANEL(Editor_AssetView, "Asset").GetCamera().SetClearColor({ color.r, color.g, color.b });
 		};
 	assetViewBackground.CreateWidget<UI::UI_MenuItem>("Reset").mClickedEvent += [this, &assetViewBackgroundPicker]
 		{
-			EDITOR_PANEL(Editor_AssetView, "Asset View").GetCamera().SetClearColor({ 0.098f, 0.098f, 0.098f });
+			EDITOR_PANEL(Editor_AssetView, "Asset").GetCamera().SetClearColor({ 0.098f, 0.098f, 0.098f });
 			assetViewBackgroundPicker.mColor = { 0.098f, 0.098f, 0.098f, 1.f };
 		};
 
-	auto& assetViewGrid = viewColors.CreateWidget<UI::UI_MenuList>("Asset View Grid");
+	auto& assetViewGrid = viewColors.CreateWidget<UI::UI_MenuList>("Asset Grid");
 	auto& assetViewGridPicker = assetViewGrid.CreateWidget<UI::UI_ColorEdit>(false, UI::Color(0.176f, 0.176f, 0.176f, 1.f));
 	assetViewGridPicker.mColorChangedEvent += [this](const auto& color)
 		{
-			EDITOR_PANEL(Editor_AssetView, "Asset View").SetGridColor({ color.r, color.g, color.b });
+			EDITOR_PANEL(Editor_AssetView, "Asset").SetGridColor({ color.r, color.g, color.b });
 		};
 	assetViewGrid.CreateWidget<UI::UI_MenuItem>("Reset").mClickedEvent += [this, &assetViewGridPicker]
 		{
-			EDITOR_PANEL(Editor_AssetView, "Asset View").SetGridColor(glm::vec3(0.176f, 0.176f, 0.176f));
+			EDITOR_PANEL(Editor_AssetView, "Asset").SetGridColor(glm::vec3(0.176f, 0.176f, 0.176f));
 			assetViewGridPicker.mColor = UI::Color(0.176f, 0.176f, 0.176f, 1.f);
 		};
 

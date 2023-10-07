@@ -131,7 +131,7 @@ void Editor::Editor_EditorActions::StartPlaying()
 		//	tinyxml2::XMLNode* node = m_sceneBackup.NewElement("root");
 		//	m_sceneBackup.InsertFirstChild(node);
 		//	mContext.sceneManager.GetCurrentScene()->OnSerialize(m_sceneBackup, node);
-		//	mPanelsManager.GetPanelAs<Editor_GameView>("Game View").Focus();
+		//	mPanelsManager.GetPanelAs<Editor_GameView>("Game").Focus();
 		//	mContext.sceneManager.GetCurrentScene()->Play();
 		//	SetEditorMode(EEditorMode::PLAY);
 		//}
@@ -172,7 +172,7 @@ void Editor::Editor_EditorActions::StopPlaying()
 			mContext.mSceneManager.StoreCurrentSceneSourcePath(sceneSourcePath);
 		}
 		m_sceneBackup.Clear();
-		EDITOR_PANEL(Editor_SceneView, "Scene View").Focus();
+		EDITOR_PANEL(Editor_SceneView, "Scene").Focus();
 		if (auto actorInstance = mContext.mSceneManager.GetCurrentScene()->FindActorByID(focusedActorID))
 		{
 			EDITOR_PANEL(Editor_Inspector, "Inspector").FocusActor(*actorInstance);
@@ -349,14 +349,14 @@ bool Editor::Editor_EditorActions::ImportAsset(const std::string& p_initialDesti
 {
 	std::string modelFormats = "*.fbx;*.obj;";
 	std::string textureFormats = "*.png;*.jpeg;*.jpg;*.tga";
-	std::string shaderFormats = "*.glsl;";
+	std::string shaderFormats = "*.shader;";
 	std::string soundFormats = "*.mp3;*.ogg;*.wav;";
 
 	Window::Window_OpenFileDialog selectAssetDialog("Select an asset to import");
 	selectAssetDialog.AddFileType("Any supported format", modelFormats + textureFormats + shaderFormats + soundFormats);
 	selectAssetDialog.AddFileType("Model (.fbx, .obj)", modelFormats);
 	selectAssetDialog.AddFileType("Texture (.png, .jpeg, .jpg, .tga)", textureFormats);
-	selectAssetDialog.AddFileType("Shader (.glsl)", shaderFormats);
+	selectAssetDialog.AddFileType("Shader (.shader)", shaderFormats);
 	selectAssetDialog.AddFileType("Sound (.mp3, .ogg, .wav)", soundFormats);
 	selectAssetDialog.Show();
 
@@ -391,14 +391,14 @@ bool Editor::Editor_EditorActions::ImportAssetAtLocation(const std::string& p_de
 {
 	std::string modelFormats = "*.fbx;*.obj;";
 	std::string textureFormats = "*.png;*.jpeg;*.jpg;*.tga;";
-	std::string shaderFormats = "*.glsl;";
+	std::string shaderFormats = "*.shader;";
 	std::string soundFormats = "*.mp3;*.ogg;*.wav;";
 
 	Window::Window_OpenFileDialog selectAssetDialog("Select an asset to import");
 	selectAssetDialog.AddFileType("Any supported format", modelFormats + textureFormats + shaderFormats + soundFormats);
 	selectAssetDialog.AddFileType("Model (.fbx, .obj)", modelFormats);
 	selectAssetDialog.AddFileType("Texture (.png, .jpeg, .jpg, .tga)", textureFormats);
-	selectAssetDialog.AddFileType("Shader (.glsl)", shaderFormats);
+	selectAssetDialog.AddFileType("Shader (.shader)", shaderFormats);
 	selectAssetDialog.AddFileType("Sound (.mp3, .ogg, .wav)", soundFormats);
 	selectAssetDialog.Show();
 
@@ -735,7 +735,7 @@ void Editor::Editor_EditorActions::LoadSceneFromDisk(const std::string& pPath, b
 
 	mContext.mSceneManager.LoadScene(pPath, pAbsolute);
 	//OVLOG_INFO("Scene loaded from disk: " + mContext.sceneManager.GetCurrentSceneSourcePath());
-	mPanelsManager.GetPanelAs<Editor_SceneView>("Scene View").Focus();
+	mPanelsManager.GetPanelAs<Editor_SceneView>("Scene").Focus();
 }
 
 bool Editor::Editor_EditorActions::IsCurrentSceneLoadedFromDisk() const
